@@ -47,11 +47,11 @@ services:
         protocol: tcp
       # HTTPS
       - target: 443
-        published: ${HTTPS_PORT:-443}
+        published: ${HTTPS_PORT:-444}
         protocol: tcp
       # HTTP/3
       - target: 443
-        published: ${HTTP3_PORT:-443}
+        published: ${HTTP3_PORT:-444}
         protocol: udp
 
   database:
