@@ -12,11 +12,3 @@ services:
     environment:
       MERCURE_PUBLISHER_JWT_KEY: ${CADDY_MERCURE_JWT_SECRET}
       MERCURE_SUBSCRIBER_JWT_KEY: ${CADDY_MERCURE_JWT_SECRET}
-    networks:
-      - swag
-
-networks:
-  swag:
-    external: true
-    name: swag
-    driver: bridge
