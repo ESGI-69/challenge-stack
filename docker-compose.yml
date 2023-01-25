@@ -43,15 +43,15 @@ services:
     ports:
       # HTTP
       - target: 80
-        published: ${HTTP_PORT:-81}
+        published: ${HTTP_PORT:-25444}
         protocol: tcp
       # HTTPS
       - target: 443
-        published: ${HTTPS_PORT:-444}
+        published: ${HTTPS_PORT:-25445}
         protocol: tcp
       # HTTP/3
       - target: 443
-        published: ${HTTP3_PORT:-444}
+        published: ${HTTP3_PORT:-25445}
         protocol: udp
 
   database:
