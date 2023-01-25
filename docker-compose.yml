@@ -24,6 +24,8 @@ services:
       MERCURE_URL: ${CADDY_MERCURE_URL:-http://caddy/.well-known/mercure}
       MERCURE_PUBLIC_URL: https://${SERVER_NAME:-localhost}/.well-known/mercure
       MERCURE_JWT_SECRET: ${CADDY_MERCURE_JWT_SECRET:-!ChangeMe!}
+    networks:
+      - challenge
 
   caddy:
     build:
@@ -53,6 +55,8 @@ services:
       - target: 443
         published: ${HTTP3_PORT:-25445}
         protocol: udp
+    networks:
+      - challenge
 
   database:
     image: postgres:${POSTGRES_VERSION:-13}-alpine
@@ -62,6 +66,8 @@ services:
       POSTGRES_USER: ${POSTGRES_USER:-symfony}
     volumes:
       - db_data:/var/lib/postgresql/data:rw
+    networks:
+      - challenge
 
 ###> symfony/mercure-bundle ###
 ###< symfony/mercure-bundle ###
@@ -74,3 +80,7 @@ volumes:
   ###< doctrine/doctrine-bundle ###
 ###> symfony/mercure-bundle ###
 ###< symfony/mercure-bundle ###
+
+networks:
+  challenge:
+    driver: bridge
