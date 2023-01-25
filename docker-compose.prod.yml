@@ -6,9 +6,20 @@ services:
     environment:
       APP_SECRET: ${APP_SECRET}
       MERCURE_JWT_SECRET: ${CADDY_MERCURE_JWT_SECRET}
+    pull_policy: build
+
+  database:
+    pull_policy: build
 
   caddy:
     container_name: caddy
     environment:
       MERCURE_PUBLISHER_JWT_KEY: ${CADDY_MERCURE_JWT_SECRET}
       MERCURE_SUBSCRIBER_JWT_KEY: ${CADDY_MERCURE_JWT_SECRET}
+    pull_policy: build
+
+    
+  mailer:
+    image: schickling/mailcatcher
+    ports: [1025, 1080]
+    pull_policy: build
