@@ -1,3 +1,7 @@
+controllers:
+    resource: ../src/Controller
+    type: attribute
+
 controllers_front:
     resource: ../src/Controller/Front
     type: attribute
