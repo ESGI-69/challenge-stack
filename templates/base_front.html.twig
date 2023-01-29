@@ -14,6 +14,19 @@
         {% endblock %}
     </head>
     <body>
+      {% if app.user %}
+        <div class="mb-3">
+            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+        </div>
+      {% endif %}
+      <ul>
+        <li><a href="/">Home</a></li>
+        {% if not app.user %}<li><a href="/login">Login</a></li>{% endif %}
+        {% if not app.user %}<li><a href="/register">Register</a></li>{% endif %}
+        {% if app.user %}<li><a href="/profile">Profile</a></li>{% endif %}
+        {# <li><a href="/logout">Logout</a></li> #}
+        {% if is_granted('ROLE_ADMIN') %}<li><a href="{{ path('admin_default_index') }}">Panel d'admin</a></li>{% endif %}
+      </ul>
         {% block body %}{% endblock %}
     </body>
 </html>
