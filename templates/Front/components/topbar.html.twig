@@ -1,0 +1,28 @@
+{# create a topbar component #}
+{% block topbar %}
+<div class="topbar">
+  <div class="topbar__logo">
+    <img src="{{ asset('build/images/logo.svg') }}" alt="logo" width="50" height="50">
+    <span class="topbar__logo__text">BeatHub</span>
+  </div>
+  <div class="topbar__navigation">
+    <a href="{{ path('front_default_index') }}">Feed</a>
+    <a href="">Artist</a>
+    <a href="">Events</a>
+    <a href="">Culbs</a>
+    <a href="">About</a>
+  </div>
+  <div class="topbar__user-info">
+    {% if not app.user %}
+      <a href="{{ path('app_login') }}">Login</a>
+      <a href="{{ path('register') }}">Register</a>
+    {% else %}
+      {% if (is_granted('ROLE_MANAGER') or is_granted('ROLE_ARTIST')) %}
+        <a href="{{ path('admin_default_index') }}">Panel d'admin</a>
+      {% endif %}
+      <a href="{{ path('profile') }}">{{ app.user.userIdentifier }}</a>
+      <a href="{{ path('logout') }}">Logout</a>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
