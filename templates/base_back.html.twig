@@ -25,7 +25,7 @@
           </li>
           <li><a href="{{ path('front_default_index') }}">Home Front</a></li>
           <li><a href="{{ path('admin_default_index') }}">Home Admin</a></li>
-          {% if is_granted('ROLE_MANAGER') %}<li><a href="{{ path('app_user') }}">Users</a></li>{% endif %}
+          {% if is_granted('ROLE_MANAGER') %}<li><a href="{{ path('admin_user_index') }}">Users</a></li>{% endif %}
         </ul>
         {% block body %}{% endblock %}
     </body>

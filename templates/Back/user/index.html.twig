@@ -19,7 +19,8 @@
       {% for user in users %}
         <li>
           {{ user.email }} - 
-          {{ user.roles | join(', ') }}
+          {{ user.roles | join(', ') }} -
+          <a href="{{ path('admin_user_edit', {'id': user.id}) }}">edit</a>
         </li>
       {% endfor %}
     </ul>

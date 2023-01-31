@@ -1,0 +1,11 @@
+{% extends 'base_back.html.twig' %}
+
+{% block title %}Edit of {{ user.email }}{% endblock %}
+
+{% block body %}
+    <h1>Edit role of {{ user.email }}</h1>
+    {{ form_start(form) }}
+        {{ form_rest(form) }}
+        <input type="submit" value="Modifier">
+    {{ form_end(form) }}
+{% endblock %}
