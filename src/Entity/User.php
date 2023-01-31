@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Entity\Traits\TimestampableTrait;
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -36,6 +38,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[NotBlank]
     #[Length(min: 6)]
     private ?string $plainPassword = null;
+
+    #[ORM\ManyToOne]
+    private ?Artist $id_artist = null;
 
     public function getId(): ?int
     {
@@ -128,5 +133,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getIdArtist(): ?Artist
+    {
+        return $this->id_artist;
+    }
+
+    public function setIdArtist(?Artist $id_artist): self
+    {
+        $this->id_artist = $id_artist;
+
+        return $this;
     }
 }
