@@ -9,6 +9,8 @@
 5. Open `https://localhost` in your favorite web browser and [accept the auto-generated TLS certificate](https://stackoverflow.com/a/15076602/1352334)
 6. Run `docker compose down --remove-orphans` to stop the Docker containers.
 7. Run `docker compose logs -f` to display current logs, `docker compose logs -f [CONTAINER_NAME]` to display specific container's current logs
+8. Run `docker compose exec php npm install` to install node_modules
+9. Run `docker compose exec php npm run dev` or `docker compose exec php npm run watch` to build assets
 
 ## Gestion de base de données
 
