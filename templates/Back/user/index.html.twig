@@ -1,0 +1,27 @@
+
+{% extends 'base_back.html.twig' %}
+
+{% block title %}Hello UserController!{% endblock %}
+
+{% block body %}
+
+<div class="example-wrapper">
+
+    <h1>Hello UserController ! ✅</h1>
+
+    This friendly message is coming from:
+    <ul>
+        <li>Your controller at <code><a href="{{ '/srv/app/src/Controller/UserController.php'|file_link(0) }}">src/Controller/UserController.php</a></code></li>
+        <li>Your template at <code><a href="{{ '/srv/app/templates/user/index.html.twig'|file_link(0) }}">templates/user/index.html.twig</a></code></li>
+    </ul>
+
+    <ul>
+      {% for user in users %}
+        <li>
+          {{ user.email }} - 
+          {{ user.roles | join(', ') }}
+        </li>
+      {% endfor %}
+    </ul>
+</div>
+{% endblock %}
