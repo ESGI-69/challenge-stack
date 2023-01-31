@@ -23,6 +23,14 @@ class Comment
     #[ORM\Column]
     private ?\DateTimeImmutable $created_at = null;
 
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $id_user = null;
+
+    #[ORM\ManyToOne(inversedBy: 'comments')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Post $id_post = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -60,6 +68,30 @@ class Comment
     public function setCreatedAt(\DateTimeImmutable $created_at): self
     {
         $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    public function getIdUser(): ?User
+    {
+        return $this->id_user;
+    }
+
+    public function setIdUser(?User $id_user): self
+    {
+        $this->id_user = $id_user;
+
+        return $this;
+    }
+
+    public function getIdPost(): ?Post
+    {
+        return $this->id_post;
+    }
+
+    public function setIdPost(?Post $id_post): self
+    {
+        $this->id_post = $id_post;
 
         return $this;
     }

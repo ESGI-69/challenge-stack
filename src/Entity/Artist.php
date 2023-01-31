@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ArtistRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -40,6 +42,18 @@ class Artist
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $url_deezer = null;
+
+    #[ORM\ManyToMany(targetEntity: Media::class, mappedBy: 'artists')]
+    private Collection $medias;
+
+    #[ORM\ManyToMany(targetEntity: Event::class, mappedBy: 'artists')]
+    private Collection $events;
+
+    public function __construct()
+    {
+        $this->medias = new ArrayCollection();
+        $this->events = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -153,4 +167,59 @@ class Artist
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Media>
+     */
+    public function getMedias(): Collection
+    {
+        return $this->medias;
+    }
+
+    public function addMedia(Media $media): self
+    {
+        if (!$this->medias->contains($media)) {
+            $this->medias->add($media);
+            $media->addArtist($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMedia(Media $media): self
+    {
+        if ($this->medias->removeElement($media)) {
+            $media->removeArtist($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Event>
+     */
+    public function getEvents(): Collection
+    {
+        return $this->events;
+    }
+
+    public function addEvent(Event $event): self
+    {
+        if (!$this->events->contains($event)) {
+            $this->events->add($event);
+            $event->addArtist($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEvent(Event $event): self
+    {
+        if ($this->events->removeElement($event)) {
+            $event->removeArtist($this);
+        }
+
+        return $this;
+    }
+
 }
