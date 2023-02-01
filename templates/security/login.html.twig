@@ -38,6 +38,6 @@
         Sign in
     </button>
     {# ajouter un lien pour pour reset le mot de passe #}
-    <a href="/reset-password">Mot de passe oublié ?</a>
+    <a href="{{ path('app_forgot_password_request') }}">Mot de passe oublié ?</a>
 </form>
 {% endblock %}
