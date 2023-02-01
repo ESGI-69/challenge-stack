@@ -20,9 +20,13 @@
           </div>
         {% endif %}
         <ul>
-          <li><a href="/">Home</a></li>
+          <li>
+            <img src="{{ asset('build/images/logo.svg') }}" alt="logo" width="50" height="50">
+          </li>
+          <li><a href="{{ path('front_default_index') }}">Home Front</a></li>
+          <li><a href="{{ path('admin_default_index') }}">Home Admin</a></li>
+          {% if is_granted('ROLE_MANAGER') %}<li><a href="{{ path('admin_user_index') }}">Users</a></li>{% endif %}
         </ul>
-        <h1>Admin Panel</h1>
         {% block body %}{% endblock %}
     </body>
 </html>
