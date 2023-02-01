@@ -25,20 +25,20 @@ body {
     main {
       padding: 1rem 3.5rem;
     }
-    
-    .back {
-      display: flex;
-      background-color: var(--color-text-primary);
-      color: var(--color-background);
+  }
   
-      main {
-        box-sizing: border-box;
-        padding: 2rem;
-        height: 100vh;
-        max-height: 100vh;
-        overflow-y: auto;
-        width: calc(100vw - var(--sidebar-width));
-      }
+  .back {
+    display: flex;
+    background-color: var(--color-text-primary);
+    color: var(--color-background);
+
+    main {
+      box-sizing: border-box;
+      padding: 2rem;
+      height: 100vh;
+      max-height: 100vh;
+      overflow-y: auto;
+      width: calc(100vw - var(--sidebar-width));
     }
   }
 }
