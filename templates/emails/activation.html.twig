@@ -1,0 +1,10 @@
+{% block body %}
+
+{# mail de lien d'activation  de compte #}
+
+<p> here is your link to activate your account  => {{ activation_token }}  </p>
+<a href="{{ activation_token }}> {{activation_token}} </a>
+<a href="{{url('activate_account', {'token': activation_token})}}"> Cliquez pour valider votre compte </a>
+
+<p> {{url('activate_account', {'token': activation_token})}}</p>
+{% endblock %}
