@@ -1,0 +1,73 @@
+<nav class="back_sidebar">
+  <div class="back_sidebar__container">
+    <div class="back_sidebar__container__logo-container">
+      <a class="back_sidebar__container__logo-container__home-link" href="{{ path('front_default_index') }}">
+        <img src="/build/images/logo.svg" class="back_sidebar__container__logo-container__logo" >
+        <span class="back_sidebar__container__logo-container__texte">BeatHub</span>
+      </a>
+    </div>
+    <div class="back_sidebar__container__navigation">
+      <section class="back_sidebar__container__navigation__section">
+        <a href="{{ path('admin_default_index') }}" class="back_sidebar__container__navigation__section__item">
+          {% include '/icons/home.html.twig' with { class: 'back_sidebar__container__navigation__section__item__icon'}%}
+          <span>Dashboard</span>
+        </a>
+      </section>
+      <section class="back_sidebar__container__navigation__section">
+        <span class="back_sidebar__container__navigation__section__title">Content</span>
+        <a href="#" class="back_sidebar__container__navigation__section__item ">
+          {% include '/icons/home.html.twig' with { class: 'back_sidebar__container__navigation__section__item__icon'} %}
+          <span>
+            Element 1
+          </span>
+        </a>
+        <a href="#" class="back_sidebar__container__navigation__section__item ">
+          {% include '/icons/home.html.twig' with { class: 'back_sidebar__container__navigation__section__item__icon'} %}
+          <span>
+            Element 2
+          </span>
+        </a>
+        <a href="#" class="back_sidebar__container__navigation__section__item">
+          {% include '/icons/home.html.twig' with { class: 'back_sidebar__container__navigation__section__item__icon'} %}
+          <span>
+            Element 3
+          </span>
+        </a>
+        <a href="#" class="back_sidebar__container__navigation__section__item">
+          {% include '/icons/home.html.twig' with { class: 'back_sidebar__container__navigation__section__item__icon'} %}
+          <span>
+            Element 4
+          </span>
+        </a>
+      </section>
+
+      <section class="back_sidebar__container__navigation__section">
+        <span class="back_sidebar__container__navigation__section__title">Management</span>
+        {% if is_granted('ROLE_MANAGER') %}
+          <a href="{{ path('admin_user_index') }}" class="back_sidebar__container__navigation__section__item">
+            {% include '/icons/home.html.twig' with { class: 'back_sidebar__container__navigation__section__item__icon'} %}
+            <span>
+              Users
+            </span>
+          </a>
+        {% endif %}
+        <a href="#" class="back_sidebar__container__navigation__section__item">
+          {% include '/icons/logs.html.twig' with { class: 'back_sidebar__container__navigation__section__item__icon'} %}
+          <span>
+            Element 2
+          </span>
+        </a>
+      </section>
+    </div>
+
+  </div>
+  <footer class="back_sidebar__footer">
+    <img class="back_sidebar__footer__avatar" src="/build/images/defaultAvatar.png" alt="Avatar">
+    <span class="back_sidebar__footer__username">
+      {{ app.user.userIdentifier }}
+    </span>
+    <a class="back_sidebar__footer__icon" href="{{ path('app_logout') }}">
+      {% include '/icons/logout.html.twig' with { class: 'back_sidebar__container__navigation__section__item__icon'} %}
+    </a>
+  </footer>
+</nav>

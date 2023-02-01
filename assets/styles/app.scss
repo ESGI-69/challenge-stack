@@ -1,6 +1,7 @@
 @use 'topbar' as *;
 @use 'footer' as *;
 @use 'variables' as *;
+@use 'back/sidebar' as *;
 
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Rock+Salt&display=swap');
 
@@ -23,6 +24,21 @@ body {
 
     main {
       padding: 1rem 3.5rem;
+    }
+  }
+  
+  .back {
+    display: flex;
+    background-color: var(--color-text-primary);
+    color: var(--color-background);
+
+    main {
+      box-sizing: border-box;
+      padding: 2rem;
+      height: 100vh;
+      max-height: 100vh;
+      overflow-y: auto;
+      width: calc(100vw - var(--sidebar-width));
     }
   }
 }
