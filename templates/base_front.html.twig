@@ -18,7 +18,12 @@
         {% block topbar %}
           {% include '/Front/components/topbar.html.twig' %}
         {% endblock %}
-        {% block body %}{% endblock %}
+        <main>
+          {% block body %}{% endblock %}
+        </main>
+        {% block footer %}
+          {% include '/Front/components/footer.html.twig' %}
+        {% endblock %}
       </div>
     </body>
 </html>
