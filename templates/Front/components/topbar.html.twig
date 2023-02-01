@@ -1,15 +1,40 @@
 {% block topbar %}
 <div class="topbar">
-  <div class="topbar__logo">
+  <a class="topbar__logo" href="{{ path('front_default_index') }}">
     <img src="{{ asset('build/images/logo.svg') }}" alt="logo" width="50" height="50">
     <span class="topbar__logo__text">BeatHub</span>
-  </div>
+  </a>
   <div class="topbar__navigation">
-    <a class="{{ app.request.get('_route')=='front_default_index' ? 'active' : '' }}" href="{{ path('front_default_index') }}">Feed</a>
-    <a class="{{ app.request.get('_route')=='front_artists' ? 'active' : '' }}" href="{{ path('front_artists') }}">Artists</a>
-    <a class="{{ app.request.get('_route')=='front_events' ? 'active' : '' }}" href="{{ path('front_events') }}">Events</a>
-    <a class="{{ app.request.get('_route')=='front_clubs' ? 'active' : '' }}" href="{{ path('front_clubs') }}">Clubs</a>
-    <a class="{{ app.request.get('_route')=='front_about' ? 'active' : '' }}" href="{{ path('front_about') }}">About</a>
+    <a
+      class="{{ app.request.get('_route')=='front_default_index' ? 'active' : '' }}"
+      href="{{ path('front_default_index') }}"
+    >
+      Feed
+    </a>
+    <a
+      class="{{ app.request.get('_route')=='front_artists' ? 'active' : '' }}"
+      href="{{ path('front_artists') }}"
+    >
+      Artists
+    </a>
+    <a
+      class="{{ app.request.get('_route')=='front_events' ? 'active' : '' }}"
+      href="{{ path('front_events') }}"
+    >
+      Events
+    </a>
+    <a
+      class="{{ app.request.get('_route')=='front_clubs' ? 'active' : '' }}"
+      href="{{ path('front_clubs') }}"
+    >
+      Clubs
+    </a>
+    <a
+      class="{{ app.request.get('_route')=='front_about' ? 'active' : '' }}"
+      href="{{ path('front_about') }}"
+    >
+      About
+    </a>
   </div>
   <div class="topbar__user-info">
     {% if not app.user %}
