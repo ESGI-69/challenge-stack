@@ -4,44 +4,45 @@
 
 {% block body %}
 {% include '/Front/components/section.html.twig' with { name: 'Trending' } %}
-<div class="artist-list">
-{% include '/Front/components/artistRow.html.twig'
-  with {
-    artistImagePath: 'build/images/logo.svg',
-    artistName: 'Luigi Tozzi',
-    artistCountry: 'Italy',
-    artistTotalEvents: 167,
-    artistTotalFollowers: 1267,
-  }
-%}
-{% include '/Front/components/artistRow.html.twig'
-  with {
-    artistImagePath: 'build/images/logo.svg',
-    artistName: 'Luigi Tozzi',
-    artistCountry: 'Italy',
-    artistTotalEvents: 167,
-    artistTotalFollowers: 1267,
-  }
-%}
+<div class="artists-list">
+  {% include '/Front/components/artistRow.html.twig'
+    with {
+      artistImagePath: 'build/images/logo.svg',
+      artistName: 'Luigi Tozzi',
+      artistCountry: 'Italy',
+      artistTotalEvents: 167,
+      artistTotalFollowers: 1267,
+    }
+  %}
+  {% include '/Front/components/artistRow.html.twig'
+    with {
+      artistImagePath: 'build/images/logo.svg',
+      artistName: 'Luigi Tozzi',
+      artistCountry: 'Italy',
+      artistTotalEvents: 167,
+      artistTotalFollowers: 1267,
+    }
+  %}
+</div>
 {% include '/Front/components/section.html.twig' with { name: 'New on BeatHub' } %}
-<div class="artist-list">
-{% include '/Front/components/artistRow.html.twig'
-  with {
-    artistImagePath: 'build/images/logo.svg',
-    artistName: 'Luigi Tozzi',
-    artistCountry: 'Italy',
-    artistTotalEvents: 167,
-    artistTotalFollowers: 1267,
-  }
-%}
-{% include '/Front/components/artistRow.html.twig'
-  with {
-    artistImagePath: 'build/images/logo.svg',
-    artistName: 'Luigi Tozzi',
-    artistCountry: 'Italy',
-    artistTotalEvents: 167,
-    artistTotalFollowers: 1267,
-  }
-%}
+<div class="artists-list">
+  {% include '/Front/components/artistRow.html.twig'
+    with {
+      artistImagePath: 'build/images/logo.svg',
+      artistName: 'Luigi Tozzi',
+      artistCountry: 'Italy',
+      artistTotalEvents: 167,
+      artistTotalFollowers: 1267,
+    }
+  %}
+  {% include '/Front/components/artistRow.html.twig'
+    with {
+      artistImagePath: 'build/images/logo.svg',
+      artistName: 'Luigi Tozzi',
+      artistCountry: 'Italy',
+      artistTotalEvents: 167,
+      artistTotalFollowers: 1267,
+    }
+  %}
 </div>
 {% endblock %}

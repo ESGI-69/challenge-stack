@@ -1,8 +1,10 @@
 @use 'topbar' as *;
 @use 'footer' as *;
 @use 'variables' as *;
+@use 'lists' as *;
 @use 'back/sidebar' as *;
 @use './components/artist/artistRow.scss' as *;
+@use './components/event/eventRow.scss' as *;
 @use './components/section.scss' as *;
 
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Rock+Salt&display=swap');
