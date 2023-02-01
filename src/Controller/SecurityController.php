@@ -41,7 +41,7 @@ class SecurityController extends AbstractController
             $userRepository->save($user, true);
 
             $email = (new Email())
-                ->from('support@beathub.timdev0.com')
+                ->from('support@'.$_ENV['DOMAIN_NAME'])
                 ->to($user->getEmail())
                 ->subject('Activation de votre compte')
                 ->html($this->renderView('emails/activation.html.twig', [
