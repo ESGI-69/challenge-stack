@@ -29,4 +29,12 @@ class ArtistsController extends AbstractController
             'artistsWithTopFollowers' => $artistsWithTopFollowers
         ]);
     }
+
+    #[Route('/artist/{id}', name: 'artist')]
+    public function show(Artist $artist): Response
+    {
+        return $this->render('front/artists/show.html.twig', [
+            'artist' => $artist,
+        ]);
+    }
 }
