@@ -39,7 +39,7 @@
   %}
   {% include '/Front/components/post.html.twig'
     with {
-      showComments: false,
+      showComments: true,
       postAuthorImage: 'build/images/logo.svg',
       postAuthorName: 'Luigi Tozzi',
       postAuthorSlug: 'luigi-tozzi',
@@ -58,6 +58,7 @@
           commentContent: 'Sick 🔥',
           commentLikeCount: 5,
           isCommentLiked: true,
+          isValidated: true,
         },
         {
           commentAuthorImage: 'build/images/logo.svg',
@@ -66,6 +67,7 @@
           commentContent: 'Sick 🔥',
           commentLikeCount: 5,
           isCommentLiked: true,
+          isValidated: false,
         },
       ],
     }

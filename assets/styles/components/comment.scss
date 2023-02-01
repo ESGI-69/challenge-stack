@@ -4,6 +4,31 @@
   grid-template-rows: 1fr;
   gap: 0.5rem;
 
+  &--not-validated {
+    .comment {
+      &__avatar {
+        opacity: 0.5;
+      }
+
+      &__content {
+        &__header {
+          &__name {
+            color: var(--color-secondary);
+          }
+
+          &__not-validated {
+            color: var(--color-primary);
+          }
+        }
+
+        &__text {
+          color: var(--color-secondary);
+        }
+
+      }
+    }
+  }
+
   &__avatar {
     width: 3rem;
     height: 3rem;
