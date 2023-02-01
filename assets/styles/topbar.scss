@@ -1,0 +1,42 @@
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2em;
+  color: var(--color-primary);
+
+  a {
+    color: var(--color-primary);
+    text-decoration: none;
+
+    &:hover, &:focus, &:active, &:visited {
+      color: var(--color-primary);
+    }
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+    &.active {
+      text-decoration: underline;
+    }
+  }
+
+  &__logo {
+    display: flex;
+    gap: 0.25rem;
+    align-items: center;
+
+    &__text {
+      font-size: 1.3em;
+      text-decoration: none;
+      font-family: 'Rock Salt', cursive;
+    }
+  }
+
+  &__navigation, &__user-info {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+  }
+}
