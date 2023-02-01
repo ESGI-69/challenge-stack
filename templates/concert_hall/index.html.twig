@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<title>ConcertHall index</title>
+
+{% block body %}
+    <h1>ConcertHall index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>Capacity</th>
+                <th>Site_link</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for concert_hall in concert_halls %}
+            <tr>
+                <td>{{ concert_hall.id }}</td>
+                <td>{{ concert_hall.name }}</td>
+                <td>{{ concert_hall.address }}</td>
+                <td>{{ concert_hall.city }}</td>
+                <td>{{ concert_hall.capacity }}</td>
+                <td>{{ concert_hall.siteLink }}</td>
+                <td>
+                    <a href="{{ path('app_concert_hall_show', {'id': concert_hall.id}) }}">show</a>
+                    <a href="{{ path('app_concert_hall_edit', {'id': concert_hall.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_concert_hall_new') }}">Create new</a>
+{% endblock %}

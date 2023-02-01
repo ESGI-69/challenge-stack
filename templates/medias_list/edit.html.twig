@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+
+<title>Edit MediasList</title>
+
+{% block body %}
+    <h1>Edit MediasList</h1>
+
+    {{ include('medias_list/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_medias_list_index') }}">back to list</a>
+
+    {{ include('medias_list/_delete_form.html.twig') }}
+{% endblock %}

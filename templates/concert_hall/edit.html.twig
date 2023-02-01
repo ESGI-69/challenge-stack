@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+
+<title>Edit ConcertHall</title>
+
+{% block body %}
+    <h1>Edit ConcertHall</h1>
+
+    {{ include('concert_hall/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_concert_hall_index') }}">back to list</a>
+
+    {{ include('concert_hall/_delete_form.html.twig') }}
+{% endblock %}
