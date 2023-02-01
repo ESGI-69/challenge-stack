@@ -6,6 +6,7 @@ use App\Entity\Traits\TimestampableTrait;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -53,6 +54,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->artists_followed = new ArrayCollection();
     }
+    #[ORM\Column(length: 255)]
+    private ?string $activation_token = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $activation_token_expiration = null;
+
+    #[ORM\Column]
+    private ?bool $active = false;
 
     public function getId(): ?int
     {
@@ -176,12 +185,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+    
+    public function getActivationToken(): ?string
+    {
+        return $this->activation_token;
+    }
+
+    public function setActivationToken(string $activation_token): self
+    {
+        $this->activation_token = $activation_token;
+
+        return $this;
+    }
 
     public function removeArtistsFollowed(Artist $artistsFollowed): self
     {
         if ($this->artists_followed->removeElement($artistsFollowed)) {
             $artistsFollowed->removeFollowed($this);
         }
+
+        return $this;
+    }
+    
+    public function getActivationTokenExpiration(): ?\DateTimeInterface
+    {
+        return $this->activation_token_expiration;
+    }
+
+    public function setActivationTokenExpiration(\DateTimeInterface $activation_token_expiration): self
+    {
+        $this->activation_token_expiration = $activation_token_expiration;
 
         return $this;
     }
@@ -194,6 +227,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setProfilePicturePath(?string $profile_picture_path): self
     {
         $this->profile_picture_path = $profile_picture_path;
+
+        return $this;
+    }
+    
+    public function isActive(): ?bool
+    {
+        return $this->active;
+    }
+
+    public function setActive(bool $active): self
+    {
+        $this->active = $active;
 
         return $this;
     }
