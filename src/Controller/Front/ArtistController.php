@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Front;
 
 use App\Entity\Artist;
 use App\Form\ArtistType;
@@ -16,8 +16,20 @@ class ArtistController extends AbstractController
     #[Route('/', name: 'app_artist_index', methods: ['GET'])]
     public function index(ArtistRepository $artistRepository): Response
     {
-        return $this->render('artist/index.html.twig', [
-            'artists' => $artistRepository->findAll(),
+        $artists = $artistRepository->findBy([], ['id' => 'DESC'], 10);
+        $queryTrendingArtist = $artistRepository->createQueryBuilder('a')
+            ->select('a, COUNT(au.id) as followers')
+            ->leftJoin('a.followed', 'au')
+            ->groupBy('a.id')
+            ->orderBy('followers', 'DESC')
+            ->setMaxResults(10)
+            ->getQuery();
+        $artistsWithTopFollowers = $queryTrendingArtist->getResult();
+
+        return $this->render('Front/artists/index.html.twig', [
+            'artists' => $artists,
+            'artistsWithTopFollowers' => $artistsWithTopFollowers,
+            'controller_name' => 'ArtistController'
         ]);
     }
 
@@ -43,7 +55,7 @@ class ArtistController extends AbstractController
     #[Route('/{id}', name: 'app_artist_show', methods: ['GET'])]
     public function show(Artist $artist): Response
     {
-        return $this->render('artist/show.html.twig', [
+        return $this->render('front/artists/show.html.twig', [
             'artist' => $artist,
         ]);
     }
