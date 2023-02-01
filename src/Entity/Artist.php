@@ -49,10 +49,14 @@ class Artist
     #[ORM\ManyToMany(targetEntity: Event::class, mappedBy: 'artists')]
     private Collection $events;
 
+    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'artists_followed')]
+    private Collection $followed;
+
     public function __construct()
     {
         $this->medias = new ArrayCollection();
         $this->events = new ArrayCollection();
+        $this->followed = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -218,6 +222,30 @@ class Artist
         if ($this->events->removeElement($event)) {
             $event->removeArtist($this);
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getFollowed(): Collection
+    {
+        return $this->followed;
+    }
+
+    public function addFollowed(User $followed): self
+    {
+        if (!$this->followed->contains($followed)) {
+            $this->followed->add($followed);
+        }
+
+        return $this;
+    }
+
+    public function removeFollowed(User $followed): self
+    {
+        $this->followed->removeElement($followed);
 
         return $this;
     }
