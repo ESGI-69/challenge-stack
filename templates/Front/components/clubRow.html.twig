@@ -1,0 +1,11 @@
+<a href="" class="club-row">
+  <img class="club-row__image" src="{{ asset(clubImagePath) }}">
+  <div class="club-row__info">
+    <span class="club-row__info__name">{{ clubName }}</span>
+    <span class="club-row__info__city">{{ clubCity }}</span>
+  </div>
+  <div class="club-row__info">
+    <span class="club-row__info__capacity">Capacity: <span class="count">{{ clubCapacity }}</span></span>
+    <span class="club-row__info__event-count"><span class="count">{{ clubEventCount }}</span> Event{{ clubEventCount > 1 ? 's' : '' }}</span>
+  </div>
+</a>
