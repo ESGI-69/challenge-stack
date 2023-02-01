@@ -5,11 +5,11 @@
     <span class="topbar__logo__text">BeatHub</span>
   </div>
   <div class="topbar__navigation">
-    <a href="{{ path('front_default_index') }}">Feed</a>
-    <a href="{{ path('front_artists') }}">Artist</a>
-    <a href="">Events</a>
-    <a href="">Culbs</a>
-    <a href="">About</a>
+    <a class="{{ app.request.get('_route')=='front_default_index' ? 'active' : '' }}" href="{{ path('front_default_index') }}">Feed</a>
+    <a class="{{ app.request.get('_route')=='front_artists' ? 'active' : '' }}" href="{{ path('front_artists') }}">Artists</a>
+    <a class="{{ app.request.get('_route')=='front_events' ? 'active' : '' }}" href="{{ path('front_events') }}">Events</a>
+    <a class="{{ app.request.get('_route')=='' ? 'active' : '' }}" href="">Culbs</a>
+    <a class="{{ app.request.get('_route')=='' ? 'active' : '' }}" href="">About</a>
   </div>
   <div class="topbar__user-info">
     {% if not app.user %}
