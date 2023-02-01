@@ -1,0 +1,11 @@
+<a href="" class="artist-row">
+  <img class="artist-row__image" src="{{ asset(artistImagePath) }}">
+  <div class="artist-row__info">
+    <span class="artist-row__info__name">{{ artistName }}</span>
+    <span class="artist-row__info__country">{{ artistCountry }}</span>
+  </div>
+  <div class="artist-row__stats">
+    <span class="artist-row__info__events-count"><span class="count">{{ artistTotalEvents }}</span> Event{{ artistTotalEvents > 1 ? 's' : '' }}</span>
+    <span class="artist-row__info__followers-count"><span class="count">{{ artistTotalFollowers }}</span> Follower{{ artistTotalFollowers > 1 ? 's' : '' }}</span>
+  </div>
+</a>

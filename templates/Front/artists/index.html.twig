@@ -3,10 +3,25 @@
 {% block title %}Hello ArtistsController!{% endblock %}
 
 {% block body %}
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-    <h2>Artists page<h2>
+{% include '/Front/components/section.html.twig' with { name: 'Trending' } %}
+<div class="artist-list">
+{% include '/Front/components/artistRow.html.twig'
+  with {
+    artistImagePath: 'build/images/logo.svg',
+    artistName: 'Luigi Tozzi',
+    artistCountry: 'Italy',
+    artistTotalEvents: 167,
+    artistTotalFollowers: 1267,
+  }
+%}
+{% include '/Front/components/artistRow.html.twig'
+  with {
+    artistImagePath: 'build/images/logo.svg',
+    artistName: 'Luigi Tozzi',
+    artistCountry: 'Italy',
+    artistTotalEvents: 167,
+    artistTotalFollowers: 1267,
+  }
+%}
 </div>
 {% endblock %}
