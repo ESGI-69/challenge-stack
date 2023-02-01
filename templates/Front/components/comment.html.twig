@@ -1,0 +1,33 @@
+<div class="comment">
+  <img class="comment__avatar" src="{{ asset(commentAuthorImage) }}">
+  <div class="comment__content">
+    <div class="comment__content__header">
+      <span class="comment__content__header__name">
+        {{ commentAuthorName }}
+      </span>
+      <span class="comment__content__header__date">
+        {{ commentDate }}
+      </span>
+    </div>
+    <div class="comment__content__text">
+      {{ commentContent }}
+    </div>
+    <div class="comment__content__actions">
+      {% include '/Front/components/button.html.twig' with {
+        text: isCommentLiked ? 'Liked' : 'Like',
+        link: '#',
+        class: 'comment__content__actions__like',
+        type: 'link',
+        color: 'white',
+      } %}
+      <div class="comment__content__actions__stat">
+        {% if isCommentLiked %}
+          <img src="{{ asset('build/images/icons/like.svg') }}" class="post__content__footer__like-count__stat__icon">
+        {% else %}
+          <img src="{{ asset('build/images/icons/like-outline.svg') }}" class="post__content__footer__like-count__stat__icon">
+        {% endif %}
+        <span class="post__content__footer__like-count__stat__text">{{ postLikeCount }}</span>
+      </div>
+    </div>
+  </div>
+</div>

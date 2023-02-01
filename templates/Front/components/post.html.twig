@@ -1,0 +1,53 @@
+<div class="post {{ showComments ? 'show-comment' : '' }}">
+  <div class="post__author">
+    <img src="{{ asset(postAuthorImage) }}" class="post__author__image">
+    <a class="post__author__name" href="#{{ postAuthorSlug }}">{{ postAuthorName }}</a>
+    <span class="post__author__date">{{ postDate }}</span>
+  </div>
+  <div class="post__content">
+    <div class="post__content__header">
+      <span class="post__content__header__title">{{ postTitle }}</span>
+      {% if showComments == false %}
+        {% include '/Front/components/button.html.twig' with {
+          text: 'View Post & Comments',
+          link: '#',
+          class: 'post__content__header__link',
+          type: 'outline',
+          color: 'white',
+        } %}
+      {% endif %}
+    </div>
+    <p class="post__content__text">{{ postContent }}</p>
+    <div class="post__content__footer">
+      <div class="post__content__footer__comment-count">
+        <img src="{{ asset('build/images/icons/comment.svg') }}" class="post__content__footer__comment-count__icon">
+        <span class="post__content__footer__comment-count__text">{{ postCommentCount }}</span>
+      </div>
+      <div class="post__content__footer__like-count">
+        {% include '/Front/components/button.html.twig' with {
+          text: isPostLiked ? 'Liked' : 'Like',
+          link: '#',
+          class: 'post__content__footer__like-count__button',
+          type: 'link',
+          color: 'white',
+        } %}
+        <div class="post__content__footer__like-count__stat">
+          {% if isPostLiked %}
+            <img src="{{ asset('build/images/icons/like.svg') }}" class="post__content__footer__like-count__stat__icon">
+          {% else %}
+            <img src="{{ asset('build/images/icons/like-outline.svg') }}" class="post__content__footer__like-count__stat__icon">
+          {% endif %}
+          <span class="post__content__footer__like-count__stat__text">{{ postLikeCount }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  {% if showComments %}
+    <div class="post__comments">
+      {% for comment in postComments %}
+        {% include '/Front/components/comment.html.twig' with comment %}
+      {% endfor %}
+    </div>
+  {% endif %}
+</div>

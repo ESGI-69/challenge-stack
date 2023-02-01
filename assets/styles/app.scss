@@ -6,7 +6,10 @@
 @use './components/artist/artistRow.scss' as *;
 @use './components/event/eventRow.scss' as *;
 @use './components/clubs/clubRow.scss' as *;
+@use './components/post.scss' as *;
+@use './components/comment.scss' as *;
 @use './components/section.scss' as *;
+@use './components/button.scss' as *;
 
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Rock+Salt&display=swap');
 

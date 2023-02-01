@@ -1,13 +1,74 @@
 {% extends 'base_front.html.twig' %}
 
-{% block title %}Hello FrontController!{% endblock %}
+{% block title %}BeatHub | Feed{% endblock %}
 
 {% block body %}
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-    
-    <h2>Follow feed</h2>
+<div class="posts-list">
+  {% include '/Front/components/post.html.twig'
+    with {
+      showComments: false,
+      postAuthorImage: 'build/images/logo.svg',
+      postAuthorName: 'Luigi Tozzi',
+      postAuthorSlug: 'luigi-tozzi',
+      postDate: '2018-01-01',
+      postSlug: 'title',
+      postTitle: 'TITLE',
+      postContent: 'Hello followers ! Today I release my new album, Deep Blue ! You can find it at the end of this post and on all my streaming platform. This album is very special to me because lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sed ante eget dolor malesuada semper vel et lectus. In hac habitasse platea dictumst. Mauris condimentum bibendum pretium. Nunc interdum id nulla eget consequat. Vestibulum nec dignissim ante. Maecenas eget tincidunt justo. Phasellus sed lacinia ex, non sodales mauris. Etiam eu rhoncus tortor. Fusce volutpat nisi in orci blandit iaculis. Sed massa massa, sodales ac malesuada a, congue id enim. Etiam eros nulla, pellentesque in ex et, varius varius felis.',
+      postCommentCount: 5,
+      postLikeCount: 15,
+      isPostLiked: false,
+      postComments: [
+        {
+          commentAuthorImage: 'build/images/logo.svg',
+          commentAuthorName: 'Gatien',
+          commentDate: '2018-01-01 02:00:00',
+          commentContent: 'Sick 🔥',
+          commentLikeCount: 5,
+          isCommentLiked: true,
+        },
+        {
+          commentAuthorImage: 'build/images/logo.svg',
+          commentAuthorName: 'Gatien',
+          commentDate: '2018-01-01 02:00:00',
+          commentContent: 'Sick 🔥',
+          commentLikeCount: 5,
+          isCommentLiked: true,
+        },
+      ],
+    }
+  %}
+  {% include '/Front/components/post.html.twig'
+    with {
+      showComments: false,
+      postAuthorImage: 'build/images/logo.svg',
+      postAuthorName: 'Luigi Tozzi',
+      postAuthorSlug: 'luigi-tozzi',
+      postDate: '2018-01-01',
+      postSlug: 'title',
+      postTitle: 'TITLE',
+      postContent: 'Hello followers ! Today I release my new album, Deep Blue ! You can find it at the end of this post and on all my streaming platform. This album is very special to me because lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sed ante eget dolor malesuada semper vel et lectus. In hac habitasse platea dictumst. Mauris condimentum bibendum pretium. Nunc interdum id nulla eget consequat. Vestibulum nec dignissim ante. Maecenas eget tincidunt justo. Phasellus sed lacinia ex, non sodales mauris. Etiam eu rhoncus tortor. Fusce volutpat nisi in orci blandit iaculis. Sed massa massa, sodales ac malesuada a, congue id enim. Etiam eros nulla, pellentesque in ex et, varius varius felis.',
+      postCommentCount: 5,
+      postLikeCount: 15,
+      isPostLiked: false,
+      postComments: [
+        {
+          commentAuthorImage: 'build/images/logo.svg',
+          commentAuthorName: 'Gatien',
+          commentDate: '2018-01-01 02:00:00',
+          commentContent: 'Sick 🔥',
+          commentLikeCount: 5,
+          isCommentLiked: true,
+        },
+        {
+          commentAuthorImage: 'build/images/logo.svg',
+          commentAuthorName: 'Gatien',
+          commentDate: '2018-01-01 02:00:00',
+          commentContent: 'Sick 🔥',
+          commentLikeCount: 5,
+          isCommentLiked: true,
+        },
+      ],
+    }
+  %}
 </div>
 {% endblock %}
