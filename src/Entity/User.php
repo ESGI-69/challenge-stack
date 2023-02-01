@@ -43,6 +43,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToOne]
     private ?Artist $id_artist = null;
 
+    #[ORM\ManyToMany(targetEntity: Artist::class, mappedBy: 'followed')]
+    private Collection $artists_followed;
+
+    public function __construct()
+    {
+        $this->artists_followed = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -144,6 +152,33 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIdArtist(?Artist $id_artist): self
     {
         $this->id_artist = $id_artist;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Artist>
+     */
+    public function getArtistsFollowed(): Collection
+    {
+        return $this->artists_followed;
+    }
+
+    public function addArtistsFollowed(Artist $artistsFollowed): self
+    {
+        if (!$this->artists_followed->contains($artistsFollowed)) {
+            $this->artists_followed->add($artistsFollowed);
+            $artistsFollowed->addFollowed($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArtistsFollowed(Artist $artistsFollowed): self
+    {
+        if ($this->artists_followed->removeElement($artistsFollowed)) {
+            $artistsFollowed->removeFollowed($this);
+        }
 
         return $this;
     }
