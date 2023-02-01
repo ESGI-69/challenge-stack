@@ -1,0 +1,15 @@
+.section {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: var(--color-primary);
+
+  &__icon {
+    height: 1.2rem;
+  }
+
+  &__name {
+    color: var(--color-primary);
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+}
