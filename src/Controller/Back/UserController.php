@@ -51,7 +51,6 @@ class UserController extends AbstractController
     {
 
         if ($this->isGranted('ROLE_ADMIN')) {
-          echo "admin";
           $form = $this->createForm(RoleType::class, $user);
           $form->handleRequest($request);
           if ($form->isSubmitted() && $form->isValid()) {
@@ -59,7 +58,6 @@ class UserController extends AbstractController
               return $this->redirectToRoute('admin_user_index');
           }
         } elseif ($this->isGranted('ROLE_MANAGER') && !$this->isGranted('ROLE_ADMIN')){
-          echo 'manager';
           $form = $this->createForm(RoleManagerType::class, $user);
           $form->handleRequest($request);
           if ($form->isSubmitted() && $form->isValid()) {

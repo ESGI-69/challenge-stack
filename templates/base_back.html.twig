@@ -14,19 +14,13 @@
         {% endblock %}
     </head>
     <body>
-        {% if app.user %}
-          <div class="mb-3">
-              You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
-          </div>
-        {% endif %}
-        <ul>
-          <li>
-            <img src="{{ asset('build/images/logo.svg') }}" alt="logo" width="50" height="50">
-          </li>
-          <li><a href="{{ path('front_default_index') }}">Home Front</a></li>
-          <li><a href="{{ path('admin_default_index') }}">Home Admin</a></li>
-          {% if is_granted('ROLE_MANAGER') %}<li><a href="{{ path('admin_user_index') }}">Users</a></li>{% endif %}
-        </ul>
-        {% block body %}{% endblock %}
+      <div class="app back">
+        {% block sidebar %}
+            {% include '/Back/components/sidebar.html.twig' %}
+        {% endblock %}
+        <main class="view">
+          {% block body %}{% endblock %}
+        </main>
+      </div>
     </body>
 </html>
