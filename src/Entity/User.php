@@ -46,6 +46,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: Artist::class, mappedBy: 'followed')]
     private Collection $artists_followed;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $profile_picture_path = null;
+
     public function __construct()
     {
         $this->artists_followed = new ArrayCollection();
@@ -179,6 +182,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         if ($this->artists_followed->removeElement($artistsFollowed)) {
             $artistsFollowed->removeFollowed($this);
         }
+
+        return $this;
+    }
+
+    public function getProfilePicturePath(): ?string
+    {
+        return $this->profile_picture_path;
+    }
+
+    public function setProfilePicturePath(?string $profile_picture_path): self
+    {
+        $this->profile_picture_path = $profile_picture_path;
 
         return $this;
     }
