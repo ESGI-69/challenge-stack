@@ -52,6 +52,9 @@ class Artist
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'artists_followed')]
     private Collection $followed;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $picture_path = null;
+
     public function __construct()
     {
         $this->medias = new ArrayCollection();
@@ -246,6 +249,18 @@ class Artist
     public function removeFollowed(User $followed): self
     {
         $this->followed->removeElement($followed);
+
+        return $this;
+    }
+
+    public function getPicturePath(): ?string
+    {
+        return $this->picture_path;
+    }
+
+    public function setPicturePath(?string $picture_path): self
+    {
+        $this->picture_path = $picture_path;
 
         return $this;
     }
