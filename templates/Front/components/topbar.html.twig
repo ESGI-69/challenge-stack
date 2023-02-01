@@ -8,8 +8,8 @@
     <a class="{{ app.request.get('_route')=='front_default_index' ? 'active' : '' }}" href="{{ path('front_default_index') }}">Feed</a>
     <a class="{{ app.request.get('_route')=='front_artists' ? 'active' : '' }}" href="{{ path('front_artists') }}">Artists</a>
     <a class="{{ app.request.get('_route')=='front_events' ? 'active' : '' }}" href="{{ path('front_events') }}">Events</a>
-    <a class="{{ app.request.get('_route')=='' ? 'active' : '' }}" href="">Culbs</a>
-    <a class="{{ app.request.get('_route')=='' ? 'active' : '' }}" href="">About</a>
+    <a class="{{ app.request.get('_route')=='front_clubs' ? 'active' : '' }}" href="{{ path('front_clubs') }}">Clubs</a>
+    <a class="{{ app.request.get('_route')=='front_about' ? 'active' : '' }}" href="{{ path('front_about') }}">About</a>
   </div>
   <div class="topbar__user-info">
     {% if not app.user %}
