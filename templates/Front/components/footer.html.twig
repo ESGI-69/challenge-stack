@@ -1,0 +1,19 @@
+{% block footer %}
+<div class="footer">
+  <img class="footer__logo" src="{{ asset('build/images/logo.svg') }}" alt="Logo" />
+  <div class="footer__links">
+    <div class="category">
+      <span class="category__title">BeatHub</span>
+      <div class="category__list">
+        <a class="category__list__item" href="{{ path('front_about') }}">About Us</a>
+      </div>
+  </div>
+    <div class="category">
+      <span class="category__title">Follow</span>
+      <div class="category__list">
+        <a class="category__list__item" target="_blank" href="https://facebook.com/">Facebook</a>
+        <a class="category__list__item" target="_blank" href="https://instagram.com">Instagram</a>
+      </div>
+  </div>
+</div>
+{% endblock %}

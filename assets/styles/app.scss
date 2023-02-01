@@ -1,12 +1,28 @@
 @use 'topbar' as *;
+@use 'footer' as *;
 @use 'variables' as *;
 
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Rock+Salt&display=swap');
 
+html, body {
+  height: 100%;
+}
+
 body {
-    background-color: #1B1B1B;
-    color: #FFFFFF;
-    margin: 0;
-    padding: 0;
-    font-family: 'Playfair Display', serif;
+  background-color: #1B1B1B;
+  color: #FFFFFF;
+  margin: 0;
+  padding: 0;
+  font-family: 'Playfair Display', serif;
+
+  .app {
+    height: 100%;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    grid-template-columns: 1fr;
+
+    main {
+      padding: 1rem 3.5rem;
+    }
+  }
 }
