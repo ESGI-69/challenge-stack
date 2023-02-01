@@ -35,6 +35,9 @@ class Event
     #[ORM\ManyToMany(targetEntity: User::class)]
     private Collection $insterested_users;
 
+    #[ORM\Column(length: 255)]
+    private ?string $picture_path = null;
+
     public function __construct()
     {
         $this->artists = new ArrayCollection();
@@ -138,6 +141,18 @@ class Event
     public function removeInsterestedUser(User $insterestedUser): self
     {
         $this->insterested_users->removeElement($insterestedUser);
+
+        return $this;
+    }
+
+    public function getPicturePath(): ?string
+    {
+        return $this->picture_path;
+    }
+
+    public function setPicturePath(string $picture_path): self
+    {
+        $this->picture_path = $picture_path;
 
         return $this;
     }
