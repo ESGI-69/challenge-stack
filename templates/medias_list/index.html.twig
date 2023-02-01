@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<title>MediasList index</title>
+
+{% block body %}
+    <h1>MediasList index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Release_date</th>
+                <th>Description</th>
+                <th>Path_cover</th>
+                <th>Type</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for medias_list in medias_lists %}
+            <tr>
+                <td>{{ medias_list.id }}</td>
+                <td>{{ medias_list.title }}</td>
+                <td>{{ medias_list.releaseDate ? medias_list.releaseDate|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ medias_list.description }}</td>
+                <td>{{ medias_list.pathCover }}</td>
+                <td>{{ medias_list.type }}</td>
+                <td>
+                    <a href="{{ path('app_medias_list_show', {'id': medias_list.id}) }}">show</a>
+                    <a href="{{ path('app_medias_list_edit', {'id': medias_list.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_medias_list_new') }}">Create new</a>
+{% endblock %}

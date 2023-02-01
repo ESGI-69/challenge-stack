@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<title>MediasList</title>
+
+{% block body %}
+    <h1>MediasList</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ medias_list.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ medias_list.title }}</td>
+            </tr>
+            <tr>
+                <th>Release_date</th>
+                <td>{{ medias_list.releaseDate ? medias_list.releaseDate|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ medias_list.description }}</td>
+            </tr>
+            <tr>
+                <th>Path_cover</th>
+                <td>{{ medias_list.pathCover }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ medias_list.type }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_medias_list_index') }}">back to list</a>
+
+    <a href="{{ path('app_medias_list_edit', {'id': medias_list.id}) }}">edit</a>
+
+    {{ include('medias_list/_delete_form.html.twig') }}
+{% endblock %}
