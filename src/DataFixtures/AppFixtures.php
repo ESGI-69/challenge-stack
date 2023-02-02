@@ -19,19 +19,19 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         /* BLOC POUR ARTISTES */ 
-        $artist = new Artist();
-        $artist->setNom("Bauweraerts");
-        $artist->setPrenom("Koen");
-        $artist->setPseudo("Coone");
-        $artist->setDescription("BOOM BOOM in the ears.");
-        $artist->setEmail("jon@swag-mgmt.com");
-        $artist->setUrlYt("https://www.youtube.com/channel/UC7alhTRNkawfATqvctiSZjA");
-        $artist->setUrlSoundcloud("https://soundcloud.com/COONE");
-        $artist->setUrlSpotify("https://open.spotify.com/artist/1Wt63OMKtv6v2ivHuQLm2C");
-        $artist->setUrlDeezer("https://www.deezer.com/fr/artist/199130");
-        $artist->setCountry("Belgium");
-        $artist->setType("solo");
-        $manager->persist($artist);
+        $artist1 = new Artist();
+        $artist1->setNom("Bauweraerts");
+        $artist1->setPrenom("Koen");
+        $artist1->setPseudo("Coone");
+        $artist1->setDescription("BOOM BOOM in the ears.");
+        $artist1->setEmail("jon@swag-mgmt.com");
+        $artist1->setUrlYt("https://www.youtube.com/channel/UC7alhTRNkawfATqvctiSZjA");
+        $artist1->setUrlSoundcloud("https://soundcloud.com/COONE");
+        $artist1->setUrlSpotify("https://open.spotify.com/artist/1Wt63OMKtv6v2ivHuQLm2C");
+        $artist1->setUrlDeezer("https://www.deezer.com/fr/artist/199130");
+        $artist1->setCountry("Belgium");
+        $artist1->setType("solo");
+        $manager->persist($artist1);
         
         $artist = new Artist();
         $artist->setNom("Camel");
@@ -209,7 +209,7 @@ class AppFixtures extends Fixture
         $media->setDuree(222);
         $media->setFilePath("");
         $media->addMediaslist($mediaslist);
-        $media->addArtist($artist);
+        $media->addArtist($artist1);
 
         $manager->persist($media);
 
@@ -221,7 +221,7 @@ class AppFixtures extends Fixture
         $media->setDuree(222);
         $media->setFilePath("");
         $media->addMediaslist($mediaslist);
-        $media->addArtist($artist);
+        $media->addArtist($artist1);
 
         $manager->persist($media);
 
@@ -233,7 +233,7 @@ class AppFixtures extends Fixture
         $media->setDuree(222);
         $media->setFilePath("");
         $media->addMediaslist($mediaslist);
-        $media->addArtist($artist);
+        $media->addArtist($artist1);
 
         $manager->persist($media);
 
@@ -245,7 +245,7 @@ class AppFixtures extends Fixture
         $media->setDuree(222);
         $media->setFilePath("");
         $media->addMediaslist($mediaslist);
-        $media->addArtist($artist);
+        $media->addArtist($artist1);
 
         $manager->persist($media);
 
@@ -257,7 +257,7 @@ class AppFixtures extends Fixture
         $media->setDuree(222);
         $media->setFilePath("");
         $media->addMediaslist($mediaslist);
-        $media->addArtist($artist);
+        $media->addArtist($artist1);
 
         $manager->persist($media);
 
@@ -280,7 +280,7 @@ class AppFixtures extends Fixture
         $event->setEndDate(new DateTimeImmutable('now'));
         $event->setTicketingLink("https://shotgun.live/fr");
         $event->setIdConcertHall($concerthall);
-        $event->addArtist($artist);
+        $event->addArtist($artist1);
         $event->setPicturePath("");
         $event->setDuration(3);
 
@@ -318,7 +318,7 @@ class AppFixtures extends Fixture
         $user_artist->setProfilePicturePath("");
         $user_artist->setActive(true);
         $user_artist->setRoles(["ROLE_ARTIST"]);
-        $user_artist->setIdArtist($artist);
+        $user_artist->setIdArtist($artist1);
         $user_artist->setActivationToken("fdp");
         $user_artist->setActivationTokenExpiration(new DateTimeImmutable('now'));
 
@@ -344,6 +344,7 @@ class AppFixtures extends Fixture
         $post->setUpdatedAt(new DateTimeImmutable('now'));
         $post->setValidatedAt(new DateTimeImmutable('now'));
         $post->setIdUser($user_artist);
+        $post->setIdArtist($artist1);
 
         $manager->persist($post);
 
@@ -356,6 +357,7 @@ class AppFixtures extends Fixture
         $post->setValidatedAt(new DateTimeImmutable('now'));
         $post->setIdEvent($event);
         $post->setIdUser($user_artist);
+        $post->setIdArtist($artist1);
 
         $manager->persist($post);
 
