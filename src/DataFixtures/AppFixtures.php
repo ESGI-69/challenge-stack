@@ -188,6 +188,20 @@ class AppFixtures extends Fixture
         $artist->setCountry("Japan");
         $artist->setType("solo");
         $manager->persist($artist);
+
+        $artist = new Artist();
+        $artist->setNom("Jarre");
+        $artist->setPrenom("Jean-Michel");
+        $artist->setPseudo("Jean-Michel Jarre");
+        $artist->setDescription("Jean-Michel André Jarre is a French composer, performer, and record producer.");
+        $artist->setEmail("jm.jarre@mail.com");
+        $artist->setUrlYt("https://www.youtube.com/@JeanMichelJarre");
+        $artist->setUrlSoundcloud("https://soundcloud.com/jeanmicheljarre");
+        $artist->setUrlDeezer("https://www.deezer.com/fr/artist/116");
+        $artist->setUrlSpotify("https://open.spotify.com/artist/0X2BH1fck6amBIoJhDVmmJ");
+        $artist->setCountry("France");
+        $artist->setType("solo");
+        $manager->persist($artist);
         
         /* BLOC POUR ALBUM */
         $mediaslist = new MediasList();

@@ -37,7 +37,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     // NotBlank with groups create
-    #[NotBlank(groups: ['create'])]
+    #[NotBlank]
     #[Length(min: 6)]
     private ?string $plainPassword = null;
 
@@ -154,6 +154,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getid_artist(): ?Artist
+    {
+        return $this->id_artist;
     }
 
     public function getIdArtist(): ?Artist
