@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Front;
 
 use App\Entity\MediasList;
 use App\Form\MediasListType;
@@ -16,7 +16,7 @@ class MediasListController extends AbstractController
     #[Route('/', name: 'app_medias_list_index', methods: ['GET'])]
     public function index(MediasListRepository $mediasListRepository): Response
     {
-        return $this->render('medias_list/index.html.twig', [
+        return $this->render('Front/medias_list/index.html.twig', [
             'medias_lists' => $mediasListRepository->findAll(),
         ]);
     }
@@ -43,7 +43,7 @@ class MediasListController extends AbstractController
     #[Route('/{id}', name: 'app_medias_list_show', methods: ['GET'])]
     public function show(MediasList $mediasList): Response
     {
-        return $this->render('medias_list/show.html.twig', [
+        return $this->render('Front/medias_list/show.html.twig', [
             'medias_list' => $mediasList,
         ]);
     }

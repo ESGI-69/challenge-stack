@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Front;
 
 use App\Entity\Event;
 use App\Form\EventType;
@@ -16,7 +16,7 @@ class EventController extends AbstractController
     #[Route('/', name: 'app_event_index', methods: ['GET'])]
     public function index(EventRepository $eventRepository): Response
     {
-        return $this->render('event/index.html.twig', [
+        return $this->render('Front/event/index.html.twig', [
             'events' => $eventRepository->findAll(),
         ]);
     }
@@ -43,7 +43,7 @@ class EventController extends AbstractController
     #[Route('/{id}', name: 'app_event_show', methods: ['GET'])]
     public function show(Event $event): Response
     {
-        return $this->render('event/show.html.twig', [
+        return $this->render('Front/event/show.html.twig', [
             'event' => $event,
         ]);
     }

@@ -26,7 +26,7 @@ class UserController extends AbstractController
     {
         if ($this->isGranted('ROLE_ADMIN')) {
           $users = $userRepository->findAll();
-          return $this->render('back/user/index.html.twig', [
+          return $this->render('Back/user/index.html.twig', [
               'users' => $users,
           ]);
         } elseif ($this->isGranted('ROLE_MANAGER') && !$this->isGranted('ROLE_ADMIN')){
@@ -36,7 +36,7 @@ class UserController extends AbstractController
               unset($users[$key]);
             }
           }
-          return $this->render('back/user/index.html.twig', [
+          return $this->render('Back/user/index.html.twig', [
               'users' => $users,
           ]);
         }
@@ -66,7 +66,7 @@ class UserController extends AbstractController
           }
         }
 
-        return $this->render('back/user/edit.html.twig', [
+        return $this->render('Back/user/edit.html.twig', [
             'form' => $form->createView(),
             'user' => $user,
         ]);

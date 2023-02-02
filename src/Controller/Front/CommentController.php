@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Front;
 
 use App\Entity\Comment;
 use App\Form\CommentType;
@@ -16,7 +16,7 @@ class CommentController extends AbstractController
     #[Route('/', name: 'app_comment_index', methods: ['GET'])]
     public function index(CommentRepository $commentRepository): Response
     {
-        return $this->render('comment/index.html.twig', [
+        return $this->render('Front/comment/index.html.twig', [
             'comments' => $commentRepository->findAll(),
         ]);
     }
@@ -34,7 +34,7 @@ class CommentController extends AbstractController
             return $this->redirectToRoute('app_comment_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('comment/new.html.twig', [
+        return $this->renderForm('front/comment/new.html.twig', [
             'comment' => $comment,
             'form' => $form,
         ]);

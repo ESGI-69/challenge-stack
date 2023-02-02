@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Front;
 
 use App\Entity\Post;
 use App\Form\PostType;
@@ -16,7 +16,7 @@ class PostController extends AbstractController
     #[Route('/', name: 'app_post_index', methods: ['GET'])]
     public function index(PostRepository $postRepository): Response
     {
-        return $this->render('post/index.html.twig', [
+        return $this->render('Front/post/index.html.twig', [
             'posts' => $postRepository->findAll(),
         ]);
     }
@@ -43,7 +43,7 @@ class PostController extends AbstractController
     #[Route('/{id}', name: 'app_post_show', methods: ['GET'])]
     public function show(Post $post): Response
     {
-        return $this->render('post/show.html.twig', [
+        return $this->render('Front/post/show.html.twig', [
             'post' => $post,
         ]);
     }

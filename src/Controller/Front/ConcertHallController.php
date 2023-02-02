@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Front;
 
 use App\Entity\ConcertHall;
 use App\Form\ConcertHallType;
@@ -16,7 +16,7 @@ class ConcertHallController extends AbstractController
     #[Route('/', name: 'app_concert_hall_index', methods: ['GET'])]
     public function index(ConcertHallRepository $concertHallRepository): Response
     {
-        return $this->render('concert_hall/index.html.twig', [
+        return $this->render('Front/concert_hall/index.html.twig', [
             'concert_halls' => $concertHallRepository->findAll(),
         ]);
     }
@@ -43,7 +43,7 @@ class ConcertHallController extends AbstractController
     #[Route('/{id}', name: 'app_concert_hall_show', methods: ['GET'])]
     public function show(ConcertHall $concertHall): Response
     {
-        return $this->render('concert_hall/show.html.twig', [
+        return $this->render('Front/concert_hall/show.html.twig', [
             'concert_hall' => $concertHall,
         ]);
     }
