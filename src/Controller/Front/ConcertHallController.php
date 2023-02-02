@@ -15,9 +15,10 @@ class ConcertHallController extends AbstractController
 {
     #[Route('/', name: 'app_concert_hall_index', methods: ['GET'])]
     public function index(ConcertHallRepository $concertHallRepository): Response
-    {
+    {        
         return $this->render('Front/concert_hall/index.html.twig', [
-            'concert_halls' => $concertHallRepository->findAll(),
+            'concert_halls' => $concertHallRepository->findBy([], ['id' => 'DESC']),
+            'concertWithTopEvents' => $concertHallRepository->getTrendingConcertHalls()
         ]);
     }
 

@@ -39,6 +39,16 @@ class EventRepository extends ServiceEntityRepository
         }
     }
 
+    public function getEventByDate($date): array
+    {
+        $qb = $this->createQueryBuilder('e')
+        ->where("e.date >= :start AND e.date <= :end")
+        ->setParameter('start', $date->format('Y-m-d 00:00:00'))
+        ->setParameter('end', $date->format('Y-m-d 23:59:59'))
+        ->orderBy('e.date', 'ASC');    
+        return $qb->getQuery()->getResult();
+    }
+
 //    /**
 //     * @return Event[] Returns an array of Event objects
 //     */
