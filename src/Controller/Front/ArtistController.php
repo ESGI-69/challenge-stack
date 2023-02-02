@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\SerializerInterface;
 
 #[Route('/artist')]
 class ArtistController extends AbstractController
@@ -49,10 +50,11 @@ class ArtistController extends AbstractController
      * @return Response
      */
     #[Route('/{slug}', name: 'app_artist_show', methods: ['GET'])]
-    public function show(Artist $artist): Response
+    public function show(Artist $artist, SerializerInterface $serializer): Response
     {
         return $this->render('Front/artist/show.html.twig', [
             'artist' => $artist,
+            'artistAsArray' => $serializer->normalize($artist, null),
         ]);
     }
 
