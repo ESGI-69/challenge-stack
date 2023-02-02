@@ -1,7 +1,15 @@
 @use 'topbar' as *;
 @use 'footer' as *;
 @use 'variables' as *;
+@use 'lists' as *;
 @use 'back/sidebar' as *;
+@use './components/artist/artistRow.scss' as *;
+@use './components/event/eventRow.scss' as *;
+@use './components/clubs/clubRow.scss' as *;
+@use './components/post.scss' as *;
+@use './components/comment.scss' as *;
+@use './components/section.scss' as *;
+@use './components/button.scss' as *;
 
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Rock+Salt&display=swap');
 
@@ -15,8 +23,11 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Playfair Display', serif;
+  display: flex;
+  justify-content: center;
 
   .app {
+    width: 1200px;
     height: 100%;
     display: grid;
     grid-template-rows: auto 1fr auto;
@@ -24,6 +35,9 @@ body {
 
     main {
       padding: 1rem 3.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
     }
   }
   

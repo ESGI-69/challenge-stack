@@ -1,0 +1,54 @@
+.event-row {
+  display: grid;
+  grid-template-columns: 70px 1fr 1fr;
+  grid-template-rows: 1fr;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem;
+  color: var(--color-text-primary);
+  text-decoration: none;
+  border-bottom: 1px solid var(--color-secondary);
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover {
+    background-color: var(--color-black);
+    color: var(--color-white);
+
+    .artist-row__info__name {
+      text-decoration: underline;
+    }
+  }
+
+  &__image {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+
+    &:last-child {
+      text-align: right;
+    }
+
+    &__name {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    &__date, &__club-city {
+      color: var(--color-secondary)
+    }
+
+    &__followers-count, &__events-count {
+      .count {
+        font-weight: bold;
+      }
+    }
+  }
+}

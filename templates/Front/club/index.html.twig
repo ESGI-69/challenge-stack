@@ -1,0 +1,34 @@
+{% extends 'base_front.html.twig' %}
+
+{% block title %}BeatHub | Clubs{% endblock %}
+
+{% block body %}
+
+{% include '/Front/components/section.html.twig' with {name: 'Trending'} %}
+<div class="clubs-list">
+{% include '/Front/components/clubRow.html.twig'
+  with {
+    clubImagePath: 'build/images/logo.svg',
+    clubSlug: 'ohm',
+    clubName: 'OHM',
+    clubCity: 'Berlin',
+    clubCapacity: 1000,
+    clubEventCount: 10,
+  }
+%}
+</div>
+
+{% include '/Front/components/section.html.twig' with {name: 'New on BeatHub'} %}
+<div class="clubs-list">
+{% include '/Front/components/clubRow.html.twig'
+  with {
+    clubImagePath: 'build/images/logo.svg',
+    clubSlug: 'ohm',
+    clubName: 'OHM',
+    clubCity: 'Berlin',
+    clubCapacity: 1000,
+    clubEventCount: 10,
+  }
+%}
+</div>
+{% endblock %}

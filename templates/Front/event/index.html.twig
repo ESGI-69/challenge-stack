@@ -1,0 +1,36 @@
+{% extends 'base_front.html.twig' %}
+
+{% block title %}Hello EventsController!{% endblock %}
+
+{% block body %}
+
+{% include '/Front/components/section.html.twig' with {name: 'Tonight'} %}
+<div class="events-list">
+{% include '/Front/components/eventRow.html.twig'
+  with {
+    eventImagePath: 'build/images/logo.svg',
+    eventSlug: '012-label-night',
+    eventName: '012 Label Nigh',
+    eventDate: 'Fri, Feb 3, 22:00',
+    eventClubSlug: 'ohm',
+    eventClubName: 'OHM',
+    eventClubCity: 'Berlin',
+  }
+%}
+</div>
+
+{% include '/Front/components/section.html.twig' with {name: 'Tomorow'} %}
+<div class="events-list">
+{% include '/Front/components/eventRow.html.twig'
+  with {
+    eventImagePath: 'build/images/logo.svg',
+    eventSlug: '012-label-night',
+    eventName: '012 Label Nigh',
+    eventDate: 'Fri, Feb 3, 22:00',
+    eventClubSlug: 'ohm',
+    eventClubName: 'OHM',
+    eventClubCity: 'Berlin',
+  }
+%}
+</div>
+{% endblock %}

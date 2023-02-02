@@ -1,0 +1,90 @@
+.post {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  grid-template-rows: 1fr;
+  grid-template-areas:
+    "author content";
+  
+  &.show-comment {
+    grid-template-rows: 1fr auto;
+    grid-template-areas:
+      "author content"
+      "author comments";
+  }
+
+  &__author {
+    grid-area: author;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+
+    &__image {
+      width: 100%;
+    }
+
+    &__name {
+      text-decoration: none;
+      font-weight: bold;
+      color: var(--color-text-primary);
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    &__date {
+      color: var(--color-secondary);
+    }
+  }
+
+  &__content {
+    grid-area: content;
+    padding: 0.5rem;
+
+    &__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      border-bottom: 1px solid var(--color-secondary);
+      padding-bottom: 0.2rem;
+
+      &__title {
+        font-size: 1.7rem;
+        font-weight: bold;
+      }
+    }
+
+    &__footer {
+      grid-area: footer;
+      display: flex;
+      justify-content: space-between;
+  
+      &__comment-count {
+        display: flex;
+        gap: 0.2rem;
+  
+        &__icon {
+          margin-right: 0.2rem;
+        }
+      }
+  
+      &__like-count {
+        display: flex;
+        gap: 0.5rem;
+  
+        &__stat {
+          display: flex;
+          gap: 0.2rem;
+        }
+  
+      }
+    }
+  }
+
+  &__comments {
+    grid-area: comments;
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    gap: 1rem;
+  }
+}
