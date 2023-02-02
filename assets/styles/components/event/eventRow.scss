@@ -17,7 +17,7 @@
     background-color: var(--color-black);
     color: var(--color-white);
 
-    .artist-row__info__name {
+    .event-row__info__name {
       text-decoration: underline;
     }
   }
@@ -42,10 +42,16 @@
     }
 
     &__date, &__club-city {
-      color: var(--color-secondary)
+      color: var(--color-secondary);
+      font-family: var(--font-family-sans-serif);
+    }
+
+    &__club-name {
+      font-family: var(--font-family-sans-serif);
     }
 
     &__followers-count, &__events-count {
+      font-family: var(--font-family-sans-serif);
       .count {
         font-weight: bold;
       }

@@ -12,13 +12,13 @@
       Feed
     </a>
     <a
-      class="{{ app.request.get('_route')=='front_artists' ? 'active' : '' }}"
+      class="{{ app.request.get('_route')=='front_app_artist_index' ? 'active' : '' }}"
       href="{{ path('front_app_artist_index') }}"
     >
       Artists
     </a>
     <a
-      class="{{ app.request.get('_route')=='front_events' ? 'active' : '' }}"
+      class="{{ app.request.get('_route')=='front_app_event_index' ? 'active' : '' }}"
       href="{{ path('front_app_event_index') }}"
     >
       Events
@@ -39,7 +39,13 @@
   <div class="topbar__user-info">
     {% if not app.user %}
       <a href="{{ path('app_login') }}">Login</a>
-      <a href="{{ path('register') }}">Register</a>
+        {% include '/Front/components/button.html.twig' with {
+          text: 'Register',
+          link: path('register'),
+          type: 'solid',
+          color: 'primary',
+        } %}
+      {# <a href="{{ path('register') }}">Register</a> #}
     {% else %}
       {% if (is_granted('ROLE_MANAGER') or is_granted('ROLE_ARTIST')) %}
         <a href="{{ path('admin_default_index') }}">Panel d'admin</a>

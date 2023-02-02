@@ -3,6 +3,7 @@
   grid-template-columns: 120px 1fr;
   grid-template-rows: 120px;
   padding: 2rem;
+  border-top: 1px solid var(--color-pirmary-darker);
 
   &__logo {
     width: 120px;

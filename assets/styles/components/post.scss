@@ -33,6 +33,7 @@
 
     &__date {
       color: var(--color-secondary);
+      font-family: var(--font-family-sans-serif);
     }
   }
 
@@ -51,6 +52,10 @@
         font-size: 1.7rem;
         font-weight: bold;
       }
+    }
+
+    &__text {
+      font-family: var(--font-family-sans-serif);
     }
 
     &__footer {

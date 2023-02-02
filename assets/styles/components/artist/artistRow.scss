@@ -38,10 +38,13 @@
     }
 
     &__country, &__followers-count {
-      color: var(--color-secondary)
+      color: var(--color-secondary);
+      font-family: var(--font-family-sans-serif);
     }
 
     &__followers-count, &__events-count {
+      font-family: var(--font-family-sans-serif);
+
       .count {
         font-weight: bold;
       }

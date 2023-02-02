@@ -18,6 +18,7 @@
 
           &__not-validated {
             color: var(--color-primary);
+            font-family: var(--font-family-sans-serif);
           }
         }
 
@@ -54,6 +55,7 @@
   
       &__date {
         color: var(--color-secondary);
+        font-family: var(--font-family-sans-serif);
       }
     }
 

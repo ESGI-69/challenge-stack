@@ -22,7 +22,7 @@ body {
   color: #FFFFFF;
   margin: 0;
   padding: 0;
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-family-serif);
   display: flex;
   justify-content: center;
 
@@ -34,7 +34,7 @@ body {
     grid-template-columns: 1fr;
 
     main {
-      padding: 1rem 3.5rem;
+      padding: 2rem 3.5rem;
       display: flex;
       flex-direction: column;
       gap: 1rem;
