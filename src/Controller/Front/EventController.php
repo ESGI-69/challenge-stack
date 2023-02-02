@@ -16,8 +16,11 @@ class EventController extends AbstractController
     #[Route('/', name: 'app_event_index', methods: ['GET'])]
     public function index(EventRepository $eventRepository): Response
     {
+        $today = new \DateTime();
         return $this->render('Front/event/index.html.twig', [
-            'events' => $eventRepository->findAll(),
+            'events' => $eventRepository->getEventByDate($today),
+            'tomorrowEvents' => $eventRepository->getEventByDate($today->modify('+1 day'))
+
         ]);
     }
 

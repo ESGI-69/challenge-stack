@@ -39,6 +39,24 @@ class ConcertHallRepository extends ServiceEntityRepository
         }
     }
 
+    public function getTrendingConcertHalls($limit = 3): array
+    {
+        $qb = $this->createQueryBuilder('c')
+            ->select('c, COUNT(e.id) as eventCount')
+            ->join('c.events', 'e')
+             ->groupBy('c.id')
+            ->orderBy('eventCount', 'DESC')
+            ->setMaxResults($limit);
+
+        $result = [];
+        foreach ($qb->getQuery()->getResult() as $row) {
+            $row[0]->eventCount = $row['eventCount'];
+            $result[] = $row[0];
+        }
+        return $result;
+
+    }
+
 //    /**
 //     * @return ConcertHall[] Returns an array of ConcertHall objects
 //     */
