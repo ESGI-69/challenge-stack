@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ArtistRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Gedmo\Mapping\Annotation\Slug;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -60,6 +61,9 @@ class Artist
 
     #[ORM\Column(length: 50)]
     private ?string $type = null;
+    #[ORM\Column(length: 105)]
+    #[Slug(fields: ['pseudo'])]
+    private ?string $slug = null;
 
     public function __construct()
     {
@@ -291,6 +295,14 @@ class Artist
     public function setType(string $type): self
     {
         $this->type = $type;
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }

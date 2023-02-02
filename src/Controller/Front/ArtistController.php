@@ -52,7 +52,11 @@ class ArtistController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_artist_show', methods: ['GET'])]
+    /**
+     * @param Artist $artist
+     * @return Response
+     */
+    #[Route('/{slug}', name: 'app_artist_show', methods: ['GET'])]
     public function show(Artist $artist): Response
     {
         return $this->render('Front/artist/show.html.twig', [
