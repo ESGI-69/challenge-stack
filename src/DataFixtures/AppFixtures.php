@@ -31,6 +31,7 @@ class AppFixtures extends Fixture
         $artist->setUrlSpotify("https://open.spotify.com/artist/1Wt63OMKtv6v2ivHuQLm2C");
         $artist->setUrlDeezer("https://www.deezer.com/fr/artist/199130");
         $artist->setCountry("Belgium");
+        $artist->setType("solo");
         
         $manager->persist($artist);
 
