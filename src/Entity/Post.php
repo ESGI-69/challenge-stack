@@ -32,7 +32,7 @@ class Post
     private ?bool $validated = null;
 
     #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?User $id_user = null;
 
     #[ORM\ManyToOne]
@@ -42,7 +42,7 @@ class Post
     private ?MediasList $id_mediaslist = null;
 
     #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Event $id_event = null;
 
     #[ORM\OneToMany(mappedBy: 'id_post', targetEntity: Comment::class, orphanRemoval: true)]
