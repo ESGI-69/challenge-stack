@@ -20,7 +20,7 @@ class Event
     private ?string $title = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $date = null;
+    private ?\DateTimeInterface $start_date = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $ticketing_link = null;
@@ -37,6 +37,12 @@ class Event
 
     #[ORM\Column(length: 255)]
     private ?string $picture_path = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $end_date = null;
+
+    #[ORM\Column]
+    private ?int $duration = null;
 
     public function __construct()
     {
@@ -61,14 +67,14 @@ class Event
         return $this;
     }
 
-    public function getDate(): ?\DateTimeInterface
+    public function getStartDate(): ?\DateTimeInterface
     {
-        return $this->date;
+        return $this->start_date;
     }
 
-    public function setDate(\DateTimeInterface $date): self
+    public function setStartDate(\DateTimeInterface $date): self
     {
-        $this->date = $date;
+        $this->start_date = $date;
 
         return $this;
     }
@@ -153,6 +159,30 @@ class Event
     public function setPicturePath(string $picture_path): self
     {
         $this->picture_path = $picture_path;
+
+        return $this;
+    }
+
+    public function getEndDate(): ?\DateTimeInterface
+    {
+        return $this->end_date;
+    }
+
+    public function setEndDate(\DateTimeInterface $end_date): self
+    {
+        $this->end_date = $end_date;
+
+        return $this;
+    }
+
+    public function getDuration(): ?int
+    {
+        return $this->duration;
+    }
+
+    public function setDuration(int $duration): self
+    {
+        $this->duration = $duration;
 
         return $this;
     }

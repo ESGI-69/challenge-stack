@@ -46,3 +46,19 @@ Executer les requètes en DB
 #### Ajout de données via les DataFixtures
 
 `docker compose exec php bin/console doctrine:fixtures:load`
+
+### Architecture pour les fichiers uploadés
+
+`data-files/` <br />
+`├─ user-pictures/`<br />
+`│  ├─ ID-image.jpg`<br />
+`├─ media_list-pictures/`<br />
+`│  ├─ ID-image.jpg`<br />
+`├─ artist-pictures/`<br />
+`│  ├─ ID-image.jpg`<br />
+`├─ concert_hall-pictures/`<br />
+`│  ├─ ID-image.jpg`<br />
+`├─ event-pictures/`<br />
+`│  ├─ ID-image.jpg`<br />
+`├─ media-pictures/`<br />
+`│  ├─ ID-image.jpg`<br />
