@@ -1,0 +1,55 @@
+<div class="artist-header">
+  <img src="{{ artist.picturePath is null ? asset('build/data-files/artist-pictures/placeholder-image.webp') : asset(artist.picturePath) }}">
+  <div class="artist-header__content">
+    <span class="artist-header__content__type">{{ artist.type }} ({{ artist.country }})</span>
+    <div class="artist-header__content__name">
+      <h1 class="artist-header__content__name__text">
+        {{ artist.type == "group" ? artist.pseudo : artist.prenom ~ ' ' ~ artist.nom ~ ' (' ~ artist.pseudo ~ ')' }}
+      </h1>
+      {% if artist.urlYt is not null %}
+        <a href="{{ artist.urlYt }}" target="_blank">
+          {% include '/icons/youtube.html.twig' %}
+        </a>
+      {% endif %}
+      {% if artist.urlSoundcloud is not null %}
+        <a href="{{ artist.urlSoundcloud }}" target="_blank">
+          {% include '/icons/soundcloud.html.twig' %}
+        </a>
+      {% endif %}
+      {% if artist.urlSpotify is not null %}
+        <a href="{{ artist.urlSpotify }}" target="_blank">
+          {% include '/icons/spotify.html.twig' %}
+        </a>
+      {% endif %}
+      {% if artist.urlDeezer is not null %}
+        <a href="{{ artist.urlDeezer }}" target="_blank">
+          {% include '/icons/deezer.html.twig' %}
+        </a>
+      {% endif %}
+    </div>
+    <p>{{ artist.description }} (<a href="mailto://{{ artist.email }}">{{ artist.email }}</a>)</p>
+    <div class="artist-header__content__info">
+
+    </div>
+    <div class="artist-header__content__actions">
+      {% if not app.user %}
+        {% include '/Front/components/button.html.twig' with {
+          text: 'Sign in',
+          link: path('app_login'),
+          class: 'artist-header__content__actions__follow-text__sign-in',
+          type: 'link',
+          color: 'black',
+        } %}<span class="artist-header__content__actions__follow-text">&nbsp;to follow this artist and be notified for the next show</span>
+      {% else %}
+        {% include '/Front/components/button.html.twig' with {
+          text: 'Follow (' ~ followerCount ~ ')',
+          link: '#',
+          class: 'artist-header__content__actions__follow-button',
+          type: 'outline',
+          color: 'white',
+        } %}
+        <span class="artist-header__content__actions__follow-text"> Follow this artist to be notified for the next show</span>
+      {% endif %}
+    </div>
+  </div>
+</div>

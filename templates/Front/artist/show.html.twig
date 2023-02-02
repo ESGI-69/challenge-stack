@@ -1,6 +1,7 @@
 {% extends 'base_front.html.twig' %}
 
-{% block title %}Hello ArtistsController!{% endblock %}
+{% block title %}BeatHub | {{ artist.type == "group" ? artist.pseudo : artist.prenom ~ ' ' ~ artist.nom ~ ' (' ~ artist.pseudo ~ ')' }}{% endblock %}
 {% block body %}
+  {% include '/Front/components/artistHeader.html.twig' with { artist, followerCount } %}
   {{ dump(artist) }}
 {% endblock %}

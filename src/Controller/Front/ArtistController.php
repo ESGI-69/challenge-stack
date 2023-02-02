@@ -17,8 +17,6 @@ class ArtistController extends AbstractController
     #[Route('/', name: 'app_artist_index', methods: ['GET'])]
     public function index(ArtistRepository $artistRepository): Response
     {
-        // dd($artistRepository->getLastCreate(5), $artistRepository->getTrending(5));
-
         return $this->render('Front/artist/index.html.twig', [
             'artists' => $artistRepository->getLastCreate(5),
             'artistsWithTopFollowers' => $artistRepository->getTrending(5),
@@ -50,11 +48,13 @@ class ArtistController extends AbstractController
      * @return Response
      */
     #[Route('/{slug}', name: 'app_artist_show', methods: ['GET'])]
-    public function show(Artist $artist, SerializerInterface $serializer): Response
+    public function show(Artist $artist, SerializerInterface $serializer, ArtistRepository $artistRepository): Response
     {
+        $followerCount = $artistRepository->getFollowersCount($artist->getId());
+
         return $this->render('Front/artist/show.html.twig', [
-            'artist' => $artist,
-            'artistAsArray' => $serializer->normalize($artist, null),
+            'artist' => $serializer->normalize($artist, null),
+            'followerCount' => $followerCount,
         ]);
     }
 
