@@ -42,6 +42,8 @@ class AppFixtures extends Fixture
         $artist->setUrlYt("https://www.youtube.com/@CamelBandOfficial");
         $artist->setUrlSoundcloud("https://soundcloud.com/camelbandofficial");
         $artist->setUrlDeezer("https://www.deezer.com/fr/artist/12826");
+        $artist->setCountry("United Kingdom");
+        $artist->setType("group");
         $manager->persist($artist);
 
         $artist = new Artist();
@@ -53,6 +55,8 @@ class AppFixtures extends Fixture
         $artist->setUrlYt("https://www.youtube.com/@PinkFloyd");
         $artist->setUrlSoundcloud("https://soundcloud.com/pinkfloyd");
         $artist->setUrlDeezer("https://www.deezer.com/fr/artist/860");
+        $artist->setCountry("United Kingdom");
+        $artist->setType("group");
         $manager->persist($artist);
 
         $artist = new Artist();
@@ -64,6 +68,8 @@ class AppFixtures extends Fixture
         $artist->setUrlYt("https://www.youtube.com/@Chromatics");
         $artist->setUrlSoundcloud("https://soundcloud.com/chromatics");
         $artist->setUrlDeezer("https://www.deezer.com/fr/artist/17269");
+        $artist->setCountry("United States");
+        $artist->setType("group");
         $manager->persist($artist);
 
         $artist = new Artist();
@@ -75,6 +81,8 @@ class AppFixtures extends Fixture
         $artist->setUrlYt("https://www.youtube.com/@TameImpala");
         $artist->setUrlSoundcloud("https://soundcloud.com/tameimpala");
         $artist->setUrlDeezer("https://www.deezer.com/fr/artist/134790");
+        $artist->setCountry("Australia");
+        $artist->setType("group");
         $manager->persist($artist);
 
         $artist = new Artist();
@@ -86,6 +94,8 @@ class AppFixtures extends Fixture
         $artist->setUrlYt("https://www.youtube.com/@LuigiTozzi");
         $artist->setUrlSoundcloud("https://soundcloud.com/luigitozzi");
         $artist->setUrlDeezer("https://www.deezer.com/fr/artist/8169420");
+        $artist->setCountry("Italy");
+        $artist->setType("solo");
         $manager->persist($artist);
 
         $artist = new Artist();
@@ -97,6 +107,8 @@ class AppFixtures extends Fixture
         $artist->setUrlYt("https://www.youtube.com/@HansZimmer");
         $artist->setUrlSoundcloud("https://soundcloud.com/hanszimmer");
         $artist->setUrlDeezer("https://www.deezer.com/fr/artist/1935");
+        $artist->setCountry("Germany");
+        $artist->setType("solo");
         $manager->persist($artist);
 
         $artist = new Artist();
@@ -108,6 +120,8 @@ class AppFixtures extends Fixture
         $artist->setUrlYt("https://www.youtube.com/@StandHighPatrol");
         $artist->setUrlSoundcloud("https://soundcloud.com/standhighpatrol");
         $artist->setUrlDeezer("https://www.deezer.com/fr/artist/1562640");
+        $artist->setCountry("France");
+        $artist->setType("group");
         $manager->persist($artist);
 
         $artist = new Artist();
@@ -119,6 +133,8 @@ class AppFixtures extends Fixture
         $artist->setUrlYt("https://www.youtube.com/@KendrickLamar");
         $artist->setUrlSoundcloud("https://soundcloud.com/kendricklamar");
         $artist->setUrlDeezer("https://www.deezer.com/fr/artist/116");
+        $artist->setCountry("United States");
+        $artist->setType("solo");
         $manager->persist($artist);
 
         $artist = new Artist();
@@ -130,6 +146,8 @@ class AppFixtures extends Fixture
         $artist->setUrlYt("https://www.youtube.com/@KanyeWest");
         $artist->setUrlSoundcloud("https://soundcloud.com/kanyewest");
         $artist->setUrlDeezer("https://www.deezer.com/fr/artist/116");
+        $artist->setCountry("United States");
+        $artist->setType("solo");
         $manager->persist($artist);
 
         $artist = new Artist();
@@ -141,6 +159,8 @@ class AppFixtures extends Fixture
         $artist->setUrlYt("https://www.youtube.com/@AngeloBadalamenti");
         $artist->setUrlSoundcloud("https://soundcloud.com/angelobadalamenti");
         $artist->setUrlDeezer("https://www.deezer.com/fr/artist/116");
+        $artist->setCountry("United States");
+        $artist->setType("solo");
         $manager->persist($artist);
 
         $artist = new Artist();
@@ -152,6 +172,8 @@ class AppFixtures extends Fixture
         $artist->setUrlYt("https://www.youtube.com/@M83");
         $artist->setUrlSoundcloud("https://soundcloud.com/m83");
         $artist->setUrlDeezer("https://www.deezer.com/fr/artist/116");
+        $artist->setCountry("France");
+        $artist->setType("group");
         $manager->persist($artist);
 
         $artist = new Artist();
@@ -163,6 +185,8 @@ class AppFixtures extends Fixture
         $artist->setUrlYt("https://www.youtube.com/@Nujabes");
         $artist->setUrlSoundcloud("https://soundcloud.com/nujabes");
         $artist->setUrlDeezer("https://www.deezer.com/fr/artist/116");
+        $artist->setCountry("Japan");
+        $artist->setType("solo");
         $manager->persist($artist);
         
         /* BLOC POUR ALBUM */
