@@ -69,12 +69,12 @@ class Event
 
     public function getStartDate(): ?\DateTimeInterface
     {
-        return $this->date;
+        return $this->start_date;
     }
 
     public function setStartDate(\DateTimeInterface $date): self
     {
-        $this->date = $date;
+        $this->start_date = $date;
 
         return $this;
     }
