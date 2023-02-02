@@ -55,6 +55,12 @@ class Artist
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $picture_path = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $country = null;
+
+    #[ORM\Column(length: 50)]
+    private ?string $type = null;
+
     public function __construct()
     {
         $this->medias = new ArrayCollection();
@@ -261,6 +267,30 @@ class Artist
     public function setPicturePath(?string $picture_path): self
     {
         $this->picture_path = $picture_path;
+
+        return $this;
+    }
+
+    public function getCountry(): ?string
+    {
+        return $this->country;
+    }
+
+    public function setCountry(string $country): self
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(string $type): self
+    {
+        $this->type = $type;
 
         return $this;
     }

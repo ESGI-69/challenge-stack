@@ -24,12 +24,13 @@ class AppFixtures extends Fixture
         $artist->setNom("Bauweraerts");
         $artist->setPrenom("Koen");
         $artist->setPseudo("Coone");
-        $artist->setDescription("BOOM BOOM dans les oreilles.");
+        $artist->setDescription("BOOM BOOM in the ears.");
         $artist->setEmail("jon@swag-mgmt.com");
         $artist->setUrlYt("https://www.youtube.com/channel/UC7alhTRNkawfATqvctiSZjA");
         $artist->setUrlSoundcloud("https://soundcloud.com/COONE");
         $artist->setUrlSpotify("https://open.spotify.com/artist/1Wt63OMKtv6v2ivHuQLm2C");
         $artist->setUrlDeezer("https://www.deezer.com/fr/artist/199130");
+        $artist->setCountry("Belgium");
         
         $manager->persist($artist);
 
@@ -120,11 +121,13 @@ class AppFixtures extends Fixture
         $event = new Event();
 
         $event->setTitle("HARD BOOM LIVE");
-        $event->setDate(new DateTimeImmutable('now'));
+        $event->setStartDate(new DateTimeImmutable('now'));
+        $event->setEndDate(new DateTimeImmutable('now'));
         $event->setTicketingLink("https://shotgun.live/fr");
         $event->setIdConcertHall($concerthall);
         $event->addArtist($artist);
         $event->setPicturePath("");
+        $event->setDuration(3);
 
         $manager->persist($event);
 
