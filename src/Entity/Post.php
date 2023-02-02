@@ -48,6 +48,10 @@ class Post
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $validated_at = null;
 
+    #[ORM\ManyToOne(inversedBy: 'posts')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Artist $id_artist = null;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -192,6 +196,18 @@ class Post
     public function setValidatedAt(?\DateTimeInterface $validated_at): self
     {
         $this->validated_at = $validated_at;
+
+        return $this;
+    }
+
+    public function getIdArtist(): ?Artist
+    {
+        return $this->id_artist;
+    }
+
+    public function setIdArtist(?Artist $id_artist): self
+    {
+        $this->id_artist = $id_artist;
 
         return $this;
     }
