@@ -12,13 +12,13 @@
       Feed
     </a>
     <a
-      class="{{ app.request.get('_route')=='front_artists' ? 'active' : '' }}"
+      class="{{ app.request.get('_route')=='front_app_artist_index' ? 'active' : '' }}"
       href="{{ path('front_app_artist_index') }}"
     >
       Artists
     </a>
     <a
-      class="{{ app.request.get('_route')=='front_events' ? 'active' : '' }}"
+      class="{{ app.request.get('_route')=='front_app_event_index' ? 'active' : '' }}"
       href="{{ path('front_app_event_index') }}"
     >
       Events
