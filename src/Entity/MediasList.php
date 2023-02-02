@@ -7,8 +7,11 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: MediasListRepository::class)]
+#[Vich\Uploadable]
 class MediasList
 {
     #[ORM\Id]
@@ -30,6 +33,9 @@ class MediasList
 
     #[ORM\Column(length: 50)]
     private ?string $type = null;
+
+    #[Vich\UploadableField(mapping: 'cover_mediaslist', fileNameProperty: 'path_cover')]
+    private ?File $imageFile = null;
 
     public function getId(): ?int
     {
@@ -92,6 +98,25 @@ class MediasList
     public function setType(string $type): self
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * @return File|null
+     */
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * @param File|null $imageFile
+     * @return Mission
+     */
+    public function setImageFile(?File $imageFile): self
+    {
+        $this->imageFile = $imageFile;
 
         return $this;
     }

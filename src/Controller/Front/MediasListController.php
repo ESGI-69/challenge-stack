@@ -34,7 +34,7 @@ class MediasListController extends AbstractController
             return $this->redirectToRoute('app_medias_list_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('medias_list/new.html.twig', [
+        return $this->renderForm('Front/medias_list/new.html.twig', [
             'medias_list' => $mediasList,
             'form' => $form,
         ]);

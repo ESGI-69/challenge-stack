@@ -48,9 +48,17 @@ class Post
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $validated_at = null;
 
+    #[ORM\ManyToOne(inversedBy: 'posts')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Artist $id_artist = null;
+
+    #[ORM\ManyToMany(targetEntity: User::class)]
+    private Collection $userslike;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
+        $this->userslike = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -192,6 +200,42 @@ class Post
     public function setValidatedAt(?\DateTimeInterface $validated_at): self
     {
         $this->validated_at = $validated_at;
+
+        return $this;
+    }
+
+    public function getIdArtist(): ?Artist
+    {
+        return $this->id_artist;
+    }
+
+    public function setIdArtist(?Artist $id_artist): self
+    {
+        $this->id_artist = $id_artist;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUserslike(): Collection
+    {
+        return $this->userslike;
+    }
+
+    public function addUserslike(User $userslike): self
+    {
+        if (!$this->userslike->contains($userslike)) {
+            $this->userslike->add($userslike);
+        }
+
+        return $this;
+    }
+
+    public function removeUserslike(User $userslike): self
+    {
+        $this->userslike->removeElement($userslike);
 
         return $this;
     }

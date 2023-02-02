@@ -27,8 +27,8 @@
                 <td>{{ medias_list.pathCover }}</td>
                 <td>{{ medias_list.type }}</td>
                 <td>
-                    <a href="{{ path('app_medias_list_show', {'id': medias_list.id}) }}">show</a>
-                    <a href="{{ path('app_medias_list_edit', {'id': medias_list.id}) }}">edit</a>
+                    <a href="{{ path('front_app_medias_list_show', {'id': medias_list.id}) }}">show</a>
+                    <a href="{{ path('front_app_medias_list_edit', {'id': medias_list.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -39,5 +39,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_medias_list_new') }}">Create new</a>
+    <a href="{{ path('front_app_medias_list_new') }}">Create new</a>
 {% endblock %}
