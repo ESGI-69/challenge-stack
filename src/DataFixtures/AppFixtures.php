@@ -20,7 +20,6 @@ class AppFixtures extends Fixture
     {
         /* BLOC POUR ARTISTES */ 
         $artist = new Artist();
-
         $artist->setNom("Bauweraerts");
         $artist->setPrenom("Koen");
         $artist->setPseudo("Coone");
@@ -32,9 +31,164 @@ class AppFixtures extends Fixture
         $artist->setUrlDeezer("https://www.deezer.com/fr/artist/199130");
         $artist->setCountry("Belgium");
         $artist->setType("solo");
+        $manager->persist($artist);
         
+        $artist = new Artist();
+        $artist->setNom("Camel");
+        $artist->setPrenom("Camel");
+        $artist->setPseudo("Camel");
+        $artist->setDescription("Rock Prog band from england.");
+        $artist->setEmail("support@cameeeel.com");
+        $artist->setUrlYt("https://www.youtube.com/@CamelBandOfficial");
+        $artist->setUrlSoundcloud("https://soundcloud.com/camelbandofficial");
+        $artist->setUrlDeezer("https://www.deezer.com/fr/artist/12826");
+        $artist->setCountry("United Kingdom");
+        $artist->setType("group");
         $manager->persist($artist);
 
+        $artist = new Artist();
+        $artist->setNom("Pink Floyd");
+        $artist->setPrenom("Pink Floyd");
+        $artist->setPseudo("Pink Floyd");
+        $artist->setDescription("Famous rock Prog band from england.");
+        $artist->setEmail("support@pinkfloyd.com");
+        $artist->setUrlYt("https://www.youtube.com/@PinkFloyd");
+        $artist->setUrlSoundcloud("https://soundcloud.com/pinkfloyd");
+        $artist->setUrlDeezer("https://www.deezer.com/fr/artist/860");
+        $artist->setCountry("United Kingdom");
+        $artist->setType("group");
+        $manager->persist($artist);
+
+        $artist = new Artist();
+        $artist->setNom("Chromatics");
+        $artist->setPrenom("Chromatics");
+        $artist->setPseudo("Chromatics");
+        $artist->setDescription("Chromatics is an American synthpop band from Portland, Oregon, formed in 2001.");
+        $artist->setEmail("support@itaaliansdoitbetter.com");
+        $artist->setUrlYt("https://www.youtube.com/@Chromatics");
+        $artist->setUrlSoundcloud("https://soundcloud.com/chromatics");
+        $artist->setUrlDeezer("https://www.deezer.com/fr/artist/17269");
+        $artist->setCountry("United States");
+        $artist->setType("group");
+        $manager->persist($artist);
+
+        $artist = new Artist();
+        $artist->setNom("Tame Impala");
+        $artist->setPrenom("Tame Impala");
+        $artist->setPseudo("Tame Impala");
+        $artist->setDescription("Tame Impala is an Australian psychedelic rock band formed in Perth in 2007.");
+        $artist->setEmail("support@tameimpalaaa.com");
+        $artist->setUrlYt("https://www.youtube.com/@TameImpala");
+        $artist->setUrlSoundcloud("https://soundcloud.com/tameimpala");
+        $artist->setUrlDeezer("https://www.deezer.com/fr/artist/134790");
+        $artist->setCountry("Australia");
+        $artist->setType("group");
+        $manager->persist($artist);
+
+        $artist = new Artist();
+        $artist->setNom("Tozzi");
+        $artist->setPrenom("Luigi");
+        $artist->setPseudo("Luigi Tozzi");
+        $artist->setDescription("Luigi Tozzi is an Italian singer-songwriter and musician.");
+        $artist->setEmail("luigi@tozzzzzi.com");
+        $artist->setUrlYt("https://www.youtube.com/@LuigiTozzi");
+        $artist->setUrlSoundcloud("https://soundcloud.com/luigitozzi");
+        $artist->setUrlDeezer("https://www.deezer.com/fr/artist/8169420");
+        $artist->setCountry("Italy");
+        $artist->setType("solo");
+        $manager->persist($artist);
+
+        $artist = new Artist();
+        $artist->setNom("Zimmer");
+        $artist->setPrenom("Hans");
+        $artist->setPseudo("Hans Zimmer");
+        $artist->setDescription("Hans Florian Zimmer is a German composer and record producer.");
+        $artist->setEmail("supoort@hansszimmer.com");
+        $artist->setUrlYt("https://www.youtube.com/@HansZimmer");
+        $artist->setUrlSoundcloud("https://soundcloud.com/hanszimmer");
+        $artist->setUrlDeezer("https://www.deezer.com/fr/artist/1935");
+        $artist->setCountry("Germany");
+        $artist->setType("solo");
+        $manager->persist($artist);
+
+        $artist = new Artist();
+        $artist->setNom("Stand High Patrol");
+        $artist->setPrenom("Stand High Patrol");
+        $artist->setPseudo("Stand High Patrol");
+        $artist->setDescription("Stand High Patrol is a French dub band from Brest.");
+        $artist->setEmail("supoort@standhighpatroldd.com");
+        $artist->setUrlYt("https://www.youtube.com/@StandHighPatrol");
+        $artist->setUrlSoundcloud("https://soundcloud.com/standhighpatrol");
+        $artist->setUrlDeezer("https://www.deezer.com/fr/artist/1562640");
+        $artist->setCountry("France");
+        $artist->setType("group");
+        $manager->persist($artist);
+
+        $artist = new Artist();
+        $artist->setNom("Kendrick Lamar");
+        $artist->setPrenom("Kendrick Lamar");
+        $artist->setPseudo("Kendrick Lamar");
+        $artist->setDescription("Kendrick Lamar Duckworth is an American rapper, songwriter, and record producer.");
+        $artist->setEmail("supoort@kendricklaaamar.com");
+        $artist->setUrlYt("https://www.youtube.com/@KendrickLamar");
+        $artist->setUrlSoundcloud("https://soundcloud.com/kendricklamar");
+        $artist->setUrlDeezer("https://www.deezer.com/fr/artist/116");
+        $artist->setCountry("United States");
+        $artist->setType("solo");
+        $manager->persist($artist);
+
+        $artist = new Artist();
+        $artist->setNom("Kanye West");
+        $artist->setPrenom("Kanye West");
+        $artist->setPseudo("Kanye West");
+        $artist->setDescription("Kanye Omari West is an American rapper, singer, songwriter, record producer, entrepreneur, and fashion designer.");
+        $artist->setEmail("supoort@kannyee.com");
+        $artist->setUrlYt("https://www.youtube.com/@KanyeWest");
+        $artist->setUrlSoundcloud("https://soundcloud.com/kanyewest");
+        $artist->setUrlDeezer("https://www.deezer.com/fr/artist/116");
+        $artist->setCountry("United States");
+        $artist->setType("solo");
+        $manager->persist($artist);
+
+        $artist = new Artist();
+        $artist->setNom("Badalamenti");
+        $artist->setPrenom("Angelo");
+        $artist->setPseudo("Angelo Badalamenti");
+        $artist->setDescription("Angelo Badalamenti is an American composer, conductor, and pianist.");
+        $artist->setEmail("supoort@angelooobadalamenti.com");
+        $artist->setUrlYt("https://www.youtube.com/@AngeloBadalamenti");
+        $artist->setUrlSoundcloud("https://soundcloud.com/angelobadalamenti");
+        $artist->setUrlDeezer("https://www.deezer.com/fr/artist/116");
+        $artist->setCountry("United States");
+        $artist->setType("solo");
+        $manager->persist($artist);
+
+        $artist = new Artist();
+        $artist->setNom("M83");
+        $artist->setPrenom("M83");
+        $artist->setPseudo("M83");
+        $artist->setDescription("M83 is a French electronic music band formed in Paris in 2001.");
+        $artist->setEmail("supoort@mmmmmm8888883333.com");
+        $artist->setUrlYt("https://www.youtube.com/@M83");
+        $artist->setUrlSoundcloud("https://soundcloud.com/m83");
+        $artist->setUrlDeezer("https://www.deezer.com/fr/artist/116");
+        $artist->setCountry("France");
+        $artist->setType("group");
+        $manager->persist($artist);
+
+        $artist = new Artist();
+        $artist->setNom("Seba");
+        $artist->setPrenom("Jun");
+        $artist->setPseudo("Nujabes");
+        $artist->setDescription("Jun Seba, better known by his stage name Nujabes, was a Japanese record producer, rapper, and DJ.");
+        $artist->setEmail("supporttt@nujabeeeees.com");
+        $artist->setUrlYt("https://www.youtube.com/@Nujabes");
+        $artist->setUrlSoundcloud("https://soundcloud.com/nujabes");
+        $artist->setUrlDeezer("https://www.deezer.com/fr/artist/116");
+        $artist->setCountry("Japan");
+        $artist->setType("solo");
+        $manager->persist($artist);
+        
         /* BLOC POUR ALBUM */
         $mediaslist = new MediasList();
 
