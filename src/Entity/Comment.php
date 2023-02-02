@@ -18,9 +18,6 @@ class Comment
     private ?string $text = null;
 
     #[ORM\Column]
-    private ?bool $validated = null;
-
-    #[ORM\Column]
     private ?\DateTimeImmutable $created_at = null;
 
     #[ORM\ManyToOne]
@@ -30,6 +27,9 @@ class Comment
     #[ORM\ManyToOne(inversedBy: 'comments')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Post $id_post = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $validated_at = null;
 
     public function getId(): ?int
     {
@@ -44,18 +44,6 @@ class Comment
     public function setText(string $text): self
     {
         $this->text = $text;
-
-        return $this;
-    }
-
-    public function isValidated(): ?bool
-    {
-        return $this->validated;
-    }
-
-    public function setValidated(bool $validated): self
-    {
-        $this->validated = $validated;
 
         return $this;
     }
@@ -92,6 +80,18 @@ class Comment
     public function setIdPost(?Post $id_post): self
     {
         $this->id_post = $id_post;
+
+        return $this;
+    }
+
+    public function getValidatedAt(): ?\DateTimeInterface
+    {
+        return $this->validated_at;
+    }
+
+    public function setValidatedAt(?\DateTimeInterface $validated_at): self
+    {
+        $this->validated_at = $validated_at;
 
         return $this;
     }

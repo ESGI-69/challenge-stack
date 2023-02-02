@@ -342,7 +342,7 @@ class AppFixtures extends Fixture
         $post->setTextContent("ICI ON RATIO OU KOA LOLOLOLOLOLOL LOLOLOLOLOLOL LOLOLOLOLOLOL LOLOLOLOLOLOL LOLOLOLOLOLOL LOLOLOLOLOLOL LOLOLOLOLOLOL LOLOLOLOLOLOL.");
         $post->setCreatedAt(new DateTimeImmutable('now'));
         $post->setUpdatedAt(new DateTimeImmutable('now'));
-        $post->setValidated(true);
+        $post->setValidatedAt(new DateTimeImmutable('now'));
         $post->setIdUser($user_artist);
 
         $manager->persist($post);
@@ -353,7 +353,7 @@ class AppFixtures extends Fixture
         $post->setTextContent("Regarde mon beau concert ololooloololo!");
         $post->setCreatedAt(new DateTimeImmutable('now'));
         $post->setUpdatedAt(new DateTimeImmutable('now'));
-        $post->setValidated(true);
+        $post->setValidatedAt(new DateTimeImmutable('now'));
         $post->setIdEvent($event);
         $post->setIdUser($user_artist);
 
@@ -363,7 +363,7 @@ class AppFixtures extends Fixture
         $comment = new Comment();
 
         $comment->setText("OH TU ME RATIO PAS CONNARD DE NAZI");
-        $comment->setValidated(true);
+        $comment->setValidatedAt(new DateTimeImmutable('now'));
         $comment->setCreatedAt(new DateTimeImmutable('now'));
         $comment->setIdUser($user_default);
         $comment->setIdPost($post);
@@ -373,7 +373,6 @@ class AppFixtures extends Fixture
         $comment = new Comment();
 
         $comment->setText("Je suis un gros raciste");
-        $comment->setValidated(false);
         $comment->setCreatedAt(new DateTimeImmutable('now'));
         $comment->setIdUser($user_default);
         $comment->setIdPost($post);

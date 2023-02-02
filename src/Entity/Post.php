@@ -28,9 +28,6 @@ class Post
     #[ORM\Column]
     private ?\DateTimeImmutable $updated_at = null;
 
-    #[ORM\Column]
-    private ?bool $validated = null;
-
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: true)]
     private ?User $id_user = null;
@@ -47,6 +44,9 @@ class Post
 
     #[ORM\OneToMany(mappedBy: 'id_post', targetEntity: Comment::class, orphanRemoval: true)]
     private Collection $comments;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $validated_at = null;
 
     public function __construct()
     {
@@ -102,18 +102,6 @@ class Post
     public function setUpdatedAt(\DateTimeImmutable $updated_at): self
     {
         $this->updated_at = $updated_at;
-
-        return $this;
-    }
-
-    public function isValidated(): ?bool
-    {
-        return $this->validated;
-    }
-
-    public function setValidated(bool $validated): self
-    {
-        $this->validated = $validated;
 
         return $this;
     }
@@ -192,6 +180,18 @@ class Post
                 $comment->setIdPost(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getValidatedAt(): ?\DateTimeInterface
+    {
+        return $this->validated_at;
+    }
+
+    public function setValidatedAt(?\DateTimeInterface $validated_at): self
+    {
+        $this->validated_at = $validated_at;
 
         return $this;
     }
