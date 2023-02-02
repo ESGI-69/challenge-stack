@@ -35,6 +35,11 @@ Encore
       //pattern: /\.(png|jpg|jpeg)$/
     })
 
+    .copyFiles({
+        from: './data-files/',
+        to: 'data-files/[path][name].[ext]',
+    })
+
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
 
