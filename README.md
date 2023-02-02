@@ -42,3 +42,7 @@ Executer les requètes en DB
 `docker compose exec php bin/console doctrine:schema:update --force`
 
 `docker compose exec php bin/console d:s:u --force`
+
+#### Ajout de données via les DataFixtures
+
+`docker compose exec php bin/console doctrine:fixtures:load`
