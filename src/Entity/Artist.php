@@ -61,6 +61,7 @@ class Artist
 
     #[ORM\Column(length: 50)]
     private ?string $type = null;
+
     #[ORM\Column(length: 105)]
     #[Slug(fields: ['pseudo'])]
     private ?string $slug = null;
@@ -295,6 +296,7 @@ class Artist
     public function setType(string $type): self
     {
         $this->type = $type;
+        return $this;
     }
 
     public function getSlug(): ?string
