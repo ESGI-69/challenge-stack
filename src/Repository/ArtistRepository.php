@@ -30,6 +30,48 @@ class ArtistRepository extends ServiceEntityRepository
         }
     }
 
+    public function getLastCreate(int $count): array
+    {
+        $dirtyResult = $this->createQueryBuilder('a')
+            ->select('a, COUNT(au.id) as followers, COUNT(ae.id) as events')
+            ->leftJoin('a.followed', 'au')
+            ->leftJoin('a.events', 'ae')
+            ->groupBy('a.id')
+            ->orderBy('a.id', 'DESC')
+            ->setMaxResults($count)
+            ->getQuery()
+            ->getResult();
+
+        $result = [];
+        foreach ($dirtyResult as $row) {
+            $row[0]->followerCount = $row['followers'];
+            $row[0]->eventCount = $row['events'];
+            $result[] = $row[0];
+        }
+        return $result;
+    }
+
+    public function getTrending(int $count): array
+    {
+        $dirtyResult = $this->createQueryBuilder('a')
+            ->select('a, COUNT(au.id) as followers, COUNT(ae.id) as events')
+            ->leftJoin('a.followed', 'au')
+            ->leftJoin('a.events', 'ae')
+            ->groupBy('a.id')
+            ->orderBy('followers', 'DESC')
+            ->setMaxResults($count)
+            ->getQuery()
+            ->getResult();
+
+        $result = [];
+        foreach ($dirtyResult as $row) {
+            $row[0]->followerCount = $row['followers'];
+            $row[0]->eventCount = $row['events'];
+            $result[] = $row[0];
+        }
+        return $result;
+    }
+
     public function remove(Artist $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);

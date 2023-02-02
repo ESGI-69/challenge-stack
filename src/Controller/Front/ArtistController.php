@@ -16,19 +16,11 @@ class ArtistController extends AbstractController
     #[Route('/', name: 'app_artist_index', methods: ['GET'])]
     public function index(ArtistRepository $artistRepository): Response
     {
-        $artists = $artistRepository->findBy([], ['id' => 'DESC'], 10);
-        $queryTrendingArtist = $artistRepository->createQueryBuilder('a')
-            ->select('a, COUNT(au.id) as followers')
-            ->leftJoin('a.followed', 'au')
-            ->groupBy('a.id')
-            ->orderBy('followers', 'DESC')
-            ->setMaxResults(10)
-            ->getQuery();
-        $artistsWithTopFollowers = $queryTrendingArtist->getResult();
+        // dd($artistRepository->getLastCreate(5), $artistRepository->getTrending(5));
 
         return $this->render('Front/artist/index.html.twig', [
-            'artists' => $artists,
-            'artistsWithTopFollowers' => $artistsWithTopFollowers,
+            'artists' => $artistRepository->getLastCreate(5),
+            'artistsWithTopFollowers' => $artistRepository->getTrending(5),
             'controller_name' => 'ArtistController'
         ]);
     }

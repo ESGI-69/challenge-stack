@@ -61,7 +61,6 @@ class Artist
 
     #[ORM\Column(length: 50)]
     private ?string $type = null;
-
     #[ORM\Column(length: 105)]
     #[Slug(fields: ['pseudo'])]
     private ?string $slug = null;

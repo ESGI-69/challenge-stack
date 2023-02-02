@@ -1,36 +1,36 @@
 {% extends 'base_front.html.twig' %}
 
-{% block title %}Hello ArtistsController!{% endblock %}
+{% block title %}BeatHub | Artists{% endblock %}
+
 {% block body %}
-{{ dump(artists) }}
-{{ dump(artistsWithTopFollowers) }}
 {% include '/Front/components/section.html.twig' with { name: 'Trending' } %}
 <div class="artists-list">
-  {% for artist in artists %}
+  {% for artist in artistsWithTopFollowers %}
     {% include '/Front/components/artistRow.html.twig'
       with {
         artistSlug: artist.slug,
-        artistImagePath: 'build/images/logo.svg',
-        artistName: artist.pseudo,
-        artistCountry: 'Italy',
-        artistTotalEvents: 167,
-        artistTotalFollowers: 1267,
+        artistImagePath: artist.picture_path | default(null),
+        artistName: artist.prenom ~ ' ' ~ artist.nom ~ ' (' ~ artist.pseudo ~ ')',
+        artistCountry: 'Italy TODO',
+        artistTotalEvents: artist.eventCount,
+        artistTotalFollowers: artist.followerCount,
       }
     %}
   {% endfor %}
 </div>
 {% include '/Front/components/section.html.twig' with { name: 'New on BeatHub' } %}
 <div class="artists-list">
-  {# {% for test in artistsWithTopFollowers %}
+  {% for artist in artists %}
     {% include '/Front/components/artistRow.html.twig'
       with {
-        artistImagePath: 'build/images/logo.svg',
-        artistName: test.pseudo,
-        artistCountry: 'Italy',
-        artistTotalEvents: 167,
-        artistTotalFollowers: 1267,
+        artistSlug: artist.slug,
+        artistImagePath: artist.picture_path | default(null),
+        artistName: artist.prenom ~ ' ' ~ artist.nom ~ ' (' ~ artist.pseudo ~ ')',
+        artistCountry: 'Italy TODO',
+        artistTotalEvents: artist.eventCount,
+        artistTotalFollowers: artist.followerCount,
       }
     %}
-  {% endfor %} #}
+  {% endfor %}
 </div>
 {% endblock %}
