@@ -6,29 +6,33 @@
 
 {% include '/Front/components/section.html.twig' with {name: 'Trending'} %}
 <div class="clubs-list">
-{% include '/Front/components/clubRow.html.twig'
-  with {
-    clubImagePath: 'build/images/logo.svg',
-    clubSlug: 'ohm',
-    clubName: 'OHM',
-    clubCity: 'Berlin',
-    clubCapacity: 1000,
-    clubEventCount: 10,
-  }
-%}
+{% for club in clubsWithTopEvents %}
+  {% include '/Front/components/clubRow.html.twig'
+    with {
+      clubImagePath: 'build/images/logo.svg',
+      clubSlug: 'ohm',
+      clubName: club.name,
+      clubCity: club.city,
+      clubCapacity: club.capacity,
+      clubEventCount: club.eventCount,
+    }
+  %}
+{% endfor %}
 </div>
 
 {% include '/Front/components/section.html.twig' with {name: 'New on BeatHub'} %}
 <div class="clubs-list">
-{% include '/Front/components/clubRow.html.twig'
-  with {
-    clubImagePath: 'build/images/logo.svg',
-    clubSlug: 'ohm',
-    clubName: 'OHM',
-    clubCity: 'Berlin',
-    clubCapacity: 1000,
-    clubEventCount: 10,
-  }
-%}
+{% for club in clubs %}
+  {% include '/Front/components/clubRow.html.twig'
+    with {
+      clubImagePath: 'build/images/logo.svg',
+      clubSlug: 'ohm',
+      clubName: club.name,
+      clubCity: club.city,
+      clubCapacity: club.capacity,
+      clubEventCount: club.eventCount,
+    }
+  %}
+{% endfor %}
 </div>
 {% endblock %}

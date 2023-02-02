@@ -6,6 +6,7 @@ use App\Repository\ConcertHallRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation\Slug;
 
 #[ORM\Entity(repositoryClass: ConcertHallRepository::class)]
 class ConcertHall
@@ -32,6 +33,13 @@ class ConcertHall
 
     #[ORM\OneToMany(mappedBy: 'id_concerthall', targetEntity: Event::class)]
     private Collection $events;
+
+    #[ORM\Column(length: 255)]
+    #[Slug(fields: ['name'])]
+    private ?string $slug = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $picture_path = null;
 
     public function __construct()
     {
@@ -129,6 +137,30 @@ class ConcertHall
                 $event->setIdConcerthall(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getPicturePath(): ?string
+    {
+        return $this->picture_path;
+    }
+
+    public function setPicturePath(?string $picture_path): self
+    {
+        $this->picture_path = $picture_path;
 
         return $this;
     }
