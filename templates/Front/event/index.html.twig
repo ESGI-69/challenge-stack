@@ -1,34 +1,36 @@
-<!DOCTYPE html>
+{% extends 'base_front.html.twig' %}
 
-<title>Event</title>
+{% block title %}Hello EventsController!{% endblock %}
 
 {% block body %}
-    <h1>Event</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ event.id }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ event.title }}</td>
-            </tr>
-            <tr>
-                <th>Date</th>
-                <td>{{ event.date ? event.date|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Ticketing_link</th>
-                <td>{{ event.ticketingLink }}</td>
-            </tr>
-        </tbody>
-    </table>
+{% include '/Front/components/section.html.twig' with {name: 'Tonight'} %}
+<div class="events-list">
+{% include '/Front/components/eventRow.html.twig'
+  with {
+    eventImagePath: 'build/images/logo.svg',
+    eventSlug: '012-label-night',
+    eventName: '012 Label Nigh',
+    eventDate: 'Fri, Feb 3, 22:00',
+    eventClubSlug: 'ohm',
+    eventClubName: 'OHM',
+    eventClubCity: 'Berlin',
+  }
+%}
+</div>
 
-    <a href="{{ path('app_event_index') }}">back to list</a>
-
-    <a href="{{ path('app_event_edit', {'id': event.id}) }}">edit</a>
-
-    {{ include('event/_delete_form.html.twig') }}
+{% include '/Front/components/section.html.twig' with {name: 'Tomorow'} %}
+<div class="events-list">
+{% include '/Front/components/eventRow.html.twig'
+  with {
+    eventImagePath: 'build/images/logo.svg',
+    eventSlug: '012-label-night',
+    eventName: '012 Label Nigh',
+    eventDate: 'Fri, Feb 3, 22:00',
+    eventClubSlug: 'ohm',
+    eventClubName: 'OHM',
+    eventClubCity: 'Berlin',
+  }
+%}
+</div>
 {% endblock %}
