@@ -26,7 +26,7 @@ class ArtistController extends AbstractController
             ->getQuery();
         $artistsWithTopFollowers = $queryTrendingArtist->getResult();
 
-        return $this->render('Front/artists/index.html.twig', [
+        return $this->render('Front/artist/index.html.twig', [
             'artists' => $artists,
             'artistsWithTopFollowers' => $artistsWithTopFollowers,
             'controller_name' => 'ArtistController'
@@ -46,7 +46,7 @@ class ArtistController extends AbstractController
             return $this->redirectToRoute('app_artist_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('artist/new.html.twig', [
+        return $this->renderForm('Front/artist/new.html.twig', [
             'artist' => $artist,
             'form' => $form,
         ]);
@@ -55,7 +55,7 @@ class ArtistController extends AbstractController
     #[Route('/{id}', name: 'app_artist_show', methods: ['GET'])]
     public function show(Artist $artist): Response
     {
-        return $this->render('front/artists/show.html.twig', [
+        return $this->render('Front/artist/show.html.twig', [
             'artist' => $artist,
         ]);
     }
@@ -72,7 +72,7 @@ class ArtistController extends AbstractController
             return $this->redirectToRoute('app_artist_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('artist/edit.html.twig', [
+        return $this->renderForm('Front/artist/edit.html.twig', [
             'artist' => $artist,
             'form' => $form,
         ]);

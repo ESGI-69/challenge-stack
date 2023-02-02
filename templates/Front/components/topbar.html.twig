@@ -13,13 +13,13 @@
     </a>
     <a
       class="{{ app.request.get('_route')=='front_artists' ? 'active' : '' }}"
-      href="{{ path('front_artists') }}"
+      href="{{ path('front_app_artist_index') }}"
     >
       Artists
     </a>
     <a
       class="{{ app.request.get('_route')=='front_events' ? 'active' : '' }}"
-      href="{{ path('front_events') }}"
+      href="{{ path('front_app_event_index') }}"
     >
       Events
     </a>
