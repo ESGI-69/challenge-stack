@@ -296,9 +296,10 @@ class Artist
     public function setType(string $type): self
     {
         $this->type = $type;
+
         return $this;
     }
-
+    
     public function getSlug(): ?string
     {
         return $this->slug;
