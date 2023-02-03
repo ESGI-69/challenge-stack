@@ -62,7 +62,7 @@ class Artist
     #[ORM\Column(length: 50)]
     private ?string $type = null;
     #[ORM\Column(length: 105)]
-    #[Slug(fields: ['pseudo'])]
+    #[Slug(fields: ['pseudo', 'id'])]
     private ?string $slug = null;
 
     #[ORM\OneToMany(mappedBy: 'id_artist', targetEntity: Post::class, orphanRemoval: true)]
