@@ -73,8 +73,8 @@ class AppFixtures extends Fixture
         $manager->persist($artist);
 
         $artist = new Artist();
-        $artist->setNom("Tame Impala");
-        $artist->setPrenom("Tame Impala");
+        $artist->setNom("");
+        $artist->setPrenom("");
         $artist->setPseudo("Tame Impala");
         $artist->setDescription("Tame Impala is an Australian psychedelic rock band formed in Perth in 2007.");
         $artist->setEmail("support@tameimpalaaa.com");
@@ -112,8 +112,8 @@ class AppFixtures extends Fixture
         $manager->persist($artist);
 
         $artist = new Artist();
-        $artist->setNom("Stand High Patrol");
-        $artist->setPrenom("Stand High Patrol");
+        $artist->setNom("");
+        $artist->setPrenom("");
         $artist->setPseudo("Stand High Patrol");
         $artist->setDescription("Stand High Patrol is a French dub band from Brest.");
         $artist->setEmail("supoort@standhighpatroldd.com");
