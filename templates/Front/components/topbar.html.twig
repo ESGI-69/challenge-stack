@@ -69,11 +69,16 @@
           color: 'primary',
         } %}
       {% endif %}
-      <div class="topbar__user-info__name">
-        <a href="{{ path('profile') }}">{{ app.user.userIdentifier }}</a>
+      <a class="topbar__user-info__name" href="{{ path('profile') }}">
+        <span href="{{ path('profile') }}">{{ app.user.userIdentifier }}</span>
         <img class="topbar__user-info__name__avatar" src="{{ app.user.ProfilePicturePath != '' ? asset(app.user.ProfilePicturePath) : asset('build/data-files/user-pictures/placeholder-image.jpeg') }}" alt="profile picture">
-      </div>
-      <a href="{{ path('app_logout') }}">Logout</a>
+      </a>
+      {% include '/Front/components/button.html.twig' with {
+        text: 'Logout',
+        link: path('app_logout'),
+        type: 'link-not-underlined',
+        color: 'primary',
+      } %}
     {% endif %}
   </div>
 </div>
