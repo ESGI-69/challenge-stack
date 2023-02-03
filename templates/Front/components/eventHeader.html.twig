@@ -1,0 +1,40 @@
+<div class="event-header">
+  <img src="{{ event.PicturePath is null ? asset('build/data-files/event-pictures/placeholder-image.webp') : asset(event.PicturePath) }}">
+  <div class="event-header__content">
+    <span class="event-header__content__type">Event</span>
+    <div class="event-header__content__name">
+      <h1 class="event-header__content__name__text">
+        {{ event.title }}
+      </h1>
+      {% if 1 is not null %}
+        <a href="{{ 1 }}" target="_blank">
+          {% include '/icons/youtube.html.twig' %}
+        </a>
+      {% endif %}
+    </div>
+    <p>{{ event.description }}</p>
+    <div class="event-header__content__info">
+
+    </div>
+    <div class="event-header__content__actions">
+      {% if not app.user %}
+        {% include '/Front/components/button.html.twig' with {
+          text: 'Sign in',
+          link: path('app_login'),
+          class: 'event-header__content__actions__follow-text__sign-in',
+          type: 'link',
+          color: 'black',
+        } %}<span class="event-header__content__actions__follow-text">&nbsp;to follow this event and be notified for the next show</span>
+      {% else %}
+        {% include '/Front/components/button.html.twig' with {
+          text: 'Follow (' ~ followerCount ~ ')',
+          link: '#',
+          class: 'event-header__content__actions__follow-button',
+          type: 'outline',
+          color: 'white',
+        } %}
+        <span class="event-header__content__actions__follow-text"> Follow this event to be notified for the next show</span>
+      {% endif %}
+    </div>
+  </div>
+</div>

@@ -7,17 +7,16 @@
 {% include '/Front/components/section.html.twig' with {name: 'Tonight'} %}
 <div class="events-list">
 {% for event in events %}
-{{ dump(event)}}
   {% include '/Front/components/eventRow.html.twig'
     with {
       eventImagePath: event.picturepath | default('build/images/logo.svg'),
-      eventSlug: 'event-test-slug',
+      eventSlug: event.slug,
       eventName: event.title,
       eventId : event.id,
       eventDate: event.startdate|date("D M j"),
-      eventClubSlug: 'test',
-      eventClubName: 'test',
-      eventClubCity: 'test'
+      eventClubSlug: event.getidconcerthall.slug,
+      eventClubName: event.getidconcerthall.name,
+      eventClubCity:  event.getidconcerthall.city
     }
   %}
 {% endfor %}
@@ -25,17 +24,20 @@
 
 {% include '/Front/components/section.html.twig' with {name: 'Tomorow'} %}
 <div class="events-list">
-{% include '/Front/components/eventRow.html.twig'
-  with {
-    eventImagePath: 'build/images/logo.svg',
-    eventSlug: '012-label-night',
-    eventName: '012 Label Nigh',
-    eventId : '1',
-    eventDate: 'Fri, Feb 3, 22:00',
-    eventClubSlug: 'ohm',
-    eventClubName: 'OHM',
-    eventClubCity: 'Berlin',
-  }
-%}
+{% for event in tomorrowEvents %}
+{{ dump(event.slug)}}
+  {% include '/Front/components/eventRow.html.twig'
+    with {
+      eventImagePath: event.picturepath | default('build/images/logo.svg'),
+      eventSlug: event.slug,
+      eventName: event.title,
+      eventId : event.id,
+      eventDate: event.startdate|date("D M j"),
+      eventClubSlug: event.getidconcerthall.slug,
+      eventClubName: event.getidconcerthall.name,
+      eventClubCity:  event.getidconcerthall.city
+    }
+  %}
+{% endfor %}  
 </div>
 {% endblock %}
