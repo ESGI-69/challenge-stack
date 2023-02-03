@@ -1,0 +1,33 @@
+.sidebar-button {
+  padding: .5rem .75rem;
+  display: flex;
+  align-items: center;
+  color: var(--color-text-primary);
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 400;
+  border-radius: 0.25rem;
+  margin-bottom: 2px;
+  transition: all .2s ease-in-out;
+
+  &:hover {
+    background-color: var(--color-background);
+    
+  }
+
+  &--selected {
+    background-color: var(--color-secondary-light);
+  }
+  
+  &__icon {
+    max-width: 1.125rem;
+    max-height: 1.125rem;
+    vertical-align: middle;
+    margin-right: 0.5rem;
+  }
+
+  &:visited {
+    color: var(--color-text-primary);
+  }
+}

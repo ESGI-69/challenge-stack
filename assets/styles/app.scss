@@ -4,6 +4,7 @@
 @use 'lists' as *;
 
 @use 'back/sidebar' as *;
+@use 'back/table' as *;
 
 @use 'front/feed' as *;
 
@@ -42,8 +43,9 @@ body {
     &.back {
       width: unset;
       display: flex;
-      background-color: var(--color-text-primary);
-      color: var(--color-background);
+      background-color: var(--color-background);
+      color: var(--color-text-primary);
+      font-family: var(--font-family-sans-serif);
   
       main {
         box-sizing: border-box;
