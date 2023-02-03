@@ -73,8 +73,8 @@ class AppFixtures extends Fixture
         $manager->persist($artist);
 
         $artist = new Artist();
-        $artist->setNom("Tame Impala");
-        $artist->setPrenom("Tame Impala");
+        $artist->setNom("");
+        $artist->setPrenom("");
         $artist->setPseudo("Tame Impala");
         $artist->setDescription("Tame Impala is an Australian psychedelic rock band formed in Perth in 2007.");
         $artist->setEmail("support@tameimpalaaa.com");
@@ -112,8 +112,8 @@ class AppFixtures extends Fixture
         $manager->persist($artist);
 
         $artist = new Artist();
-        $artist->setNom("Stand High Patrol");
-        $artist->setPrenom("Stand High Patrol");
+        $artist->setNom("");
+        $artist->setPrenom("");
         $artist->setPseudo("Stand High Patrol");
         $artist->setDescription("Stand High Patrol is a French dub band from Brest.");
         $artist->setEmail("supoort@standhighpatroldd.com");
@@ -322,6 +322,19 @@ class AppFixtures extends Fixture
         $user_manager->setProfilePicturePath("");
         $user_manager->setActive(true);
         $user_manager->setRoles(["ROLE_MANAGER"]);
+        $user_manager->setIdArtist($artist1);
+        $user_manager->setActivationToken("fdp");
+        $user_manager->setActivationTokenExpiration(new DateTimeImmutable('now'));
+
+        $manager->persist($user_manager);
+
+        $user_manager = new User();
+
+        $user_manager->setEmail("manager2@mail.com");
+        $user_manager->setPlainPassword("password");
+        $user_manager->setProfilePicturePath("");
+        $user_manager->setActive(true);
+        $user_manager->setRoles(["ROLE_MANAGER"]);
         $user_manager->setActivationToken("fdp");
         $user_manager->setActivationTokenExpiration(new DateTimeImmutable('now'));
 
@@ -374,6 +387,19 @@ class AppFixtures extends Fixture
         $post->setIdEvent($event);
         $post->setIdUser($user_artist);
         $post->setIdArtist($artist2);
+
+        $manager->persist($post);
+
+        $post = new Post();
+
+        $post->setTitle("pas validé");
+        $post->setTextContent("AYAYAYAYAYAYAYAYAYAY CACA");
+        $post->setCreatedAt(new DateTimeImmutable('now'));
+        $post->setUpdatedAt(new DateTimeImmutable('now'));
+        $post->setValidatedAt(null);
+        $post->setIdEvent($event);
+        $post->setIdUser($user_artist);
+        $post->setIdArtist($artist1);
 
         $manager->persist($post);
 

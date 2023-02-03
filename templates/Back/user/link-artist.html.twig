@@ -3,9 +3,13 @@
 {% block title %}Add artist to a groupe{% endblock %}
 
 {% block body %}
-    {{ dump(user) }}
-    {{ form_start(form) }}
-      {{ form_rest(form) }}
-      <input type="submit" value="Modifier">
-    {{ form_end(form) }}
+    <h2>{{user.email}}</h2>
+    {% if artistLinked == true %}
+      {{ form_start(form) }}
+        {{ form_rest(form) }}
+        <input type="submit" value="Modifier">
+      {{ form_end(form) }}
+    {% else %}
+      <h1>you should be a linked to an artist to add users</h1>
+    {% endif %}
 {% endblock %}
