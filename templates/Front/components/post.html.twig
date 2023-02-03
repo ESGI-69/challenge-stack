@@ -20,7 +20,7 @@
     <p class="post__content__text">{{ post.TextContent }}</p>
     <div class="post__content__footer">
       <div class="post__content__footer__comment-count">
-        <img src="{{ asset('build/images/icons/comment.svg') }}" class="post__content__footer__comment-count__icon">
+        {% include '/icons/comment.html.twig' with { class: 'post__content__footer__comment-count__icon' } %}
         <span class="post__content__footer__comment-count__text">{{ post.commentCount }}</span>
       </div>
       <div class="post__content__footer__like-count">
@@ -33,9 +33,9 @@
         } %}
         <div class="post__content__footer__like-count__stat">
           {% if isPostLiked %}
-            <img src="{{ asset('build/images/icons/like.svg') }}" class="post__content__footer__like-count__stat__icon">
+            {% include '/icons/like.html.twig' with { class: 'post__content__footer__like-count__stat__icon' } %}
           {% else %}
-            <img src="{{ asset('build/images/icons/like-outline.svg') }}" class="post__content__footer__like-count__stat__icon">
+            {% include '/icons/like-outline.html.twig' with { class: 'post__content__footer__like-count__stat__icon' } %}
           {% endif %}
           <span class="post__content__footer__like-count__stat__text">{{ post.likeCount }}</span>
         </div>

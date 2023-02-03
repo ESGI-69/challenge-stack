@@ -63,22 +63,5 @@
     &__text {
       color: var(--color-text-primary);
     }
-
-    &__actions {
-      display: flex;
-      justify-content: end;
-      gap: 0.5rem;
-      color: var(--color-secondary);
-      font-size: 1.2rem;
-      cursor: pointer;
-
-      &__like, &__stat {
-        font-size: 0.8rem !important; // override font-size of button
-      }
-
-      &__stat {
-        margin-left: 0.2rem;
-      }
-    }
   }
 }
