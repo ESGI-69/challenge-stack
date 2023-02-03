@@ -281,6 +281,7 @@ class AppFixtures extends Fixture
         $concerthall->setName("Terminal 7");
         $concerthall->setAddress("1 Pl. de la Prte de Versailles");
         $concerthall->setCity("Paris");
+        $concerthall->setDescription("Située à Paris, la salle de concert Terminal 7 est un lieu de concerts et de spectacles de 500 places.");
         $concerthall->setCapacity(500);
         $concerthall->setSiteLink("https://paris-society-events.com/salles/terminal7/?utm_source=Yext&utm_medium=GMB&y_source=1_MjU3NzExODktNzE1LWxvY2F0aW9uLndlYnNpdGU%3D");
         

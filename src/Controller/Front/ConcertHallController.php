@@ -41,7 +41,7 @@ class ConcertHallController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_club_show', methods: ['GET'])]
+    #[Route('/{slug}', name: 'app_club_show', methods: ['GET'])]
     public function show(ConcertHall $concertHall): Response
     {
         return $this->render('Front/club/show.html.twig', [
