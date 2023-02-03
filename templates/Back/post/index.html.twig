@@ -1,9 +1,12 @@
-<!DOCTYPE html>
+{% extends 'base_back.html.twig' %}
 
-<title>Post index</title>
+{% block title %}Hello UserController!{% endblock %}
 
 {% block body %}
     <h1>Post index</h1>
+
+      {{ dump(posts) }}
+
 
     <table class="table">
         <thead>
@@ -13,7 +16,7 @@
                 <th>Text_content</th>
                 <th>Created_at</th>
                 <th>Updated_at</th>
-                <th>Validated</th>
+                <th>Validated_at</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -25,10 +28,10 @@
                 <td>{{ post.textContent }}</td>
                 <td>{{ post.createdAt ? post.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ post.updatedAt ? post.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ post.validated ? 'Yes' : 'No' }}</td>
+                <td>{{ post.validatedAt ? post.validatedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('app_post_show', {'id': post.id}) }}">show</a>
-                    <a href="{{ path('app_post_edit', {'id': post.id}) }}">edit</a>
+                    <a href="{{ path('admin_app_post_show', {'id': post.id}) }}">show</a>
+                    <a href="{{ path('admin_app_post_edit', {'id': post.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -39,5 +42,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_post_new') }}">Create new</a>
+    <a href="{{ path('admin_app_post_new') }}">Create new</a>
 {% endblock %}
