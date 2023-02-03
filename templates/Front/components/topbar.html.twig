@@ -47,7 +47,6 @@
         } %}
       {# <a href="{{ path('register') }}">Register</a> #}
     {% else %}
-      {{ dump(app.user) }}
       {% if (is_granted('ROLE_MANAGER') or is_granted('ROLE_ARTIST')) %}
         <a href="{{ path('admin_default_index') }}">Panel d'admin</a>
       {% endif %}
