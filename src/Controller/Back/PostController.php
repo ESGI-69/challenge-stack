@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 #[Route('/post')]
 class PostController extends AbstractController
@@ -19,6 +20,23 @@ class PostController extends AbstractController
     {
         return $this->render('back/post/index.html.twig', [
             'posts' => $postRepository->findAll(),
+        ]);
+    }
+
+    #[Route('/validation', name: 'app_post_validation', methods: ['GET'])]
+    public function validation(PostRepository $postRepository): Response
+    {
+      //get artist id linked to the current user
+      $artistId = $this->getUser()->getIdArtist()->getId();
+      // All unvalidated posts ID from the artist
+      $unvalidatedPostIds = $postRepository->getUnvalidatedPostIdsFromArtist($artistId);
+      // Retrive all unvalidated posts from the artist
+      foreach ($unvalidatedPostIds as $unvalidatedPostId) {
+        $unvalidatedPosts[] = $postRepository->find($unvalidatedPostId);
+      }
+        return $this->render('back/post/validation.html.twig', [
+            'posts' => $postRepository->findAll(),
+            'unvalidatedPosts' => $unvalidatedPosts,
         ]);
     }
 
@@ -44,7 +62,7 @@ class PostController extends AbstractController
             return $this->redirectToRoute('admin_app_post_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('back/post/new.html.twig', [
+        return $this->renderForm('Back/post/new.html.twig', [
             'post' => $post,
             'form' => $form,
             'linkedArtist' => $linkedArtist,
@@ -54,7 +72,7 @@ class PostController extends AbstractController
     #[Route('/{id}', name: 'app_post_show', methods: ['GET'])]
     public function show(Post $post): Response
     {
-        return $this->render('back/post/show.html.twig', [
+        return $this->render('Back/post/show.html.twig', [
             'post' => $post,
         ]);
     }
@@ -72,7 +90,7 @@ class PostController extends AbstractController
             return $this->redirectToRoute('admin_app_post_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('back/post/edit.html.twig', [
+        return $this->renderForm('Back/post/edit.html.twig', [
             'post' => $post,
             'form' => $form,
         ]);
