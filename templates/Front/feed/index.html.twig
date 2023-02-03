@@ -28,6 +28,17 @@
     {% endfor %}
   </div>
 {% else %}
-CACA
+  {% include '/Front/components/section.html.twig' with { name: 'Last followed post' } %}
+  <div class="posts-list">
+    {% for post in posts %}
+      {% include '/Front/components/post.html.twig'
+        with {
+          showComments: false,
+          post,
+          isPostLiked: false,
+        }
+      %}
+    {% endfor %}
+  </div>
 {% endif %}
 {% endblock %}

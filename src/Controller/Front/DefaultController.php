@@ -15,9 +15,15 @@ class DefaultController extends AbstractController
     #[Route('/', name: 'default_index')]
     public function index(PostRepository $PostRepository): Response
     {
+        $posts;
+        // check id user is logged in
+        if ($this->getUser()) {
+            $posts = $PostRepository->getFollowedArtistPosts($this->getUser());
+            // dd($posts);
+        }
         return $this->render('Front/feed/index.html.twig', [
             'controller_name' => 'FrontController',
-            'posts' => $PostRepository->getLastCreate(5),
+            'posts' => $posts,
         ]);
     }
 }

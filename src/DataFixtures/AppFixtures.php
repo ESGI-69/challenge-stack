@@ -33,18 +33,18 @@ class AppFixtures extends Fixture
         $artist1->setType("solo");
         $manager->persist($artist1);
         
-        $artist = new Artist();
-        $artist->setNom("Camel");
-        $artist->setPrenom("Camel");
-        $artist->setPseudo("Camel");
-        $artist->setDescription("Rock Prog band from england.");
-        $artist->setEmail("support@cameeeel.com");
-        $artist->setUrlYt("https://www.youtube.com/@CamelBandOfficial");
-        $artist->setUrlSoundcloud("https://soundcloud.com/camelbandofficial");
-        $artist->setUrlDeezer("https://www.deezer.com/fr/artist/12826");
-        $artist->setCountry("United Kingdom");
-        $artist->setType("group");
-        $manager->persist($artist);
+        $artist2 = new Artist();
+        $artist2->setNom("Camel");
+        $artist2->setPrenom("Camel");
+        $artist2->setPseudo("Camel");
+        $artist2->setDescription("Rock Prog band from england.");
+        $artist2->setEmail("support@cameeeel.com");
+        $artist2->setUrlYt("https://www.youtube.com/@CamelBandOfficial");
+        $artist2->setUrlSoundcloud("https://soundcloud.com/camelbandofficial");
+        $artist2->setUrlDeezer("https://www.deezer.com/fr/artist/12826");
+        $artist2->setCountry("United Kingdom");
+        $artist2->setType("group");
+        $manager->persist($artist2);
 
         $artist = new Artist();
         $artist->setNom("Pink Floyd");
@@ -310,6 +310,7 @@ class AppFixtures extends Fixture
         $user_admin->setActive(true);
         $user_admin->setRoles(["ROLE_ADMIN"]);
         $user_admin->setActivationToken("fdp");
+        $user_admin->addArtistsFollowed($artist1);
         $user_admin->setActivationTokenExpiration(new DateTimeImmutable('now'));
 
         $manager->persist($user_admin);
@@ -372,7 +373,7 @@ class AppFixtures extends Fixture
         $post->setValidatedAt(new DateTimeImmutable('now'));
         $post->setIdEvent($event);
         $post->setIdUser($user_artist);
-        $post->setIdArtist($artist1);
+        $post->setIdArtist($artist2);
 
         $manager->persist($post);
 
