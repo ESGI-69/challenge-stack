@@ -39,7 +39,7 @@ class PostRepository extends ServiceEntityRepository
         }
     }
 
-    public function getFollowedArtistPosts($user)
+    public function getFollowedArtistPosts($user, $count = 10)
     {
         $dirtyResult = $this->createQueryBuilder('post')
         ->leftJoin('post.id_artist', 'postArtist')
@@ -56,6 +56,7 @@ class PostRepository extends ServiceEntityRepository
         ->addSelect('COUNT(postComments.id) as commentCount')
         ->addSelect('COUNT(postLikes.id) as likeCount')
         ->orderBy('post.created_at', 'DESC')
+        ->setMaxResults($count)
         ->getQuery()
         ->getResult();
 

@@ -28,7 +28,7 @@
     {% endfor %}
   </div>
 {% else %}
-  {% include '/Front/components/section.html.twig' with { name: 'Last followed post' } %}
+  {% include '/Front/components/section.html.twig' with { name: 'Lastest posts by your favorite artists' } %}
   <div class="posts-list">
     {% for post in posts %}
       {% include '/Front/components/post.html.twig'
