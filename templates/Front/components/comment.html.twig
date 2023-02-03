@@ -19,24 +19,5 @@
     <div class="comment__content__text">
       {{ comment.Text }}
     </div>
-      {% if comment.ValidatedAt != null %}
-        <div class="comment__content__actions">
-          {% include '/Front/components/button.html.twig' with {
-            text: isCommentLiked ? 'Liked' : 'Like',
-            link: '#',
-            class: 'comment__content__actions__like',
-            type: 'link',
-            color: 'white',
-          } %}
-          <div class="comment__content__actions__stat">
-            {% if isCommentLiked %}
-              <img src="{{ asset('build/images/icons/like.svg') }}" class="post__content__footer__like-count__stat__icon">
-            {% else %}
-              <img src="{{ asset('build/images/icons/like-outline.svg') }}" class="post__content__footer__like-count__stat__icon">
-            {% endif %}
-            <span class="post__content__footer__like-count__stat__text">{{ 'LIKE NOT IMPLEMENTED' }}</span>
-          </div>
-        </div>
-      {% endif %}
   </div>
 </div>
