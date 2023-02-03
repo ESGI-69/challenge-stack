@@ -31,7 +31,7 @@ class MediasListController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $mediasListRepository->save($mediasList, true);
 
-            return $this->redirectToRoute('app_medias_list_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('front_app_medias_list_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('Front/medias_list/new.html.twig', [
