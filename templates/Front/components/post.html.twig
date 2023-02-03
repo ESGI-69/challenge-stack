@@ -1,12 +1,12 @@
 <div class="post {{ showComments ? 'show-comment' : '' }}">
   <div class="post__author">
-    <img src="{{ asset(postAuthorImage) }}" class="post__author__image">
-    <a class="post__author__name" href="#{{ postAuthorSlug }}">{{ postAuthorName }}</a>
-    <span class="post__author__date">{{ postDate }}</span>
+    <img src="{{ post.IdArtist.PicturePath is null ? asset('build/data-files/artist-pictures/placeholder-image.webp') : asset(post.IdArtist.PicturePath) }}" class="post__author__image">
+    <a class="post__author__name" href="{{ path('front_app_artist_show', {'slug': post.IdArtist.Slug}) }}">{{ post.IdArtist.Type == 'group' ? post.IdArtist.Pseudo : post.IdArtist.Prenom ~ ' ' ~ post.IdArtist.Nom ~ ' (' ~ post.IdArtist.Pseudo ~ ')' }}</a>
+    <span class="post__author__date">{{ post.ValidatedAt|date('d/m/Y') }}</span>
   </div>
   <div class="post__content">
     <div class="post__content__header">
-      <span class="post__content__header__title">{{ postTitle }}</span>
+      <span class="post__content__header__title">{{ post.Title }}</span>
       {% if showComments == false %}
         {% include '/Front/components/button.html.twig' with {
           text: 'View Post & Comments',
@@ -17,11 +17,11 @@
         } %}
       {% endif %}
     </div>
-    <p class="post__content__text">{{ postContent }}</p>
+    <p class="post__content__text">{{ post.TextContent }}</p>
     <div class="post__content__footer">
       <div class="post__content__footer__comment-count">
         <img src="{{ asset('build/images/icons/comment.svg') }}" class="post__content__footer__comment-count__icon">
-        <span class="post__content__footer__comment-count__text">{{ postCommentCount }}</span>
+        <span class="post__content__footer__comment-count__text">{{ post.commentCount }}</span>
       </div>
       <div class="post__content__footer__like-count">
         {% include '/Front/components/button.html.twig' with {
@@ -37,7 +37,7 @@
           {% else %}
             <img src="{{ asset('build/images/icons/like-outline.svg') }}" class="post__content__footer__like-count__stat__icon">
           {% endif %}
-          <span class="post__content__footer__like-count__stat__text">{{ postLikeCount }}</span>
+          <span class="post__content__footer__like-count__stat__text">{{ post.likeCount }}</span>
         </div>
       </div>
     </div>
@@ -45,8 +45,8 @@
   
   {% if showComments %}
     <div class="post__comments">
-      {% for comment in postComments %}
-        {% include '/Front/components/comment.html.twig' with comment %}
+      {% for comment in post.Comments %}
+        {% include '/Front/components/comment.html.twig' with { comment, isCommentLiked: false } %}
       {% endfor %}
     </div>
   {% endif %}

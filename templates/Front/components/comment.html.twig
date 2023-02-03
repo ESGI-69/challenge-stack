@@ -1,13 +1,14 @@
-<div class="comment {{ isValidated ? '' : 'comment--not-validated' }}">
-  <img class="comment__avatar" src="{{ asset(commentAuthorImage) }}">
+<div class="comment {{ comment.ValidatedAt != null ? '' : 'comment--not-validated' }}">
+  <img class="comment__avatar" src="{{ comment.IdUser.ProfilePicturePath is null ? asset('build/data-files/artist-pictures/placeholder-image.webp') : asset(comment.IdUser.ProfilePicturePath) }}">
   <div class="comment__content">
     <div class="comment__content__header">
       <span class="comment__content__header__name">
-        {{ commentAuthorName }}
+        {# {{ comment.IdUser.email }} #}
+        USERNAME NOT IMPLEMENTED
       </span>
-      {% if isValidated %}
+      {% if comment.ValidatedAt != null %}
         <span class="comment__content__header__date">
-          {{ commentDate }}
+          {{ comment.CreatedAt|date('d/m/Y') }}
         </span>
       {% else %}
         <span class="comment__content__header__not-validated">
@@ -16,9 +17,9 @@
       {% endif %}
     </div>
     <div class="comment__content__text">
-      {{ commentContent }}
+      {{ comment.Text }}
     </div>
-      {% if isValidated %}
+      {% if comment.ValidatedAt != null %}
         <div class="comment__content__actions">
           {% include '/Front/components/button.html.twig' with {
             text: isCommentLiked ? 'Liked' : 'Like',
@@ -33,7 +34,7 @@
             {% else %}
               <img src="{{ asset('build/images/icons/like-outline.svg') }}" class="post__content__footer__like-count__stat__icon">
             {% endif %}
-            <span class="post__content__footer__like-count__stat__text">{{ postLikeCount }}</span>
+            <span class="post__content__footer__like-count__stat__text">{{ 'LIKE NOT IMPLEMENTED' }}</span>
           </div>
         </div>
       {% endif %}

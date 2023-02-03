@@ -59,4 +59,7 @@ npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
 
+data-files/*/*
+!data-files/*/placeholder-image.*
+
 .env

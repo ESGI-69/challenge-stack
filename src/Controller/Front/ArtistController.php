@@ -5,11 +5,11 @@ namespace App\Controller\Front;
 use App\Entity\Artist;
 use App\Form\ArtistType;
 use App\Repository\ArtistRepository;
+use App\Repository\PostRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Serializer\SerializerInterface;
 
 #[Route('/artist')]
 class ArtistController extends AbstractController
@@ -48,13 +48,16 @@ class ArtistController extends AbstractController
      * @return Response
      */
     #[Route('/{slug}', name: 'app_artist_show', methods: ['GET'])]
-    public function show(Artist $artist, SerializerInterface $serializer, ArtistRepository $artistRepository): Response
+    public function show(Artist $artist, ArtistRepository $artistRepository, PostRepository $PostRepository): Response
     {
         $followerCount = $artistRepository->getFollowersCount($artist->getId());
 
+        // dd($artist);
+
         return $this->render('Front/artist/show.html.twig', [
-            'artist' => $serializer->normalize($artist, null),
+            'artist' => $artist,
             'followerCount' => $followerCount,
+            // 'posts' => $PostRepository->getPostsFromArtist($artist->getId()),
         ]);
     }
 

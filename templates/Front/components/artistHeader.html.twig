@@ -1,5 +1,5 @@
 <div class="artist-header">
-  <img src="{{ artist.picturePath is null ? asset('build/data-files/artist-pictures/placeholder-image.webp') : asset(artist.picturePath) }}">
+  <img src="{{ artist.PicturePath is null ? asset('build/data-files/artist-pictures/placeholder-image.webp') : asset(artist.PicturePath) }}">
   <div class="artist-header__content">
     <span class="artist-header__content__type">{{ artist.type }} ({{ artist.country }})</span>
     <div class="artist-header__content__name">
