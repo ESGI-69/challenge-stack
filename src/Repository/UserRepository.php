@@ -64,6 +64,13 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
           ->getQuery()
           ->getResult();
     }
+
+    public function unlinkArtist(int $id)
+    {
+      $user = $this->find($id);
+      $user->setIdArtist(null);
+      $this->save($user, true);
+    }
 //    /**
 //     * @return User[] Returns an array of User objects
 //     */

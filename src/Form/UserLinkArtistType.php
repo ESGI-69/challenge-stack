@@ -5,7 +5,6 @@ namespace App\Form;
 use App\Entity\Artist;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
-//use ArtistRepository
 use App\Repository\ArtistRepository;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;

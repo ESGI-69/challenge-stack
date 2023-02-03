@@ -19,16 +19,18 @@
       {% for user in users %}
         <li>
           {{ user.email }} - 
-          {{ user.roles | join(', ') }} - 
-          {% if "ROLE_ARTIST" in user.roles  %}
+          {{ user.roles | join(', ') }} -
+          {% if ("ROLE_ARTIST" in user.roles  or "ROLE_MANAGER" in user.roles ) %}
             {% if user.IdArtist == null %} 
               no artist link -
             {% else %} 
               {{ user.IdArtist.pseudo }} -
             {% endif %}
-          <a href="{{ path('admin_user_artist_link', {'id': user.id}) }}">link artist</a> -
+            <a href="{{ path('admin_user_artist_link', {'id': user.id}) }}">link artist</a> -
           {% endif %}
-          <a href="{{ path('admin_user_edit', {'id': user.id}) }}">edit</a>
+          {% if user.id != app.user.id %}
+            <a href="{{ path('admin_user_edit', {'id': user.id}) }}">edit</a>
+          {% endif %}
         </li>
       {% endfor %}
     </ul>
