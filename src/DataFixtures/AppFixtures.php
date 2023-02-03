@@ -229,6 +229,16 @@ class AppFixtures extends Fixture
 
         $manager->persist($mediaslist);
 
+        $mediaslist2 = new MediasList();
+
+        $mediaslist2->setTitle("Album Test 2");
+        $mediaslist2->setReleaseDate(new DateTimeImmutable('now'));
+        $mediaslist2->setDescription("TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST ");
+        $mediaslist2->setPathCover("");
+        $mediaslist2->setType("album");
+
+        $manager->persist($mediaslist2);
+
         /* BLOC POUR MEDIAS */
         $media = new Media();
 
@@ -286,6 +296,18 @@ class AppFixtures extends Fixture
         $media->setDuree(222);
         $media->setFilePath("");
         $media->addMediaslist($mediaslist);
+        $media->addArtist($artist1);
+
+        $manager->persist($media);
+
+        $media = new Media();
+
+        $media->setTitle("Media Test");
+        $media->setDescription("BOOM BOOM 5");
+        $media->setPosition(5);
+        $media->setDuree(222);
+        $media->setFilePath("");
+        $media->addMediaslist($mediaslist2);
         $media->addArtist($artist1);
 
         $manager->persist($media);

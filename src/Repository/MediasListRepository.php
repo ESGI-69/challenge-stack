@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\MediasList;
+use App\Entity\Arist;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -37,6 +38,25 @@ class MediasListRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function GetMedias(MediasList $entity): array
+    {
+
+        $qb = $this->createQueryBuilder('mediasList')
+        ->andWhere('mediasList.id = :id')
+        ->setParameter('id', $entity->getId())
+        ->innerjoin('mediasList.medias', 'mediaMediasList')
+        ->addSelect('mediaMediasList')
+        ->groupBy('mediasList.id','mediaMediasList.id')
+        ->getQuery()
+        ->getResult();
+
+        $result = [];
+        
+        $result = $qb[0]->getMedias()->toArray();
+
+        return $result;
     }
 
 //    /**

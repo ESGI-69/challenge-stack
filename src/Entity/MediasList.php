@@ -37,6 +37,14 @@ class MediasList
     #[Vich\UploadableField(mapping: 'cover_mediaslist', fileNameProperty: 'path_cover')]
     private ?File $imageFile = null;
 
+    #[ORM\ManyToMany(targetEntity: Media::class, mappedBy: 'mediaslists')]
+    private Collection $medias;
+
+    public function __construct()
+    {
+        $this->medias = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -112,11 +120,38 @@ class MediasList
 
     /**
      * @param File|null $imageFile
-     * @return Mission
+     * @return MediasList
      */
     public function setImageFile(?File $imageFile): self
     {
         $this->imageFile = $imageFile;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Media>
+     */
+    public function getMedias(): Collection
+    {
+        return $this->medias;
+    }
+
+    public function addMedia(Media $media): self
+    {
+        if (!$this->medias->contains($media)) {
+            $this->medias->add($media);
+            $media->addMediaslist($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMedia(Media $media): self
+    {
+        if ($this->medias->removeElement($media)) {
+            $media->removeMediaslist($this);
+        }
 
         return $this;
     }

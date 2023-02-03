@@ -3,6 +3,7 @@
 namespace App\Controller\Front;
 
 use App\Entity\MediasList;
+use App\Entity\Arist;
 use App\Form\MediasListType;
 use App\Repository\MediasListRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -41,7 +42,7 @@ class MediasListController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_medias_list_show', methods: ['GET'])]
-    public function show(MediasList $mediasList): Response
+    public function show(MediasList $mediasList, MediasListRepository $mediasListRepository): Response
     {
         return $this->render('Front/medias_list/show.html.twig', [
             'medias_list' => $mediasList,
