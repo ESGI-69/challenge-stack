@@ -47,8 +47,27 @@
         } %}
       {# <a href="{{ path('register') }}">Register</a> #}
     {% else %}
-      {% if (is_granted('ROLE_MANAGER') or is_granted('ROLE_ARTIST')) %}
-        <a href="{{ path('admin_default_index') }}">Admin Panel</a>
+      {% if is_granted('ROLE_ADMIN') %}
+        {% include '/Front/components/button.html.twig' with {
+          text: 'Admin Panel',
+          link: path('admin_default_index'),
+          type: 'solid',
+          color: 'primary',
+        } %}
+      {% elseif is_granted('ROLE_MANAGER') %}
+        {% include '/Front/components/button.html.twig' with {
+          text: 'Manager Panel',
+          link: path('admin_default_index'),
+          type: 'solid',
+          color: 'primary',
+        } %}
+      {% elseif is_granted('ROLE_ARTIST') %}
+        {% include '/Front/components/button.html.twig' with {
+          text: 'Artist Panel',
+          link: path('admin_default_index'),
+          type: 'solid',
+          color: 'primary',
+        } %}
       {% endif %}
       <div class="topbar__user-info__name">
         <a href="{{ path('profile') }}">{{ app.user.userIdentifier }}</a>
