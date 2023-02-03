@@ -320,6 +320,19 @@ class AppFixtures extends Fixture
         $user_manager->setProfilePicturePath("");
         $user_manager->setActive(true);
         $user_manager->setRoles(["ROLE_MANAGER"]);
+        $user_manager->setIdArtist($artist1);
+        $user_manager->setActivationToken("fdp");
+        $user_manager->setActivationTokenExpiration(new DateTimeImmutable('now'));
+
+        $manager->persist($user_manager);
+
+        $user_manager = new User();
+
+        $user_manager->setEmail("manager2@mail.com");
+        $user_manager->setPlainPassword("password");
+        $user_manager->setProfilePicturePath("");
+        $user_manager->setActive(true);
+        $user_manager->setRoles(["ROLE_MANAGER"]);
         $user_manager->setActivationToken("fdp");
         $user_manager->setActivationTokenExpiration(new DateTimeImmutable('now'));
 
@@ -369,6 +382,19 @@ class AppFixtures extends Fixture
         $post->setCreatedAt(new DateTimeImmutable('now'));
         $post->setUpdatedAt(new DateTimeImmutable('now'));
         $post->setValidatedAt(new DateTimeImmutable('now'));
+        $post->setIdEvent($event);
+        $post->setIdUser($user_artist);
+        $post->setIdArtist($artist1);
+
+        $manager->persist($post);
+
+        $post = new Post();
+
+        $post->setTitle("pas validé");
+        $post->setTextContent("AYAYAYAYAYAYAYAYAYAY CACA");
+        $post->setCreatedAt(new DateTimeImmutable('now'));
+        $post->setUpdatedAt(new DateTimeImmutable('now'));
+        $post->setValidatedAt(null);
         $post->setIdEvent($event);
         $post->setIdUser($user_artist);
         $post->setIdArtist($artist1);
