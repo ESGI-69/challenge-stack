@@ -21,10 +21,10 @@
           {{ user.email }} - 
           {{ user.roles | join(', ') }} - 
           {% if "ROLE_ARTIST" in user.roles  %}
-            {% if user.id_artist == null %} 
+            {% if user.IdArtist == null %} 
               no artist link -
             {% else %} 
-              {{ user.id_artist.pseudo }} -
+              {{ user.IdArtist.pseudo }} -
             {% endif %}
           <a href="{{ path('admin_user_artist_link', {'id': user.id}) }}">link artist</a> -
           {% endif %}
