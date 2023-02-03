@@ -50,8 +50,10 @@
       {% if (is_granted('ROLE_MANAGER') or is_granted('ROLE_ARTIST')) %}
         <a href="{{ path('admin_default_index') }}">Admin Panel</a>
       {% endif %}
-      <a href="{{ path('profile') }}">{{ app.user.userIdentifier }}</a>
-      <img class="topbar__user-info__avatar" src="{{ app.user.ProfilePicturePath != '' ? asset(app.user.ProfilePicturePath) : asset('build/data-files/user-pictures/placeholder-image.jpeg') }}" alt="profile picture">
+      <div class="topbar__user-info__name">
+        <a href="{{ path('profile') }}">{{ app.user.userIdentifier }}</a>
+        <img class="topbar__user-info__name__avatar" src="{{ app.user.ProfilePicturePath != '' ? asset(app.user.ProfilePicturePath) : asset('build/data-files/user-pictures/placeholder-image.jpeg') }}" alt="profile picture">
+      </div>
       <a href="{{ path('app_logout') }}">Logout</a>
     {% endif %}
   </div>
