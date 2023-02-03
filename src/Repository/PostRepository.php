@@ -39,7 +39,45 @@ class PostRepository extends ServiceEntityRepository
         }
     }
 
-    public function getLastCreate(int $count): array
+    public function getFollowedArtistPosts($user, $count = 10)
+    {
+        $dirtyResult = $this->createQueryBuilder('post')
+        ->leftJoin('post.id_artist', 'postArtist')
+        ->leftJoin('post.comments', 'postComments')
+        ->leftJoin('postComments.id_user', 'postCommentsUser')
+        ->leftJoin('post.userslike', 'postLikes')
+        ->leftJoin('postArtist.followed', 'postArtistFollowed')
+        ->addSelect('postArtist')
+        ->addSelect('postComments')
+        ->addSelect('postLikes')
+        ->addSelect('postCommentsUser')
+        ->addSelect('postArtistFollowed')
+        ->groupBy('post.id', 'postArtist.id', 'postComments.id', 'postLikes.id', 'postCommentsUser.id', 'postArtistFollowed.id')
+        ->addSelect('COUNT(postComments.id) as commentCount')
+        ->addSelect('COUNT(postLikes.id) as likeCount')
+        ->orderBy('post.created_at', 'DESC')
+        ->setMaxResults($count)
+        ->getQuery()
+        ->getResult();
+
+        $result = [];
+        foreach ($dirtyResult as $post) {
+            if ($post[0]->getIdArtist()->getFollowed()->contains($user)) {
+                $result[] = $post;
+            }
+        }
+        
+        $resultEnhance = [];
+        foreach ($result as $row) {
+            $row[0]->likeCount = $row['likeCount'];
+            $row[0]->commentCount = $row['commentCount'];
+            $resultEnhance[] = $row[0];
+        }
+
+        return $resultEnhance;
+    }
+
+    public function getLastCreate(int $count = 5): array
     {
         $dirtyResult = $this->createQueryBuilder('post')
         // ->select('COUNT(pc.id) as comments', 'a', 'pc')
