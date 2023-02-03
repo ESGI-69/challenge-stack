@@ -38,27 +38,26 @@ body {
     display: grid;
     grid-template-rows: auto 1fr auto;
     grid-template-columns: 1fr;
+  
+    &.back {
+      width: unset;
+      display: flex;
+      background-color: var(--color-text-primary);
+      color: var(--color-background);
+  
+      main {
+        box-sizing: border-box;
+        padding: 2rem;
+        overflow-y: auto;
+        width: calc(100vw - var(--sidebar-width));
+      }
+    }
 
     main {
       padding: 2rem 3.5rem;
       display: flex;
       flex-direction: column;
       gap: 1rem;
-    }
-  }
-  
-  .back {
-    display: flex;
-    background-color: var(--color-text-primary);
-    color: var(--color-background);
-
-    main {
-      box-sizing: border-box;
-      padding: 2rem;
-      height: 100vh;
-      max-height: 100vh;
-      overflow-y: auto;
-      width: calc(100vw - var(--sidebar-width));
     }
   }
 }
