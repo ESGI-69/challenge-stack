@@ -156,11 +156,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
-    public function getid_artist(): ?Artist
-    {
-        return $this->id_artist;
-    }
-
     public function getIdArtist(): ?Artist
     {
         return $this->id_artist;
