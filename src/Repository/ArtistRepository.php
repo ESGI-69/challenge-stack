@@ -72,6 +72,17 @@ class ArtistRepository extends ServiceEntityRepository
         return $result;
     }
 
+    public function getFollowersCount(int $id): int
+    {
+        return $this->createQueryBuilder('a')
+            ->select('COUNT(au.id) as followers')
+            ->leftJoin('a.followed', 'au')
+            ->where('a.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
     public function remove(Artist $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);

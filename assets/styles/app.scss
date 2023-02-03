@@ -2,8 +2,13 @@
 @use 'footer' as *;
 @use 'variables' as *;
 @use 'lists' as *;
+
 @use 'back/sidebar' as *;
+
+@use 'front/feed' as *;
+
 @use './components/artist/artistRow.scss' as *;
+@use './components/artist/artistHeader.scss' as *;
 @use './components/event/eventRow.scss' as *;
 @use './components/clubs/clubRow.scss' as *;
 @use './components/post.scss' as *;

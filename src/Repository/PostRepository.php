@@ -39,6 +39,49 @@ class PostRepository extends ServiceEntityRepository
         }
     }
 
+    public function getLastCreate(int $count): array
+    {
+        $dirtyResult = $this->createQueryBuilder('post')
+        // ->select('COUNT(pc.id) as comments', 'a', 'pc')
+        ->leftJoin('post.id_artist', 'postArtist')
+        ->leftJoin('post.comments', 'postComments')
+        ->leftJoin('postComments.id_user', 'postCommentsUser')
+        ->leftJoin('post.userslike', 'postLikes')
+        ->addSelect('postArtist')
+        ->addSelect('postComments')
+        ->addSelect('postLikes')
+        ->addSelect('postCommentsUser')
+        ->groupBy('post.id', 'postArtist.id', 'postComments.id', 'postLikes.id', 'postCommentsUser.id')
+        ->addSelect('COUNT(postComments.id) as commentCount')
+        ->addSelect('COUNT(postLikes.id) as likeCount')
+        ->orderBy('post.created_at', 'DESC')
+        ->setMaxResults(10)
+        ->getQuery()
+        ->getResult();
+
+        
+        $result = [];
+        foreach ($dirtyResult as $row) {
+            $row[0]->likeCount = $row['likeCount'];
+            $row[0]->commentCount = $row['commentCount'];
+            $result[] = $row[0];
+        }
+        return $result;
+    }
+
+    // /**
+    //  * Retrive all post from a artist
+    //  */
+    // public function getPostsFromArtist(int $artistId): array
+    // {
+    //     return $this->createQueryBuilder('p')
+    //         ->andWhere('p.artist = :artistId')
+    //         ->setParameter('id_user', $artistId)
+    //         ->orderBy('p.id', 'DESC')
+    //         ->getQuery()
+    //         ->getResult();
+    // }
+
 //    /**
 //     * @return Post[] Returns an array of Post objects
 //     */

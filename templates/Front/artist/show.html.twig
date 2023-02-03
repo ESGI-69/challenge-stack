@@ -1,6 +1,19 @@
 {% extends 'base_front.html.twig' %}
 
-{% block title %}Hello ArtistsController!{% endblock %}
+{% block title %}BeatHub | {{ artist.type == "group" ? artist.pseudo : artist.prenom ~ ' ' ~ artist.nom ~ ' (' ~ artist.pseudo ~ ')' }}{% endblock %}
 {% block body %}
+  {% include '/Front/components/artistHeader.html.twig' with { artist, followerCount } %}
+  {# {% include '/Front/components/section.html.twig' with { name: 'Last posts' } %}
+  <div class="post-list">
+    {% for post in posts %}
+      {% include '/Front/components/post.html.twig' with { post } %}
+    {% endfor %}
+  </div> #}
+  {% include '/Front/components/section.html.twig' with { name: 'Musics' } %}
+  {# <div class="music-list">
+    {% for music in musics %}
+      {% include '/Front/components/music.html.twig' with { music } %}
+    {% endfor %}
+  </div> #}
   {{ dump(artist) }}
 {% endblock %}

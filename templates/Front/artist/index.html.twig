@@ -10,7 +10,7 @@
       with {
         artistSlug: artist.slug,
         artistImagePath: artist.picture_path | default(null),
-        artistName: artist.prenom ~ ' ' ~ artist.nom ~ ' (' ~ artist.pseudo ~ ')',
+        artistName: artist == 'group' ? artist.pseudo : artist.prenom ~ ' ' ~ artist.nom ~ ' (' ~ artist.pseudo ~ ')',
         artistCountry: 'Italy TODO',
         artistTotalEvents: artist.eventCount,
         artistTotalFollowers: artist.followerCount,
@@ -25,7 +25,7 @@
       with {
         artistSlug: artist.slug,
         artistImagePath: artist.picture_path | default(null),
-        artistName: artist.prenom ~ ' ' ~ artist.nom ~ ' (' ~ artist.pseudo ~ ')',
+        artistName: artist == 'group' ? artist.pseudo : artist.prenom ~ ' ' ~ artist.nom ~ ' (' ~ artist.pseudo ~ ')',
         artistCountry: 'Italy TODO',
         artistTotalEvents: artist.eventCount,
         artistTotalFollowers: artist.followerCount,
