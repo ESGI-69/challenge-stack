@@ -16,10 +16,10 @@ class DefaultController extends AbstractController
     public function index(PostRepository $PostRepository): Response
     {
         $posts;
-        // check id user is logged in
         if ($this->getUser()) {
             $posts = $PostRepository->getFollowedArtistPosts($this->getUser());
-            // dd($posts);
+        } else {
+            $posts = $PostRepository->getLastCreate();
         }
         return $this->render('Front/feed/index.html.twig', [
             'controller_name' => 'FrontController',

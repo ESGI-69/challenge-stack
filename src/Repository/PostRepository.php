@@ -77,7 +77,7 @@ class PostRepository extends ServiceEntityRepository
         return $resultEnhance;
     }
 
-    public function getLastCreate(int $count): array
+    public function getLastCreate(int $count = 5): array
     {
         $dirtyResult = $this->createQueryBuilder('post')
         // ->select('COUNT(pc.id) as comments', 'a', 'pc')
