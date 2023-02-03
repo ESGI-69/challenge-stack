@@ -42,10 +42,21 @@ class EventRepository extends ServiceEntityRepository
     public function getEventByDate($date): array
     {
         $qb = $this->createQueryBuilder('e')
-        ->where("e.date >= :start AND e.date <= :end")
+        ->where("e.start_date >= :start AND e.start_date <= :end")
         ->setParameter('start', $date->format('Y-m-d 00:00:00'))
         ->setParameter('end', $date->format('Y-m-d 23:59:59'))
-        ->orderBy('e.date', 'ASC');    
+        ->orderBy('e.start_date', 'ASC');    
+        return $qb->getQuery()->getResult();
+    }
+
+    // function to get club (concertHall) of the event
+    public function getClub($id): array
+    {
+        $qb = $this->createQueryBuilder('e')
+        ->select('c.name')
+        ->join('e.concertHall', 'c')
+        ->where("e.id = :id")
+        ->setParameter('id', $id);
         return $qb->getQuery()->getResult();
     }
 

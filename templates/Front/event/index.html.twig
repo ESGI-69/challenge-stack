@@ -6,17 +6,21 @@
 
 {% include '/Front/components/section.html.twig' with {name: 'Tonight'} %}
 <div class="events-list">
-{% include '/Front/components/eventRow.html.twig'
-  with {
-    eventImagePath: 'build/images/logo.svg',
-    eventSlug: '012-label-night',
-    eventName: '012 Label Nigh',
-    eventDate: 'Fri, Feb 3, 22:00',
-    eventClubSlug: 'ohm',
-    eventClubName: 'OHM',
-    eventClubCity: 'Berlin',
-  }
-%}
+{% for event in events %}
+{{ dump(event)}}
+  {% include '/Front/components/eventRow.html.twig'
+    with {
+      eventImagePath: event.picturepath | default('build/images/logo.svg'),
+      eventSlug: 'event-test-slug',
+      eventName: event.title,
+      eventId : event.id,
+      eventDate: event.startdate|date("D M j"),
+      eventClubSlug: 'test',
+      eventClubName: 'test',
+      eventClubCity: 'test'
+    }
+  %}
+{% endfor %}
 </div>
 
 {% include '/Front/components/section.html.twig' with {name: 'Tomorow'} %}
@@ -26,6 +30,7 @@
     eventImagePath: 'build/images/logo.svg',
     eventSlug: '012-label-night',
     eventName: '012 Label Nigh',
+    eventId : '1',
     eventDate: 'Fri, Feb 3, 22:00',
     eventClubSlug: 'ohm',
     eventClubName: 'OHM',
