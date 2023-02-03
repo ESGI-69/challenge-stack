@@ -3,16 +3,18 @@
 {% block title %}Beathub | {{ club.name }} {% endblock %}
 
 {% block body %}
+  {% include '/Front/components/clubHeader.html.twig' with { club } %}
 {% include '/Front/components/section.html.twig' with {name: 'Upcoming Events'} %}
 <div class="clubs-list">
 {% for event in club.getevents %}
   {% include '/Front/components/eventRow.html.twig' 
     with {
+      eventId : event.id,
       eventImagePath : 'build/images/logo.svg',
       eventName : event.title,
       eventDate :  event.startdate|date("D M j"),
-      eventClubName : 'test',
-      eventClubCity : 'test',
+      eventClubName : club.name,
+      eventClubCity : club.city
     }
   %}
 {% endfor %}
@@ -27,8 +29,8 @@
           artistImagePath: artist.picture_path | default(null),
           artistName: artist.prenom ~ ' ' ~ artist.nom ~ ' (' ~ artist.pseudo ~ ')',
           artistCountry: 'Italy TODO',
-          artistTotalEvents: artist.eventCount | default(0),
-          artistTotalFollowers: artist.followerCount | default(0),
+          artistTotalEvents: artist.eventCount | default(artist.getevents.count() ?? 0),
+          artistTotalFollowers: artist.followerCount | default( artist.followed.count() ?? 0),
         } 
       %}
   {% endfor %}
