@@ -1,0 +1,42 @@
+{% extends 'base_front.html.twig' %}
+
+{% block title %}Beathub | {{ club.name }} {% endblock %}
+
+{% block body %}
+  {% include '/Front/components/clubHeader.html.twig' with { club } %}
+{% include '/Front/components/section.html.twig' with {name: 'Upcoming Events'} %}
+<div class="clubs-list">
+{% for event in club.getevents %}
+  {% include '/Front/components/eventRow.html.twig' 
+    with {
+      eventId : event.id,
+      eventImagePath : 'build/images/logo.svg',
+      eventName : event.title,
+      eventDate :  event.startdate|date("D M j"),
+      eventClubName : club.name,
+      eventClubCity : club.city
+    }
+  %}
+{% endfor %}
+</div>
+
+{% include '/Front/components/section.html.twig' with {name: 'Top Listed Artists'} %}
+{% for event in club.getevents %}
+  {% for artist in event.getartists %}
+      {% include '/Front/components/artistRow.html.twig'
+        with {
+          artistSlug: artist.slug,
+          artistImagePath: artist.picture_path | default(null),
+          artistName: artist.prenom ~ ' ' ~ artist.nom ~ ' (' ~ artist.pseudo ~ ')',
+          artistCountry: 'Italy TODO',
+          artistTotalEvents: artist.eventCount | default(artist.getevents.count() ?? 0),
+          artistTotalFollowers: artist.followerCount | default( artist.followed.count() ?? 0),
+        } 
+      %}
+  {% endfor %}
+{% endfor %}
+
+
+{% include '/Front/components/section.html.twig' with {name: 'Location'} %}
+<iframe height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=2.3028373718261723%2C48.84223752518157%2C2.3563957214355473%2C48.86835647932926&amp;layer=mapnik" style="border: 1px solid black"></iframe><br/><small><a href="https://www.openstreetmap.org/#map=15/48.8553/2.3296">Afficher une carte plus grande</a></small>
+{% endblock %}

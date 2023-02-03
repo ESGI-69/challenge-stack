@@ -1,4 +1,4 @@
-<a href="" class="event-row">
+<a href=" {{ path('front_app_event_show', {'id' : eventId}) }}"class="event-row">
   <img class="event-row__image" src="{{ asset(eventImagePath) }}">
   <div class="event-row__info">
     <span class="event-row__info__name">{{ eventName }}</span>

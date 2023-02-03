@@ -43,7 +43,7 @@ class ConcertHallRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('c')
             ->select('c, COUNT(e.id) as eventCount')
-            ->join('c.events', 'e')
+            ->leftJoin('c.events', 'e')
              ->groupBy('c.id')
             ->orderBy('eventCount', 'DESC')
             ->setMaxResults($limit);
@@ -55,6 +55,23 @@ class ConcertHallRepository extends ServiceEntityRepository
         }
         return $result;
 
+    }
+
+    public function getLastCreate($limit = 3): array
+    {
+        $qb = $this->createQueryBuilder('c')
+            ->select('c, COUNT(e.id) as eventCount')
+            ->leftJoin('c.events', 'e')
+            ->groupBy('c.id')
+            ->orderBy('c.id', 'DESC')
+            ->setMaxResults($limit);
+
+        $result = [];
+        foreach ($qb->getQuery()->getResult() as $row) {
+            $row[0]->eventCount = $row['eventCount'];
+            $result[] = $row[0];
+        }
+        return $result;
     }
 
 //    /**

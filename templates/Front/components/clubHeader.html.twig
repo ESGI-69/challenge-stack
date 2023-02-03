@@ -1,0 +1,28 @@
+<div class="club-header">
+  <img src="{{ club.picturePath is null ? asset('build/data-files/club-pictures/placeholder-image.webp') : asset(club.picturePath) }}">
+  <div class="club-header__content">
+    <span class="club-header__content__type"> Club</span>
+    <div class="club-header__content__name">
+      <h1 class="club-header__content__name__text">
+        {{ club.name }}
+      </h1>
+      {% if 1 is not null %}
+        <a href="{{ 'test' }}" target="_blank">
+        </a>
+      {% endif %}
+    </div>
+    <p>{{ club.description }} </p>
+    <div class="club-header__content__info">
+      {% if 1 is not null %}
+        <span class="club-header__content__info__icons">
+          {% include '/icons/warehouse.html.twig' %} Capacity <b>{{ club.capacity }}</b>
+        </span>
+      {% endif %}
+        {% if 1 is not null %}
+        <span class="club-header__content__info__icons">
+          {% include '/icons/warehouse.html.twig' %} Total Events <b>{{ club.capacity }}</b>
+        </span>
+      {% endif %}
+    </div>
+  </div>
+</div>
