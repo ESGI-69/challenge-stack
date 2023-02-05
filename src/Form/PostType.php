@@ -21,10 +21,6 @@ class PostType extends AbstractType
         $builder
             ->add('title')
             ->add('text_content')
-            // ->add('id_user',  EntityType::class, [
-            //   'class' => User::class,
-            //   'choice_label' => 'email'
-            // ])
             ->add('id_media', EntityType::class, [
               'class' => Media::class,
               'choice_label' => 'title',
@@ -43,7 +39,6 @@ class PostType extends AbstractType
               'placeholder' => 'No event',
               'required' => false,
             ])
-            // ->add('id_artist')
         ;
     }
 

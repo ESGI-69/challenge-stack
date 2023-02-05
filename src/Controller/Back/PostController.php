@@ -18,8 +18,17 @@ class PostController extends AbstractController
     #[Route('/', name: 'app_post_index', methods: ['GET'])]
     public function index(PostRepository $postRepository): Response
     {
+        // $posts = $postRepository->findAll();
+        $posts = null;
+        // get all post where Idartist = id of the current user
+        $artistId = $this->getUser()->getIdArtist();
+        if ($artistId !== null) {
+          $artistId = $artistId->getId();
+          $posts = $postRepository->getPostsFromArtist($artistId);
+        }
         return $this->render('back/post/index.html.twig', [
-            'posts' => $postRepository->findAll(),
+            'posts' => $posts,
+            'validation' => false,
         ]);
     }
 
@@ -37,7 +46,16 @@ class PostController extends AbstractController
         return $this->render('back/post/validation.html.twig', [
             'posts' => $postRepository->findAll(),
             'unvalidatedPosts' => $unvalidatedPosts,
+            'validation' => true,
         ]);
+    }
+
+    #[Route('/{id}/validate', name: 'app_post_validate', methods: ['GET'])]
+    public function validate(Post $post, PostRepository $postRepository): Response
+    {
+      $post->setValidatedAt(new \DateTimeImmutable());
+      $postRepository->save($post, true);
+      return $this->redirectToRoute('admin_app_post_validation', [], Response::HTTP_SEE_OTHER);
     }
 
     #[Route('/new', name: 'app_post_new', methods: ['GET', 'POST'])]
@@ -53,7 +71,6 @@ class PostController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // set post created_at date now (DateTimeImmutable)
             $post->setCreatedAt(new \DateTimeImmutable());
             $post->setUpdatedAt(new \DateTimeImmutable());
             $post->setIdUser($this->getUser());
@@ -104,5 +121,15 @@ class PostController extends AbstractController
         }
 
         return $this->redirectToRoute('admin_app_post_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/{id}/del-validation', name: 'app_post_delete_validation', methods: ['POST'])]
+    public function deleteValidation(Request $request, Post $post, PostRepository $postRepository): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$post->getId(), $request->request->get('_token'))) {
+            $postRepository->remove($post, true);
+        }
+
+        return $this->redirectToRoute('admin_app_post_validation', [], Response::HTTP_SEE_OTHER);
     }
 }

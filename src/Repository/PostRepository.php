@@ -125,6 +125,17 @@ class PostRepository extends ServiceEntityRepository
         return $result;
     }
 
+    public function getPostsFromArtist(int $artistId): array
+    {
+      // select * where id_artist = $artistId
+      return $this->createQueryBuilder('post')
+        ->andWhere('post.id_artist = :artistId')
+        ->setParameter('artistId', $artistId)
+        ->orderBy('post.id', 'ASC')
+        ->getQuery()
+        ->getResult();
+    }
+
     // /**
     //  * Retrive all post from a artist
     //  */

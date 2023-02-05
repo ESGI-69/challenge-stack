@@ -3,7 +3,6 @@
 {% block title %}BeatHub | Posts validation{% endblock %}
 
 {% block body %}
-{{ dump(posts) }}
 
     <h1>Posts validation</h1>
     <div class="container-table">
@@ -14,13 +13,19 @@
                     <th scope="col">Author</th>
                     <th scope="col">Title</th>
                     <th scope="col">Content</th>
-                    <th scope="col">Date</th>
+                    <th scope="col">Created at</th>
+                    <th scope="col">Updated at</th>
+                    <th scope="col">Validated at</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
             {% for post in unvalidatedPosts %}
-                {% include '/back/post/postRow.html.twig' with { post } %}
+                {% include '/back/post/postRow.html.twig' with { post, validation } %}
+            {% else %}
+              <tr>
+                  <td class="text-center">no records found</td>
+              </tr>
             {% endfor %}
             </tbody>
         </table>
