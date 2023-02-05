@@ -107,6 +107,24 @@ class PostRepository extends ServiceEntityRepository
         return $result;
     }
 
+    public function getUnvalidatedPostIdsFromArtist(int $artistId): array
+    {
+        $dirtyResult = $this->createQueryBuilder('post')
+            ->select('post.id')
+            ->andWhere('post.id_artist = :artistId')
+            ->andWhere('post.validated_at IS NULL')
+            ->setParameter('artistId', $artistId)
+            ->orderBy('post.id', 'DESC')
+            ->getQuery()
+            ->getResult(); 
+
+        foreach ($dirtyResult as $row) {
+            $result[] = $row['id'];
+        }
+
+        return $result;
+    }
+
     // /**
     //  * Retrive all post from a artist
     //  */

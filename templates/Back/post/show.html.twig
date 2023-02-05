@@ -1,8 +1,9 @@
-<!DOCTYPE html>
+{% extends 'base_back.html.twig' %}
 
-<title>Post</title>
+{% block title %}Hello UserController!{% endblock %}
 
 {% block body %}
+{{dump(post) }}
     <h1>Post</h1>
 
     <table class="table">
@@ -28,15 +29,15 @@
                 <td>{{ post.updatedAt ? post.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
-                <th>Validated</th>
-                <td>{{ post.validated ? 'Yes' : 'No' }}</td>
+                <th>Validated_at</th>
+                <td>{{ post.validatedAt ? post.validatedAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('app_post_index') }}">back to list</a>
+    <a href="{{ path('admin_app_post_index') }}">back to list</a>
 
-    <a href="{{ path('app_post_edit', {'id': post.id}) }}">edit</a>
+    <a href="{{ path('admin_app_post_edit', {'id': post.id}) }}">edit</a>
 
-    {{ include('post/_delete_form.html.twig') }}
+    {{ include('back/post/_delete_form.html.twig') }}
 {% endblock %}

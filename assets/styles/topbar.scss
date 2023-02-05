@@ -49,6 +49,10 @@
 
       &:hover {
         text-decoration: underline;
+
+        img {
+          box-shadow: var(--color-primary) 0px 0px 0px 1.5px;
+        }
       }
 
       &__avatar {

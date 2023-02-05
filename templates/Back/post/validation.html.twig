@@ -1,0 +1,28 @@
+{% extends 'base_back.html.twig' %}
+
+{% block title %}BeatHub | Posts validation{% endblock %}
+
+{% block body %}
+{{ dump(posts) }}
+
+    <h1>Posts validation</h1>
+    <div class="container-table">
+        <table class="table table--validation">
+            <thead>
+                <tr>
+                    <th scope="col">Post ID</th>
+                    <th scope="col">Author</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Content</th>
+                    <th scope="col">Date</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for post in unvalidatedPosts %}
+                {% include '/back/post/postRow.html.twig' with { post } %}
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

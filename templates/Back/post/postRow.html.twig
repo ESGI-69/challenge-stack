@@ -1,0 +1,12 @@
+{# table row #}
+<tr>
+  <td class="text-center">{{ post.Id }}</td>
+  <td class="text-center">{{ post.IdArtist.Pseudo }}</td>
+  <td class="text-center">{{ post.Title }}</td>
+  <td class="text-center">{{ post.TextContent }}</td>
+  <td class="text-center">{{ post.CreatedAt|date() }}</td>
+  <td class="text-center">
+    <a href="/posts/{{ post.Id }}/edit" class="btn btn-primary">Validate</a>
+    <a href="/posts/{{ post.Id }}/delete" class="btn btn-danger">Delete</a>
+  </td>
+</tr>

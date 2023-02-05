@@ -1,13 +1,13 @@
-<!DOCTYPE html>
+{% extends 'base_back.html.twig' %}
 
-<title>Edit Post</title>
+{% block title %}Hello UserController!{% endblock %}
 
 {% block body %}
     <h1>Edit Post</h1>
 
-    {{ include('post/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('back/post/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('app_post_index') }}">back to list</a>
+    <a href="{{ path('admin_app_post_index') }}">back to list</a>
 
-    {{ include('post/_delete_form.html.twig') }}
+    {{ include('back/post/_delete_form.html.twig') }}
 {% endblock %}

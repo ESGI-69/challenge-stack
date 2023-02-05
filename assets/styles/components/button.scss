@@ -28,6 +28,19 @@ a.button {
       border-style: none;
       text-decoration: underline;
     }
+
+    &--link-not-underlined {
+      padding: 0;
+      background-color: transparent;
+      border-width: 0;
+      border-style: none;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
   }
   
   &.button-color {

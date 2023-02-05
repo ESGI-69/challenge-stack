@@ -3,9 +3,16 @@
 namespace App\Form;
 
 use App\Entity\Post;
+use App\Entity\User;
+use App\Entity\Media;
+use App\Entity\MediasList;
+use App\Entity\Event;
+use App\Entity\Comment;
+
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class PostType extends AbstractType
 {
@@ -14,13 +21,29 @@ class PostType extends AbstractType
         $builder
             ->add('title')
             ->add('text_content')
-            ->add('created_at')
-            ->add('updated_at')
-            ->add('validated')
-            ->add('id_user')
-            ->add('id_media')
-            ->add('id_mediaslist')
-            ->add('id_event')
+            // ->add('id_user',  EntityType::class, [
+            //   'class' => User::class,
+            //   'choice_label' => 'email'
+            // ])
+            ->add('id_media', EntityType::class, [
+              'class' => Media::class,
+              'choice_label' => 'title',
+              'placeholder' => 'No music',
+              'required' => false,
+            ])
+            ->add('id_mediaslist', EntityType::class, [
+              'class' => MediasList::class,
+              'choice_label' => 'title',
+              'placeholder' => 'No album',
+              'required' => false,
+            ])
+            ->add('id_event', EntityType::class, [
+              'class' => Event::class,
+              'choice_label' => 'title',
+              'placeholder' => 'No event',
+              'required' => false,
+            ])
+            // ->add('id_artist')
         ;
     }
 
