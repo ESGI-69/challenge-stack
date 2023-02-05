@@ -21,18 +21,6 @@
           <tbody>
           {% for post in posts %}
             {% include '/back/post/postRow.html.twig' with { post } %}
-              {# <tr>
-                  <td>{{ post.id }}</td>
-                  <td>{{ post.title }}</td>
-                  <td>{{ post.textContent }}</td>
-                  <td>{{ post.createdAt ? post.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                  <td>{{ post.updatedAt ? post.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                  <td>{{ post.validatedAt ? post.validatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                  <td>
-                      <a href="{{ path('admin_app_post_show', {'id': post.id}) }}">show</a>
-                      <a href="{{ path('admin_app_post_edit', {'id': post.id}) }}">edit</a>
-                  </td>
-              </tr> #}
           {% else %}
               <tr>
                   <td class="text-center">no records found</td>

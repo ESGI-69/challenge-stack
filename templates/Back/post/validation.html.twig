@@ -5,6 +5,9 @@
 {% block body %}
 
     <h1>Posts validation</h1>
+    {% if artistId == null %}
+      <p>You must be linked to an artist to validate post</p>
+    {% endif %}
     <div class="container-table">
         <table class="table table--validation">
             <thead>

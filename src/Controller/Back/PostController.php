@@ -18,9 +18,7 @@ class PostController extends AbstractController
     #[Route('/', name: 'app_post_index', methods: ['GET'])]
     public function index(PostRepository $postRepository): Response
     {
-        // $posts = $postRepository->findAll();
         $posts = null;
-        // get all post where Idartist = id of the current user
         $artistId = $this->getUser()->getIdArtist();
         if ($artistId !== null) {
           $artistId = $artistId->getId();
@@ -35,18 +33,22 @@ class PostController extends AbstractController
     #[Route('/validation', name: 'app_post_validation', methods: ['GET'])]
     public function validation(PostRepository $postRepository): Response
     {
-      //get artist id linked to the current user
-      $artistId = $this->getUser()->getIdArtist()->getId();
-      // All unvalidated posts ID from the artist
-      $unvalidatedPostIds = $postRepository->getUnvalidatedPostIdsFromArtist($artistId);
-      // Retrive all unvalidated posts from the artist
-      foreach ($unvalidatedPostIds as $unvalidatedPostId) {
-        $unvalidatedPosts[] = $postRepository->find($unvalidatedPostId);
+      $artistId = $this->getUser()->getIdArtist();
+      if ($artistId === null) {
+        $unvalidatedPosts = null;
+      } else {
+        $artistId = $artistId->getId();
+        $unvalidatedPostIds = $postRepository->getUnvalidatedPostIdsFromArtist($artistId);
+        foreach ($unvalidatedPostIds as $unvalidatedPostId) {
+          $unvalidatedPosts[] = $postRepository->find($unvalidatedPostId);
+        }
       }
+    
         return $this->render('back/post/validation.html.twig', [
             'posts' => $postRepository->findAll(),
             'unvalidatedPosts' => $unvalidatedPosts,
             'validation' => true,
+            'artistId' => $artistId,
         ]);
     }
 
@@ -96,7 +98,11 @@ class PostController extends AbstractController
 
     #[Route('/{id}/edit', name: 'app_post_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Post $post, PostRepository $postRepository): Response
-    {
+    { 
+        $idArtist = $this->getUser()->getIdArtist();
+        if ($idArtist !== $post->getIdArtist()) {
+          return $this->redirectToRoute('admin_app_post_index', [], Response::HTTP_SEE_OTHER);
+        }
         $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
 
