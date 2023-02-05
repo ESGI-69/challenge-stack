@@ -5,8 +5,21 @@
   <td class="text-center">{{ post.Title }}</td>
   <td class="text-center">{{ post.TextContent }}</td>
   <td class="text-center">{{ post.CreatedAt|date() }}</td>
-  <td class="text-center">
-    <a href="/posts/{{ post.Id }}/edit" class="btn btn-primary">Validate</a>
-    <a href="/posts/{{ post.Id }}/delete" class="btn btn-danger">Delete</a>
-  </td>
+  <td class="text-center">{{ post.UpdatedAt|date() }}</td>
+  {% if post.ValidatedAt == null %}
+    <td class="text-center">Non validé</td>
+  {% else %}
+    <td class="text-center">{{ post.ValidatedAt|date() }}</td>
+  {% endif %}
+  {% if validation %}
+    <td class="text-center">
+      <a href="{{ path('admin_app_post_validate', {'id': post.id}) }}" class="btn btn-primary">Validate</a>
+      {{ include('back/post/_delete_form_validation.html.twig') }}
+    </td>
+  {% else %}
+    <td class="text-center">
+      <a href="{{ path('admin_app_post_edit', {'id': post.id}) }}" class="btn btn-primary">Edit</a>
+      {{ include('back/post/_delete_form.html.twig') }}
+    </td>
+  {% endif %}
 </tr>

@@ -4,44 +4,31 @@
 
 {% block body %}
     <h1>Post index</h1>
-
-      {{ dump(posts) }}
-
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Text_content</th>
-                <th>Created_at</th>
-                <th>Updated_at</th>
-                <th>Validated_at</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for post in posts %}
-        
-            <tr>
-                <td>{{ post.id }}</td>
-                <td>{{ post.title }}</td>
-                <td>{{ post.textContent }}</td>
-                <td>{{ post.createdAt ? post.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ post.updatedAt ? post.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ post.validatedAt ? post.validatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('admin_app_post_show', {'id': post.id}) }}">show</a>
-                    <a href="{{ path('admin_app_post_edit', {'id': post.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="7">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div class="container-table">
+      <table class="table table--post">
+          <thead>
+              <tr>
+                  <th scope="col">Id</th>
+                  <th scope="col">Author</th>
+                  <th scope="col">Title</th>
+                  <th scope="col">Content</th>
+                  <th scope="col">Created at</th>
+                  <th scope="col">Updated at</th>
+                  <th scope="col">Validated at</th>
+                  <th scope="col"></th>
+              </tr>
+          </thead>
+          <tbody>
+          {% for post in posts %}
+            {% include '/back/post/postRow.html.twig' with { post } %}
+          {% else %}
+              <tr>
+                  <td class="text-center">no records found</td>
+              </tr>
+          {% endfor %}
+          </tbody>
+      </table>
+    </div>
 
     <a href="{{ path('admin_app_post_new') }}">Create new</a>
 {% endblock %}
