@@ -84,7 +84,6 @@ class UserController extends AbstractController
                 if (count($user->getRoles()) <= 1) {
                   $userRepository->unlinkArtist($user->getId());
                 }
-                dd($user, count($user->getRoles()), $user->getRoles());
                 return $this->redirectToRoute('admin_user_index');
             }
           }

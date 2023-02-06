@@ -1,0 +1,8 @@
+{% extends 'base_front.html.twig' %}
+{% block title %}BeatHub | {{ post.title }}{% endblock %}
+{% block body %}
+  <h1>{{ post.title }}</h1>
+  <p>{{ post.textContent }}</p>
+  {{ dump(post) }}
+  <p>Posted by {{ post.IdArtist.pseudo }} at {{ post.createdAt|date('d/m/Y') }}</p>
+{% endblock %}

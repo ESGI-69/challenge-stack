@@ -10,7 +10,7 @@
       {% if showComments == false %}
         {% include '/Front/components/button.html.twig' with {
           text: 'View Post & Comments',
-          link: '#',
+          link: path('front_app_post_show', {'slug': post.Slug}),
           class: 'post__content__header__link',
           type: 'outline',
           color: 'white',

@@ -34,8 +34,8 @@ class AppFixtures extends Fixture
         $manager->persist($artist1);
         
         $artist2 = new Artist();
-        $artist2->setNom("Camel");
-        $artist2->setPrenom("Camel");
+        $artist2->setNom("");
+        $artist2->setPrenom("");
         $artist2->setPseudo("Camel");
         $artist2->setDescription("Rock Prog band from england.");
         $artist2->setEmail("support@cameeeel.com");
@@ -47,8 +47,8 @@ class AppFixtures extends Fixture
         $manager->persist($artist2);
 
         $artist = new Artist();
-        $artist->setNom("Pink Floyd");
-        $artist->setPrenom("Pink Floyd");
+        $artist->setNom("");
+        $artist->setPrenom("");
         $artist->setPseudo("Pink Floyd");
         $artist->setDescription("Famous rock Prog band from england.");
         $artist->setEmail("support@pinkfloyd.com");
@@ -60,8 +60,8 @@ class AppFixtures extends Fixture
         $manager->persist($artist);
 
         $artist = new Artist();
-        $artist->setNom("Chromatics");
-        $artist->setPrenom("Chromatics");
+        $artist->setNom("");
+        $artist->setPrenom("");
         $artist->setPseudo("Chromatics");
         $artist->setDescription("Chromatics is an American synthpop band from Portland, Oregon, formed in 2001.");
         $artist->setEmail("support@itaaliansdoitbetter.com");
@@ -125,8 +125,8 @@ class AppFixtures extends Fixture
         $manager->persist($artist);
 
         $artist = new Artist();
-        $artist->setNom("Kendrick Lamar");
-        $artist->setPrenom("Kendrick Lamar");
+        $artist->setNom("Lamar");
+        $artist->setPrenom("Kendrick");
         $artist->setPseudo("Kendrick Lamar");
         $artist->setDescription("Kendrick Lamar Duckworth is an American rapper, songwriter, and record producer.");
         $artist->setEmail("supoort@kendricklaaamar.com");
@@ -138,8 +138,8 @@ class AppFixtures extends Fixture
         $manager->persist($artist);
 
         $artist = new Artist();
-        $artist->setNom("Kanye West");
-        $artist->setPrenom("Kanye West");
+        $artist->setNom("West");
+        $artist->setPrenom("Kanye");
         $artist->setPseudo("Kanye West");
         $artist->setDescription("Kanye Omari West is an American rapper, singer, songwriter, record producer, entrepreneur, and fashion designer.");
         $artist->setEmail("supoort@kannyee.com");
@@ -164,8 +164,8 @@ class AppFixtures extends Fixture
         $manager->persist($artist);
 
         $artist = new Artist();
-        $artist->setNom("M83");
-        $artist->setPrenom("M83");
+        $artist->setNom("");
+        $artist->setPrenom("");
         $artist->setPseudo("M83");
         $artist->setDescription("M83 is a French electronic music band formed in Paris in 2001.");
         $artist->setEmail("supoort@mmmmmm8888883333.com");
