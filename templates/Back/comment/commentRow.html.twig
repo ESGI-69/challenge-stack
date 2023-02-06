@@ -1,0 +1,15 @@
+{# table row #}
+<tr>
+  <td class="text-center">{{ comment.Id }}</td>
+  <td class="text-center">{{ comment.IdUser.Email }}</td>
+  <td class="text-center">{{ comment.Text }}</td>
+  <td class="text-center">{{ comment.CreatedAt|date() }}</td>
+  <td class="text-center">{{ comment.IdPost.Id }}</td>
+  <td class="text-center">{{ comment.IdPost.Title }}</td>
+  <td class="text-center">{{ comment.IdPost.IdArtist.Pseudo }}</td>
+  <td class="text-center">{{ comment.IdPost.TextContent }}</td>
+  <td class="text-center">
+    <a href="{{ path('admin_app_comment_validate', {'id': comment.id}) }}" class="btn btn-primary">Validate</a>
+    {{ include('back/comment/_delete_form_validation.html.twig') }}
+  </td>
+</tr>

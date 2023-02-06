@@ -9,7 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class DefaultController extends AbstractController
 {
-    #[IsGranted('ROLE_ARTIST')]
+    #[IsGranted('ROLE_HAS_ACCES_TO_ADMIN_PANNEL')]
     #[Route('/', name: 'default_index')]
     public function index(): Response
     {

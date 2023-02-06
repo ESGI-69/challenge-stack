@@ -34,12 +34,15 @@ security:
         - { path: ^/, roles: PUBLIC_ACCESS }
         - { path: ^/login, roles: PUBLIC_ACCESS }
         - { path: ^/register, roles: PUBLIC_ACCESS }
-        - { path: ^/admin, roles: ROLE_ARTIST}
+        - { path: ^/admin, roles: [ROLE_ARTIST, ROLE_MANAGER, ROLE_MODERATOR, ROLE_ADMIN] }
 
     role_hierarchy:
-        ROLE_ARTIST: ROLE_USER
-        ROLE_MANAGER: [ROLE_USER, ROLE_ARTIST]
-        ROLE_ADMIN: [ROLE_USER, ROLE_ARTIST, ROLE_MANAGER]
+        ROLE_HAS_ACCES_TO_ADMIN_PANNEL: ROLE_USER
+        ROLE_CAN_MODERATE_COMMENT: ROLE_USER
+        ROLE_ARTIST: [ROLE_HAS_ACCES_TO_ADMIN_PANNEL]
+        ROLE_MANAGER: [ROLE_HAS_ACCES_TO_ADMIN_PANNEL]
+        ROLE_MODERATOR: [ROLE_HAS_ACCES_TO_ADMIN_PANNEL, ROLE_CAN_MODERATE_COMMENT]
+        ROLE_ADMIN: [ROLE_MODERATOR, ROLE_ARTIST, ROLE_MANAGER]
 
 when@test:
     security:

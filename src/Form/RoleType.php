@@ -16,6 +16,7 @@ class RoleType extends AbstractType
           ->add('roles', ChoiceType::class, [
               'choices' => [
                   'Admin' => 'ROLE_ADMIN',
+                  'Moderator' => 'ROLE_MODERATOR',
                   'Manager' => 'ROLE_MANAGER',
                   'Artist' => 'ROLE_ARTIST',
               ],

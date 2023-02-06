@@ -7,52 +7,30 @@
       </a>
     </div>
     <div class="back_sidebar__container__navigation">
-      {# <section class="back_sidebar__container__navigation__section">
-        <a href="{{ path('admin_default_index') }}" class="back_sidebar__container__navigation__section__item">
-          {% include '/icons/home.html.twig' with { class: 'back_sidebar__container__navigation__section__item__icon'}%}
-          <span>Dashboard</span>
-        </a>
-      </section> #}
-      {# <section class="back_sidebar__container__navigation__section">
-        <span class="back_sidebar__container__navigation__section__title">Content</span>
-        <a href="#" class="back_sidebar__container__navigation__section__item ">
-          {% include '/icons/home.html.twig' with { class: 'back_sidebar__container__navigation__section__item__icon'} %}
-          <span>
-            Element 1
-          </span>
-        </a>
-        <a href="#" class="back_sidebar__container__navigation__section__item ">
-          {% include '/icons/home.html.twig' with { class: 'back_sidebar__container__navigation__section__item__icon'} %}
-          <span>
-            Element 2
-          </span>
-        </a>
-        <a href="#" class="back_sidebar__container__navigation__section__item">
-          {% include '/icons/home.html.twig' with { class: 'back_sidebar__container__navigation__section__item__icon'} %}
-          <span>
-            Element 3
-          </span>
-        </a>
-        <a href="#" class="back_sidebar__container__navigation__section__item">
-          {% include '/icons/home.html.twig' with { class: 'back_sidebar__container__navigation__section__item__icon'} %}
-          <span>
-            Element 4
-          </span>
-        </a>
-      </section> #}
-
-      <section class="back_sidebar__container__navigation__section">
-        <span class="back_sidebar__container__navigation__section__title">Content</span>
-          {% include '/back/components/sidebarButton.html.twig' with {
-              href: path('admin_app_post_index'),
-              iconTwig: '/icons/home.html.twig',
-              text: 'Posts',
-            }
-          %}
+      {% if is_granted('ROLE_ARTIST') or is_granted('ROLE_CAN_MODERATE_COMMENT') %}
+        <section class="back_sidebar__container__navigation__section">
+          <span class="back_sidebar__container__navigation__section__title">Content</span>
+          {% if is_granted('ROLE_ARTIST') %}
+            {% include '/back/components/sidebarButton.html.twig' with {
+                href: path('admin_app_post_index'),
+                iconTwig: '/icons/home.html.twig',
+                text: 'Posts',
+              }
+            %}
+          {% endif %}
+          {% if is_granted('ROLE_CAN_MODERATE_COMMENT') %}
+            {% include '/back/components/sidebarButton.html.twig' with {
+                href: path('admin_app_comment_validation'),
+                iconTwig: '/icons/home.html.twig',
+                text: 'Comment moderation',
+              }
+            %}
+          {% endif %}
         </section>
+      {% endif %}
 
       <section class="back_sidebar__container__navigation__section">
-        {% if is_granted('ROLE_MANAGER') %}
+        {% if is_granted('ROLE_MANAGER') or is_granted('ROLE_ADMIN') %}
           <span class="back_sidebar__container__navigation__section__title">Management</span>
             {% include '/back/components/sidebarButton.html.twig' with {
                 href: path('admin_user_index'),
@@ -64,6 +42,12 @@
                 href: path('admin_app_post_validation'),
                 iconTwig: '/icons/home.html.twig',
                 text: 'Validate posts',
+              }
+            %}
+            {% include '/back/components/sidebarButton.html.twig' with {
+                href: '#',
+                iconTwig: '/icons/home.html.twig',
+                text: 'Create event',
               }
             %}
           {% endif %}
