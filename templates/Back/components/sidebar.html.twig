@@ -11,7 +11,7 @@
         <section class="back_sidebar__container__navigation__section">
           <span class="back_sidebar__container__navigation__section__title">Content</span>
           {% if is_granted('ROLE_ARTIST') %}
-            {% include '/back/components/sidebarButton.html.twig' with {
+            {% include '/Back/components/sidebarButton.html.twig' with {
                 href: path('admin_app_post_index'),
                 iconTwig: '/icons/home.html.twig',
                 text: 'Posts',
@@ -19,7 +19,7 @@
             %}
           {% endif %}
           {% if is_granted('ROLE_CAN_MODERATE_COMMENT') %}
-            {% include '/back/components/sidebarButton.html.twig' with {
+            {% include '/Back/components/sidebarButton.html.twig' with {
                 href: path('admin_app_comment_validation'),
                 iconTwig: '/icons/home.html.twig',
                 text: 'Comment moderation',
@@ -32,19 +32,19 @@
       <section class="back_sidebar__container__navigation__section">
         {% if is_granted('ROLE_MANAGER') or is_granted('ROLE_ADMIN') %}
           <span class="back_sidebar__container__navigation__section__title">Management</span>
-            {% include '/back/components/sidebarButton.html.twig' with {
+            {% include '/Back/components/sidebarButton.html.twig' with {
                 href: path('admin_user_index'),
                 iconTwig: '/icons/link.html.twig',
                 text: 'Associate user to Artist',
               }
             %}
-            {% include '/back/components/sidebarButton.html.twig' with {
+            {% include '/Back/components/sidebarButton.html.twig' with {
                 href: path('admin_app_post_validation'),
                 iconTwig: '/icons/home.html.twig',
                 text: 'Validate posts',
               }
             %}
-            {% include '/back/components/sidebarButton.html.twig' with {
+            {% include '/Back/components/sidebarButton.html.twig' with {
                 href: '#',
                 iconTwig: '/icons/home.html.twig',
                 text: 'Create event',
