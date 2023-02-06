@@ -17,7 +17,8 @@
                 text: 'Posts',
               }
             %}
-          {% elseif is_granted('ROLE_CAN_MODERATE_COMMENT') %}
+          {% endif %}
+          {% if is_granted('ROLE_CAN_MODERATE_COMMENT') %}
             {% include '/back/components/sidebarButton.html.twig' with {
                 href: path('admin_app_comment_validation'),
                 iconTwig: '/icons/home.html.twig',
