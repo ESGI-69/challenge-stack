@@ -69,10 +69,12 @@ class CommentController extends AbstractController
     #[Route('/{id}', name: 'app_comment_delete', methods: ['POST'])]
     public function delete(Request $request, Comment $comment, CommentRepository $commentRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$comment->getId(), $request->request->get('_token'))) {
+        $redirect = $request->query->get('redirect_route_name');
+
+        if ($this->isCsrfTokenValid('delete'.$comment->getId(), $request->request->get('_token')) && $comment->getIdUser() === $this->getUser()) {
             $commentRepository->remove($comment, true);
         }
 
-        return $this->redirectToRoute('app_comment_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute($redirect, [], Response::HTTP_SEE_OTHER);
     }
 }

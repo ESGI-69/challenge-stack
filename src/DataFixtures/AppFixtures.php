@@ -373,6 +373,7 @@ class AppFixtures extends Fixture
         $user_default->setProfilePicturePath("");
         $user_default->setActive(true);
         $user_default->setActivationToken("fdp");
+        $user_default->addArtistsFollowed($artist1);
         $user_default->setActivationTokenExpiration(new DateTimeImmutable('now'));
 
         $manager->persist($user_default);
@@ -384,7 +385,7 @@ class AppFixtures extends Fixture
         $post->setTextContent("ICI ON RATIO OU KOA LOLOLOLOLOLOL LOLOLOLOLOLOL LOLOLOLOLOLOL LOLOLOLOLOLOL LOLOLOLOLOLOL LOLOLOLOLOLOL LOLOLOLOLOLOL LOLOLOLOLOLOL.");
         $post->setCreatedAt(new DateTimeImmutable('now'));
         $post->setUpdatedAt(new DateTimeImmutable('now'));
-        $post->setValidatedAt(new DateTimeImmutable('now'));
+        $post->setValidatedAt(null);
         $post->setIdUser($user_artist);
         $post->setIdArtist($artist1);
 
@@ -409,7 +410,7 @@ class AppFixtures extends Fixture
         $post->setTextContent("AYAYAYAYAYAYAYAYAYAY CACA");
         $post->setCreatedAt(new DateTimeImmutable('now'));
         $post->setUpdatedAt(new DateTimeImmutable('now'));
-        $post->setValidatedAt(null);
+        $post->setValidatedAt(new DateTimeImmutable('now'));
         $post->setIdEvent($event);
         $post->setIdUser($user_artist);
         $post->setIdArtist($artist1);

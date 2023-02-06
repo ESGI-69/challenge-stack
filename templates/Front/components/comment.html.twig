@@ -1,10 +1,10 @@
 <div class="comment {{ comment.ValidatedAt != null ? '' : 'comment--not-validated' }}">
-  <img class="comment__avatar" src="{{ comment.IdUser.ProfilePicturePath is null ? asset('build/data-files/artist-pictures/placeholder-image.webp') : asset(comment.IdUser.ProfilePicturePath) }}">
+  <img class="comment__avatar" src="{{ comment.IdUser.ProfilePicturePath|default(asset('build/data-files/user-pictures/placeholder-image.jpeg')) }}">
   <div class="comment__content">
     <div class="comment__content__header">
       <span class="comment__content__header__name">
-        {# {{ comment.IdUser.email }} #}
-        USERNAME NOT IMPLEMENTED
+        TODO
+        {{ comment.IdUser.email }}
       </span>
       {% if comment.ValidatedAt != null %}
         <span class="comment__content__header__date">
@@ -19,5 +19,20 @@
     <div class="comment__content__text">
       {{ comment.Text }}
     </div>
+  </div>
+  <div class="comment__actions">
+    {# REPORT COMMENT TODO ? #}
+    {# {% if comment.IdUser.Id != app.user.Id %}
+      <a class="comment__actions__report" href="{{ path('report_comment', { 'id': comment.Id }) }}">
+      <a class="comment__actions__report" href="#">
+        Report
+      </a>
+    {% endif %} #}
+    {% if comment.IdUser.Id == app.user.Id %}
+      <form method="post" action="{{ path('front_app_comment_delete', {'id': comment.id, 'redirect_route_name': app.request.attributes.get('_route') }) }}" onsubmit="return confirm('Are you sure you want to delete your comment ?');">
+        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ comment.id) }}">
+        <button class="comment__actions__delete">Delete</button>
+      </form>
+    {% endif %}
   </div>
 </div>
