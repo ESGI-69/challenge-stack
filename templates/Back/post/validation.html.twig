@@ -24,7 +24,7 @@
             </thead>
             <tbody>
             {% for post in unvalidatedPosts %}
-                {% include '/back/post/postRow.html.twig' with { post, validation } %}
+                {% include '/Back/post/postRow.html.twig' with { post, validation } %}
             {% else %}
               <tr>
                   <td class="text-center">no records found</td>
