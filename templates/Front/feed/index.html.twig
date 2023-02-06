@@ -32,8 +32,8 @@
   {% if not posts %}
     <div class="feed-not-followed">
       <div class="feed-not-followed__content">
-        <h2 class="feed-not-followed__title">You are not following any artist !</h2>
-        <p class="feed-not-followed__text">Follow artists to see their latest posts</p>
+        <h2 class="feed-not-followed__title">You are not following any artist or they don't have any post yet !</h2>
+        <p class="feed-not-followed__text">Follow more artists to see their latest posts</p>
         <div class="feed-not-followed__buttons">
           {% include '/Front/components/button.html.twig' with { text: 'Explore artists', link: path('front_app_artist_index'), type: 'link', color: 'primary' } %}
         </div>
@@ -45,7 +45,7 @@
       {% for post in posts %}
         {% include '/Front/components/post.html.twig'
           with {
-            showComments: false,
+            showComments: true,
             post,
             isPostLiked: false,
           }

@@ -122,6 +122,9 @@ class PostController extends AbstractController
     #[Route('/{id}', name: 'app_post_delete', methods: ['POST'])]
     public function delete(Request $request, Post $post, PostRepository $postRepository): Response
     {
+        // get all the post not from the current user
+
+
         if ($this->isCsrfTokenValid('delete'.$post->getId(), $request->request->get('_token'))) {
             $postRepository->remove($post, true);
         }

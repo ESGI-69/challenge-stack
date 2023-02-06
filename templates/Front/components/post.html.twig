@@ -46,7 +46,9 @@
   {% if showComments %}
     <div class="post__comments">
       {% for comment in post.Comments %}
-        {% include '/Front/components/comment.html.twig' with { comment, isCommentLiked: false } %}
+        {% if comment.ValidatedAt is not null %}
+          {% include '/Front/components/comment.html.twig' with { comment } %}
+        {% endif %}
       {% endfor %}
     </div>
   {% endif %}
