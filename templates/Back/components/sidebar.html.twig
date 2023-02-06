@@ -7,7 +7,7 @@
       </a>
     </div>
     <div class="back_sidebar__container__navigation">
-      {% if is_granted('ROLE_ARTIST') or is_granted('ROLE_MODERATOR') or is_granted('ROLE_ADMIN') %}
+      {% if is_granted('ROLE_ARTIST') or is_granted('ROLE_CAN_MODERATE_COMMENT') %}
         <section class="back_sidebar__container__navigation__section">
           <span class="back_sidebar__container__navigation__section__title">Content</span>
           {% if is_granted('ROLE_ARTIST') %}
@@ -17,9 +17,9 @@
                 text: 'Posts',
               }
             %}
-          {% elseif is_granted('ROLE_MODERATOR') or is_granted('ROLE_ADMIN') %}
+          {% elseif is_granted('ROLE_CAN_MODERATE_COMMENT') %}
             {% include '/back/components/sidebarButton.html.twig' with {
-                href: '#',
+                href: path('admin_comment_validation'),
                 iconTwig: '/icons/home.html.twig',
                 text: 'Comment moderation',
               }

@@ -1,0 +1,29 @@
+{% extends 'base_back.html.twig' %}
+
+{% block title %}BeatHub | Comments validation{% endblock %}
+
+{% block body %}
+  <h1>Comments validation</h1>
+    <div class="container-table">
+      <table class="table table--validation">
+        <thead>
+          <tr>
+            <th scope="col">Comment ID</th>
+            <th scope="col">Author</th>
+            <th scope="col">Content</th>
+            <th scope="col">Created at</th>
+            <th scope="col">Post ID</th>
+            <th scope="col">Post title</th>
+            <th scope="col">Post author</th>
+            <th scope="col">Post content</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for comment in unvalidatedComment %}
+          {% include '/back/comment/commentRow.html.twig' with { comment } %}
+        {% endfor %}
+        </tbody>
+    </table>
+  </div>
+{% endblock %}
