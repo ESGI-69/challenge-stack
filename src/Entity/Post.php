@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\PostRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Gedmo\Mapping\Annotation\Slug;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -41,6 +42,10 @@ class Post
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: true)]
     private ?Event $id_event = null;
+
+    #[ORM\Column(length: 105)]
+    #[Slug(fields: ['title', 'id'])]
+    private ?string $slug = null;
 
     #[ORM\OneToMany(mappedBy: 'id_post', targetEntity: Comment::class, orphanRemoval: true)]
     private Collection $comments;
@@ -212,6 +217,18 @@ class Post
     public function setIdArtist(?Artist $id_artist): self
     {
         $this->id_artist = $id_artist;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }

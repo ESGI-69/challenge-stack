@@ -24,25 +24,6 @@ class ArtistController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_artist_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, ArtistRepository $artistRepository): Response
-    {
-        $artist = new Artist();
-        $form = $this->createForm(ArtistType::class, $artist);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $artistRepository->save($artist, true);
-
-            return $this->redirectToRoute('app_artist_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->renderForm('Front/artist/new.html.twig', [
-            'artist' => $artist,
-            'form' => $form,
-        ]);
-    }
-
     /**
      * @param Artist $artist
      * @return Response
@@ -57,24 +38,6 @@ class ArtistController extends AbstractController
             'artist' => $artist,
             'followerCount' => $followerCount,
             'isFollowed' => $isFollowed,
-        ]);
-    }
-
-    #[Route('/{id}/edit', name: 'app_artist_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Artist $artist, ArtistRepository $artistRepository): Response
-    {
-        $form = $this->createForm(ArtistType::class, $artist);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $artistRepository->save($artist, true);
-
-            return $this->redirectToRoute('app_artist_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->renderForm('Front/artist/edit.html.twig', [
-            'artist' => $artist,
-            'form' => $form,
         ]);
     }
 
