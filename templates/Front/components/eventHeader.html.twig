@@ -6,35 +6,34 @@
       <h1 class="event-header__content__name__text">
         {{ event.title }}
       </h1>
-      {% if 1 is not null %}
-        <a href="{{ 1 }}" target="_blank">
-          {% include '/icons/youtube.html.twig' %}
-        </a>
-      {% endif %}
     </div>
     <p>{{ event.description }}</p>
     <div class="event-header__content__info">
-
-    </div>
-    <div class="event-header__content__actions">
-      {% if not app.user %}
-        {% include '/Front/components/button.html.twig' with {
-          text: 'Sign in',
-          link: path('app_login'),
-          class: 'event-header__content__actions__follow-text__sign-in',
-          type: 'link',
-          color: 'black',
-        } %}<span class="event-header__content__actions__follow-text">&nbsp;to follow this event and be notified for the next show</span>
-      {% else %}
-        {% include '/Front/components/button.html.twig' with {
-          text: 'Follow (' ~ followerCount ~ ')',
-          link: '#',
-          class: 'event-header__content__actions__follow-button',
-          type: 'outline',
-          color: 'white',
-        } %}
-        <span class="event-header__content__actions__follow-text"> Follow this event to be notified for the next show</span>
+      {% if 1 is not null %}
+        <span class="event-header__content__info__icons" style="white-space: nowrap">
+          {% include '/icons/warehouse.html.twig' %} Venue <b>{{ event.getidconcerthall.name }}</b>
+        </span>
       {% endif %}
+
+      {% if 1 is not null %}
+        <span class="club-header__content__info__icons" style="white-space: nowrap">
+          {% include '/icons/warehouse.html.twig' %} Date <b>{{ event.startdate|date("D M j") }}</b>
+        </span>
+      {% endif %}
+
+        {% if 1 is not null %}
+        <span class="club-header__content__info__icons" style="white-space: nowrap">
+          {% include '/icons/warehouse.html.twig' %} Attending todo <b>{{ event.getidconcerthall.capacity }}</b>
+        </span>
+      {% endif %}
+       <a class="button button-type--outline button-color--white">
+        Interested
+      </a>
+
+      <a class="button button-type--outline button-color--white" style="white-space: nowrap">
+        Buy tickets
+      </a>
+     
     </div>
   </div>
 </div>

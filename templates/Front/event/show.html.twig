@@ -25,20 +25,32 @@
 {% for artist in event.getartists %}
 <div style="display: flex;justify-content: space-around;">
     {% for media in artist.getmedias %}
-    <div>
-        <div style="height: 200px; width: 200px; background-color: red;"></div>
-            <p>{{ media.title }} <b>{{  media.date | default(2022)}}</b></p>
-            <p>{{ artist.pseudo }}  -  {{ media.duree }}</p>
-    </div>
+      {% if loop.index < 4 %}
+        <div>
+            <div style="height: 200px; width: 200px; background-color: red; background-image:url('{{media.getmediaslists[0].pathcover}}');    background-size: cover;"></div>
+                <p>{{ media.title }} <b class="event-row__info__duration">{{  media.date | default(2022)}}</b></p>
+                <p class="event-row__info__duration">{{ artist.pseudo }}  -  {{ media.duree|date('i:s')  }}</p>
+        </div>
+        {% else %}
+        
+       <div>
+            <div style="height: 50px; width: 50px; background-color: red; background-image:url('{{media.getmediaslists[0].pathcover}}');    background-size: cover;"></div>
+                <p>{{ media.title }} <b class="event-row__info__duration">{{  media.date | default(2022)}}</b></p>
+                <p class="event-row__info__duration">{{ artist.pseudo }}  -  {{ media.duree|date('i:s') }}</p>
+        </div>      
+
+  
+      {% endif %}
+
+
     {% endfor %}    
 </div>
 {% endfor %}
 
 
 {% include '/Front/components/section.html.twig' with {name: 'Medias'} %}
-<p> Todo </p>
-<div style="display: flex;">
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/_7Hx_IB9Qys" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/_7Hx_IB9Qys" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<div style="display: flex;justify-content: space-between;">
+    <iframe width="530" height="315" src="https://www.youtube.com/embed/_7Hx_IB9Qys" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    <iframe width="530" height="315" src="https://www.youtube.com/embed/_7Hx_IB9Qys" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 </div>
 {% endblock %}
