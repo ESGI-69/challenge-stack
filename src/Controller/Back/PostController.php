@@ -24,7 +24,7 @@ class PostController extends AbstractController
           $artistId = $artistId->getId();
           $posts = $postRepository->getPostsFromArtist($artistId);
         }
-        return $this->render('back/post/index.html.twig', [
+        return $this->render('Back/post/index.html.twig', [
             'posts' => $posts,
             'validation' => false,
         ]);
@@ -44,7 +44,7 @@ class PostController extends AbstractController
         }
       }
     
-        return $this->render('back/post/validation.html.twig', [
+        return $this->render('Back/post/validation.html.twig', [
             'posts' => $postRepository->findAll(),
             'unvalidatedPosts' => $unvalidatedPosts,
             'validation' => true,

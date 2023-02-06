@@ -44,7 +44,7 @@ class SecurityController extends AbstractController
                 ->from('support@'.$_ENV['DOMAIN_NAME'])
                 ->to($user->getEmail())
                 ->subject('Activation de votre compte')
-                ->html($this->renderView('front/email/activation.html.twig', [
+                ->html($this->renderView('Front/email/activation.html.twig', [
                     'activation_token' => $user->getActivationToken()
                 ]));
             $mailer->send($email);
