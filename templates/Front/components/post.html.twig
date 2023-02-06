@@ -47,7 +47,7 @@
     {% if post.Comments|length > 0 %}
       <div class="post__comments">
         {% for comment in post.Comments %}
-          {% if comment.ValidatedAt is not null %}
+          {% if comment.ValidatedAt is not null or comment.IdUser == app.user %}
             {% include '/Front/components/comment.html.twig' with { comment } %}
           {% endif %}
         {% endfor %}
@@ -57,5 +57,8 @@
         <span class="post__comments__no-comments">No comments yet :( Be the first to comment this post</span>
       </div>
     {% endif %}
+    <div class="post__comment-form">
+      {% include '/Front/components/comment-form.html.twig' with { post } %}
+    </div>
   {% endif %}
 </div>

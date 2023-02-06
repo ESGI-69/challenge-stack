@@ -6,10 +6,11 @@
     "author content";
   
   &.show-comment {
-    grid-template-rows: 1fr auto;
+    grid-template-rows: 1fr auto auto;
     grid-template-areas:
       "author content"
-      "author comments";
+      "author comments"
+      "author comment-form";
   }
 
   &__author {
@@ -94,6 +95,25 @@
 
     &__no-comments {
       color: var(--color-secondary);
+    }
+  }
+
+  &__comment-form {
+    grid-area: comment-form;
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    gap: 1rem;
+
+    &__title {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    &__form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
     }
   }
 }

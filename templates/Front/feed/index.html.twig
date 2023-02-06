@@ -45,7 +45,7 @@
       {% for post in posts %}
         {% include '/Front/components/post.html.twig'
           with {
-            showComments: true,
+            showComments: false,
             post,
             isPostLiked: false,
           }
