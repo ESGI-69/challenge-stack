@@ -21,12 +21,13 @@
     </div>
   </div>
   <div class="comment__actions">
-    {% if comment.IdUser.Id != app.user.Id %}
-      {# <a class="comment__actions__report" href="{{ path('report_comment', { 'id': comment.Id }) }}"> #}
+    {# REPORT COMMENT TODO ? #}
+    {# {% if comment.IdUser.Id != app.user.Id %}
+      <a class="comment__actions__report" href="{{ path('report_comment', { 'id': comment.Id }) }}">
       <a class="comment__actions__report" href="#">
         Report
       </a>
-    {% endif %}
+    {% endif %} #}
     {% if comment.IdUser.Id == app.user.Id %}
       <form method="post" action="{{ path('front_app_comment_delete', {'id': comment.id, 'redirect_route_name': app.request.attributes.get('_route') }) }}" onsubmit="return confirm('Are you sure you want to delete your comment ?');">
         <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ comment.id) }}">

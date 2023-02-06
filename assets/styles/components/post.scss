@@ -91,5 +91,9 @@
     flex-direction: column;
     padding: 1.5rem;
     gap: 1rem;
+
+    &__no-comments {
+      color: var(--color-secondary);
+    }
   }
 }

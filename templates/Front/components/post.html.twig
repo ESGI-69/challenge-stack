@@ -21,7 +21,8 @@
     <div class="post__content__footer">
       <div class="post__content__footer__comment-count">
         {% include '/icons/comment.html.twig' with { class: 'post__content__footer__comment-count__icon' } %}
-        <span class="post__content__footer__comment-count__text">{{ post.commentCount }}</span>
+        {# Count only the validated comment #}
+        <span class="post__content__footer__comment-count__text">{{ post.Comments|length - post.Comments|filter(c => c.ValidatedAt is null)|length }}</span>
       </div>
       <div class="post__content__footer__like-count">
         {% include '/Front/components/button.html.twig' with {
@@ -37,19 +38,24 @@
           {% else %}
             {% include '/icons/like-outline.html.twig' with { class: 'post__content__footer__like-count__stat__icon' } %}
           {% endif %}
-          <span class="post__content__footer__like-count__stat__text">{{ post.likeCount }}</span>
+          <span class="post__content__footer__like-count__stat__text">{{ post.Userslike|length }}</span>
         </div>
       </div>
     </div>
   </div>
-  
   {% if showComments %}
-    <div class="post__comments">
-      {% for comment in post.Comments %}
-        {% if comment.ValidatedAt is not null %}
-          {% include '/Front/components/comment.html.twig' with { comment } %}
-        {% endif %}
-      {% endfor %}
-    </div>
+    {% if post.Comments|length > 0 %}
+      <div class="post__comments">
+        {% for comment in post.Comments %}
+          {% if comment.ValidatedAt is not null %}
+            {% include '/Front/components/comment.html.twig' with { comment } %}
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="post__comments">
+        <span class="post__comments__no-comments">No comments yet :( Be the first to comment this post</span>
+      </div>
+    {% endif %}
   {% endif %}
 </div>
