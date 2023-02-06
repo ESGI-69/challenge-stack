@@ -31,7 +31,7 @@
     {% if comment.IdUser.Id == app.user.Id %}
       <form method="post" action="{{ path('front_app_comment_delete', {'id': comment.id, 'redirect_route_name': app.request.attributes.get('_route') }) }}" onsubmit="return confirm('Are you sure you want to delete your comment ?');">
         <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ comment.id) }}">
-        <button class="btn">Delete</button>
+        <button class="comment__actions__delete">Delete</button>
       </form>
     {% endif %}
   </div>

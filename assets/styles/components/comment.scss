@@ -79,5 +79,11 @@
     justify-content: flex-end;
     font-size: 0.8rem;
     color: var(--color-secondary);
+
+    &__delete {
+      all: unset;
+      text-decoration: underline;
+      cursor: pointer;
+    }
   }
 }
