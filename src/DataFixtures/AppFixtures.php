@@ -315,6 +315,19 @@ class AppFixtures extends Fixture
 
         $manager->persist($user_admin);
 
+        $user_moderator = new User();
+
+        $user_moderator->setEmail("moderator@mail.com");
+        $user_moderator->setPlainPassword("password");
+        $user_moderator->setProfilePicturePath("");
+        $user_moderator->setActive(true);
+        $user_moderator->setRoles(["ROLE_MODERATOR"]);
+        $user_moderator->setActivationToken("fdp");
+        $user_moderator->addArtistsFollowed($artist1);
+        $user_moderator->setActivationTokenExpiration(new DateTimeImmutable('now'));
+
+        $manager->persist($user_moderator);
+
         $user_manager = new User();
 
         $user_manager->setEmail("manager@mail.com");
