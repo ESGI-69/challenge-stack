@@ -2,7 +2,7 @@
 
 {% block title %}BeatHub | {{ artist.type == "group" ? artist.pseudo : artist.prenom ~ ' ' ~ artist.nom ~ ' (' ~ artist.pseudo ~ ')' }}{% endblock %}
 {% block body %}
-  {% include '/Front/components/artistHeader.html.twig' with { artist, followerCount } %}
+  {% include '/Front/components/artistHeader.html.twig' with { artist, followerCount, isFollowed } %}
   {# {% include '/Front/components/section.html.twig' with { name: 'Last posts' } %}
   <div class="post-list">
     {% for post in posts %}

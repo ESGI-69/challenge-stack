@@ -92,6 +92,20 @@ class ArtistRepository extends ServiceEntityRepository
         }
     }
 
+    public function isFollowed(int $artistId, int $userId): bool
+    {
+        return $this->createQueryBuilder('a')
+            ->select('COUNT(au.id) as followers')
+            ->leftJoin('a.followed', 'au')
+            ->where('a.id = :artistId')
+            ->andWhere('au.id = :userId')
+            ->setParameter('artistId', $artistId)
+            ->setParameter('userId', $userId)
+            ->getQuery()
+            ->getSingleScalarResult() > 0;
+    }
+
+
 //    /**
 //     * @return Artist[] Returns an array of Artist objects
 //     */

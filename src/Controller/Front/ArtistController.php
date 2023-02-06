@@ -52,12 +52,11 @@ class ArtistController extends AbstractController
     {
         $followerCount = $artistRepository->getFollowersCount($artist->getId());
 
-        // dd($artist);
-
+        $isFollowed = $artistRepository->isFollowed($artist->getId(), $this->getUser()->getId());
         return $this->render('Front/artist/show.html.twig', [
             'artist' => $artist,
             'followerCount' => $followerCount,
-            // 'posts' => $PostRepository->getPostsFromArtist($artist->getId()),
+            'isFollowed' => $isFollowed,
         ]);
     }
 
@@ -88,4 +87,21 @@ class ArtistController extends AbstractController
 
         return $this->redirectToRoute('app_artist_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    #[Route('/{id}/follow', name: 'app_artist_follow', methods: ['GET'])]
+    public function follow(Artist $artist, ArtistRepository $artistRepository): Response
+    {
+        $artist->addFollowed($this->getUser());
+        $artistRepository->save($artist, true);
+        return $this->redirectToRoute('front_app_artist_show', ['slug' => $artist->getSlug()], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/{id}/unfollow', name: 'app_artist_unfollow', methods: ['GET'])]
+    public function unfollow(Artist $artist, ArtistRepository $artistRepository): Response
+    {
+        $artist->removeFollowed($this->getUser());
+        $artistRepository->save($artist, true);
+        return $this->redirectToRoute('front_app_artist_show', ['slug' => $artist->getSlug()], Response::HTTP_SEE_OTHER);
+    }
+
 }
