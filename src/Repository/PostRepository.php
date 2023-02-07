@@ -116,8 +116,9 @@ class PostRepository extends ServiceEntityRepository
             ->setParameter('artistId', $artistId)
             ->orderBy('post.id', 'DESC')
             ->getQuery()
-            ->getResult(); 
-
+            ->getResult();
+            
+        $result = [];
         foreach ($dirtyResult as $row) {
             $result[] = $row['id'];
         }
