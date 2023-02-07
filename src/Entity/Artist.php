@@ -68,12 +68,16 @@ class Artist
     #[ORM\OneToMany(mappedBy: 'id_artist', targetEntity: Post::class, orphanRemoval: true)]
     private Collection $posts;
 
+    #[ORM\OneToMany(mappedBy: 'id_artist', targetEntity: EventInvite::class, orphanRemoval: true)]
+    private Collection $eventInvites;
+
     public function __construct()
     {
         $this->medias = new ArrayCollection();
         $this->events = new ArrayCollection();
         $this->followed = new ArrayCollection();
         $this->posts = new ArrayCollection();
+        $this->eventInvites = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -339,6 +343,36 @@ class Artist
             // set the owning side to null (unless already changed)
             if ($post->getIdArtist() === $this) {
                 $post->setIdArtist(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, EventInvite>
+     */
+    public function getEventInvites(): Collection
+    {
+        return $this->eventInvites;
+    }
+
+    public function addEventInvite(EventInvite $eventInvite): self
+    {
+        if (!$this->eventInvites->contains($eventInvite)) {
+            $this->eventInvites->add($eventInvite);
+            $eventInvite->setIdArtist($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEventInvite(EventInvite $eventInvite): self
+    {
+        if ($this->eventInvites->removeElement($eventInvite)) {
+            // set the owning side to null (unless already changed)
+            if ($eventInvite->getIdArtist() === $this) {
+                $eventInvite->setIdArtist(null);
             }
         }
 

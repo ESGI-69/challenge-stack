@@ -10,6 +10,7 @@ use App\Entity\Event;
 use App\Entity\User;
 use App\Entity\Post;
 use App\Entity\Comment;
+use App\Entity\EventInvite;
 use Monolog\DateTimeImmutable;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -297,9 +298,24 @@ class AppFixtures extends Fixture
         $event->setIdConcertHall($concerthall);
         $event->addArtist($artist1);
         $event->setPicturePath("");
-        $event->setDuration(3);
+        $event->setPrivate(false);
+        $event->setType("concert");
 
         $manager->persist($event);
+
+        $practice = new Event();
+
+        $practice->setTitle("REPETITION HARD BOOM LIVE");
+        $practice->setStartDate(new DateTimeImmutable('now'));
+        $practice->setEndDate(new DateTimeImmutable('now'));
+        $practice->setTicketingLink("https://shotgun.live/fr");
+        $practice->setIdConcertHall($concerthall);
+        $practice->addArtist($artist1);
+        $practice->setPicturePath("");
+        $practice->setPrivate(true);
+        $practice->setType("practice");
+
+        $manager->persist($practice);
 
         /* BLOC USER */
         $user_admin = new User();
@@ -353,6 +369,19 @@ class AppFixtures extends Fixture
 
         $manager->persist($user_manager);
 
+        $user_artist2 = new User();
+
+        $user_artist2->setEmail("artist2@mail.com");
+        $user_artist2->setPlainPassword("password");
+        $user_artist2->setProfilePicturePath("");
+        $user_artist2->setActive(true);
+        $user_artist2->setRoles(["ROLE_ARTIST"]);
+        $user_artist2->setIdArtist($artist2);
+        $user_artist2->setActivationToken("fdp");
+        $user_artist2->setActivationTokenExpiration(new DateTimeImmutable('now'));
+
+        $manager->persist($user_artist2);
+
         $user_artist = new User();
 
         $user_artist->setEmail("artist@mail.com");
@@ -377,6 +406,18 @@ class AppFixtures extends Fixture
         $user_default->setActivationTokenExpiration(new DateTimeImmutable('now'));
 
         $manager->persist($user_default);
+
+        /* BLOC POUR EVENT INVITES */
+
+        $eventInvite = new EventInvite();
+
+        $eventInvite->setComment('Ceci est un commentaire, accepte l\'invit');
+        $eventInvite->setIdEvent($practice);
+        $eventInvite->setIdArtist($artist2);
+        $eventInvite->setCreatedAt(new DateTimeImmutable('now'));
+        $eventInvite->setStatus('pending');
+
+        $manager->persist($eventInvite);
 
         /* BLOC POUR POSTS */
         $post = new Post();
