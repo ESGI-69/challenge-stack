@@ -46,7 +46,7 @@ class Event
     private ?int $duration = null;
 
     #[ORM\Column(length: 255)]
-    #[Slug(fields: ['title'])]
+    #[Slug(fields: ['title','id'])]
     private ?string $slug = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
