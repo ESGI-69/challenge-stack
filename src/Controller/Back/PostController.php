@@ -14,7 +14,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 #[Route('/post')]
 class PostController extends AbstractController
-{
+{   
+    #[IsGranted('ROLE_ARTIST')]
     #[Route('/', name: 'app_post_index', methods: ['GET'])]
     public function index(PostRepository $postRepository): Response
     {
@@ -30,9 +31,11 @@ class PostController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_MANAGER')]
     #[Route('/validation', name: 'app_post_validation', methods: ['GET'])]
     public function validation(PostRepository $postRepository): Response
     {
+      $unvalidatedPosts = null;
       $artistId = $this->getUser()->getIdArtist();
       if ($artistId === null) {
         $unvalidatedPosts = null;
@@ -52,6 +55,7 @@ class PostController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_MANAGER')]
     #[Route('/{id}/validate', name: 'app_post_validate', methods: ['GET'])]
     public function validate(Post $post, PostRepository $postRepository): Response
     {
@@ -60,6 +64,7 @@ class PostController extends AbstractController
       return $this->redirectToRoute('admin_app_post_validation', [], Response::HTTP_SEE_OTHER);
     }
 
+    #[IsGranted('ROLE_ARTIST')]
     #[Route('/new', name: 'app_post_new', methods: ['GET', 'POST'])]
     public function new(Request $request, PostRepository $postRepository): Response
     {   
@@ -88,6 +93,7 @@ class PostController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_ARTIST')]
     #[Route('/{id}', name: 'app_post_show', methods: ['GET'])]
     public function show(Post $post): Response
     {
@@ -96,6 +102,7 @@ class PostController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_ARTIST')]
     #[Route('/{id}/edit', name: 'app_post_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Post $post, PostRepository $postRepository): Response
     { 
@@ -119,6 +126,7 @@ class PostController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_ARTIST')]
     #[Route('/{id}', name: 'app_post_delete', methods: ['POST'])]
     public function delete(Request $request, Post $post, PostRepository $postRepository): Response
     {
@@ -132,6 +140,7 @@ class PostController extends AbstractController
         return $this->redirectToRoute('admin_app_post_index', [], Response::HTTP_SEE_OTHER);
     }
 
+    #[IsGranted('ROLE_MANAGER')]
     #[Route('/{id}/del-validation', name: 'app_post_delete_validation', methods: ['POST'])]
     public function deleteValidation(Request $request, Post $post, PostRepository $postRepository): Response
     {
