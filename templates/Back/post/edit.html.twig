@@ -3,7 +3,7 @@
 {% block title %}Hello UserController!{% endblock %}
 
 {% block body %}
-    <h1>Edit Post</h1>
+    <h1>Edit Post {{ post.Title }}</h1>
 
     {{ include('Back/post/_form.html.twig', {'button_label': 'Update'}) }}
 
