@@ -24,25 +24,6 @@ class EventController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_event_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EventRepository $eventRepository): Response
-    {
-        $event = new Event();
-        $form = $this->createForm(EventType::class, $event);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $eventRepository->save($event, true);
-
-            return $this->redirectToRoute('app_event_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->renderForm('event/new.html.twig', [
-            'event' => $event,
-            'form' => $form,
-        ]);
-    }
-
     #[Route('/{slug}', name: 'app_event_show', methods: ['GET'])]
     public function show(Event $event): Response
     {
