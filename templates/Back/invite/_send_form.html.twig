@@ -1,0 +1,4 @@
+<form method="post" action="{{ path('admin_app_event_invite_send', {'artist': artist.Id, 'event': event.Id}) }}">
+  <input type="hidden" name="_token" value="{{ csrf_token('send' ~ artist.Id ~ event.Id) }}">
+  <button class="btn">Send invite</button>
+</form>

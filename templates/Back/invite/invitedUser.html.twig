@@ -17,7 +17,7 @@
         </thead>
         <tbody>
         {% for artist in artists %}
-          {% include '/Back/invite/invitedUserRow.html.twig' with { artist, invitedArtists, invitesByArtist } %}
+          {% include '/Back/invite/invitedUserRow.html.twig' with { artist, invitedArtists, invitesByArtist, event } %}
         {% else %}
             <tr>
                 <td class="text-center">no records found</td>

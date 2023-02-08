@@ -64,6 +64,40 @@ class EventInviteController extends AbstractController
     }
 
     #[isGranted('ROLE_ARTIST')]
+    #[Route('/send', name: 'app_event_invite_send', methods: ['POST'])]
+    public function send(Request $request, EventInviteRepository $eventInviteRepository, EventRepository $eventRepository, ArtistRepository $artistRepository)
+    {
+        $artistId = $request->query->get('artist');
+        $eventId = $request->query->get('event');
+        
+        $artist = $artistRepository->findOneBy(['id' => $artistId]);
+        $event = $eventRepository->findOneBy(['id' => $eventId]);
+
+        if ($event->getArtistAuthor() != $this->getUser()->getIdArtist()) {
+            throw $this->createAccessDeniedException();
+        }
+
+        // Test if the artist is already invited
+        $alreadyInvited = $eventInviteRepository->findOneBy(['id_artist' => $artist, 'id_event' => $event]);
+        if ($alreadyInvited) {
+            $this->addFlash('danger', 'Cet artiste a déjà été invité');
+            return $this->redirectToRoute('admin_app_select_artist_event_invite', ['event' => $event->getSlug()], Response::HTTP_SEE_OTHER);
+        }
+
+        // Create a new eventInvite
+        $eventInvite = new EventInvite();
+        $eventInvite->setIdArtist($artist);
+        $eventInvite->setArtistAuthor($this->getUser()->getIdArtist());
+        $eventInvite->setIdEvent($event);
+        $eventInvite->setStatus('pending');
+        $eventInvite->setCreatedAt(new \DateTimeImmutable());
+        $eventInvite->setComment('Invitation envoyée zebi');
+        $eventInviteRepository->save($eventInvite, true);
+
+        return $this->redirectToRoute('admin_app_select_artist_event_invite', ['event' => $event->getSlug()], Response::HTTP_SEE_OTHER);
+    }
+
+    #[isGranted('ROLE_ARTIST')]
     #[Route('/{id}', name: 'app_event_invite_delete', methods: ['POST'])]
     public function delete(Request $request, EventInvite $eventInvite, EventInviteRepository $eventInviteRepository): Response
     {

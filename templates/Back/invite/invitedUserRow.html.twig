@@ -6,15 +6,12 @@
     <td class="text-center">
       Invited: {{ invitesByArtist[artist.Id].Status }}
       {% if invitesByArtist[artist.Id].Status == 'pending' %}
-        {# {{ dump(invitesByArtist[artist.Id]) }} #}
-        {# <a href="#">Remove invite</a> #}
         {% include '/Back/invite/_delete_form.html.twig' with { invite: invitesByArtist[artist.Id] } %}
       {% endif %}
     </td>
   {% else %}
     <td class="text-center">
-      Not invited yet.
-      <a href="#">Send invite</a>
+      {% include '/Back/invite/_send_form.html.twig' with { artist, event } %}
     </td>
   {% endif %}
 </tr>
