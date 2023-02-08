@@ -52,7 +52,7 @@ class EventInviteController extends AbstractController
             $invitesByArtist[$invitedArtist->getId()] = $eventInviteRepository->findOneBy(['id_artist' => $invitedArtist, 'id_event' => $event]);
         }
 
-        $artists = $artistRepository->findAll();
+        $artists = $artistRepository->findExcept([$this->getUser()->getIdArtist()->getId()]);
 
         return $this->render('Back/invite/invitedUser.html.twig', [
             'event' => $event,

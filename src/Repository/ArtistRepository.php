@@ -30,6 +30,18 @@ class ArtistRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * Find all artists except the given ids
+     */
+    public function findExcept(array $ids): array
+    {
+        return $this->createQueryBuilder('a')
+            ->where('a.id NOT IN (:ids)')
+            ->setParameter('ids', $ids)
+            ->getQuery()
+            ->getResult();
+    }
+
     public function getLastCreate(int $count): array
     {
         $dirtyResult = $this->createQueryBuilder('a')
