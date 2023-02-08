@@ -1,0 +1,33 @@
+{% extends 'base_back.html.twig' %}
+
+{% block title %}HeatHub | Invites{% endblock %}
+
+{% block body %}
+    <h1>Invites</h1>
+    <div class="container-table">
+      <table class="table table--invite">
+          <thead>
+              <tr>
+                  <th scope="col">Id</th>
+                  <th scope="col">Event</th>
+                  <th scope="col">Event type</th>
+                  <th scope="col">Event start</th>
+                  <th scope="col">Event end</th>
+                  <th scope="col">Invited by</th>
+                  <th scope="col">Invited at</th>
+                  <th scope="col"></th>
+              </tr>
+          </thead>
+          <tbody>
+          {% for invite in invites %}
+            {% include '/Back/invite/inviteRow.html.twig' with { invite } %}
+          {% else %}
+              <tr>
+                  <td class="text-center">no records found</td>
+              </tr>
+          {% endfor %}
+          </tbody>
+      </table>
+    </div>
+    {# <a href="{{ path('admin_app_post_new') }}">Create new</a> #}
+{% endblock %}

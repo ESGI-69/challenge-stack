@@ -1,0 +1,35 @@
+{% extends 'base_back.html.twig' %}
+
+{% block title %}BeatHub |  {% endblock %}
+
+{% block body %}
+  <h1>Post index</h1>
+  <div class="container-table">
+    <table class="table table--post">
+      <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Club</th>
+          <th scope="col">Type</th>
+          <th scope="col">Title</th>
+          <th scope="col">Description</th>
+          <th scope="col">Start at</th>
+          <th scope="col">End at</th>
+          <th scope="col">Privacy</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for event in events %}
+        {% include '/Back/event/eventRow.html.twig' with { event } %}
+      {% else %}
+        <tr>
+          <td class="text-center">no records found</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <a href="{{ path('admin_app_event_new') }}">Create a new event</a>
+{% endblock %}

@@ -36,14 +36,20 @@ class Event
     #[ORM\ManyToMany(targetEntity: User::class)]
     private Collection $insterested_users;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $picture_path = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $end_date = null;
 
     #[ORM\Column]
-    private ?int $duration = null;
+    private ?bool $private = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $type = null;
+
+    #[ORM\OneToMany(mappedBy: 'id_event', targetEntity: EventInvite::class, cascade: ['remove'])]
+    private Collection $eventInvites;
 
     #[ORM\Column(length: 255)]
     #[Slug(fields: ['title','id'])]
@@ -52,10 +58,15 @@ class Event
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
+    #[ORM\ManyToOne(inversedBy: 'created_events')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Artist $ArtistAuthor = null;
+
     public function __construct()
     {
         $this->artists = new ArrayCollection();
         $this->insterested_users = new ArrayCollection();
+        $this->eventInvites = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -164,7 +175,7 @@ class Event
         return $this->picture_path;
     }
 
-    public function setPicturePath(string $picture_path): self
+    public function setPicturePath(?string $picture_path): self
     {
         $this->picture_path = $picture_path;
 
@@ -183,14 +194,56 @@ class Event
         return $this;
     }
 
-    public function getDuration(): ?int
+    public function isPrivate(): ?bool
     {
-        return $this->duration;
+        return $this->private;
     }
 
-    public function setDuration(int $duration): self
+    public function setPrivate(bool $private): self
     {
-        $this->duration = $duration;
+        $this->private = $private;
+
+        return $this;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(string $type): self
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, EventInvite>
+     */
+    public function getEventInvites(): Collection
+    {
+        return $this->eventInvites;
+    }
+
+    public function addEventInvite(EventInvite $eventInvite): self
+    {
+        if (!$this->eventInvites->contains($eventInvite)) {
+            $this->eventInvites->add($eventInvite);
+            $eventInvite->setIdEvent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEventInvite(EventInvite $eventInvite): self
+    {
+        if ($this->eventInvites->removeElement($eventInvite)) {
+            // set the owning side to null (unless already changed)
+            if ($eventInvite->getIdEvent() === $this) {
+                $eventInvite->setIdEvent(null);
+            }
+        }
 
         return $this;
     }
@@ -215,6 +268,18 @@ class Event
     public function setDescription(?string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getArtistAuthor(): ?Artist
+    {
+        return $this->ArtistAuthor;
+    }
+
+    public function setArtistAuthor(?Artist $ArtistAuthor): self
+    {
+        $this->ArtistAuthor = $ArtistAuthor;
 
         return $this;
     }

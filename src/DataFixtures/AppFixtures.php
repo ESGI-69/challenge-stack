@@ -10,6 +10,7 @@ use App\Entity\Event;
 use App\Entity\User;
 use App\Entity\Post;
 use App\Entity\Comment;
+use App\Entity\EventInvite;
 use Monolog\DateTimeImmutable;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -296,10 +297,29 @@ class AppFixtures extends Fixture
         $event->setTicketingLink("https://shotgun.live/fr");
         $event->setIdConcertHall($concerthall);
         $event->addArtist($artist1);
+        $event->setArtistAuthor($artist1);
         $event->setPicturePath("");
-        $event->setDuration(3);
+        $event->setPrivate(false);
+        $event->setType("concert");
+        $event->setDescription("HARD BOOM LIVE est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un imprimeur anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n'a pas fait que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en soit modifié. Il a été popularisé dans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son inclusion dans des applications de mise en page de texte, comme Aldus PageMaker.");
 
         $manager->persist($event);
+
+        $practice = new Event();
+
+        $practice->setTitle("REPETITION HARD BOOM LIVE");
+        $practice->setStartDate(new DateTimeImmutable('now'));
+        $practice->setEndDate(new DateTimeImmutable('now'));
+        $practice->setTicketingLink("https://shotgun.live/fr");
+        $practice->setIdConcertHall($concerthall);
+        $practice->addArtist($artist1);
+        $practice->setArtistAuthor($artist1);
+        $practice->setPicturePath("");
+        $practice->setPrivate(true);
+        $practice->setType("practice");
+        $practice->setDescription("REPETITION HARD BOOM LIVE est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un imprimeur anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n'a pas fait que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en soit modifié. Il a été popularisé dans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son inclusion dans des applications de mise en page de texte, comme Aldus PageMaker.");
+
+        $manager->persist($practice);
 
         /* BLOC USER */
         $user_admin = new User();
@@ -353,6 +373,19 @@ class AppFixtures extends Fixture
 
         $manager->persist($user_manager);
 
+        $user_artist2 = new User();
+
+        $user_artist2->setEmail("artist2@mail.com");
+        $user_artist2->setPlainPassword("password");
+        $user_artist2->setProfilePicturePath("");
+        $user_artist2->setActive(true);
+        $user_artist2->setRoles(["ROLE_ARTIST"]);
+        $user_artist2->setIdArtist($artist2);
+        $user_artist2->setActivationToken("fdp");
+        $user_artist2->setActivationTokenExpiration(new DateTimeImmutable('now'));
+
+        $manager->persist($user_artist2);
+
         $user_artist = new User();
 
         $user_artist->setEmail("artist@mail.com");
@@ -377,6 +410,19 @@ class AppFixtures extends Fixture
         $user_default->setActivationTokenExpiration(new DateTimeImmutable('now'));
 
         $manager->persist($user_default);
+
+        /* BLOC POUR EVENT INVITES */
+
+        $eventInvite = new EventInvite();
+
+        $eventInvite->setComment('Ceci est un commentaire, accepte l\'invit');
+        $eventInvite->setIdEvent($practice);
+        $eventInvite->setIdArtist($artist1);
+        $eventInvite->setCreatedAt(new DateTimeImmutable('now'));
+        $eventInvite->setArtistAuthor($artist2);
+        $eventInvite->setStatus('pending');
+
+        $manager->persist($eventInvite);
 
         /* BLOC POUR POSTS */
         $post = new Post();
