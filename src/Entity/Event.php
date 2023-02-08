@@ -48,7 +48,7 @@ class Event
     #[ORM\Column(length: 255)]
     private ?string $type = null;
 
-    #[ORM\OneToMany(mappedBy: 'id_event', targetEntity: EventInvite::class)]
+    #[ORM\OneToMany(mappedBy: 'id_event', targetEntity: EventInvite::class, cascade: ['remove'])]
     private Collection $eventInvites;
 
     #[ORM\Column(length: 255)]
@@ -57,6 +57,10 @@ class Event
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
+
+    #[ORM\ManyToOne(inversedBy: 'created_events')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Artist $ArtistAuthor = null;
 
     public function __construct()
     {
@@ -264,6 +268,18 @@ class Event
     public function setDescription(?string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getArtistAuthor(): ?Artist
+    {
+        return $this->ArtistAuthor;
+    }
+
+    public function setArtistAuthor(?Artist $ArtistAuthor): self
+    {
+        $this->ArtistAuthor = $ArtistAuthor;
 
         return $this;
     }

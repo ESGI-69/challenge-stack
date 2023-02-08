@@ -1,0 +1,19 @@
+{# table row #}
+<tr>
+  <td class="text-center">{{ event.Id }}</td>
+  <td class="text-center">{{ event.IdConcertHall.Name }}</td>
+  <td class="text-center">{{ event.Type }}</td>
+  <td class="text-center">{{ event.Title }}</td>
+  <td class="text-center">{{ event.Description }}</td>
+  <td class="text-center">{{ event.StartDate|date() }}</td>
+  <td class="text-center">{{ event.EndDate|date() }}</td>
+  {% if event.isPrivate == false %}
+    <td class="text-center">Public</td>
+  {% else %}
+    <td class="text-center">Privé</td>
+  {% endif %}
+  <td class="text-center">
+    <a href="{{ path('admin_app_post_edit', {'id': event.id}) }}" class="btn btn-primary">Edit</a>
+    {{ include('Back/event/_delete_form.html.twig') }}
+  </td>
+</tr>

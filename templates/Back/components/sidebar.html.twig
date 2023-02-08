@@ -7,6 +7,17 @@
       </a>
     </div>
     <div class="back_sidebar__container__navigation">
+      {% if is_granted('ROLE_ARTIST') %}
+        <section class="back_sidebar__container__navigation__section">
+          <span class="back_sidebar__container__navigation__section__title">Invitations</span>
+          {% include '/Back/components/sidebarButton.html.twig' with {
+              href: '#',
+              iconTwig: '/icons/home.html.twig',
+              text: 'Invitations received',
+            }
+          %}
+        </section>
+      {% endif %}
       {% if is_granted('ROLE_ARTIST') or is_granted('ROLE_CAN_MODERATE_COMMENT') %}
         <section class="back_sidebar__container__navigation__section">
           <span class="back_sidebar__container__navigation__section__title">Content</span>
@@ -18,9 +29,9 @@
               }
             %}
             {% include '/Back/components/sidebarButton.html.twig' with {
-                href: path('admin_app_event_new'),
+                href: path('admin_app_event_index'),
                 iconTwig: '/icons/home.html.twig',
-                text: 'Create event',
+                text: 'Events',
               }
             %}
           {% endif %}

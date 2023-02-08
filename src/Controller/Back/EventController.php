@@ -10,18 +10,19 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+#[Route('event')]
 class EventController extends AbstractController
 {
-    // #[Route('/', name: 'app_event_index', methods: ['GET'])]
-    // public function index(EventRepository $eventRepository): Response
-    // {
-    //     $today = new \DateTime();
-    //     return $this->render('Front/event/index.html.twig', [
-    //         'events' => $eventRepository->getEventByDate($today),
-    //         'tomorrowEvents' => $eventRepository->getEventByDate($today->modify('+1 day'))
-
-    //     ]);
-    // }
+    #[IsGranted('ROLE_ARTIST')]
+    #[Route('/', name: 'app_event_index', methods: ['GET'])]
+    public function index(EventRepository $eventRepository): Response
+    {
+        $today = new \DateTime();
+        return $this->render('/Back/event/index.html.twig', [
+            // All events created by the connected artist
+            'events' => $eventRepository->findBy(['ArtistAuthor' => $this->getUser()->getIdArtist()]),
+        ]);
+    }
 
     #[IsGranted('ROLE_ARTIST')]
     #[Route('/new-event', name: 'app_event_new', methods: ['GET', 'POST'])]
@@ -36,12 +37,42 @@ class EventController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $eventRepository->save($event, true);
 
-            return $this->redirectToRoute('admin_default_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_event_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('/Back/event/new.html.twig', [
             'event' => $event,
             'form' => $form,
         ]);
+    }
+
+    #[isGranted('ROLE_ARTIST')]
+    #[Route('/{id}/edit', name: 'app_event_edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, Event $event, EventRepository $eventRepository): Response
+    {
+        $form = $this->createForm(EventType::class, $event);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $eventRepository->save($event, true);
+
+            return $this->redirectToRoute('app_event_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('/Back/event/edit.html.twig', [
+            'event' => $event,
+            'form' => $form,
+        ]);
+    }
+
+    #[isGranted('ROLE_ARTIST')]
+    #[Route('/{id}', name: 'app_event_delete', methods: ['POST'])]
+    public function delete(Request $request, Event $event, EventRepository $eventRepository): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$event->getId(), $request->request->get('_token'))) {
+            $eventRepository->remove($event, true);
+        }
+
+        return $this->redirectToRoute('admin_app_event_index', [], Response::HTTP_SEE_OTHER);
     }
 }
