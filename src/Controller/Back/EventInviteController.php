@@ -11,17 +11,23 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Doctrine\ORM\EntityManagerInterface;
 
 #[Route('/invite')]
 class EventInviteController extends AbstractController
 {   
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     #[IsGranted('ROLE_ARTIST')]
     #[Route('/', name: 'app_invite_index', methods: ['GET'])]
     public function index(EventInviteRepository $eventInviteRepository): Response
     {
         $invites = null;
         $artistId = $this->getUser()->getIdArtist();
-        $invites = $eventInviteRepository->findBy(['id_artist' => $artistId]);
+        $invites = $eventInviteRepository->findBy(['id_artist' => $artistId, 'status' => 'pending']);
         
         return $this->render('Back/invite/index.html.twig', [
             'invites' => $invites,
@@ -72,5 +78,42 @@ class EventInviteController extends AbstractController
         }
 
         return $this->redirectToRoute('admin_app_select_artist_event_invite', ['event' => $eventSlug], Response::HTTP_SEE_OTHER);
+    }
+
+    #[isGranted('ROLE_ARTIST')]
+    #[Route('/accept/{id}', name: 'app_event_invite_accept', methods: ['POST'])]
+    public function accept(Request $request, EventInvite $eventInvite, EventInviteRepository $eventInviteRepository): Response
+    {
+
+        if ($eventInvite->getIdArtist() != $this->getUser()->getIdArtist()) {
+            throw $this->createAccessDeniedException();
+        }
+
+        $event = $eventInvite->getIdEvent();
+        
+        if ($this->isCsrfTokenValid('accept'.$eventInvite->getId(), $request->request->get('_token'))) {
+            $event->addArtist($eventInvite->getIdArtist());
+            $eventInvite->setStatus('accepted');
+            $this->entityManager->flush();
+        }
+
+        return $this->redirectToRoute('admin_app_invite_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[isGranted('ROLE_ARTIST')]
+    #[Route('/decline/{id}', name: 'app_event_invite_decline', methods: ['POST'])]
+    public function decline(Request $request, EventInvite $eventInvite, EventInviteRepository $eventInviteRepository): Response
+    {
+
+        if ($eventInvite->getIdArtist() != $this->getUser()->getIdArtist()) {
+            throw $this->createAccessDeniedException();
+        }
+
+        if ($this->isCsrfTokenValid('decline'.$eventInvite->getId(), $request->request->get('_token'))) {
+            $eventInvite->setStatus('declined');
+            $this->entityManager->flush();
+        }
+
+        return $this->redirectToRoute('admin_app_invite_index', [], Response::HTTP_SEE_OTHER);
     }
 }

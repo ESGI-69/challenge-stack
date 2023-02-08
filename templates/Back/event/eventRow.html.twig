@@ -12,6 +12,10 @@
   {% else %}
     <td class="text-center">Private</td>
   {% endif %}
+  <td class="text-center">{{ event.Artists|length }}</td>
+  {# {{ dump(event.EventInvites) }} #}
+  <td class="text-center">{{ event.EventInvites|filter(invite => invite.Status == 'pending')|length }}</td>
+  <td class="text-center">{{ event.EventInvites|filter(invite => invite.Status == 'declined')|length }}</td>
   <td class="text-center">
     <a href="{{ path('admin_app_select_artist_event_invite', {'event': event.Slug}) }}">Send invites</a>
     <a href="{{ path('admin_app_post_edit', {'id': event.id}) }}" class="btn btn-primary">Edit</a>
