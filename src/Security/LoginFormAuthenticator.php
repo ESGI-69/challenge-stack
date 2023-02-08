@@ -14,6 +14,8 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordCredentials;
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
+use App\Repository\UserRepository;
+use Symfony\Component\Security\Core\Exception\AuthenticationException;
 
 class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
 {
@@ -21,8 +23,8 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
 
     public const LOGIN_ROUTE = 'app_login';
 
-    public function __construct(private UrlGeneratorInterface $urlGenerator)
-    {
+    public function __construct(private UrlGeneratorInterface $urlGenerator, private UserRepository $userRepository)
+    {  
     }
 
     public function authenticate(Request $request): Passport
@@ -31,6 +33,10 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
 
         $request->getSession()->set(Security::LAST_USERNAME, $email);
 
+        $user = $this->userRepository->findOneBy(['email' => $email]);
+        if (!$user->isActive()) {
+            throw new AuthenticationException('You need to activate your account first.');
+        }
         return new Passport(
             new UserBadge($email),
             new PasswordCredentials($request->request->get('password', '')),
