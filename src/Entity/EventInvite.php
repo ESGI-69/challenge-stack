@@ -29,6 +29,10 @@ class EventInvite
     #[ORM\Column]
     private ?\DateTimeImmutable $created_at = null;
 
+    #[ORM\ManyToOne(inversedBy: 'eventInvitesCreated')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Artist $ArtistAuthor = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -90,6 +94,18 @@ class EventInvite
     public function setCreatedAt(\DateTimeImmutable $created_at): self
     {
         $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    public function getArtistAuthor(): ?Artist
+    {
+        return $this->ArtistAuthor;
+    }
+
+    public function setArtistAuthor(?Artist $ArtistAuthor): self
+    {
+        $this->ArtistAuthor = $ArtistAuthor;
 
         return $this;
     }

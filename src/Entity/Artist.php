@@ -74,6 +74,9 @@ class Artist
     #[ORM\OneToMany(mappedBy: 'ArtistAuthor', targetEntity: Event::class, orphanRemoval: true)]
     private Collection $created_events;
 
+    #[ORM\OneToMany(mappedBy: 'ArtistAuthor', targetEntity: EventInvite::class, orphanRemoval: true)]
+    private Collection $eventInvitesCreated;
+
     public function __construct()
     {
         $this->medias = new ArrayCollection();
@@ -82,6 +85,7 @@ class Artist
         $this->posts = new ArrayCollection();
         $this->eventInvites = new ArrayCollection();
         $this->created_events = new ArrayCollection();
+        $this->eventInvitesCreated = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -407,6 +411,36 @@ class Artist
             // set the owning side to null (unless already changed)
             if ($createdEvent->getArtistAuthor() === $this) {
                 $createdEvent->setArtistAuthor(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, EventInvite>
+     */
+    public function getEventInvitesCreated(): Collection
+    {
+        return $this->eventInvitesCreated;
+    }
+
+    public function addEventInvitesCreated(EventInvite $eventInvitesCreated): self
+    {
+        if (!$this->eventInvitesCreated->contains($eventInvitesCreated)) {
+            $this->eventInvitesCreated->add($eventInvitesCreated);
+            $eventInvitesCreated->setArtistAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEventInvitesCreated(EventInvite $eventInvitesCreated): self
+    {
+        if ($this->eventInvitesCreated->removeElement($eventInvitesCreated)) {
+            // set the owning side to null (unless already changed)
+            if ($eventInvitesCreated->getArtistAuthor() === $this) {
+                $eventInvitesCreated->setArtistAuthor(null);
             }
         }
 
