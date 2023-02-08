@@ -6,31 +6,38 @@
 
 {% include '/Front/components/section.html.twig' with {name: 'Tonight'} %}
 <div class="events-list">
-{% include '/Front/components/eventRow.html.twig'
-  with {
-    eventImagePath: 'build/images/logo.svg',
-    eventSlug: '012-label-night',
-    eventName: '012 Label Nigh',
-    eventDate: 'Fri, Feb 3, 22:00',
-    eventClubSlug: 'ohm',
-    eventClubName: 'OHM',
-    eventClubCity: 'Berlin',
-  }
-%}
+{% for event in events %}
+  {% include '/Front/components/eventRow.html.twig'
+    with {
+      eventImagePath: event.picturepath | default('build/images/logo.svg'),
+      eventSlug: event.slug,
+      eventName: event.title,
+      eventId : event.id,
+      eventDate: event.startdate|date("D M j"),
+      eventClubSlug: event.getidconcerthall.slug,
+      eventClubName: event.getidconcerthall.name,
+      eventClubCity:  event.getidconcerthall.city
+    }
+  %}
+{% endfor %}
 </div>
 
 {% include '/Front/components/section.html.twig' with {name: 'Tomorow'} %}
 <div class="events-list">
-{% include '/Front/components/eventRow.html.twig'
-  with {
-    eventImagePath: 'build/images/logo.svg',
-    eventSlug: '012-label-night',
-    eventName: '012 Label Nigh',
-    eventDate: 'Fri, Feb 3, 22:00',
-    eventClubSlug: 'ohm',
-    eventClubName: 'OHM',
-    eventClubCity: 'Berlin',
-  }
-%}
+{% for event in tomorrowEvents %}
+{{ dump(event.slug)}}
+  {% include '/Front/components/eventRow.html.twig'
+    with {
+      eventImagePath: event.picturepath | default('build/images/logo.svg'),
+      eventSlug: event.slug,
+      eventName: event.title,
+      eventId : event.id,
+      eventDate: event.startdate|date("D M j"),
+      eventClubSlug: event.getidconcerthall.slug,
+      eventClubName: event.getidconcerthall.name,
+      eventClubCity:  event.getidconcerthall.city
+    }
+  %}
+{% endfor %}  
 </div>
 {% endblock %}
