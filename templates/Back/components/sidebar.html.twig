@@ -1,15 +1,15 @@
-<nav class="back_sidebar">
-  <div class="back_sidebar__container">
-    <div class="back_sidebar__container__logo-container">
-      <a class="back_sidebar__container__logo-container__home-link" href="{{ path('front_default_index') }}">
-        <img src="/build/images/logo.svg" class="back_sidebar__container__logo-container__logo" >
-        <span class="back_sidebar__container__logo-container__texte">BeatHub</span>
+<nav class="sidebar">
+  <div class="sidebar__container">
+    <div class="sidebar__container__logo-container">
+      <a class="sidebar__container__logo-container__home-link" href="{{ path('front_default_index') }}">
+        <img src="/build/images/logo.svg" class="sidebar__container__logo-container__home-link__logo" >
+        <span class="sidebar__container__logo-container__home-link__texte">BeatHub</span>
       </a>
     </div>
-    <div class="back_sidebar__container__navigation">
+    <div class="sidebar__container__navigation">
       {% if is_granted('ROLE_ARTIST') %}
-        <section class="back_sidebar__container__navigation__section">
-          <span class="back_sidebar__container__navigation__section__title">Invitations</span>
+        <section class="sidebar__container__navigation__section">
+          <span class="sidebar__container__navigation__section__title">Invitations</span>
           {% include '/Back/components/sidebarButton.html.twig' with {
               href: path('admin_app_invite_index'),
               iconTwig: '/icons/home.html.twig',
@@ -19,8 +19,8 @@
         </section>
       {% endif %}
       {% if is_granted('ROLE_ARTIST') or is_granted('ROLE_CAN_MODERATE_COMMENT') %}
-        <section class="back_sidebar__container__navigation__section">
-          <span class="back_sidebar__container__navigation__section__title">Content</span>
+        <section class="sidebar__container__navigation__section">
+          <span class="sidebar__container__navigation__section__title">Content</span>
           {% if is_granted('ROLE_ARTIST') %}
             {% include '/Back/components/sidebarButton.html.twig' with {
                 href: path('admin_app_post_index'),
@@ -46,9 +46,9 @@
         </section>
       {% endif %}
 
-      <section class="back_sidebar__container__navigation__section">
+      <section class="sidebar__container__navigation__section">
         {% if is_granted('ROLE_MANAGER') or is_granted('ROLE_ADMIN') %}
-          <span class="back_sidebar__container__navigation__section__title">Management</span>
+          <span class="sidebar__container__navigation__section__title">Management</span>
             {% include '/Back/components/sidebarButton.html.twig' with {
                 href: path('admin_user_index'),
                 iconTwig: '/icons/link.html.twig',
@@ -66,16 +66,16 @@
     </div>
 
   </div>
-  <footer class="back_sidebar__footer">
-    <img class="back_sidebar__footer__avatar" src="{{ asset(app.user.profile_picture_path|default('build/data-files/user-pictures/placeholder-image.jpeg')) }}" alt="Avatar">
-    <span class="back_sidebar__footer__username">
+  <footer class="sidebar__footer">
+    <img class="sidebar__footer__avatar" src="{{ asset(app.user.profile_picture_path|default('build/data-files/user-pictures/placeholder-image.jpeg')) }}" alt="Avatar">
+    <span class="sidebar__footer__username">
       {{ app.user.userIdentifier }}
       {% if app.user.IdArtist is not null %}
         ({{ app.user.IdArtist.Pseudo }})
       {% endif %}
     </span>
-    <a class="back_sidebar__footer__icon" href="{{ path('app_logout') }}">
-      {% include '/icons/logout.html.twig' with { class: 'back_sidebar__container__navigation__section__item__icon'} %}
+    <a class="sidebar__footer__icon" href="{{ path('app_logout') }}">
+      {% include '/icons/logout.html.twig' with { class: 'sidebar__container__navigation__section__item__icon'} %}
     </a>
   </footer>
 </nav>

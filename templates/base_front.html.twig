@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}BeatHub{% endblock %}</title>
         <link rel="icon" type="image/ico" href="{{ asset('build/images/favicon.ico') }}">
        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
@@ -13,7 +13,7 @@
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </head>
-    <body>
+    <body class="front">
       <div class="app">
         {% block topbar %}
           {% include '/Front/components/topbar.html.twig' %}
