@@ -1,0 +1,4 @@
+<form method="post" action="{{ path('admin_app_event_invite_delete', {'id': invite.Id, 'event-redirection': invite.IdEvent.Slug}) }}" onsubmit="return confirm('Are you sure you want to delete this invite?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ invite.Id) }}">
+    <button class="btn">Remove invite</button>
+</form>

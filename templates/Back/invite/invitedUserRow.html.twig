@@ -1,0 +1,17 @@
+<tr>
+  <td class="text-center">{{ artist.Id }}</td>
+  <td class="text-center">{{ artist.Pseudo }}</td>
+  <td class="text-center">{{ artist.Country }}</td>
+  {% if artist in invitedArtists %}
+    <td class="text-center">
+      Invited: {{ invitesByArtist[artist.Id].Status }}
+      {% if invitesByArtist[artist.Id].Status == 'pending' %}
+        {% include '/Back/invite/_delete_form.html.twig' with { invite: invitesByArtist[artist.Id] } %}
+      {% endif %}
+    </td>
+  {% else %}
+    <td class="text-center">
+      {% include '/Back/invite/_send_form.html.twig' with { artist, event } %}
+    </td>
+  {% endif %}
+</tr>

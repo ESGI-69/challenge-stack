@@ -2,13 +2,14 @@
 <tr>
   <td class="text-center">{{ invite.Id }}</td>
   <td class="text-center">{{ invite.IdEvent.Title }}</td>
+  <td class="text-center">{{ invite.Comment }}</td>
   <td class="text-center">{{ invite.IdEvent.Type }}</td>
   <td class="text-center">{{ invite.IdEvent.StartDate|date() }}</td>
   <td class="text-center">{{ invite.IdEvent.EndDate|date() }}</td>
   <td class="text-center">{{ invite.ArtistAuthor.Pseudo }}</td>
   <td class="text-center">{{ invite.CreatedAt|date() }}</td>
   <td class="text-center">
-    <a href="#" class="btn btn-primary">Accept</a>
-    <a href="#" class="btn btn-primary">Decline</a>
+    {% include '/Back/invite/_accept_form.html.twig' %}
+    {% include '/Back/invite/_decline_form.html.twig' %}
   </td>
 </tr>

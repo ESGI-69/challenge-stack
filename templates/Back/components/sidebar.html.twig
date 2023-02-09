@@ -70,6 +70,9 @@
     <img class="back_sidebar__footer__avatar" src="{{ asset(app.user.profile_picture_path|default('build/data-files/user-pictures/placeholder-image.jpeg')) }}" alt="Avatar">
     <span class="back_sidebar__footer__username">
       {{ app.user.userIdentifier }}
+      {% if app.user.IdArtist is not null %}
+        ({{ app.user.IdArtist.Pseudo }})
+      {% endif %}
     </span>
     <a class="back_sidebar__footer__icon" href="{{ path('app_logout') }}">
       {% include '/icons/logout.html.twig' with { class: 'back_sidebar__container__navigation__section__item__icon'} %}

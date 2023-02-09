@@ -23,7 +23,7 @@ class PostController extends AbstractController
         $artistId = $this->getUser()->getIdArtist();
         if ($artistId !== null) {
           $artistId = $artistId->getId();
-          $posts = $postRepository->getPostsFromArtist($artistId);
+          $posts = $postRepository->findBy(['id_artist' => $artistId], ['created_at' => 'DESC']);
         }
         return $this->render('Back/post/index.html.twig', [
             'posts' => $posts,

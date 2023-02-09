@@ -1,0 +1,31 @@
+{% extends 'base_back.html.twig' %}
+
+{% block title %}BeatHub | Send Invite{% endblock %}
+
+{% block body %}
+  <h1>Send invite for event {{ event.Title }}</h1>
+
+  <div class="container-table">
+    <table class="table table--artist">
+        <thead>
+            <tr>
+                <th scope="col">Artist ID</th>
+                <th scope="col">Artist nickname</th>
+                <th scope="col">Artist country</th>
+                <th scope="col">Invite Status</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for artist in artists %}
+          {% include '/Back/invite/invitedUserRow.html.twig' with { artist, invitedArtists, invitesByArtist, event } %}
+        {% else %}
+            <tr>
+                <td class="text-center">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+  </div>
+
+  {# {{ include('/Back/event/_form.html.twig') }} #}
+{% endblock %}

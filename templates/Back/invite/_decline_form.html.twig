@@ -1,0 +1,4 @@
+<form method="post" action="{{ path('admin_app_event_invite_decline', {'id': invite.Id}) }}">
+    <input type="hidden" name="_token" value="{{ csrf_token('decline' ~ invite.Id) }}">
+    <button class="btn">Decline</button>
+</form>
