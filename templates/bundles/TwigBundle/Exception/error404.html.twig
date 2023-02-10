@@ -1,0 +1,15 @@
+{% extends 'base_front.html.twig' %}
+
+{% block title %}BeatHub | 404{% endblock %}
+
+{% block body %}
+<div class="not-found">
+  <div class="not-found-title">
+    <span class="not-found-title-text">4</span>
+    <img class="not-found-logo" src="/build/images/logo.svg">
+    <span class="not-found-title-text">4</span>
+  </div>
+  <p class="not-found-text">Look like you’r lost</p>
+  <p class="not-found-text" ><a class="not-found-link" href="{{path('front_default_index')}}">Back to home</a></p>
+</div>
+{% endblock %}
