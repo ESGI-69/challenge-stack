@@ -28,6 +28,7 @@ class AppFixtures extends Fixture
         $artist1->setEmail("jon@swag-mgmt.com");
         $artist1->setUrlYt("https://www.youtube.com/channel/UC7alhTRNkawfATqvctiSZjA");
         $artist1->setUrlSoundcloud("https://soundcloud.com/COONE");
+        $artist1->setUrlSpotify("https://open.spotify.com/artist/1Wt63OMKtv6v2ivHuQLm2C");
         $artist1->setUrlDeezer("https://www.deezer.com/fr/artist/199130");
         $artist1->setCountry("Belgium");
         $artist1->setType("solo");
