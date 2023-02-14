@@ -12,7 +12,7 @@ class DefaultController extends AbstractController
     #[Route('/', name: 'default_index')]
     public function index(PostRepository $PostRepository): Response
     {
-        $posts;
+        $posts = null;
         if ($this->getUser()) {
             $posts = $PostRepository->getFollowedArtistPosts($this->getUser());
         } else {

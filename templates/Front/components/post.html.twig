@@ -25,13 +25,23 @@
         <span class="post__content__footer__comment-count__text">{{ post.Comments|length - post.Comments|filter(c => c.ValidatedAt is null)|length }}</span>
       </div>
       <div class="post__content__footer__like-count">
-        {% include '/Front/components/button.html.twig' with {
-          text: isPostLiked ? 'Liked' : 'Like',
-          link: '#',
-          class: 'post__content__footer__like-count__button',
-          type: 'link',
-          color: 'white',
-        } %}
+        {% if not app.user %}
+          {% include '/Front/components/button.html.twig' with {
+              text: isPostLiked ? 'Liked' : 'Like',
+              link: path('app_login'),
+              class: 'post__content__footer__like-count__button',
+              type: 'link',
+              color: 'white',
+            } %}
+        {% else %}
+            {% include '/Front/components/button.html.twig' with {
+              text: isPostLiked ? 'Liked' : 'Like',
+              link: isPostLiked ? path('front_app_post_unlike', {'id': post.Id}) : path('front_app_post_like', {'id': post.Id}),
+              class: 'post__content__footer__like-count__button',
+              type: 'link',
+              color: 'white',
+            } %}
+        {% endif %}
         <div class="post__content__footer__like-count__stat">
           {% if isPostLiked %}
             {% include '/icons/like.html.twig' with { class: 'post__content__footer__like-count__stat__icon' } %}

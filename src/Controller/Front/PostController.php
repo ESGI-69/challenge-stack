@@ -30,14 +30,38 @@ class PostController extends AbstractController
       $comment->setValidatedAt(null);
       
       $commentRepository->save($comment, true);
-
       return $this->redirectToRoute('front_app_post_show', ["slug" => $post->getSlug()], Response::HTTP_SEE_OTHER);
     }
 
+    $isPostLiked = $post->getUserslike()->contains($this->getUser());
+
     return $this->render('Front/post/show.html.twig', [
       'post' => $post,
-        'form' => $form->createView(),
+      'form' => $form->createView(),
+      'isPostLiked' => $isPostLiked
+
     ]);
   }
+
+  #[Route('/{id}/like', name: 'app_post_like', methods: ['GET'])]
+  public function like(Post $post, PostRepository $postRepository, Request $request): Response
+  {
+    $referer = $request->headers->get('referer');
+    $post->addUserslike($this->getUser());
+    $postRepository->save($post, true);
+
+    return $this->redirect($referer);
+  }
+
+  #[Route('/{id}/unlike', name: 'app_post_unlike', methods: ['GET'])]
+  public function unlike(Post $post, PostRepository $postRepository, Request $request): Response
+  {
+    $referer = $request->headers->get('referer');
+    $post->removeUserslike($this->getUser());
+    $postRepository->save($post, true);
+
+    return $this->redirect($referer);
+  }
+
   
 }
