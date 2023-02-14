@@ -3,6 +3,13 @@
 {% block title %}BeatHub | Feed{% endblock %}
 
 {% block body %}
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+        <div class="flash-{{ label }}">
+          <p>{{ message }}</p>
+        </div>
+    {% endfor %}
+{% endfor %}
 {# Check connection #}
 {% if not app.user %}
   <div class="feed-not-connected">

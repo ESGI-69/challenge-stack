@@ -34,8 +34,10 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
         $request->getSession()->set(Security::LAST_USERNAME, $email);
 
         $user = $this->userRepository->findOneBy(['email' => $email]);
-        if (!$user->isActive()) {
+        if ($user != null) {
+          if (!$user->isActive()) {
             throw new AuthenticationException('You need to activate your account first.');
+          }
         }
         return new Passport(
             new UserBadge($email),

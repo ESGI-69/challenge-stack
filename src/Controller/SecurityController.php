@@ -38,19 +38,28 @@ class SecurityController extends AbstractController
 
             $user->setActivationToken(md5(uniqid()));
             $user->setActivationTokenExpiration(new \DateTime('+1 day'));
-            $userRepository->save($user, true);
-
-            $email = (new Email())
-                ->from('support@'.$_ENV['DOMAIN_NAME'])
-                ->to($user->getEmail())
-                ->subject('Activation de votre compte')
-                ->html($this->renderView('Front/email/activation.html.twig', [
-                    'activation_token' => $user->getActivationToken()
-                ]));
-            $mailer->send($email);
-            $this->addFlash('success', 'Votre compte a bien été créé. Un email de confirmation vous a été envoyé.');
-
-            return $this->redirectToRoute('front_default_index');
+            // check if user mail already exist
+            $mailExist = $userRepository->findOneBy(['email' => $user->getEmail()]);
+            $usernameExist = $userRepository->findOneBy(['username' => $user->getUsername()]);
+            if ($mailExist) {
+                $this->addFlash('danger', 'Cette adresse email est déjà utilisée.');
+            }  
+            if ($usernameExist) {
+                $this->addFlash('danger', 'Ce nom d\'utilisateur est déjà utilisé.');
+            } 
+            if(!$mailExist && !$usernameExist) {
+              $userRepository->save($user, true);
+              $email = (new Email())
+                  ->from('support@'.$_ENV['DOMAIN_NAME'])
+                  ->to($user->getEmail())
+                  ->subject('Activation de votre compte')
+                  ->html($this->renderView('Front/email/activation.html.twig', [
+                      'activation_token' => $user->getActivationToken()
+                  ]));
+              $mailer->send($email);
+              $this->addFlash('success', 'Your account has been created. Please check your email to activate it.');
+              return $this->redirectToRoute('front_default_index');
+            }
         }
 
         return $this->render('security/register.html.twig', [
