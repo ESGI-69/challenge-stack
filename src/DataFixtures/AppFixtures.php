@@ -35,17 +35,31 @@ class AppFixtures extends Fixture
         $manager->persist($artist1);
         
         $artist2 = new Artist();
-        $artist2->setNom("");
-        $artist2->setPrenom("");
-        $artist2->setPseudo("Camel");
-        $artist2->setDescription("Rock Prog band from england.");
-        $artist2->setEmail("support@cameeeel.com");
-        $artist2->setUrlYt("https://www.youtube.com/@CamelBandOfficial");
-        $artist2->setUrlSoundcloud("https://soundcloud.com/camelbandofficial");
-        $artist2->setUrlDeezer("https://www.deezer.com/fr/artist/12826");
-        $artist2->setCountry("United Kingdom");
-        $artist2->setType("group");
+        $artist2->setNom("Auberger");
+        $artist2->setPrenom("Jacques");
+        $artist2->setPseudo("Jacques");
+        $artist2->setDescription("French electronic, transversal techno and bruitist composer.");
+        $artist2->setEmail("jacques@mail.com");
+        $artist2->setUrlYt("https://www.youtube.com/channel/UC05Om8nHItHP3xi4N8g1eMQ");
+        $artist2->setUrlSoundcloud("https://soundcloud.com/jacquestransversal");
+        $artist1->setUrlSpotify("https://open.spotify.com/artist/55i4AnS7E58y41UwE0vvQh");
+        $artist2->setUrlDeezer("https://www.deezer.com/fr/artist/260397");
+        $artist2->setCountry("France");
+        $artist2->setType("solo");
         $manager->persist($artist2);
+
+        $artist3 = new Artist();
+        $artist3->setNom("");
+        $artist3->setPrenom("");
+        $artist3->setPseudo("Camel");
+        $artist3->setDescription("Rock Prog band from england.");
+        $artist3->setEmail("support@cameeeel.com");
+        $artist3->setUrlYt("https://www.youtube.com/@CamelBandOfficial");
+        $artist3->setUrlSoundcloud("https://soundcloud.com/camelbandofficial");
+        $artist3->setUrlDeezer("https://www.deezer.com/fr/artist/12826");
+        $artist3->setCountry("United Kingdom");
+        $artist3->setType("group");
+        $manager->persist($artist3);
 
         $artist = new Artist();
         $artist->setNom("");

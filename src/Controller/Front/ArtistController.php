@@ -32,8 +32,11 @@ class ArtistController extends AbstractController
     public function show(Artist $artist, ArtistRepository $artistRepository, PostRepository $PostRepository): Response
     {
         $followerCount = $artistRepository->getFollowersCount($artist->getId());
-
-        $isFollowed = $artistRepository->isFollowed($artist->getId(), $this->getUser()->getId());
+        
+        $isFollowed = null;
+        if ($this->getUser() !== null){
+          $isFollowed = $artistRepository->isFollowed($artist->getId(), $this->getUser()->getId());
+        }
         return $this->render('Front/artist/show.html.twig', [
             'artist' => $artist,
             'followerCount' => $followerCount,
