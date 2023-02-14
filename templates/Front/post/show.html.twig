@@ -1,11 +1,12 @@
 {% extends 'base_front.html.twig' %}
 {% block title %}BeatHub | {{ post.title }}{% endblock %}
 {% block body %}
+{{dump(postLiked)}}
   {% include '/Front/components/post.html.twig'
     with {
       showComments: true,
       post,
-      isPostLiked: false,
+      isPostLiked: postLiked,
     }
   %}
   {{ dump(post) }}
