@@ -18,12 +18,12 @@
   {% include '/Front/components/section.html.twig' with { name: 'Last posts' } %}
   <div class="posts-list">
     {% for post in posts %}
-    {% set postLiked = post.userslike.contains(app.user) %}
+    {% set isPostLiked = post.userslike.contains(app.user) %}
       {% include '/Front/components/post.html.twig'
         with {
           showComments: false,
           post,
-          isPostLiked: postLiked,
+          isPostLiked,
         }
       %}
     {% endfor %}
@@ -44,12 +44,12 @@
     {% include '/Front/components/section.html.twig' with { name: 'Lastest posts by your favorite artists' } %}
     <div class="posts-list">
       {% for post in posts %}
-      {% set postLiked = post.userslike.contains(app.user) %}
+      {% set isPostLiked = post.userslike.contains(app.user) %}
         {% include '/Front/components/post.html.twig'
           with {
             showComments: false,
             post,
-            isPostLiked: postLiked,
+            isPostLiked,
           }
         %}
       {% endfor %}

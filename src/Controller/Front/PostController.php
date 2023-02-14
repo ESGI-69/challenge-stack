@@ -33,12 +33,12 @@ class PostController extends AbstractController
       return $this->redirectToRoute('front_app_post_show', ["slug" => $post->getSlug()], Response::HTTP_SEE_OTHER);
     }
 
-    $postLiked = $post->getUserslike()->contains($this->getUser());
+    $isPostLiked = $post->getUserslike()->contains($this->getUser());
 
     return $this->render('Front/post/show.html.twig', [
       'post' => $post,
       'form' => $form->createView(),
-      'postLiked' => $postLiked
+      'isPostLiked' => $isPostLiked
 
     ]);
   }
