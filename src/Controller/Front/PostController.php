@@ -22,7 +22,7 @@ class PostController extends AbstractController
     $comment = new Comment();
     $form = $this->createForm(CommentType::class, $comment);
     $form->handleRequest($request);
-    
+
     if ($form->isSubmitted() && $form->isValid()) {
       $comment->setIdUser($this->getUser());
       $comment->setIdPost($post);
