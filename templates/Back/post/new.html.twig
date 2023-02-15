@@ -6,7 +6,7 @@
     <h1>Create new Post</h1>
 
     {% if linkedArtist == false %}
-        <p> You must be linked to an artist to create a post, ask to your manager.</p>
+      <p> You must be linked to an artist to create a post, ask to your manager.</p>
     {% else %}
       {{ include('Back/post/_form.html.twig') }}
     {% endif %}

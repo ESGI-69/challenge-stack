@@ -28,8 +28,15 @@ class EventController extends AbstractController
     #[Route('/new-event', name: 'app_event_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EventRepository $eventRepository): Response
     {
+        $linkedArtist = true;
         $event = new Event();
-        $event->addArtist($this->getUser()->getIdArtist());
+
+        $idArtist = $this->getUser()->getIdArtist();
+        if ($idArtist === null) {
+          $linkedArtist = false;
+        } else {
+          $event->addArtist($this->getUser()->getIdArtist());
+        }
         $event->setPrivate(true);
         $form = $this->createForm(EventType::class, $event);
         $form->handleRequest($request);
@@ -43,6 +50,7 @@ class EventController extends AbstractController
         return $this->renderForm('/Back/event/new.html.twig', [
             'event' => $event,
             'form' => $form,
+            'linkedArtist' => $linkedArtist,
         ]);
     }
 
