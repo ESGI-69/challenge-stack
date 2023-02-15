@@ -3,8 +3,7 @@
   <div class="comment__content">
     <div class="comment__content__header">
       <span class="comment__content__header__name">
-        TODO
-        {{ comment.IdUser.email }}
+        {{ comment.IdUser.Username }}
       </span>
       {% if comment.ValidatedAt != null %}
         <span class="comment__content__header__date">
@@ -28,11 +27,13 @@
         Report
       </a>
     {% endif %} #}
-    {% if comment.IdUser.Id == app.user.Id %}
-      <form method="post" action="{{ path('front_app_comment_delete', {'id': comment.id, 'redirect_route_name': app.request.attributes.get('_route') }) }}" onsubmit="return confirm('Are you sure you want to delete your comment ?');">
-        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ comment.id) }}">
-        <button class="comment__actions__delete">Delete</button>
-      </form>
+    {% if app.user %}
+      {% if comment.IdUser.Id == app.user.Id %}
+        <form method="post" action="{{ path('front_app_comment_delete', {'id': comment.id, 'redirect_route_name': app.request.attributes.get('_route') }) }}" onsubmit="return confirm('Are you sure you want to delete your comment ?');">
+          <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ comment.id) }}">
+          <button class="comment__actions__delete">Delete</button>
+        </form>
+      {% endif %}
     {% endif %}
   </div>
 </div>

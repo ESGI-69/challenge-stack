@@ -3,6 +3,11 @@
 {% block title %}Register!{% endblock %}
 
 {% block body %}
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+          <p class="flash-{{ label }}">{{ message }}</p>
+        {% endfor %}
+    {% endfor %}
     {{ form_start(form) }}
         {{ form_rest(form) }}
         <input type="submit" value="S'enregistrer">
