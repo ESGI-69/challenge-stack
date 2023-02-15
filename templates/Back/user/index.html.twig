@@ -4,35 +4,28 @@
 {% block title %}BeatHub | Users{% endblock %}
 
 {% block body %}
-
-<div class="example-wrapper">
-
-    <h1>Hello UserController ! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/srv/app/src/Controller/UserController.php'|file_link(0) }}">src/Controller/UserController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/srv/app/templates/user/index.html.twig'|file_link(0) }}">templates/user/index.html.twig</a></code></li>
-    </ul>
-
-    <ul>
+<h1>Users</h1>
+<div class="container-table">
+  <table class="table table--post">
+      <thead>
+          <tr>
+              <th scope="col">Id</th>
+              <th scope="col">Email</th>
+              <th scope="col">Username</th>
+              <th scope="col">Roles</th>
+              <th scope="col">Artist Link</th>
+              <th scope="col"></th>
+          </tr>
+      </thead>
+      <tbody>
       {% for user in users %}
-        <li>
-          {{ user.email }} - 
-          {{ user.roles | join(', ') }} -
-          {% if ("ROLE_ARTIST" in user.roles  or "ROLE_MANAGER" in user.roles ) %}
-            {% if user.IdArtist == null %} 
-              no artist link -
-            {% else %} 
-              {{ user.IdArtist.pseudo }} -
-            {% endif %}
-            <a href="{{ path('admin_user_artist_link', {'id': user.id}) }}">link artist</a> -
-          {% endif %}
-          {% if user.id != app.user.id %}
-            <a href="{{ path('admin_user_edit', {'id': user.id}) }}">edit</a>
-          {% endif %}
-        </li>
+        {% include '/Back/user/userRow.html.twig' with { user } %}
+      {% else %}
+          <tr>
+              <td class="text-center">no records found</td>
+          </tr>
       {% endfor %}
-    </ul>
+      </tbody>
+  </table>
 </div>
 {% endblock %}

@@ -1,0 +1,23 @@
+{# table row #}
+<tr>
+<td class="text-center">{{ user.Id }}</td>
+<td class="text-center">{{ user.Email }}</td>
+<td class="text-center">{{ user.Username }}</td>
+<td class="text-center">{{ user.roles | join(', ') }}</td>
+<td class="text-center">
+  {% if ("ROLE_ARTIST" in user.roles  or "ROLE_MANAGER" in user.roles ) %}
+    {% if user.IdArtist == null %} 
+      no artist link -
+    {% else %} 
+      {{ user.IdArtist.pseudo }} -
+    {% endif %}
+    <a href="{{ path('admin_user_artist_link', {'id': user.id}) }}">link artist</a>
+  {% endif %}
+</td>
+
+<td class="text-center">
+  {% if user.id != app.user.id %}
+  <a href="{{ path('admin_user_edit', {'id': user.id}) }}">edit</a>
+  {% endif %}
+</td>
+</tr>
