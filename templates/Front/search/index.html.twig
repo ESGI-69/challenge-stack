@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<title>Hello SearchController!</title>
+
+{% block body %}
+
+    {{ include('Front/search/_form.html.twig') }}
+    <h2>Results</h2>
+    
+        {% if artists is defined %}
+            <h3>Artists</h3>
+            <ul>
+                {% for artist in artists %}
+                    <li>{{ artist.pseudo }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        {% if concertHalls is defined %}
+            <h3>Concert Halls</h3>
+            <ul>
+                {% for concertHall in concertHalls %}
+                    <li>{{ concertHall.name }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        {% if events is defined %}
+            <h3>Events</h3>
+            <ul>
+                {% for event in events %}
+                    <li>{{ event.title }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+
+{% endblock %}
