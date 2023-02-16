@@ -1,12 +1,5 @@
-<form action="{{ path('front_app_search') }}" method="POST">
-  <div class="input-group">
-    <input type="hidden" name="_token" value="{{ csrf_token('search') }}">
-    <input type="text" class="form-control" name="search" placeholder="Rechercher...">
-    <div class="input-group-append">
-      <button class="btn btn-primary" type="submit">
-        <i class="fas fa-search"></i>
-      </button>
-    </div>
-  </div>
-</form>
-
+{% if searchForm is defined %}
+{{ form_start(searchForm) }}
+{{ form_widget(searchForm.search) }}
+{{ form_end(searchForm) }}
+{% endif %}

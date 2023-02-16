@@ -19,47 +19,37 @@ class SearchController extends AbstractController
     public function search(Request $request, ManagerRegistry $doctrine): Response
     {
         
-        $form = $this->createForm(SearchType::class);
-        $form->handleRequest($request);
-        
-                if (($form->isSubmitted() && $form->isValid())) {
+        $searchForm = $this->createForm(SearchType::class);
+        $searchForm->handleRequest($request);
 
-                    $search = $form->getData();
+                if (($searchForm->isSubmitted() && $searchForm->isValid())) {
+
+                    $search = $searchForm->getData();
                     $search = $search['search'];
-                
+
+                    $artistRepository = $doctrine->getRepository(Artist::class);
+                    $artists = $artistRepository->findBy(['pseudo' => $search]);
+
+                    $concertHallRepository = $doctrine->getRepository(ConcertHall::class);
+                    $concertHalls = $concertHallRepository->findBy(['name' => $search]);
+
+                    $eventRepository = $doctrine->getRepository(Event::class);
+                    $events = $eventRepository->findBy(['title' => $search]);
+                    
+                    return $this->render('Front/search/index.html.twig', [
+                        'search' => $search,
+                        'artists' => $artists,
+                        'concertHalls' => $concertHalls,
+                        'events' => $events,
+                        'searchForm' => $searchForm->createView()
+                    ]);
+                    
+
                 }else{
-                    if ($request->isMethod('POST')) { 
-                        
-                        if ($this->isCsrfTokenValid('search', $request->request->get('_token'))) {
-                            $search = $request->request->get('search') ;
-                            $search = htmlspecialchars($search, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
-                        }else{
-                            throw new \Exception('CSRF token is invalid');
-                        }                       
-                    }else{
-                        return $this->render('Front/search/index.html.twig', [
-                            'form' => $form->createView()
-                        ]);
-                    }
+                    return $this->render('Front/search/index.html.twig', [
+                        'searchForm' => $searchForm->createView()
+                    ]);
                 }
-
-                  $artistRepository = $doctrine->getRepository(Artist::class);
-                  $artists = $artistRepository->findBy(['pseudo' => $search]);
-
-                  $concertHallRepository = $doctrine->getRepository(ConcertHall::class);
-                  $concertHalls = $concertHallRepository->findBy(['name' => $search]);
-
-                  $eventRepository = $doctrine->getRepository(Event::class);
-                  $events = $eventRepository->findBy(['title' => $search]);
-                  
-                  return $this->render('Front/search/index.html.twig', [
-                      'search' => $search,
-                      'artists' => $artists,
-                      'concertHalls' => $concertHalls,
-                      'events' => $events,
-                      'form' => $form->createView()
-                  ]);
-
 
     }
 }

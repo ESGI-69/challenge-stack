@@ -1,35 +1,63 @@
-<!DOCTYPE html>
+{% extends 'base_front.html.twig' %}
 
-<title>Hello SearchController!</title>
+{% block title %}Beathub | recherche {% endblock %}
 
 {% block body %}
 
-    {{ include('Front/search/_form.html.twig') }}
-    <h2>Results</h2>
+    <h2>Results :</h2>
     
         {% if artists is defined %}
-            <h3>Artists</h3>
+        {% include '/Front/components/section.html.twig' with {name: 'Artists'} %}
             <ul>
                 {% for artist in artists %}
-                    <li>{{ artist.pseudo }}</li>
-                {% endfor %}
+                    {% include '/Front/components/artistRow.html.twig'
+                            with {
+                                artistSlug: artist.slug,
+                                artistImagePath: artist.picture_path | default(null),
+                                artistName: artist.prenom ~ ' ' ~ artist.nom ~ ' (' ~ artist.pseudo ~ ')',
+                                artistCountry: 'Italy TODO',
+                                artistTotalEvents: artist.eventCount | default(artist.getevents.count() ?? 0),
+                                artistTotalFollowers: artist.followerCount | default( artist.followed.count() ?? 0),
+                            } 
+                    %}
+          {% endfor %}
             </ul>
         {% endif %}
 
         {% if concertHalls is defined %}
-            <h3>Concert Halls</h3>
+        {% include '/Front/components/section.html.twig' with {name: 'Club'} %}
             <ul>
-                {% for concertHall in concertHalls %}
-                    <li>{{ concertHall.name }}</li>
+                {% for club in concertHalls %}
+                       {% include '/Front/components/clubRow.html.twig'
+                            with {
+                            clubImagePath: club.picturepath | default('build/images/logo.svg'),
+                            clubSlug: club.slug,
+                            clubName: club.name,
+                            clubCity: club.city,
+                            clubCapacity: club.capacity,
+                            clubEventCount: '',
+                            }
+                        %}
                 {% endfor %}
             </ul>
         {% endif %}
 
         {% if events is defined %}
-            <h3>Events</h3>
+        {% include '/Front/components/section.html.twig' with {name: 'Events'} %}
             <ul>
                 {% for event in events %}
-                    <li>{{ event.title }}</li>
+                    {% include '/Front/components/eventRow.html.twig'
+                        with {
+                        eventImagePath: event.picturepath | default('build/images/logo.svg'),
+                        eventSlug: event.slug,
+                        eventName: event.title,
+                        eventId : event.id,
+                        eventDate: event.startdate|date("D M j"),
+                        eventClubSlug: event.getidconcerthall.slug,
+                        eventClubName: event.getidconcerthall.name,
+                        eventClubCity:  event.getidconcerthall.city
+                        }
+                    %}
                 {% endfor %}
             </ul>
         {% endif %}

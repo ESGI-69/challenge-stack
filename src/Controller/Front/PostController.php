@@ -12,6 +12,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Form\SearchType;
+
 
 #[Route('/post')]
 class PostController extends AbstractController
@@ -22,6 +24,7 @@ class PostController extends AbstractController
     if ($post->getValidatedAt() === null) {
       throw $this->createNotFoundException('The post does not exist');
     }
+    $searchForm = $this->createForm(SearchType::class, null, ['action' => $this->generateUrl('front_app_search'),'method' => 'POST']);
     $comment = new Comment();
     $form = $this->createForm(CommentType::class, $comment);
     $form->handleRequest($request);
@@ -41,6 +44,8 @@ class PostController extends AbstractController
       'post' => $post,
       'form' => $form->createView(),
       'isPostLiked' => $isPostLiked,
+      'searchForm' =>  $searchForm->createView()
+
     ]);
   }
 
