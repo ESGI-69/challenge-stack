@@ -155,4 +155,15 @@ class MediasList
 
         return $this;
     }
+
+    public function getTotalDuration(): int
+    {
+        $total = 0;
+        
+        foreach ($this->medias as $media) {
+            $total += $media->getDuree();
+        }
+
+        return $total;
+    }
 }

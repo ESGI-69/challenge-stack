@@ -4,6 +4,6 @@ vich_uploader:
     mappings:
         cover_mediaslist:
            uri_prefix: /data-files/medias_list-pictures
-           upload_destination: '%kernel.project_dir%/data-files/medias_list-pictures'
+           upload_destination: '%kernel.project_dir%/public/data-files/medias_list-pictures'
            namer:
                 service: Vich\UploaderBundle\Naming\UniqidNamer

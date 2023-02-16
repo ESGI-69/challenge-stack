@@ -30,6 +30,7 @@ class MediasListController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $mediasListRepository->save($mediasList, true);
 
             return $this->redirectToRoute('front_app_medias_list_index', [], Response::HTTP_SEE_OTHER);
@@ -44,13 +45,14 @@ class MediasListController extends AbstractController
     #[Route('/{id}', name: 'app_medias_list_show', methods: ['GET'])]
     public function show(MediasList $mediasList, MediasListRepository $mediasListRepository): Response
     {
+
         return $this->render('Front/medias_list/show.html.twig', [
             'medias_list' => $mediasList,
         ]);
     }
 
     #[Route('/{id}/edit', name: 'app_medias_list_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, MediasList $mediasList, MediasListRepository $mediasListRepository): Response
+    public function edit(Request $request, MediasList $mediasList): Response
     {
         $form = $this->createForm(MediasListType::class, $mediasList);
         $form->handleRequest($request);

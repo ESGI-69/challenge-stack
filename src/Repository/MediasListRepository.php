@@ -24,6 +24,9 @@ class MediasListRepository extends ServiceEntityRepository
 
     public function save(MediasList $entity, bool $flush = false): void
     {
+
+        dd($entity);
+
         $this->getEntityManager()->persist($entity);
 
         if ($flush) {
@@ -40,12 +43,12 @@ class MediasListRepository extends ServiceEntityRepository
         }
     }
 
-    public function GetMedias(MediasList $entity): array
+    public function GetMedias(MediasList $artist): array
     {
 
         $qb = $this->createQueryBuilder('mediasList')
         ->andWhere('mediasList.id = :id')
-        ->setParameter('id', $entity->getId())
+        ->setParameter('id', $artist->getId())
         ->innerjoin('mediasList.medias', 'mediaMediasList')
         ->addSelect('mediaMediasList')
         ->groupBy('mediasList.id','mediaMediasList.id')
@@ -58,6 +61,21 @@ class MediasListRepository extends ServiceEntityRepository
 
         return $result;
     }
+
+    // public function getTotalDuration(MediasList $ml): int
+    // {
+    //     $qb = $this->createQueryBuilder('mediasList')
+    //     // ->select('SUM(mediasMediasList.duree) as total', 'mediasList', 'mediaMediasList')
+    //     ->andWhere('mediasList.id = :id')
+    //     ->setParameter('id', $ml->getId())
+    //     ->innerjoin('mediasList.medias', 'mediaMediasList')
+    //     ->addSelect('mediaMediasList')
+    //     ->groupBy('mediasList.id','mediaMediasList.id')
+    //     ->getQuery()
+    //     ->getResult();
+
+    //     dd($qb);
+    // }
 
 //    /**
 //     * @return MediasList[] Returns an array of MediasList objects
