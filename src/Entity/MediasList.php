@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\MediasListRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Gedmo\Mapping\Annotation\Slug;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
@@ -39,6 +40,10 @@ class MediasList
 
     #[ORM\ManyToMany(targetEntity: Media::class, mappedBy: 'mediaslists')]
     private Collection $medias;
+
+    #[ORM\Column(length: 105)]
+    #[Slug(fields: ['type', 'id'])]
+    private ?string $slug = null;
 
     public function __construct()
     {
@@ -165,5 +170,17 @@ class MediasList
         }
 
         return $total;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
     }
 }
