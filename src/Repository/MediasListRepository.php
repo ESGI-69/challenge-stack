@@ -25,8 +25,6 @@ class MediasListRepository extends ServiceEntityRepository
     public function save(MediasList $entity, bool $flush = false): void
     {
 
-        dd($entity);
-
         $this->getEntityManager()->persist($entity);
 
         if ($flush) {

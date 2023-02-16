@@ -93,7 +93,12 @@ class MediasList
 
     public function getPathCover(): ?string
     {
-        return $this->path_cover;
+
+        if ( $this->path_cover == "" ) {
+            $this->path_cover = "placeholder-medias_lists.jpeg";
+        }
+
+        return "/data-files/medias_list-pictures/".$this->path_cover;
     }
 
     public function setPathCover(?string $path_cover): self
