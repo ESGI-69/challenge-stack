@@ -52,7 +52,7 @@ class MediasListController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_medias_list_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, MediasList $mediasList): Response
+    public function edit(Request $request, MediasList $mediasList, MediasListRepository $mediasListRepository): Response
     {
         $form = $this->createForm(MediasListType::class, $mediasList);
         $form->handleRequest($request);
@@ -60,10 +60,10 @@ class MediasListController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $mediasListRepository->save($mediasList, true);
 
-            return $this->redirectToRoute('app_medias_list_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('front_app_medias_list_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('medias_list/edit.html.twig', [
+        return $this->renderForm('Front/medias_list/edit.html.twig', [
             'medias_list' => $mediasList,
             'form' => $form,
         ]);
@@ -76,6 +76,6 @@ class MediasListController extends AbstractController
             $mediasListRepository->remove($mediasList, true);
         }
 
-        return $this->redirectToRoute('app_medias_list_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('front_app_medias_list_index', [], Response::HTTP_SEE_OTHER);
     }
 }
