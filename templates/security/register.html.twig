@@ -3,13 +3,14 @@
 {% block title %}BeatHub | Register!{% endblock %}
 
 {% block body %}
+    <h1 class="h3 mb-3 font-weight-normal">Register</h1>
     {% for label, messages in app.flashes %}
         {% for message in messages %}
           <p class="flash-{{ label }}">{{ message }}</p>
         {% endfor %}
     {% endfor %}
-    {{ form_start(form) }}
+    {{ form_start(form, {'attr': {'class': 'form'}} ) }}
         {{ form_rest(form) }}
-        <input type="submit" value="S'enregistrer">
+        <input class="button" type="submit" value="Register">
     {{ form_end(form) }}
 {% endblock %}

@@ -6,9 +6,11 @@
 @use 'back/sidebar' as *;
 @use 'back/table' as *;
 
+@use 'front/about' as *;
 @use 'front/feed' as *;
 @use 'front/register' as *;
 @use 'front/login' as *;
+@use 'front/form' as *;
 
 @use 'errors/404' as *;
 

@@ -362,7 +362,7 @@ class AppFixtures extends Fixture
 
         $user_admin->setEmail("admin@mail.com");
         $user_admin->setPlainPassword("password");
-        $user_admin->setUsername("admin");
+        $user_admin->setUsername("Huskiness2212");
         $user_admin->setProfilePicturePath("");
         $user_admin->setActive(true);
         $user_admin->setRoles(["ROLE_ADMIN"]);
@@ -376,7 +376,7 @@ class AppFixtures extends Fixture
 
         $user_moderator->setEmail("moderator@mail.com");
         $user_moderator->setPlainPassword("password");
-        $user_moderator->setUsername("modo");
+        $user_moderator->setUsername("Decal7390");
         $user_moderator->setProfilePicturePath("");
         $user_moderator->setActive(true);
         $user_moderator->setRoles(["ROLE_MODERATOR"]);
@@ -390,7 +390,7 @@ class AppFixtures extends Fixture
 
         $user_manager->setEmail("manager@mail.com");
         $user_manager->setPlainPassword("password");
-        $user_manager->setUsername("manager1");
+        $user_manager->setUsername("Lividly0518");
         $user_manager->setProfilePicturePath("");
         $user_manager->setActive(true);
         $user_manager->setRoles(["ROLE_MANAGER"]);
@@ -404,7 +404,7 @@ class AppFixtures extends Fixture
 
         $user_manager2->setEmail("manager2@mail.com");
         $user_manager2->setPlainPassword("password");
-        $user_manager2->setUsername("manager2");
+        $user_manager2->setUsername("Shredder2664");
         $user_manager2->setProfilePicturePath("");
         $user_manager2->setActive(true);
         $user_manager2->setRoles(["ROLE_MANAGER"]);
@@ -417,7 +417,7 @@ class AppFixtures extends Fixture
 
         $user_artist2->setEmail("artist2@mail.com");
         $user_artist2->setPlainPassword("password");
-        $user_artist2->setUsername("artist2");
+        $user_artist2->setUsername("Possibly3905");
         $user_artist2->setProfilePicturePath("");
         $user_artist2->setActive(true);
         $user_artist2->setRoles(["ROLE_ARTIST"]);
@@ -431,7 +431,7 @@ class AppFixtures extends Fixture
 
         $user_artist->setEmail("artist@mail.com");
         $user_artist->setPlainPassword("password");
-        $user_artist->setUsername("artist");
+        $user_artist->setUsername("Excavator0465");
         $user_artist->setProfilePicturePath("");
         $user_artist->setActive(true);
         $user_artist->setRoles(["ROLE_ARTIST"]);
@@ -445,7 +445,7 @@ class AppFixtures extends Fixture
 
         $user_default->setEmail("user@mail.com");
         $user_default->setPlainPassword("password");
-        $user_default->setUsername("default");
+        $user_default->setUsername("Unfocused9216");
         $user_default->setProfilePicturePath("");
         $user_default->setActive(true);
         $user_default->setActivationToken("fdp");
