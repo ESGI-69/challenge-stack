@@ -115,6 +115,7 @@ class PostController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $post->setUpdatedAt(new \DateTimeImmutable());
+            $post->setValidatedAt(null);
             $postRepository->save($post, true);
 
             return $this->redirectToRoute('admin_app_post_index', [], Response::HTTP_SEE_OTHER);

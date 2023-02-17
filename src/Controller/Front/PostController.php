@@ -19,10 +19,12 @@ class PostController extends AbstractController
   #[Route('/{slug}', name: 'app_post_show', methods: ['GET', 'POST'])]
   public function show(Post $post, CommentRepository $commentRepository, Request $request): Response
   {
+    if ($post->getValidatedAt() === null) {
+      throw $this->createNotFoundException('The post does not exist');
+    }
     $comment = new Comment();
     $form = $this->createForm(CommentType::class, $comment);
     $form->handleRequest($request);
-
     if ($form->isSubmitted() && $form->isValid()) {
       $comment->setIdUser($this->getUser());
       $comment->setIdPost($post);
@@ -38,8 +40,7 @@ class PostController extends AbstractController
     return $this->render('Front/post/show.html.twig', [
       'post' => $post,
       'form' => $form->createView(),
-      'isPostLiked' => $isPostLiked
-
+      'isPostLiked' => $isPostLiked,
     ]);
   }
 
