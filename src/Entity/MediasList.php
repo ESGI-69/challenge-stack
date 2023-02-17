@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\MediasListRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Gedmo\Mapping\Annotation\Slug;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
@@ -36,6 +37,18 @@ class MediasList
 
     #[Vich\UploadableField(mapping: 'cover_mediaslist', fileNameProperty: 'path_cover')]
     private ?File $imageFile = null;
+
+    #[ORM\ManyToMany(targetEntity: Media::class, mappedBy: 'mediaslists')]
+    private Collection $medias;
+
+    #[ORM\Column(length: 105)]
+    #[Slug(fields: ['type', 'id'])]
+    private ?string $slug = null;
+
+    public function __construct()
+    {
+        $this->medias = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -80,7 +93,12 @@ class MediasList
 
     public function getPathCover(): ?string
     {
-        return $this->path_cover;
+
+        if ( $this->path_cover == "" ) {
+            $this->path_cover = "placeholder-medias_lists.jpeg";
+        }
+
+        return "/data-files/medias_list-pictures/".$this->path_cover;
     }
 
     public function setPathCover(?string $path_cover): self
@@ -112,11 +130,61 @@ class MediasList
 
     /**
      * @param File|null $imageFile
-     * @return Mission
+     * @return MediasList
      */
     public function setImageFile(?File $imageFile): self
     {
         $this->imageFile = $imageFile;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Media>
+     */
+    public function getMedias(): Collection
+    {
+        return $this->medias;
+    }
+
+    public function addMedia(Media $media): self
+    {
+        if (!$this->medias->contains($media)) {
+            $this->medias->add($media);
+            $media->addMediaslist($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMedia(Media $media): self
+    {
+        if ($this->medias->removeElement($media)) {
+            $media->removeMediaslist($this);
+        }
+
+        return $this;
+    }
+
+    public function getTotalDuration(): int
+    {
+        $total = 0;
+        
+        foreach ($this->medias as $media) {
+            $total += $media->getDuree();
+        }
+
+        return $total;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }

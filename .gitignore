@@ -62,4 +62,7 @@ yarn-error.log
 data-files/*/*
 !data-files/*/placeholder-image.*
 
+public/data-files/*/*
+!public/data-files/*/placeholder-image.*
+
 .env

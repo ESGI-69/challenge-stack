@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\MediasList;
+use App\Entity\Arist;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -23,6 +24,7 @@ class MediasListRepository extends ServiceEntityRepository
 
     public function save(MediasList $entity, bool $flush = false): void
     {
+
         $this->getEntityManager()->persist($entity);
 
         if ($flush) {
@@ -38,6 +40,40 @@ class MediasListRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+
+    public function GetMedias(MediasList $artist): array
+    {
+
+        $qb = $this->createQueryBuilder('mediasList')
+        ->andWhere('mediasList.id = :id')
+        ->setParameter('id', $artist->getId())
+        ->innerjoin('mediasList.medias', 'mediaMediasList')
+        ->addSelect('mediaMediasList')
+        ->groupBy('mediasList.id','mediaMediasList.id')
+        ->getQuery()
+        ->getResult();
+
+        $result = [];
+        
+        $result = $qb[0]->getMedias()->toArray();
+
+        return $result;
+    }
+
+    // public function getTotalDuration(MediasList $ml): int
+    // {
+    //     $qb = $this->createQueryBuilder('mediasList')
+    //     // ->select('SUM(mediasMediasList.duree) as total', 'mediasList', 'mediaMediasList')
+    //     ->andWhere('mediasList.id = :id')
+    //     ->setParameter('id', $ml->getId())
+    //     ->innerjoin('mediasList.medias', 'mediaMediasList')
+    //     ->addSelect('mediaMediasList')
+    //     ->groupBy('mediasList.id','mediaMediasList.id')
+    //     ->getQuery()
+    //     ->getResult();
+
+    //     dd($qb);
+    // }
 
 //    /**
 //     * @return MediasList[] Returns an array of MediasList objects

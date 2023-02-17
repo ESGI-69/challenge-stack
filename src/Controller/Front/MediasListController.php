@@ -3,6 +3,7 @@
 namespace App\Controller\Front;
 
 use App\Entity\MediasList;
+use App\Entity\Arist;
 use App\Form\MediasListType;
 use App\Repository\MediasListRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -29,9 +30,10 @@ class MediasListController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $mediasListRepository->save($mediasList, true);
 
-            return $this->redirectToRoute('app_medias_list_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('front_app_medias_list_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('Front/medias_list/new.html.twig', [
@@ -41,8 +43,9 @@ class MediasListController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_medias_list_show', methods: ['GET'])]
-    public function show(MediasList $mediasList): Response
+    public function show(MediasList $mediasList, MediasListRepository $mediasListRepository): Response
     {
+
         return $this->render('Front/medias_list/show.html.twig', [
             'medias_list' => $mediasList,
         ]);
@@ -57,10 +60,10 @@ class MediasListController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $mediasListRepository->save($mediasList, true);
 
-            return $this->redirectToRoute('app_medias_list_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('front_app_medias_list_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('medias_list/edit.html.twig', [
+        return $this->renderForm('Front/medias_list/edit.html.twig', [
             'medias_list' => $mediasList,
             'form' => $form,
         ]);
@@ -73,6 +76,6 @@ class MediasListController extends AbstractController
             $mediasListRepository->remove($mediasList, true);
         }
 
-        return $this->redirectToRoute('app_medias_list_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('front_app_medias_list_index', [], Response::HTTP_SEE_OTHER);
     }
 }
