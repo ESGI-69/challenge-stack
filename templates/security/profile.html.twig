@@ -3,7 +3,8 @@
 {% block title %}BeatHub | Profile update!{% endblock %}
 
 {% block body %}
-    {{ form_start(form) }}
+    <h1>Profile update!</h1>
+    {{ form_start(form, {'attr': {'class': 'form'}}) }}
         {{ form_rest(form) }}
         <input type="submit" value="S'enregistrer">
     {{ form_end(form) }}
