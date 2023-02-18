@@ -74,6 +74,16 @@ class ConcertHallRepository extends ServiceEntityRepository
         return $result;
     }
 
+    public function findByLikeName($name): array
+    {
+        $qb = $this->createQueryBuilder('c')
+            ->where('LOWER(c.name) LIKE :name')
+            ->setParameter('name', '%' . $name . '%')
+            ->orderBy('c.name', 'ASC');
+            
+        return $qb->getQuery()->getResult();
+    }
+
 //    /**
 //     * @return ConcertHall[] Returns an array of ConcertHall objects
 //     */

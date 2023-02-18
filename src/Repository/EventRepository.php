@@ -60,6 +60,14 @@ class EventRepository extends ServiceEntityRepository
         return $qb->getQuery()->getResult();
     }
     
+    public function findByLikeTitle($title): array
+    {
+        $qb = $this->createQueryBuilder('e')
+        ->where("LOWER(e.title) LIKE LOWER(:title)")
+        ->setParameter('title', '%'.$title.'%')
+        ->orderBy('e.title', 'ASC');    
+        return $qb->getQuery()->getResult();
+    }
 
 //    /**
 //     * @return Event[] Returns an array of Event objects
