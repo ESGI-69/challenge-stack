@@ -45,6 +45,9 @@ class ConcertHall
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
+    #[ORM\Column(nullable: true)]
+    private array $location = [];
+
     public function __construct()
     {
         $this->events = new ArrayCollection();
@@ -177,6 +180,18 @@ class ConcertHall
     public function setDescription(?string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getLocation(): array
+    {
+        return $this->location;
+    }
+
+    public function setLocation(?array $location): self
+    {
+        $this->location = $location;
 
         return $this;
     }
