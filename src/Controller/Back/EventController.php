@@ -64,7 +64,7 @@ class EventController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $eventRepository->save($event, true);
 
-            return $this->redirectToRoute('app_event_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('admin_app_event_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('/Back/event/edit.html.twig', [
