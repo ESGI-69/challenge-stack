@@ -89,6 +89,37 @@ class ConcertHallController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            //Get the adress geolocation using nominatim
+            $address = $form->get('address')->getData();
+            $city = $form->get('city')->getData();
+            $urlencode = rawurlencode($address . ' ' . $city);
+
+            $url = 'https://nominatim.openstreetmap.org/search?q=' . $urlencode . '&format=json';
+            $opts = [
+                'http' => [
+                    'method' => 'GET',
+                    'header' => [
+                        'User-Agent: PHP'
+                    ]
+                ]
+            ];
+
+            $context = stream_context_create($opts);
+            $response = file_get_contents($url, false, $context);
+            $result = json_decode($response);
+
+            if(empty($result)) {
+                $this->addFlash('danger', 'Adresse non trouvée');
+            }else{
+                $latitude = $result[0]->lat;
+                $longitude = $result[0]->lon;
+                $location = [
+                    'latitude' => $latitude,
+                    'longitude' => $longitude
+                ];
+                $concertHall->setLocation($location); 
+            }
+
             $concertHallRepository->save($concertHall, true);
 
             return $this->redirectToRoute('admin_app_club_index', [], Response::HTTP_SEE_OTHER);
