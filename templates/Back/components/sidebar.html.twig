@@ -57,6 +57,12 @@
       <section class="sidebar__container__navigation__section">
         {% if is_granted('ROLE_MANAGER') or is_granted('ROLE_ADMIN') %}
           <span class="sidebar__container__navigation__section__title">Management</span>
+           {% include '/Back/components/sidebarButton.html.twig' with {
+                href: path('admin_app_artist_index'),
+                iconTwig: '/icons/home.html.twig',
+                text: 'Artists',
+              }
+            %}
             {% include '/Back/components/sidebarButton.html.twig' with {
                 href: path('admin_user_index'),
                 iconTwig: '/icons/link.html.twig',

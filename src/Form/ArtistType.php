@@ -21,9 +21,9 @@ class ArtistType extends AbstractType
             ->add('url_soundcloud')
             ->add('url_spotify')
             ->add('url_deezer')
-            ->add('medias')
-            ->add('events')
-            ->add('followed')
+            ->add('picture_path')
+            ->add('country')
+            ->add('type')
         ;
     }
 
