@@ -77,7 +77,7 @@ class ConcertHallRepository extends ServiceEntityRepository
     public function findByLikeName($name): array
     {
         $qb = $this->createQueryBuilder('c')
-            ->where('LOWER(c.name) LIKE :name')
+            ->where('LOWER(c.name) LIKE LOWER(:name)')
             ->setParameter('name', '%' . $name . '%')
             ->orderBy('c.name', 'ASC');
             

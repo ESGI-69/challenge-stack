@@ -12,11 +12,13 @@ class ConcertHallType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name')
-            ->add('address')
-            ->add('city')
-            ->add('capacity')
-            ->add('site_link')
+        ->add('name')
+        ->add('address')
+        ->add('city')
+        ->add('capacity')
+        ->add('site_link')
+        ->add('picture_path')
+        ->add('description')
         ;
     }
 

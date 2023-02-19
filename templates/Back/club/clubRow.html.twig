@@ -1,0 +1,13 @@
+{# table row #}
+<tr>
+  <td class="text-center">{{ club.Id }}</td>
+  <td class="text-center">{{ club.name }}</td>
+  <td class="text-center">{{ club.address }}</td>
+  <td class="text-center">{{ club.city }}</td>
+  <td class="text-center">{{ club.capacity }}</td>
+  <td class="text-center">{{ club.description }}</td>
+    <td class="text-center">
+      <a href="{{ path('admin_app_club_edit', {'id': club.id}) }}" class="btn btn-primary">Edit</a>
+      {{ include('Back/club/_delete_form.html.twig') }}
+    </td>
+</tr>

@@ -1,13 +1,13 @@
-<!DOCTYPE html>
+{% extends 'base_back.html.twig' %}
 
-<title>Edit ConcertHall</title>
+{% block title %}BeatHub | Edit {{ club.Name }} {% endblock %}
 
 {% block body %}
-    <h1>Edit ConcertHall</h1>
+    <h1>Edit club {{ club.name }}</h1>
 
-    {{ include('concert_hall/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('Back/club/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('app_concert_hall_index') }}">back to list</a>
+    <a href="{{ path('admin_app_club_index') }}">back to list</a>
 
-    {{ include('concert_hall/_delete_form.html.twig') }}
+    {{ include('Back/club/_delete_form.html.twig') }}
 {% endblock %}

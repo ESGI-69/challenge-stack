@@ -1,11 +1,10 @@
-<!DOCTYPE html>
+{% extends 'base_back.html.twig' %}
 
-<title>New ConcertHall</title>
+{% block title %}BeatHub | New Club{% endblock %}
 
 {% block body %}
-    <h1>Create new ConcertHall</h1>
+    <h1>Create new Club</h1>
+      {{ include('Back/club/_form.html.twig') }}
 
-    {{ include('concert_hall/_form.html.twig') }}
-
-    <a href="{{ path('app_concert_hall_index') }}">back to list</a>
+    <a href="{{ path('admin_app_club_index') }}">back to list</a>
 {% endblock %}
