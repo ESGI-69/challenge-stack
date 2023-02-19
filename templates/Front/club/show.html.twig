@@ -39,5 +39,10 @@
 
 
 {% include '/Front/components/section.html.twig' with {name: 'Location'} %}
+{{ club.address }} {{ club.city }} 
+{% if club.Location %}
+  <iframe height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox={{ club.Location.longitude }}%2C{{ club.Location.latitude }}%2C{{ club.Location.longitude }}%2C{{ club.Location.latitude }}&amp;layer=mapnik" style="border: 1px solid black"></iframe><br/><small><a href="https://www.openstreetmap.org/#map=15/{{ club.Location.latitude }}/{{ club.Location.longitude }}">Afficher une carte plus grande</a></small>
+{% else %}
 <iframe height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=2.3028373718261723%2C48.84223752518157%2C2.3563957214355473%2C48.86835647932926&amp;layer=mapnik" style="border: 1px solid black"></iframe><br/><small><a href="https://www.openstreetmap.org/#map=15/48.8553/2.3296">Afficher une carte plus grande</a></small>
+{% endif %}
 {% endblock %}
