@@ -10,6 +10,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Form\SearchType;
+
 
 #[Route('/artist')]
 class ArtistController extends AbstractController
@@ -17,10 +19,13 @@ class ArtistController extends AbstractController
     #[Route('/', name: 'app_artist_index', methods: ['GET'])]
     public function index(ArtistRepository $artistRepository): Response
     {
+        $searchForm = $this->createForm(SearchType::class, null, ['action' => $this->generateUrl('front_app_search'),'method' => 'POST']);
         return $this->render('Front/artist/index.html.twig', [
             'artists' => $artistRepository->getLastCreate(5),
             'artistsWithTopFollowers' => $artistRepository->getTrending(5),
-            'controller_name' => 'ArtistController'
+            'controller_name' => 'ArtistController',
+            'searchForm' => $searchForm->createView()
+
         ]);
     }
 
@@ -32,7 +37,7 @@ class ArtistController extends AbstractController
     public function show(Artist $artist, ArtistRepository $artistRepository, PostRepository $PostRepository): Response
     {
         $followerCount = $artistRepository->getFollowersCount($artist->getId());
-        
+        $searchForm = $this->createForm(SearchType::class, null, ['action' => $this->generateUrl('front_app_search'),'method' => 'POST']);
         $isFollowed = null;
         if ($this->getUser() !== null){
           $isFollowed = $artistRepository->isFollowed($artist->getId(), $this->getUser()->getId());
@@ -41,6 +46,7 @@ class ArtistController extends AbstractController
             'artist' => $artist,
             'followerCount' => $followerCount,
             'isFollowed' => $isFollowed,
+            'searchForm' => $searchForm->createView()
         ]);
     }
 

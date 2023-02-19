@@ -37,6 +37,7 @@
     </a>
   </div>
   <div class="topbar__user-info">
+    {% include '/Front/components/searchbar.html.twig' %}
     {% if not app.user %}
       <a href="{{ path('app_login') }}">Login</a>
         {% include '/Front/components/button.html.twig' with {

@@ -117,6 +117,15 @@ class ArtistRepository extends ServiceEntityRepository
             ->getSingleScalarResult() > 0;
     }
 
+    public function findByLikePseudo(string $pseudo): array
+    {
+        return $this->createQueryBuilder('a')
+            ->where('LOWER(a.pseudo) LIKE LOWER(:pseudo)')
+            ->setParameter('pseudo', '%' . $pseudo . '%')
+            ->getQuery()
+            ->getResult();
+            // where ignore case sensitive
+    }
 
 //    /**
 //     * @return Artist[] Returns an array of Artist objects
