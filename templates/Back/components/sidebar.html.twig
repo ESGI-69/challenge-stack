@@ -43,6 +43,14 @@
               }
             %}
           {% endif %}
+          {% if is_granted('ROLE_ADMIN') %}
+            {% include '/Back/components/sidebarButton.html.twig' with {
+                href: path('admin_app_club_index'),
+                iconTwig: '/icons/home.html.twig',
+                text: 'Clubs',
+              }
+            %}
+          {% endif %}
         </section>
       {% endif %}
 

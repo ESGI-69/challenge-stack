@@ -23,6 +23,7 @@ class ConcertHallController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/new', name: 'app_club_new', methods: ['GET', 'POST'])]
     public function new(Request $request, ConcertHallRepository $concertHallRepository): Response
     {
@@ -50,6 +51,7 @@ class ConcertHallController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/{id}/edit', name: 'app_club_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, ConcertHall $concertHall, ConcertHallRepository $concertHallRepository): Response
     {
@@ -68,6 +70,7 @@ class ConcertHallController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/{id}', name: 'app_club_delete', methods: ['POST'])]
     public function delete(Request $request, ConcertHall $concertHall, ConcertHallRepository $concertHallRepository): Response
     {
