@@ -9,7 +9,7 @@
 {% for event in events %}
   {% include '/Front/components/eventRow.html.twig'
     with {
-      eventImagePath: event.picturepath | default('build/images/logo.svg'),
+      eventImagePath: event.getPicturePath,
       eventSlug: event.slug,
       eventName: event.title,
       eventId : event.id,
@@ -28,7 +28,7 @@
 {{ dump(event.slug)}}
   {% include '/Front/components/eventRow.html.twig'
     with {
-      eventImagePath: event.picturepath | default('build/images/logo.svg'),
+      eventImagePath: event.getPicturePath,
       eventSlug: event.slug,
       eventName: event.title,
       eventId : event.id,

@@ -6,6 +6,7 @@ use App\Entity\ConcertHall;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class ConcertHallType extends AbstractType
 {
@@ -17,8 +18,12 @@ class ConcertHallType extends AbstractType
         ->add('city')
         ->add('capacity')
         ->add('site_link')
-        ->add('picture_path')
         ->add('description')
+        ->add('imageFile', VichImageType::class, [
+            'required' => false,
+            'allow_delete' => true,
+            'delete_label' => 'Supprimer l\'image',
+        ])
         ;
     }
 

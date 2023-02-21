@@ -8,8 +8,11 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation\Slug;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: ConcertHallRepository::class)]
+#[Vich\Uploadable]
 class ConcertHall
 {
     #[ORM\Id]
@@ -41,6 +44,9 @@ class ConcertHall
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $picture_path = null;
+
+    #[Vich\UploadableField(mapping: 'picture_clubs', fileNameProperty: 'picture_path')]
+    private ?File $imageFile = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
@@ -162,7 +168,12 @@ class ConcertHall
 
     public function getPicturePath(): ?string
     {
-        return $this->picture_path;
+
+        if ( $this->picture_path == "" ) {
+            $this->picture_path = "placeholder-club.jpeg";
+        }
+
+        return "/data-files/club-pictures/".$this->picture_path;
     }
 
     public function setPicturePath(?string $picture_path): self
@@ -192,6 +203,25 @@ class ConcertHall
     public function setLocation(?array $location): self
     {
         $this->location = $location;
+
+        return $this;
+    }
+
+    /**
+     * @return File|null
+     */
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * @param File|null $imageFile
+     * @return MediasList
+     */
+    public function setImageFile(?File $imageFile): self
+    {
+        $this->imageFile = $imageFile;
 
         return $this;
     }

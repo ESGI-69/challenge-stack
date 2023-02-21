@@ -8,8 +8,11 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation\Slug;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: EventRepository::class)]
+#[Vich\Uploadable]
 class Event
 {
     #[ORM\Id]
@@ -38,6 +41,9 @@ class Event
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $picture_path = null;
+
+    #[Vich\UploadableField(mapping: 'picture_events', fileNameProperty: 'picture_path')]
+    private ?File $imageFile = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $end_date = null;
@@ -172,7 +178,13 @@ class Event
 
     public function getPicturePath(): ?string
     {
-        return $this->picture_path;
+
+        if ( $this->picture_path == "" ) {
+            $this->picture_path = "placeholder-events.png";
+        }
+
+        return "/data-files/event-pictures/".$this->picture_path;
+
     }
 
     public function setPicturePath(?string $picture_path): self
@@ -280,6 +292,25 @@ class Event
     public function setArtistAuthor(?Artist $ArtistAuthor): self
     {
         $this->ArtistAuthor = $ArtistAuthor;
+
+        return $this;
+    }
+
+    /**
+     * @return File|null
+     */
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * @param File|null $imageFile
+     * @return MediasList
+     */
+    public function setImageFile(?File $imageFile): self
+    {
+        $this->imageFile = $imageFile;
 
         return $this;
     }

@@ -6,6 +6,7 @@ use App\Entity\Artist;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class ArtistType extends AbstractType
 {
@@ -21,11 +22,15 @@ class ArtistType extends AbstractType
             ->add('url_soundcloud')
             ->add('url_spotify')
             ->add('url_deezer')
-            ->add('picture_path')
             ->add('country')
             ->add('type')
             ->add('first_video')
             ->add('second_video')
+            ->add('imageFile', VichImageType::class, [
+                'required' => false,
+                'allow_delete' => true,
+                'delete_label' => 'Supprimer l\'image',
+            ])
         ;
     }
 

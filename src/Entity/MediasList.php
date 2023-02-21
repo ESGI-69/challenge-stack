@@ -32,11 +32,11 @@ class MediasList
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $path_cover = null;
 
+    #[Vich\UploadableField(mapping: 'picture_clubs', fileNameProperty: 'path_cover')]
+    private ?File $imageFile = null;
+
     #[ORM\Column(length: 50)]
     private ?string $type = null;
-
-    #[Vich\UploadableField(mapping: 'cover_mediaslist', fileNameProperty: 'path_cover')]
-    private ?File $imageFile = null;
 
     #[ORM\ManyToMany(targetEntity: Media::class, mappedBy: 'mediaslists')]
     private Collection $medias;
@@ -99,6 +99,7 @@ class MediasList
         }
 
         return "/data-files/medias_list-pictures/".$this->path_cover;
+        
     }
 
     public function setPathCover(?string $path_cover): self

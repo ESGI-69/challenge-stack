@@ -12,7 +12,7 @@
       {% include '/Front/components/artistRow.html.twig'
         with {
           artistSlug: artist.slug,
-          artistImagePath: artist.picture_path | default(null),
+          artistImagePath: artist.getPicturePath,
           artistName: artist.prenom ~ ' ' ~ artist.nom ~ ' (' ~ artist.pseudo ~ ')',
           artistCountry: 'Italy TODO',
           artistTotalEvents: artist.eventCount | default(artist.getevents.count() ?? 0),
