@@ -1,0 +1,20 @@
+<div style="display: flex;justify-content: space-around;">
+    {% for media in artist.getmedias %}
+      {% if loop.index < 4 %}
+        <div>
+            <div style="height: 200px; width: 200px; background-color: red; background-image:url('{{media.getmediaslists[0].pathcover}}');    background-size: cover;"></div>
+                <p>{{ media.title }} <b class="event-row__info__duration">{{  media.date | default(2022)}}</b></p>
+                <p class="event-row__info__duration">{{ artist.pseudo }}  -  {{ media.duree|date('i:s')  }}</p>
+        </div>
+        {% else %}
+        
+       <div>
+            <div style="height: 50px; width: 50px; background-color: red; background-image:url('{{media.getmediaslists[0].pathcover}}');    background-size: cover;"></div>
+                <p>{{ media.title }} <b class="event-row__info__duration">{{  media.date | default(2022)}}</b></p>
+                <p class="event-row__info__duration">{{ artist.pseudo }}  -  {{ media.duree|date('i:s') }}</p>
+        </div>      
+
+      {% endif %}
+
+    {% endfor %}    
+</div>
