@@ -12,9 +12,12 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
+#[Vich\Uploadable]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     use TimestampableTrait;
@@ -49,6 +52,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $profile_picture_path = null;
+
+    #[Vich\UploadableField(mapping: 'picture_users', fileNameProperty: 'profile_picture_path')]
+    private ?File $imageFile = null;
 
     public function __construct()
     {
@@ -224,7 +230,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getProfilePicturePath(): ?string
     {
-        return $this->profile_picture_path;
+
+        if ( $this->profile_picture_path == "" ) {
+            $this->profile_picture_path = "placeholder-users.png";
+        }
+
+        return "/data-files/user-pictures/".$this->profile_picture_path;
     }
 
     public function setProfilePicturePath(?string $profile_picture_path): self
@@ -256,5 +267,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->username = $username;
 
         return $this;
+    }
+
+    /**
+     * @return File|null
+     */
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * @param File|null $imageFile
+     * @return MediasList
+     */
+    public function setImageFile(?File $imageFile): self
+    {
+        $this->imageFile = $imageFile;
+
+        return $this;
+    }
+
+
+    public function __sleep()
+    {
+        return ['id','email','roles','password','plainPassword','id_artist','artists_followed','profile_picture_path'];
     }
 }
