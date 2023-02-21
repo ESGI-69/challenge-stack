@@ -9,11 +9,68 @@
       {% include '/Front/components/post.html.twig' with { post } %}
     {% endfor %}
   </div> #}
-  {% include '/Front/components/section.html.twig' with { name: 'Musics' } %}
-  {# <div class="music-list">
-    {% for music in musics %}
-      {% include '/Front/components/music.html.twig' with { music } %}
+
+      {% include '/Front/components/section.html.twig' with { name: 'Last Posts' } %}
+
+    <div class="posts-list">
+    {% for post in artist.getPosts %}
+      {% set isPostLiked = post.userslike.contains(app.user) %}
+        {% include '/Front/components/post.html.twig'
+          with {
+            showComments: false,
+            post,
+            isPostLiked,
+          }
+        %}
+      {% endfor %}
+    </div>
+
+    {% include '/Front/components/section.html.twig' with { name: 'Musics' } %}
+
+      {% include '/Front/components/mediaRow.html.twig' with { artists : artist } %}
+
+    {% include '/Front/components/section.html.twig' with { name: 'Upcoming events' } %}
+
+    {% for event in artist.getEvents %} 
+      {% if date(event.getStartDate) > date()|date_modify("-12 hours") %}
+       {% include '/Front/components/eventRow.html.twig' 
+        with {
+          eventId : event.id,
+          eventImagePath : 'build/images/logo.svg',
+          eventName : event.title,
+          eventSlug : event.slug,
+          eventDate :  event.startdate|date("D M j"),
+          eventClubName : event.getIdConcerthall.name,
+          eventClubCity : event.getIdConcerthall.city
+        }
+      %}
+      {% endif %}
     {% endfor %}
-  </div> #}
-  {{ dump(artist) }}
+
+    {% include '/Front/components/section.html.twig' with { name: 'Medias' } %}
+
+    {% include 'Front/components/artistVideo.html.twig' 
+      with { 
+        first_video : artist.getFirstVideo, 
+        second_video : artist.getSecondVideo
+      }
+    %}
+    {% include '/Front/components/section.html.twig' with { name: 'Past events' } %}
+      {% for event in artist.getEvents %} 
+      {% if date(event.getStartDate) < date()|date_modify("-12 hours") %}
+       {% include '/Front/components/eventRow.html.twig' 
+        with {
+          eventId : event.id,
+          eventImagePath : 'build/images/logo.svg',
+          eventName : event.title,
+          eventSlug : event.slug,
+          eventDate :  event.startdate|date("D M j"),
+          eventClubName : event.getIdConcerthall.name,
+          eventClubCity : event.getIdConcerthall.city
+        }
+      %}
+      {% endif %}
+    {% endfor %}
+
+  
 {% endblock %}
