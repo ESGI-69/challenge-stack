@@ -9,7 +9,7 @@
     {% include '/Front/components/artistRow.html.twig'
       with {
         artistSlug: artist.slug,
-        artistImagePath: artist.picture_path | default(null),
+        artistImagePath: artist.getPicturePath,
         artistName: artist == 'group' ? artist.pseudo : artist.prenom ~ ' ' ~ artist.nom ~ ' (' ~ artist.pseudo ~ ')',
         artistCountry: 'Italy TODO',
         artistTotalEvents: artist.eventCount,
@@ -24,7 +24,7 @@
     {% include '/Front/components/artistRow.html.twig'
       with {
         artistSlug: artist.slug,
-        artistImagePath: artist.picture_path | default(null),
+        artistImagePath: artist.getPicturePath,
         artistName: artist == 'group' ? artist.pseudo : artist.prenom ~ ' ' ~ artist.nom ~ ' (' ~ artist.pseudo ~ ')',
         artistCountry: 'Italy TODO',
         artistTotalEvents: artist.eventCount,
