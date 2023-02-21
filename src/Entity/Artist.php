@@ -77,6 +77,12 @@ class Artist
     #[ORM\OneToMany(mappedBy: 'ArtistAuthor', targetEntity: EventInvite::class, orphanRemoval: true)]
     private Collection $eventInvitesCreated;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $first_video = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $second_video = null;
+
     public function __construct()
     {
         $this->medias = new ArrayCollection();
@@ -443,6 +449,30 @@ class Artist
                 $eventInvitesCreated->setArtistAuthor(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getFirstVideo(): ?string
+    {
+        return $this->first_video;
+    }
+
+    public function setFirstVideo(?string $first_video): self
+    {
+        $this->first_video = $first_video;
+
+        return $this;
+    }
+
+    public function getSecondVideo(): ?string
+    {
+        return $this->second_video;
+    }
+
+    public function setSecondVideo(?string $second_video): self
+    {
+        $this->second_video = $second_video;
 
         return $this;
     }

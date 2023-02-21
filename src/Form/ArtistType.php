@@ -24,6 +24,8 @@ class ArtistType extends AbstractType
             ->add('picture_path')
             ->add('country')
             ->add('type')
+            ->add('first_video')
+            ->add('second_video')
         ;
     }
 
