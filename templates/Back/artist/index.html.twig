@@ -1,0 +1,33 @@
+{% extends 'base_back.html.twig' %}
+
+{% block title %}BeatHub | artists {% endblock %}
+
+{% block body %}
+  <h1>My artists</h1>
+  <div class="container-table">
+    <table class="table table--post">
+      <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Pseudo</th>
+          <th scope="col" style="min-width: 100px">Nom</th>
+          <th scope="col">Prenom</th>
+          <th scope="col" style="min-width: 400px">Description</th>
+          <th scope="col">Email</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for artist in artists %}
+        {% include '/Back/artist/artistRow.html.twig' with { artist } %}
+      {% else %}
+        <tr>
+          <td class="text-center">no records found</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <a href="{{ path('admin_app_artist_new') }}">Create a new artist</a>
+{% endblock %}

@@ -1,0 +1,14 @@
+{# table row #}
+<tr>
+  <td class="text-center">{{ artist.Id }}</td>
+  <td class="text-center">{{ artist.pseudo }}</td>
+  <td class="text-center">{{ artist.prenom }}</td>
+  <td class="text-center">{{ artist.nom }}</td>
+  <td class="text-center">{{ artist.Description }}</td>
+  <td class="text-center">{{ artist.email }}</td>
+
+
+    <td class="text-center">
+      <a href="{{ path('admin_app_artist_edit', {'id': artist.id}) }}" class="btn btn-primary">Edit</a>
+      {{ include('Back/artist/_delete_form.html.twig') }}
+    </td>
