@@ -484,6 +484,8 @@ class Artist
     public function setSecondVideo(?string $second_video): self
     {
         $this->second_video = $second_video;
+    }
+    
     /**
      * @return File|null
      */
