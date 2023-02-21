@@ -1,5 +1,5 @@
 <div class="event-header">
-  <img src="{{ event.PicturePath is null ? asset('build/data-files/event-pictures/placeholder-image.webp') : asset(event.PicturePath) }}">
+  <img src="{{ asset(event.getPicturePath) }}">
   <div class="event-header__content">
     <span class="event-header__content__type">Event</span>
     <div class="event-header__content__name">

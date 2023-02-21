@@ -11,6 +11,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class EventType extends AbstractType
 {
@@ -56,10 +57,10 @@ class EventType extends AbstractType
                 'label' => 'Ticketing link',
                 'required' => false,
             ])
-            ->add('picture_path', null, [
-                'label' => 'Image',
+            ->add('imageFile', VichImageType::class, [
                 'required' => false,
-                'empty_data' => null,
+                'allow_delete' => true,
+                'delete_label' => 'Supprimer l\'image',
             ])
             // Only the artist that are managed by the user can be selected
             // ->add('description')

@@ -32,19 +32,23 @@ class EventController extends AbstractController
         $event = new Event();
 
         $idArtist = $this->getUser()->getIdArtist();
+
         if ($idArtist === null) {
           $linkedArtist = false;
         } else {
           $event->addArtist($this->getUser()->getIdArtist());
+          $event->setArtistAuthor($this->getUser()->getIdArtist());
         }
+
         $event->setPrivate(true);
         $form = $this->createForm(EventType::class, $event);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $eventRepository->save($event, true);
 
-            return $this->redirectToRoute('app_event_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('admin_app_event_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('/Back/event/new.html.twig', [
