@@ -8,8 +8,11 @@ use Doctrine\Common\Collections\Collection;
 use Gedmo\Mapping\Annotation\Slug;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: ArtistRepository::class)]
+#[Vich\Uploadable]
 class Artist
 {
     #[ORM\Id]
@@ -55,6 +58,9 @@ class Artist
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $picture_path = null;
+
+    #[Vich\UploadableField(mapping: 'picture_artists', fileNameProperty: 'picture_path')]
+    private ?File $imageFile = null;
 
     #[ORM\Column(length: 255)]
     private ?string $country = null;
@@ -287,7 +293,12 @@ class Artist
 
     public function getPicturePath(): ?string
     {
-        return $this->picture_path;
+
+        if ( $this->picture_path == "" ) {
+            $this->picture_path = "placeholder-image.webp";
+        }
+
+        return "/data-files/artist-pictures/".$this->picture_path;
     }
 
     public function setPicturePath(?string $picture_path): self
@@ -473,6 +484,21 @@ class Artist
     public function setSecondVideo(?string $second_video): self
     {
         $this->second_video = $second_video;
+    /**
+     * @return File|null
+     */
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * @param File|null $imageFile
+     * @return MediasList
+     */
+    public function setImageFile(?File $imageFile): self
+    {
+        $this->imageFile = $imageFile;
 
         return $this;
     }
