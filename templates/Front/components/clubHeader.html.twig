@@ -1,5 +1,5 @@
 <div class="club-header">
-  <img src="{{ club.picturePath is null ? asset('build/data-files/club-pictures/placeholder-image.webp') : asset(club.picturePath) }}">
+  <img src="{{ asset(club.getPicturePath) }}">
   <div class="club-header__content">
     <span class="club-header__content__type"> Club</span>
     <div class="club-header__content__name">

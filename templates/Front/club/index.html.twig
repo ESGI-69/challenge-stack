@@ -9,7 +9,7 @@
 {% for club in clubsWithTopEvents %}
   {% include '/Front/components/clubRow.html.twig'
     with {
-      clubImagePath: club.picturepath | default('build/images/logo.svg'),
+      clubImagePath: club.getPicturePath,
       clubSlug: club.slug,
       clubName: club.name,
       clubCity: club.city,
@@ -25,7 +25,7 @@
 {% for club in clubs %}
   {% include '/Front/components/clubRow.html.twig'
     with {
-      clubImagePath: club.picturepath | default('build/images/logo.svg'),
+      clubImagePath: club.getPicturePath,
       clubSlug: club.slug,
       clubName: club.name,
       clubCity: club.city,

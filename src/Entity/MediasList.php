@@ -32,7 +32,7 @@ class MediasList
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $path_cover = null;
 
-    #[Vich\UploadableField(mapping: 'cover_mediaslist', fileNameProperty: 'path_cover')]
+    #[Vich\UploadableField(mapping: 'picture_clubs', fileNameProperty: 'path_cover')]
     private ?File $imageFile = null;
 
     #[ORM\Column(length: 50)]

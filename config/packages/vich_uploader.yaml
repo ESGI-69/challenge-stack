@@ -19,3 +19,9 @@ vich_uploader:
            upload_destination: '%kernel.project_dir%/public/data-files/event-pictures'
            namer:
                 service: Vich\UploaderBundle\Naming\UniqidNamer
+
+        picture_clubs:
+           uri_prefix: /data-files/club-pictures
+           upload_destination: '%kernel.project_dir%/public/data-files/club-pictures'
+           namer:
+                service: Vich\UploaderBundle\Naming\UniqidNamer
