@@ -36,4 +36,24 @@ class EventController extends AbstractController
             'searchForm' => $searchForm->createView()
         ]);
     }
+
+    //route to make a user be interested in an event
+    #[Route('/{id}/interested', name: 'app_event_interested', methods: ['GET'])]
+    public function interested(Event $event, EventRepository $eventRepository): Response
+    {
+        $event->addInsterestedUser($this->getUser());
+        $eventRepository->save($event, true);
+        return $this->redirectToRoute('front_app_event_show', ['slug' => $event->getSlug()], Response::HTTP_SEE_OTHER);
+    }
+
+    //route to make a user be not interested in an event
+    #[Route('/{id}/uninterested', name: 'app_event_uninterested', methods: ['GET'])]
+    public function uninterested(Event $event, EventRepository $eventRepository): Response
+    {
+        $event->removeInsterestedUser($this->getUser());
+        $eventRepository->save($event, true);
+        return $this->redirectToRoute('front_app_event_show', ['slug' => $event->getSlug()], Response::HTTP_SEE_OTHER);
+    }
+
+
 }

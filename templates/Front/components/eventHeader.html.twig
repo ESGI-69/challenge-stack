@@ -26,9 +26,18 @@
           {% include '/icons/warehouse.html.twig' %} Attending todo <b>{{ event.getidconcerthall.capacity }}</b>
         </span>
       {% endif %}
-       <a class="button button-type--outline button-color--white">
-        Interested
-      </a>
+      {% if app.user %}
+        {% if app.user in event.getInsterestedUsers %}
+          <a class="button button-type--outline button-color--white">
+            Interested 
+          </a>
+        {% else %}
+              <a class="button button-type--outline button-color--white">
+              Not Interested 
+              </a>
+        {% endif %}
+      {% endif %}
+       
 
       <a class="button button-type--outline button-color--white" style="white-space: nowrap">
         Buy tickets
