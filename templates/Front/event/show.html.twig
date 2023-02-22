@@ -14,7 +14,7 @@
           artistSlug: artist.slug,
           artistImagePath: artist.getPicturePath,
           artistName: artist.prenom ~ ' ' ~ artist.nom ~ ' (' ~ artist.pseudo ~ ')',
-          artistCountry: 'Italy TODO',
+          artistCountry: artist.Country,
           artistTotalEvents: artist.eventCount | default(artist.getevents.count() ?? 0),
           artistTotalFollowers: artist.followerCount | default( artist.followed.count() ?? 0),
         } 
