@@ -11,7 +11,7 @@
         artistSlug: artist.slug,
         artistImagePath: artist.getPicturePath,
         artistName: artist == 'group' ? artist.pseudo : artist.prenom ~ ' ' ~ artist.nom ~ ' (' ~ artist.pseudo ~ ')',
-        artistCountry: 'Italy TODO',
+        artistCountry: artist.Country,
         artistTotalEvents: artist.eventCount,
         artistTotalFollowers: artist.followerCount,
       }
@@ -26,7 +26,7 @@
         artistSlug: artist.slug,
         artistImagePath: artist.getPicturePath,
         artistName: artist == 'group' ? artist.pseudo : artist.prenom ~ ' ' ~ artist.nom ~ ' (' ~ artist.pseudo ~ ')',
-        artistCountry: 'Italy TODO',
+        artistCountry: artist.Country,
         artistTotalEvents: artist.eventCount,
         artistTotalFollowers: artist.followerCount,
       }
