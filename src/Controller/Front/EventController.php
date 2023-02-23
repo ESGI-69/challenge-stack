@@ -41,9 +41,14 @@ class EventController extends AbstractController
     public function interested(Event $event, EventRepository $eventRepository , Request $request): Response
     {
         // check csrf token 
-        $event->addInsterestedUser($this->getUser());
-        $eventRepository->save($event, true);
-        return $this->redirectToRoute('front_app_event_show', ['slug' => $event->getSlug()], Response::HTTP_SEE_OTHER);
+        if (!$this->isCsrfTokenValid('interested', $request->request->get('_token'))) {
+            return $this->redirectToRoute('front_app_event_show', ['slug' => $event->getSlug()], Response::HTTP_SEE_OTHER);
+        }else{
+            $event->addInsterestedUser($this->getUser());
+            $eventRepository->save($event, true);
+            return $this->redirectToRoute('front_app_event_show', ['slug' => $event->getSlug()], Response::HTTP_SEE_OTHER);
+        }
+       
     }
 
     //route to make a user be not interested in an event
@@ -51,9 +56,14 @@ class EventController extends AbstractController
     public function uninterested(Event $event, EventRepository $eventRepository, Request $request): Response
     {
         // check csrf token
-        $event->removeInsterestedUser($this->getUser());
-        $eventRepository->save($event, true);
-        return $this->redirectToRoute('front_app_event_show', ['slug' => $event->getSlug()], Response::HTTP_SEE_OTHER);
+        if (!$this->isCsrfTokenValid('interested', $request->request->get('_token'))) {
+            return $this->redirectToRoute('front_app_event_show', ['slug' => $event->getSlug()], Response::HTTP_SEE_OTHER);
+        }else{
+            $event->removeInsterestedUser($this->getUser());
+            $eventRepository->save($event, true);
+            return $this->redirectToRoute('front_app_event_show', ['slug' => $event->getSlug()], Response::HTTP_SEE_OTHER);
+        }
+     
     }
 
 
