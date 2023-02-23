@@ -1,0 +1,36 @@
+{% extends 'base_back.html.twig' %}
+
+{% block title %}BeatHub | Events{% endblock %}
+
+{% block body %}
+  <h1>Your artist events</h1>
+  <div class="container-table">
+    <table class="table table--post">
+      <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col" style="min-width: 100px">Club</th>
+          <th scope="col">Type</th>
+          <th scope="col">Title</th>
+          <th scope="col" style="min-width: 400px">Description</th>
+          <th scope="col">Start at</th>
+          <th scope="col">End at</th>
+          <th scope="col">Privacy</th>
+          <th scope="col">Attendees</th>
+          <th scope="col" style="min-width: 130px">Pending invites</th>
+          <th scope="col" style="min-width: 130px">Declined invites</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for event in events %}
+        {% include '/Back/event/privacy/eventRow.html.twig' with { event } %}
+      {% else %}
+        <tr>
+          <td class="text-center">no records found</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}
