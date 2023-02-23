@@ -1,0 +1,22 @@
+{# table row #}
+<tr>
+  <td class="text-center">{{ event.Id }}</td>
+  <td class="text-center">{{ event.IdConcertHall.Name }}</td>
+  <td class="text-center">{{ event.Type }}</td>
+  <td class="text-center">{{ event.Title }}</td>
+  <td class="text-center">{{ event.Description }}</td>
+  <td class="text-center">{{ event.StartDate|date() }}</td>
+  <td class="text-center">{{ event.EndDate|date() }}</td>
+  {% if event.isPrivate == false %}
+    <td class="text-center">Public</td>
+  {% else %}
+    <td class="text-center">Private</td>
+  {% endif %}
+  <td class="text-center">{{ event.Artists|length }}</td>
+  {# {{ dump(event.EventInvites) }} #}
+  <td class="text-center">{{ event.EventInvites|filter(invite => invite.Status == 'pending')|length }}</td>
+  <td class="text-center">{{ event.EventInvites|filter(invite => invite.Status == 'declined')|length }}</td>
+  <td class="text-center">
+    <a href="{{ path('admin_app_event_privacy_edit', {'slug': event.Slug}) }}">Change privacy</a>
+  </td>
+</tr>

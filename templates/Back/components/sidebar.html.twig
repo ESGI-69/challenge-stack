@@ -83,6 +83,12 @@
                 text: 'Validate posts',
               }
             %}
+            {% include '/Back/components/sidebarButton.html.twig' with {
+                href: path('admin_app_event_privacy_index'),
+                iconTwig: '/icons/home.html.twig',
+                text: 'Change event privacy',
+              }
+            %}
           {% endif %}
         </section>
     </div>

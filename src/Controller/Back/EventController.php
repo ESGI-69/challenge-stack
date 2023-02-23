@@ -4,6 +4,7 @@ namespace App\Controller\Back;
 
 use App\Entity\Event;
 use App\Form\EventType;
+use App\Form\EventPrivacyType;
 use App\Repository\EventRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -86,5 +87,40 @@ class EventController extends AbstractController
         }
 
         return $this->redirectToRoute('admin_app_event_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    // EVENT PRIVACY
+
+    #[IsGranted('ROLE_ARTIST')]
+    #[Route('/privacy', name: 'app_event_privacy_index', methods: ['GET'])]
+    public function privacy(EventRepository $eventRepository): Response
+    {
+        $today = new \DateTime();
+        return $this->render('/Back/event/privacy/index.html.twig', [
+            // All events created by the connected artist
+            'events' => $eventRepository->findBy(['ArtistAuthor' => $this->getUser()->getIdArtist()]),
+        ]);
+    }
+
+    #[IsGranted('ROLE_ARTIST')]
+    #[Route('/privacy/{slug}/edit', name: 'app_event_privacy_edit', methods: ['GET', 'POST'])]
+    public function privacyEdit(Request $request, Event $event, EventRepository $eventRepository): Response
+    {
+
+        $form = $this->createForm(EventPrivacyType::class, $event);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $eventRepository->save($event, true);
+
+            return $this->redirectToRoute('admin_app_event_privacy_index', [], Response::HTTP_SEE_OTHER);
+        }
+        
+        $today = new \DateTime();
+
+        return $this->renderForm('/Back/event/privacy/edit.html.twig', [
+            'event' => $event,
+            'form' => $form,
+        ]);
     }
 }
