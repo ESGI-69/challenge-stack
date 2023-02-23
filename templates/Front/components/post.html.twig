@@ -18,6 +18,44 @@
       {% endif %}
     </div>
     <p class="post__content__text">{{ post.TextContent }}</p>
+    {% if post.getIdEvent %}
+      <div class="post__content__event">
+        {% include '/Front/components/eventRow.html.twig' 
+          with {
+            eventId : post.getIdEvent.id,
+            eventImagePath : post.getIdEvent.picturePath,
+            eventName : post.getIdEvent.title,
+            eventSlug : post.getIdEvent.slug,
+            eventDate :  post.getIdEvent.startdate|date("D M j"),
+            eventClubName : post.getIdEvent.getIdConcerthall.name,
+            eventClubCity : post.getIdEvent.getIdConcerthall.city,
+            }
+        %}
+      </div>
+    {% endif %}
+    <div class="post__content__medias">
+      {% if post.getIdMediaslist %}
+        <div class="post__content__mediaslist">
+          {% include '/Front/components/mediasListCard.html.twig' with {
+            mediasListPicture: post.getIdMediaslist.pathCover,
+            mediasListTitle: post.getIdMediaslist.title,
+            mediaslistDate: post.getIdMediaslist.releaseDate|date("Y"),
+            mediaslistArtist: post.getIdMediaslist.getArtists,
+            mediasListDuration: mediasListDuration,
+          } %}
+        </div>
+      {% endif %}
+      {% if post.getIdMedia %}
+        <div class="post__content__media">
+          {% include '/Front/components/mediaCard.html.twig' with {
+            mediaTitle: post.getIdMedia.title,
+            mediaArtist: post.getIdMedia.getArtists,
+            mediaDuree: post.getIdMedia.duree,
+            mediaPicture: post.getIdMedia.FilePath,
+          } %}
+        </div>
+      {% endif %}
+    </div>
     <div class="post__content__footer">
       <div class="post__content__footer__comment-count">
         {% include '/icons/comment.html.twig' with { class: 'post__content__footer__comment-count__icon' } %}

@@ -59,6 +59,16 @@
       font-family: var(--font-family-sans-serif);
     }
 
+    &__event {
+      border-bottom: 1px solid var(--color-secondary);
+      margin-bottom: .5rem;
+    }
+
+    &__medias {
+      display: flex;
+      flex-direction: row;
+    }
+
     &__footer {
       grid-area: footer;
       display: flex;

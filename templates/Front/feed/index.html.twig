@@ -25,6 +25,12 @@
   {% include '/Front/components/section.html.twig' with { name: 'Last posts' } %}
   <div class="posts-list">
     {% for post in posts %}
+    {% set mediasListDuration = 0 %}
+    {% if (post.getIdMediaslist) %}
+      {% for media in post.getIdMediaslist.getMedias %}
+        {% set mediasListDuration = mediasListDuration + media.duree %}
+      {% endfor %}
+    {% endif %}
     {% set isPostLiked = post.userslike.contains(app.user) %}
       {% include '/Front/components/post.html.twig'
         with {
@@ -51,6 +57,12 @@
     {% include '/Front/components/section.html.twig' with { name: 'Lastest posts by your favorite artists' } %}
     <div class="posts-list">
       {% for post in posts %}
+      {% set mediasListDuration = 0 %}
+      {% if (post.getIdMediaslist) %}
+        {% for media in post.getIdMediaslist.getMedias %}
+          {% set mediasListDuration = mediasListDuration + media.duree %}
+        {% endfor %}
+      {% endif %}
       {% set isPostLiked = post.userslike.contains(app.user) %}
         {% include '/Front/components/post.html.twig'
           with {

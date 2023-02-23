@@ -37,6 +37,13 @@ class PostController extends AbstractController
       $commentRepository->save($comment, true);
       return $this->redirectToRoute('front_app_post_show', ["slug" => $post->getSlug()], Response::HTTP_SEE_OTHER);
     }
+    $mediasListDuration = 0;
+    if ($post->getIdMediaslist()) {
+      $mediasOfMediasList = $post->getIdMediaslist()->getMedias();
+      foreach ($mediasOfMediasList as $media) {
+        $mediasListDuration += $media->getDuree();
+      }
+    }
 
     $isPostLiked = $post->getUserslike()->contains($this->getUser());
 
@@ -44,8 +51,8 @@ class PostController extends AbstractController
       'post' => $post,
       'form' => $form->createView(),
       'isPostLiked' => $isPostLiked,
-      'searchForm' =>  $searchForm->createView()
-
+      'searchForm' =>  $searchForm->createView(),
+      'mediasListDuration' => $mediasListDuration
     ]);
   }
 
