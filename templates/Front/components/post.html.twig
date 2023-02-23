@@ -23,7 +23,7 @@
         {% include '/Front/components/eventRow.html.twig' 
           with {
             eventId : post.getIdEvent.id,
-            eventImagePath : post.getIdEvent.picturePath,
+            eventImagePath : post.getIdEvent.getPrefixedPicturePath,
             eventName : post.getIdEvent.title,
             eventSlug : post.getIdEvent.slug,
             eventDate :  post.getIdEvent.startdate|date("D M j"),

@@ -10,7 +10,7 @@
   {% include '/Front/components/eventRow.html.twig' 
     with {
       eventId : event.id,
-      eventImagePath : 'build/images/logo.svg',
+      eventImagePath : event.getPrefixedPicturePath,
       eventName : event.title,
       eventSlug : event.slug,
       eventDate :  event.startdate|date("D M j"),
