@@ -5,12 +5,9 @@
 {% block body %}
 
 <div class="example-wrapper">
-<h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/srv/app/src/Controller/BackController.php'|file_link(0) }}">src/Controller/BackController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/srv/app/templates/Back/index.html.twig'|file_link(0) }}">templates/Back/index.html.twig</a></code></li>
-    </ul>
+  <h1>Welcome {{ user.username }} !</h1>
+  {% if countInvites > 0 %}
+  <p>You have {{ countInvites }} invite(s) pending !</p>
+  {% endif %}
 </div>
 {% endblock %}

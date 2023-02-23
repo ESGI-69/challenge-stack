@@ -7,12 +7,20 @@
       </a>
     </div>
     <div class="sidebar__container__navigation">
+    <section class="sidebar__container__navigation__section">
+        {% include '/Back/components/sidebarButton.html.twig' with {
+            href: path('admin_default_index'),
+            iconTwig: '/icons/home.html.twig',
+            text: 'Dashboard',
+          }
+        %}
+      </section>
       {% if is_granted('ROLE_ARTIST') %}
         <section class="sidebar__container__navigation__section">
           <span class="sidebar__container__navigation__section__title">Invitations</span>
           {% include '/Back/components/sidebarButton.html.twig' with {
               href: path('admin_app_invite_index'),
-              iconTwig: '/icons/home.html.twig',
+              iconTwig: '/icons/invitation.html.twig',
               text: 'Invitations received',
             }
           %}
@@ -24,13 +32,13 @@
           {% if is_granted('ROLE_ARTIST') %}
             {% include '/Back/components/sidebarButton.html.twig' with {
                 href: path('admin_app_post_index'),
-                iconTwig: '/icons/home.html.twig',
+                iconTwig: '/icons/post.html.twig',
                 text: 'Posts',
               }
             %}
             {% include '/Back/components/sidebarButton.html.twig' with {
                 href: path('admin_app_event_index'),
-                iconTwig: '/icons/home.html.twig',
+                iconTwig: '/icons/ticket.html.twig',
                 text: 'Events',
               }
             %}
@@ -38,7 +46,7 @@
           {% if is_granted('ROLE_CAN_MODERATE_COMMENT') %}
             {% include '/Back/components/sidebarButton.html.twig' with {
                 href: path('admin_app_comment_validation'),
-                iconTwig: '/icons/home.html.twig',
+                iconTwig: '/icons/shieldCheck.html.twig',
                 text: 'Comment moderation',
               }
             %}
@@ -46,7 +54,7 @@
           {% if is_granted('ROLE_ADMIN') %}
             {% include '/Back/components/sidebarButton.html.twig' with {
                 href: path('admin_app_club_index'),
-                iconTwig: '/icons/home.html.twig',
+                iconTwig: '/icons/music.html.twig',
                 text: 'Clubs',
               }
             %}
@@ -59,7 +67,7 @@
           <span class="sidebar__container__navigation__section__title">Management</span>
            {% include '/Back/components/sidebarButton.html.twig' with {
                 href: path('admin_app_artist_index'),
-                iconTwig: '/icons/home.html.twig',
+                iconTwig: '/icons/user.html.twig',
                 text: 'Artists',
               }
             %}
@@ -71,7 +79,7 @@
             %}
             {% include '/Back/components/sidebarButton.html.twig' with {
                 href: path('admin_app_post_validation'),
-                iconTwig: '/icons/home.html.twig',
+                iconTwig: '/icons/checkPost.html.twig',
                 text: 'Validate posts',
               }
             %}
