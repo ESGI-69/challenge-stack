@@ -24,6 +24,8 @@
 @use './components/comment.scss' as *;
 @use './components/section.scss' as *;
 @use './components/button.scss' as *;
+@use './components/mediaList/mediaListCard.scss' as *;
+@use './components/mediaList/mediaCard.scss' as *;
 
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Rock+Salt&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;0,6..96,700;0,6..96,800;0,6..96,900;1,6..96,400;1,6..96,500;1,6..96,600;1,6..96,700;1,6..96,800;1,6..96,900&display=swap');

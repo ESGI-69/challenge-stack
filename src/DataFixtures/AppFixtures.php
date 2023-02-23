@@ -226,6 +226,7 @@ class AppFixtures extends Fixture
         $mediaslist->setDescription("THIS IS HOW WE BOOMBOOM.");
         $mediaslist->setPathCover("");
         $mediaslist->setType("album");
+        $mediaslist->addArtist($artist1);
 
         $manager->persist($mediaslist);
 
@@ -236,6 +237,7 @@ class AppFixtures extends Fixture
         $mediaslist2->setDescription("TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST ");
         $mediaslist2->setPathCover("");
         $mediaslist2->setType("album");
+        $mediaslist2->addArtist($artist2);
 
         $manager->persist($mediaslist2);
 

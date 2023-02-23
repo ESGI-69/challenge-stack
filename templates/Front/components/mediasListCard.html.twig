@@ -1,0 +1,13 @@
+<div class="medias-list" >
+  <img class="medias-list__img" src="{{ mediasListPicture }}">
+  <div class="medias-list__text-container">
+    <span>{{ mediasListTitle }}</span>
+    <span class="medias-list__light-text">• {{ mediaslistDate }}</span>
+  </div>
+  <div class="medias-list__text-container">
+    <span class="medias-list__light-text">{% for artist in mediaslistArtist %}{{artist.pseudo}}{% endfor %}</span>
+    {% set minutes = mediasListDuration / 60 %}
+    {% set seconds = mediasListDuration % 60 %}
+    <span class="medias-list__light-text">• {{ minutes|format_number({fraction_digit: 0}) }}min {{seconds}}s</span>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+.media {
+  padding: 16px;
+  margin-bottom: 8px;
+  display: flex;
+  flex-direction: row;
+
+  &__img {
+    width: 81px;
+    height: 81px;
+  }
+
+  &__text-container {
+    margin-left: 8px;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+  }
+
+  &__paragraph {
+    margin: 0;
+  }
+
+  &__light-text {
+    color: var(--color-secondary);
+  }
+}

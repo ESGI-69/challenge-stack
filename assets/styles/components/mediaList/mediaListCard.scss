@@ -1,0 +1,12 @@
+.medias-list {
+  padding: 16px;
+  margin-bottom: 8px;
+  &__img {
+    width: 250px;
+    height: 250px;
+  }
+
+  &__light-text {
+    color: var(--color-secondary);
+  }
+}

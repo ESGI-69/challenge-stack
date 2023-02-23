@@ -41,12 +41,16 @@ class MediasList
     #[ORM\ManyToMany(targetEntity: Media::class, mappedBy: 'mediaslists')]
     private Collection $medias;
 
+    #[ORM\ManyToMany(targetEntity: Artist::class, inversedBy: 'medias')]
+    private Collection $artists;
+
     #[ORM\Column(length: 105)]
     #[Slug(fields: ['type', 'id'])]
     private ?string $slug = null;
 
     public function __construct()
     {
+        $this->artists = new ArrayCollection();
         $this->medias = new ArrayCollection();
     }
 
@@ -186,6 +190,30 @@ class MediasList
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Artist>
+     */
+    public function getArtists(): Collection
+    {
+        return $this->artists;
+    }
+
+    public function addArtist(Artist $artist): self
+    {
+        if (!$this->artists->contains($artist)) {
+            $this->artists->add($artist);
+        }
+
+        return $this;
+    }
+
+    public function removeArtist(Artist $artist): self
+    {
+        $this->artists->removeElement($artist);
 
         return $this;
     }
