@@ -28,18 +28,24 @@
       {% endif %}
       {% if app.user %}
         {% if app.user in event.getInsterestedUsers %}
-          <a class="button button-type--outline button-color--white">
-            Interested 
-          </a>
+               <form id="form-interested" action="{{path('front_app_event_uninterested', {id: event.id})}}" method="post">
+               <input type="hidden" name="_csrf_token" value="{{ csrf_token('interested') }}">
+                <a class="button button-type--outline button-color--white" style="white-space: nowrap" onclick="document.getElementById('form-interested').submit();">
+                  Interested ✅
+                </a>
+                </form>
         {% else %}
-              <a class="button button-type--outline button-color--white">
-              Not Interested 
-              </a>
+              <form id="form-interested" action="{{path('front_app_event_interested', {id: event.id})}}" method="post">
+               <input type="hidden" name="_csrf_token" value="{{ csrf_token('interested') }}">
+                <a class="button button-type--outline button-color--white" style="white-space: nowrap" onclick="document.getElementById('form-interested').submit();">
+                        Interested ?
+                </a>
+                </form>
         {% endif %}
       {% endif %}
        
 
-      <a class="button button-type--outline button-color--white" style="white-space: nowrap">
+      <a class="button button-type--outline button-color--white" style="white-space: nowrap" href="href="{{path('front_app_event_uninterested' , {id: event.id})}}">
         Buy tickets
       </a>
      
