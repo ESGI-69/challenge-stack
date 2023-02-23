@@ -9,7 +9,7 @@
 {% for event in events %}
   {% include '/Front/components/eventRow.html.twig'
     with {
-      eventImagePath: event.getPicturePath,
+      eventImagePath: event.getPrefixedPicturePath,
       eventSlug: event.slug,
       eventName: event.title,
       eventId : event.id,
@@ -28,7 +28,7 @@
 {{ dump(event.slug)}}
   {% include '/Front/components/eventRow.html.twig'
     with {
-      eventImagePath: event.getPicturePath,
+      eventImagePath: event.getPrefixedPicturePath,
       eventSlug: event.slug,
       eventName: event.title,
       eventId : event.id,

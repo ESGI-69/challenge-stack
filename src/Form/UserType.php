@@ -24,8 +24,7 @@ class UserType extends AbstractType
             ])
             ->add('imageFile', VichImageType::class, [
                 'required' => false,
-                'allow_delete' => true,
-                'delete_label' => 'Supprimer l\'image',
+                'allow_delete' => false,
             ])
         ;
     }

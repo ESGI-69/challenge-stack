@@ -9,7 +9,7 @@
     {% include '/Front/components/artistRow.html.twig'
       with {
         artistSlug: artist.slug,
-        artistImagePath: artist.getPicturePath,
+        artistImagePath: artist.getPrefixedPicturePath,
         artistName: artist == 'group' ? artist.pseudo : artist.prenom ~ ' ' ~ artist.nom ~ ' (' ~ artist.pseudo ~ ')',
         artistCountry: artist.Country,
         artistTotalEvents: artist.eventCount,
@@ -24,7 +24,7 @@
     {% include '/Front/components/artistRow.html.twig'
       with {
         artistSlug: artist.slug,
-        artistImagePath: artist.getPicturePath,
+        artistImagePath: artist.getPrefixedPicturePath,
         artistName: artist == 'group' ? artist.pseudo : artist.prenom ~ ' ' ~ artist.nom ~ ' (' ~ artist.pseudo ~ ')',
         artistCountry: artist.Country,
         artistTotalEvents: artist.eventCount,

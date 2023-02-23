@@ -1,6 +1,6 @@
 <div class="post {{ showComments ? 'show-comment' : '' }}">
   <div class="post__author">
-    <img src="{{ post.IdArtist.PicturePath is null ? asset('build/data-files/artist-pictures/placeholder-image.webp') : asset(post.IdArtist.PicturePath) }}" class="post__author__image">
+    <img src="{{ asset(post.IdArtist.getPrefixedPicturePath) }}" class="post__author__image">
     <a class="post__author__name" href="{{ path('front_app_artist_show', {'slug': post.IdArtist.Slug}) }}">{{ post.IdArtist.Type == 'group' ? post.IdArtist.Pseudo : post.IdArtist.Prenom ~ ' ' ~ post.IdArtist.Nom ~ ' (' ~ post.IdArtist.Pseudo ~ ')' }}</a>
     <span class="post__author__date">{{ post.ValidatedAt|date('d/m/Y') }}</span>
   </div>
@@ -23,7 +23,7 @@
         {% include '/Front/components/eventRow.html.twig' 
           with {
             eventId : post.getIdEvent.id,
-            eventImagePath : post.getIdEvent.picturePath,
+            eventImagePath : post.getIdEvent.getPrefixedPicturePath,
             eventName : post.getIdEvent.title,
             eventSlug : post.getIdEvent.slug,
             eventDate :  post.getIdEvent.startdate|date("D M j"),

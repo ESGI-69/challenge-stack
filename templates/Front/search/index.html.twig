@@ -13,7 +13,7 @@
                     {% include '/Front/components/artistRow.html.twig'
                             with {
                                 artistSlug: artist.slug,
-                                artistImagePath: artist.getPicturePath,
+                                artistImagePath: artist.getPrefixedPicturePath,
                                 artistName: artist.prenom ~ ' ' ~ artist.nom ~ ' (' ~ artist.pseudo ~ ')',
                                 artistCountry: artist.Country,
                                 artistTotalEvents: artist.eventCount | default(artist.getevents.count() ?? 0),
@@ -30,7 +30,7 @@
                 {% for club in concertHalls %}
                        {% include '/Front/components/clubRow.html.twig'
                             with {
-                            clubImagePath: club.getPicturePath,
+                            clubImagePath: club.getPrefixedPicturePath,
                             clubSlug: club.slug,
                             clubName: club.name,
                             clubCity: club.city,
@@ -48,7 +48,7 @@
                 {% for event in events %}
                     {% include '/Front/components/eventRow.html.twig'
                         with {
-                        eventImagePath: event.getPicturePath,
+                        eventImagePath: event.getPrefixedPicturePath,
                         eventSlug: event.slug,
                         eventName: event.title,
                         eventId : event.id,

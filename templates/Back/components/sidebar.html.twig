@@ -95,7 +95,7 @@
 
   </div>
   <footer class="sidebar__footer">
-    <img class="sidebar__footer__avatar" src="{{ asset(app.user.getProfilePicturePath) }}" alt="Avatar">
+    <img class="sidebar__footer__avatar" src="{{ asset(app.user.getPrefixedProfilePicturePath) }}" alt="Avatar">
     <span class="sidebar__footer__username">
       {{ app.user.userIdentifier }}
       {% if app.user.IdArtist is not null %}

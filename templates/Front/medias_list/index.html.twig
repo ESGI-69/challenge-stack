@@ -24,7 +24,7 @@
                 <td>{{ medias_list.title }}</td>
                 <td>{{ medias_list.releaseDate ? medias_list.releaseDate|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ medias_list.description }}</td>
-                <td><image src="{{ medias_list.pathCover }}"</td>
+                <td><image src="{{ medias_list.getPrefixedPathCover }}"</td>
                 <td>{{ medias_list.type }}</td>
                 <td>
                     <a href="{{ path('front_app_medias_list_show', {'id': medias_list.id}) }}">show</a>
