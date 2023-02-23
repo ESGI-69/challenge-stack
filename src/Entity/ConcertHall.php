@@ -173,6 +173,16 @@ class ConcertHall
             $this->picture_path = "placeholder-club.jpeg";
         }
 
+        return $this->picture_path;
+    }
+
+    public function getPrefixedPicturePath(): ?string
+    {
+
+        if ( $this->picture_path == "" ) {
+            $this->picture_path = "placeholder-club.jpeg";
+        }
+
         return "/data-files/club-pictures/".$this->picture_path;
     }
 

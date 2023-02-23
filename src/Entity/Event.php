@@ -183,6 +183,17 @@ class Event
             $this->picture_path = "placeholder-events.png";
         }
 
+        return $this->picture_path;
+
+    }
+
+    public function getPrefixedPicturePath(): ?string
+    {
+
+        if ( $this->picture_path == "" ) {
+            $this->picture_path = "placeholder-events.png";
+        }
+
         return "/data-files/event-pictures/".$this->picture_path;
 
     }

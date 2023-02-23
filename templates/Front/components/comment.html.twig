@@ -1,5 +1,5 @@
 <div class="comment {{ comment.ValidatedAt != null ? '' : 'comment--not-validated' }}">
-  <img class="comment__avatar" src="{{ comment.IdUser.ProfilePicturePath|default(asset('build/data-files/user-pictures/placeholder-image.jpeg')) }}">
+  <img class="comment__avatar" src="{{ asset(comment.IdUser.getPrefixedProfilePicturePath) }}">
   <div class="comment__content">
     <div class="comment__content__header">
       <span class="comment__content__header__name">

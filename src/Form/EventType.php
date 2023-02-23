@@ -59,8 +59,7 @@ class EventType extends AbstractType
             ])
             ->add('imageFile', VichImageType::class, [
                 'required' => false,
-                'allow_delete' => true,
-                'delete_label' => 'Supprimer l\'image',
+                'allow_delete' => false,
             ])
             // Only the artist that are managed by the user can be selected
             // ->add('description')

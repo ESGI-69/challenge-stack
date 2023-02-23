@@ -7,6 +7,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vich\UploaderBundle\Form\Type\VichImageType;
+use Vich\UploaderBundle\Form\Type\VichFileType;
+use Symfony\Component\HttpFoundation\File\File;
 
 class ArtistType extends AbstractType
 {
@@ -28,8 +30,7 @@ class ArtistType extends AbstractType
             ->add('second_video')
             ->add('imageFile', VichImageType::class, [
                 'required' => false,
-                'allow_delete' => true,
-                'delete_label' => 'Supprimer l\'image',
+                'allow_delete' => false,
             ])
         ;
     }

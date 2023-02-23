@@ -235,6 +235,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \Serial
             $this->profile_picture_path = "placeholder-users.png";
         }
 
+        return $this->profile_picture_path;
+    }
+
+    public function getPrefixedProfilePicturePath(): ?string
+    {
+
+        if ( $this->profile_picture_path == "" ) {
+            $this->profile_picture_path = "placeholder-users.png";
+        }
+
         return "/data-files/user-pictures/".$this->profile_picture_path;
     }
 

@@ -298,6 +298,16 @@ class Artist
             $this->picture_path = "placeholder-image.webp";
         }
 
+        return $this->picture_path;
+    }
+
+    public function getPrefixedPicturePath(): ?string
+    {
+
+        if ( $this->picture_path == "" ) {
+            $this->picture_path = "placeholder-image.webp";
+        }
+
         return "/data-files/artist-pictures/".$this->picture_path;
     }
 
