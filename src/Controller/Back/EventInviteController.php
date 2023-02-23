@@ -91,7 +91,6 @@ class EventInviteController extends AbstractController
         $eventInvite->setIdEvent($event);
         $eventInvite->setStatus('pending');
         $eventInvite->setCreatedAt(new \DateTimeImmutable());
-        $eventInvite->setComment('Invitation envoyée zebi');
         $eventInviteRepository->save($eventInvite, true);
 
         return $this->redirectToRoute('admin_app_select_artist_event_invite', ['event' => $event->getSlug()], Response::HTTP_SEE_OTHER);

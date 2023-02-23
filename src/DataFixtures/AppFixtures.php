@@ -458,7 +458,6 @@ class AppFixtures extends Fixture
 
         $eventInvite = new EventInvite();
 
-        $eventInvite->setComment('Ceci est un commentaire, accepte l\'invit');
         $eventInvite->setIdEvent($practice);
         $eventInvite->setIdArtist($artist2);
         $eventInvite->setCreatedAt(new DateTimeImmutable('now'));

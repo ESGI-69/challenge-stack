@@ -13,9 +13,6 @@ class EventInvite
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $comment = null;
-
     #[ORM\ManyToOne(inversedBy: 'eventInvites')]
     private ?Event $id_event = null;
 
@@ -36,18 +33,6 @@ class EventInvite
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getComment(): ?string
-    {
-        return $this->comment;
-    }
-
-    public function setComment(?string $comment): self
-    {
-        $this->comment = $comment;
-
-        return $this;
     }
 
     public function getIdEvent(): ?Event
