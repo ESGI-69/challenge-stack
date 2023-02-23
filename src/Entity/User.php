@@ -18,7 +18,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
 #[Vich\Uploadable]
-class User implements UserInterface, PasswordAuthenticatedUserInterface
+class User implements UserInterface, PasswordAuthenticatedUserInterface, \Serializable
 {
     use TimestampableTrait;
 
@@ -289,8 +289,32 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
 
-    public function __sleep()
-    {
-        return ['id','email','roles','password','plainPassword','id_artist','artists_followed','profile_picture_path'];
+    public function serialize() {
+
+        return serialize(array(
+            $this->id,
+            $this->email,
+            $this->roles,
+            $this->password,
+            $this->plainPassword,
+            $this->id_artist,
+            $this->artists_followed,
+            $this->profile_picture_path,
+        ));
+        
+    }
+        
+    public function unserialize($serialized) {
+        
+        list (
+            $this->id,
+            $this->email,
+            $this->roles,
+            $this->password,
+            $this->plainPassword,
+            $this->id_artist,
+            $this->artists_followed,
+            $this->profile_picture_path,
+        ) = unserialize($serialized);
     }
 }
