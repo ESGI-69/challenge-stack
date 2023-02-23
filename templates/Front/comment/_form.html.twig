@@ -1,6 +1,6 @@
 {% if app.user %}
-  {{ form_start(form) }}
+  {{ form_start(form, {'attr': {'class': 'form form-comment'}}) }}
       {{ form_widget(form) }}
-      <button class="btn">{{ button_label|default('Save') }}</button>
+      <button class="btn button">{{ button_label|default('Send Comment') }}</button>
   {{ form_end(form) }}
 {% endif %}
