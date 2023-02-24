@@ -1,0 +1,6 @@
+{% block body %}
+  <p>Hi {{comment.getIdUser.username }}, your comment as been approved</p>
+  <p><a href="{{url('front_app_post_show', {'slug': comment.getIdPost.Slug})}}">Check the post you just commented</a></p>
+  <p><a href="{{url('front_app_post_show', {'slug': comment.getIdPost.Slug})}}">{{url('front_app_post_show', {'slug': comment.getIdPost.Slug})}}</a></p>
+  <p>The content of your comment: "{{ comment.text }}"</p>
+{% endblock %}
