@@ -22,6 +22,10 @@ class ConcertHallType extends AbstractType
         ->add('imageFile', VichImageType::class, [
             'required' => false,
             'allow_delete' => false,
+            'download_uri' => false,
+            'attr' => [
+              'class' => 'vich-image'
+          ]
         ])
         ;
     }
