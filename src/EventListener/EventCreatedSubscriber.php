@@ -37,7 +37,7 @@ class EventCreatedSubscriber implements EventSubscriber
         }
 
         // Check if the Event has been set to private = false and send emails to all followers
-        if ($entity->isPrivate() != null) {
+        if ($entity->isPrivate() == false) {
             $artist = $entity->getArtistAuthor();
             $followers = $artist->getFollowed()->toArray();
             foreach ($followers as $follower) {
@@ -45,7 +45,7 @@ class EventCreatedSubscriber implements EventSubscriber
                 $email = (new TemplatedEmail())
                     ->from(new Address('noreply@'.$_ENV['DOMAIN_NAME'], 'BeatHub'))
                     ->to($follower->getEmail())
-                    ->subject('New post from your favorite artist !')
+                    ->subject('New Event from your favorite artist !')
                     ->htmlTemplate('Front/email/event.html.twig')
                     ->context([
                         'event' => $entity,

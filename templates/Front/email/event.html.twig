@@ -1,6 +1,6 @@
 {% block body %}
-  <p>The arstist {{ event.IdArtist.pseudo }} posted a new article !</p>
+  <p>New event from your favorite artist : {{ event.ArtistAuthor.pseudo }} !</p>
   <p><strong>{{ event.Title }}</strong></p>
-  <p><a href="{{url('front_app_post_show', {'slug': event.Slug})}}">Check it out !</a></p>
-  <p><a href="{{url('front_app_post_show', {'slug': event.Slug})}}">{{url('front_app_post_show', {'slug': event.Slug})}}</a></p>
+  <p><a href="{{url('front_app_event_show', {'slug': event.Slug})}}">Check it out !</a></p>
+  <p><a href="{{url('front_app_event_show', {'slug': event.Slug})}}">{{url('front_app_event_show', {'slug': event.Slug})}}</a></p>
 {% endblock %}
