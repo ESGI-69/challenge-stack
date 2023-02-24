@@ -6,37 +6,96 @@
 
 {% include '/Front/components/section.html.twig' with {name: 'Tonight'} %}
 <div class="events-list">
-{% for event in events %}
-  {% include '/Front/components/eventRow.html.twig'
-    with {
-      eventImagePath: event.getPrefixedPicturePath,
-      eventSlug: event.slug,
-      eventName: event.title,
-      eventId : event.id,
-      eventDate: event.startdate|date("D M j"),
-      eventClubSlug: event.getidconcerthall.slug,
-      eventClubName: event.getidconcerthall.name,
-      eventClubCity:  event.getidconcerthall.city
-    }
-  %}
-{% endfor %}
+{% if events|length == 0 %}
+  <div class="no-events">
+    <h3>There are no events tonight</h3>
+  </div>
+{% else %}
+  {% for event in events %}
+    {% include '/Front/components/eventRow.html.twig'
+      with {
+        eventImagePath: event.getPrefixedPicturePath,
+        eventSlug: event.slug,
+        eventName: event.title,
+        eventId : event.id,
+        eventDate: event.startdate|date("D M j"),
+        eventClubSlug: event.getidconcerthall.slug,
+        eventClubName: event.getidconcerthall.name,
+        eventClubCity:  event.getidconcerthall.city
+      }
+    %}
+  {% endfor %}
+{% endif %}
 </div>
 
 {% include '/Front/components/section.html.twig' with {name: 'Tomorow'} %}
 <div class="events-list">
-{% for event in tomorrowEvents %}
-  {% include '/Front/components/eventRow.html.twig'
-    with {
-      eventImagePath: event.getPrefixedPicturePath,
-      eventSlug: event.slug,
-      eventName: event.title,
-      eventId : event.id,
-      eventDate: event.startdate|date("D M j"),
-      eventClubSlug: event.getidconcerthall.slug,
-      eventClubName: event.getidconcerthall.name,
-      eventClubCity:  event.getidconcerthall.city
-    }
-  %}
-{% endfor %}  
+{% if tomorrowEvents|length == 0 %}
+  <div class="no-events">
+    <h3>There are no events tomorrow</h3>
+  </div>
+{% else %}
+  {% for event in tomorrowEvents %}
+    {% include '/Front/components/eventRow.html.twig'
+      with {
+        eventImagePath: event.getPrefixedPicturePath,
+        eventSlug: event.slug,
+        eventName: event.title,
+        eventId : event.id,
+        eventDate: event.startdate|date("D M j"),
+        eventClubSlug: event.getidconcerthall.slug,
+        eventClubName: event.getidconcerthall.name,
+        eventClubCity:  event.getidconcerthall.city
+      }
+    %}
+  {% endfor %}
+{% endif %}
 </div>
+
+{% include '/Front/components/section.html.twig' with {name: 'This month'} %}
+<div class="events-list">
+{% if monthEvents|length == 0 %}
+  <div class="no-events">
+    <h3>There are no events this month</h3>
+  </div>
+{% else %}
+  {% for event in monthEvents %}
+    {% include '/Front/components/eventRow.html.twig'
+      with {
+        eventImagePath: event.getPrefixedPicturePath,
+        eventSlug: event.slug,
+        eventName: event.title,
+        eventId : event.id,
+        eventDate: event.startdate|date("D M j"),
+        eventClubSlug: event.getidconcerthall.slug,
+        eventClubName: event.getidconcerthall.name,
+        eventClubCity:  event.getidconcerthall.city
+      }
+    %}
+  {% endfor %}
+{% endif %}
+</div>
+
+{% include '/Front/components/section.html.twig' with {name: 'Passed event'} %}
+<div class="events-list">
+{% if passedEvents|length == 0 %}
+  <div class="no-events">
+    <h3>There are no passed events</h3>
+  </div>
+{% else %}
+  {% for event in passedEvents %}
+    {% include '/Front/components/eventRow.html.twig'
+      with {
+        eventImagePath: event.getPrefixedPicturePath,
+        eventSlug: event.slug,
+        eventName: event.title,
+        eventId : event.id,
+        eventDate: event.startdate|date("D M j"),
+        eventClubSlug: event.getidconcerthall.slug,
+        eventClubName: event.getidconcerthall.name,
+        eventClubCity:  event.getidconcerthall.city
+      }
+    %}
+  {% endfor %}
+{% endif %}
 {% endblock %}
