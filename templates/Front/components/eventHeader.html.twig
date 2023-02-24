@@ -43,12 +43,11 @@
                 </form>
         {% endif %}
       {% endif %}
-       
-
-      <a class="button button-type--outline button-color--white" style="white-space: nowrap" href="href="{{path('front_app_event_uninterested' , {id: event.id})}}">
-        Buy tickets
-      </a>
-     
+      {% if event.getTicketingLink %}
+        <a class="button button-type--outline button-color--white" style="white-space: nowrap" href="{{event.getTicketingLink}}" target="_blank">
+          Buy tickets
+        </a>
+      {% endif %}
     </div>
   </div>
 </div>
