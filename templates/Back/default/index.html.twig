@@ -6,8 +6,20 @@
 
 <div class="example-wrapper">
   <h1>Welcome {{ user.username }} !</h1>
-  {% if countInvites > 0 %}
-  <p>You have {{ countInvites }} invite(s) pending !</p>
+  {% if is_granted('ROLE_ARTIST') %}
+    {% if countInvites > 0 %}
+      <p>You have {{ countInvites }} invite(s) pending !</p>
+    {% endif %}
+  {% endif %}
+  {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_MODERATOR') %}
+    {% if countComment > 0 %}
+      <p>{{countComment}} comment(s) needs to be validated</p>
+    {% endif %}
+  {% endif %}
+  {% if is_granted('ROLE_MANAGER') %}
+    {% if countPost > 0 %}
+      <p>{{countPost}} post(s) needs to be validated</p>
+    {% endif %}
   {% endif %}
 </div>
 {% endblock %}
