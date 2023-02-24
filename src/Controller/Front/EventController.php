@@ -20,8 +20,10 @@ class EventController extends AbstractController
         $searchForm = $this->createForm(SearchType::class, null, ['action' => $this->generateUrl('front_app_search'),'method' => 'POST']);
         $today = new \DateTime();
         return $this->render('Front/event/index.html.twig', [
-            'events' => $eventRepository->getEventByDate($today),
-            'tomorrowEvents' => $eventRepository->getEventByDate($today->modify('+1 day')),
+            'events' => $eventRepository->getPublicEventByDate((new \DateTime())),
+            'tomorrowEvents' => $eventRepository->getPublicEventByDate((new \DateTime())->modify('+1 day')),
+            'monthEvents' => $eventRepository->getPublicEventByDateRange((new \DateTime()), (new \DateTime())->modify('+1 month')),
+            'passedEvents' => $eventRepository->getPublicEventsBeforeDate(new \DateTime()),
             'searchForm' => $searchForm->createView()
         ]);
     }
