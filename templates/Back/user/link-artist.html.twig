@@ -3,8 +3,8 @@
 {% block title %}BeatHub | Add artist to a groupe{% endblock %}
 
 {% block body %}
-    <h2>{{user.email}}</h2>
     {% if artistLinked == true %}
+      <h1>{{user.email}}</h2>
       {{ form_start(form) }}
         {{ form_rest(form) }}
         <input type="submit" value="Modifier">
