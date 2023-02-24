@@ -5,8 +5,8 @@
 {% block body %}
     <h1>Reset your password</h1>
 
-    {{ form_start(resetForm) }}
+    {{ form_start(resetForm, {'attr': {'class': 'form'}}  ) }}
         {{ form_row(resetForm.plainPassword) }}
-        <button class="btn btn-primary">Reset password</button>
+        <button class="btn button btn-primary">Reset password</button>
     {{ form_end(resetForm) }}
 {% endblock %}
