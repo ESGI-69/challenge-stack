@@ -30,11 +30,16 @@ class DefaultController extends AbstractController
         $countComment = count($comments);
 
         $countPost = 0;
-        if ($user->getIdArtist()) {
-          $artistID = $user->getIdArtist()->getId();
-          $posts = $postRepository->findBy(['id_artist' => $artistID, 'validated_at' => null]);
+        if ($artist) {
+          $artistId = $artist->getId();
+          $posts = $postRepository->findBy(['id_artist' => $artistId, 'validated_at' => null]);
           $countPost = count($posts);
         }
+
+        $artistName = null;
+        if ($artist){
+          $artistName = $artist->getPseudo();
+        } 
 
         return $this->render('Back/default/index.html.twig', [
             'controller_name' => 'BackController',
@@ -42,6 +47,7 @@ class DefaultController extends AbstractController
             'countInvites' => $countInvites,
             'countComment' => $countComment,
             'countPost' => $countPost,
+            'artistName' => $artistName
         ]);
     }
 }
