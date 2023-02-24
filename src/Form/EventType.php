@@ -60,6 +60,10 @@ class EventType extends AbstractType
             ->add('imageFile', VichImageType::class, [
                 'required' => false,
                 'allow_delete' => false,
+                'download_uri' => false,
+                'attr' => [
+                  'class' => 'vich-image'
+              ]
             ])
             // Only the artist that are managed by the user can be selected
             // ->add('description')

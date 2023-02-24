@@ -241,6 +241,17 @@ class AppFixtures extends Fixture
 
         $manager->persist($mediaslist2);
 
+        $mediaslist3 = new MediasList();
+
+        $mediaslist3->setTitle("LIMPORTANCEDUVIDE");
+        $mediaslist3->setReleaseDate(new DateTimeImmutable('2022-12-12 09:00:00'));
+        $mediaslist3->setDescription("Nouvel album pop/bruitisme de Jacques, 2022, en tournée avec son nouveau groupe");
+        $mediaslist3->setPathCover("");
+        $mediaslist3->setType("album");
+        $mediaslist3->addArtist($artist2);
+
+        $manager->persist($mediaslist3);
+
         /* BLOC POUR MEDIAS */
         $media = new Media();
 
@@ -314,6 +325,137 @@ class AppFixtures extends Fixture
 
         $manager->persist($media);
 
+        $media1 = new Media();
+
+        $media1->setTitle("Porte s'ouvre");
+        $media1->setDescription("Porte s'ouvre musique");
+        $media1->setPosition(1);
+        $media1->setDuree(101);
+        $media1->setFilePath("");
+        $media1->addMediaslist($mediaslist3);
+        $media1->addArtist($artist2);
+        $manager->persist($media1);
+
+        $media = new Media();
+        $media->setTitle("Arrivera");
+        $media->setDescription("Arrivera musique");
+        $media->setPosition(2);
+        $media->setDuree(183);
+        $media->setFilePath("");
+        $media->addMediaslist($mediaslist3);
+        $media->addArtist($artist2);
+        $manager->persist($media);
+
+        $media = new Media();
+        $media->setTitle("Ca se voit");
+        $media->setDescription("Ca se voit musique");
+        $media->setPosition(3);
+        $media->setDuree(153);
+        $media->setFilePath("");
+        $media->addMediaslist($mediaslist3);
+        $media->addArtist($artist2);
+        $manager->persist($media);
+
+        $media = new Media();
+        $media->setTitle("Avec les mots");
+        $media->setDescription("Avec les mots musique");
+        $media->setPosition(4);
+        $media->setDuree(219);
+        $media->setFilePath("");
+        $media->addMediaslist($mediaslist3);
+        $media->addArtist($artist2);
+        $manager->persist($media);
+
+        $media = new Media();
+        $media->setTitle("La vie de tout les jours");
+        $media->setDescription("La vie de tout les jours musique");
+        $media->setPosition(5);
+        $media->setDuree(172);
+        $media->setFilePath("");
+        $media->addMediaslist($mediaslist3);
+        $media->addArtist($artist2);
+        $manager->persist($media);
+
+        $media = new Media();
+        $media->setTitle("Qu'en avez-vous fait?");
+        $media->setDescription("Qu'en avez-vous fait? musique");
+        $media->setPosition(6);
+        $media->setDuree(184);
+        $media->setFilePath("");
+        $media->addMediaslist($mediaslist3);
+        $media->addArtist($artist2);
+        $manager->persist($media);
+
+        $media = new Media();
+        $media->setTitle("Pourquoi c'est comme ça?");
+        $media->setDescription("Pourquoi c'est comme ça? musique");
+        $media->setPosition(7);
+        $media->setDuree(140);
+        $media->setFilePath("");
+        $media->addMediaslist($mediaslist3);
+        $media->addArtist($artist2);
+        $manager->persist($media);
+
+        $media = new Media();
+        $media->setTitle("Je ne te vois plus");
+        $media->setDescription("Je ne te vois plus musique");
+        $media->setPosition(8);
+        $media->setDuree(216);
+        $media->setFilePath("");
+        $media->addMediaslist($mediaslist3);
+        $media->addArtist($artist2);
+        $manager->persist($media);
+
+        $media = new Media();
+        $media->setTitle("Kick ce soit");
+        $media->setDescription("Kick ce soit musique");
+        $media->setPosition(9);
+        $media->setDuree(193);
+        $media->setFilePath("");
+        $media->addMediaslist($mediaslist3);
+        $media->addArtist($artist2);
+        $manager->persist($media);
+
+        $media = new Media();
+        $media->setTitle("Partout");
+        $media->setDescription("Partout musique");
+        $media->setPosition(10);
+        $media->setDuree(206);
+        $media->setFilePath("");
+        $media->addMediaslist($mediaslist3);
+        $media->addArtist($artist2);
+        $manager->persist($media);
+
+        $media = new Media();
+        $media->setTitle("Qu'est-ce-que");
+        $media->setDescription("Qu'est-ce-que musique");
+        $media->setPosition(11);
+        $media->setDuree(58);
+        $media->setFilePath("");
+        $media->addMediaslist($mediaslist3);
+        $media->addArtist($artist2);
+        $manager->persist($media);
+
+        $media = new Media();
+        $media->setTitle("C'est");
+        $media->setDescription("C'est musique");
+        $media->setPosition(12);
+        $media->setDuree(248);
+        $media->setFilePath("");
+        $media->addMediaslist($mediaslist3);
+        $media->addArtist($artist2);
+        $manager->persist($media);
+
+        $media = new Media();
+        $media->setTitle("Rien.");
+        $media->setDescription("Rien. musique");
+        $media->setPosition(13);
+        $media->setDuree(190);
+        $media->setFilePath("");
+        $media->addMediaslist($mediaslist3);
+        $media->addArtist($artist2);
+        $manager->persist($media);
+
         /* BLOC CONCERT HALL */
         $concerthall = new ConcertHall();
 
@@ -342,6 +484,22 @@ class AppFixtures extends Fixture
         $event->setDescription("HARD BOOM LIVE est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un imprimeur anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n'a pas fait que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en soit modifié. Il a été popularisé dans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son inclusion dans des applications de mise en page de texte, comme Aldus PageMaker.");
 
         $manager->persist($event);
+
+        $event2 = new Event();
+
+        $event2->setTitle("Concert Album Release");
+        $event2->setStartDate(new DateTimeImmutable('now'));
+        $event2->setEndDate(new DateTimeImmutable('now'));
+        $event2->setTicketingLink("https://shotgun.live/fr");
+        $event2->setIdConcertHall($concerthall);
+        $event2->addArtist($artist2);
+        $event2->setArtistAuthor($artist2);
+        $event2->setPicturePath("");
+        $event2->setPrivate(false);
+        $event2->setType("concert");
+        $event2->setDescription("Nouvelle tournée pour Jacques et son groupe pour la sortie de leur nouvel album LIMPORTANCEDUVIDE.");
+
+        $manager->persist($event2);
 
         $practice = new Event();
 
@@ -410,6 +568,7 @@ class AppFixtures extends Fixture
         $user_manager2->setProfilePicturePath("");
         $user_manager2->setActive(true);
         $user_manager2->setRoles(["ROLE_MANAGER"]);
+        $user_manager2->setIdArtist($artist2);
         $user_manager2->setActivationToken("fdp");
         $user_manager2->setActivationTokenExpiration(new DateTimeImmutable('now'));
 
@@ -469,6 +628,23 @@ class AppFixtures extends Fixture
         $manager->persist($eventInvite);
 
         /* BLOC POUR POSTS */
+        $post0 = new Post();
+
+        $post0->setTitle("Nouveau concert de Jacques qui arrive bientôt");
+        $post0->setTextContent("
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris aliquet libero iaculis, malesuada elit sit amet, scelerisque lacus. Nulla pellentesque, eros ac consectetur imperdiet, ligula nulla varius enim, at blandit sapien metus at dui. Donec et diam at dolor laoreet consequat. Cras pellentesque fringilla sapien, id bibendum odio malesuada vitae. Nulla rutrum leo tortor, a dictum mi volutpat at. Morbi convallis turpis velit, sed blandit mauris ullamcorper non. Praesent sed lorem consequat, eleifend quam nec, facilisis augue. Ut sollicitudin fringilla eleifend. In porttitor odio sed luctus aliquet. Vivamus semper sit amet est finibus ultrices. Phasellus nulla augue, viverra at lacus quis, elementum blandit ipsum. Nullam aliquet pretium nunc, ac vulputate nulla luctus sit amet. Pellentesque id quam id metus rhoncus bibendum. Vestibulum eu nibh vel sapien mollis porta. Donec vitae interdum odio. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla facilisi. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nam nibh lorem, faucibus tempus lacinia eget, mollis ut turpis. Mauris elementum tellus ut tellus elementum, vitae aliquet massa posuere. Suspendisse lacus mi, facilisis at quam at, tincidunt facilisis mauris. Praesent id tempus magna. Suspendisse sed volutpat ipsum. Nam vel euismod nunc. Suspendisse sagittis nibh vitae luctus efficitur. Donec sit amet cursus orci. In tristique nisl et dolor volutpat lobortis. Aenean non placerat velit. Nam porttitor est a maximus bibendum. Suspendisse ut efficitur lectus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Cras malesuada euismod maximus. Phasellus fermentum tempor velit, ut vehicula dolor feugiat et. Suspendisse quis hendrerit sapien, a malesuada mi. Praesent in molestie leo, non pretium erat. Integer quis tempor arcu. Ut sollicitudin molestie purus sed molestie. Maecenas quis lacus sed risus ullamcorper porttitor. Nullam ullamcorper a lectus semper ultricies. Nunc faucibus tortor id augue tincidunt, ac hendrerit est volutpat. Etiam hendrerit lectus augue, a venenatis nunc vestibulum elementum. Nunc laoreet facilisis massa. Pellentesque quis dui mollis, elementum justo at, efficitur orci. In rhoncus mollis magna, vitae facilisis risus rhoncus vel. Mauris faucibus molestie ipsum, sed euismod odio egestas a. Ut non orci volutpat, egestas justo bibendum, tristique odio. Phasellus quis massa tristique, accumsan nisl sit amet, ullamcorper urna. Donec in feugiat erat, nec auctor ex. Nunc sit amet fringilla nunc, non dapibus lacus. Curabitur libero arcu, varius vel hendrerit sed, gravida non ante. Morbi id odio augue. Donec varius eros imperdiet, ultrices metus et, suscipit enim. Nam sapien dui, fermentum a massa a, aliquam semper tortor. Cras eu posuere massa. Vestibulum rutrum auctor purus, eu accumsan nunc sagittis ut. Morbi nisi dolor, efficitur ac vulputate sit amet, vehicula non elit. Ut varius nisi viverra mauris molestie, vitae eleifend quam ultrices. Integer orci libero, ultrices quis feugiat id, porta vel nunc. Quisque a rutrum ipsum. Praesent ornare vel quam in varius. Nunc pulvinar lectus neque, ut imperdiet ipsum condimentum et. Pellentesque leo augue, hendrerit quis egestas ut, semper eu ante. Pellentesque sem ex, porttitor eu sapien vitae, blandit aliquam sapien. Morbi placerat ante vitae libero lobortis, et commodo urna pulvinar. Morbi elementum dolor in faucibus eleifend. Sed suscipit mattis nulla eu consequat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Proin venenatis orci eget mauris tempor, nec rutrum erat semper.
+        ");
+        $post0->setCreatedAt(new DateTimeImmutable('now'));
+        $post0->setUpdatedAt(new DateTimeImmutable('now'));
+        $post0->setValidatedAt(new DateTimeImmutable('now'));
+        $post0->setIdEvent($event2);
+        $post0->setIdUser($user_artist2);
+        $post0->setIdArtist($artist2);
+        $post0->setIdMediasList($mediaslist3);
+        $post0->setIdMedia($media1);
+        
+        $manager->persist($post0);
+
         $post = new Post();
 
         $post->setTitle("RATIO");
@@ -497,7 +673,7 @@ class AppFixtures extends Fixture
         $post = new Post();
 
         $post->setTitle("pas validé");
-        $post->setTextContent("AYAYAYAYAYAYAYAYAYAY CACA");
+        $post->setTextContent("AYAYAYAYAYAYAYAYAYAY YAyatAYA");
         $post->setCreatedAt(new DateTimeImmutable('now'));
         $post->setUpdatedAt(new DateTimeImmutable('now'));
         $post->setValidatedAt(new DateTimeImmutable('now'));
@@ -510,7 +686,7 @@ class AppFixtures extends Fixture
         /* BLOC POUR COMMENT */
         $comment = new Comment();
 
-        $comment->setText("OH TU ME RATIO PAS CONNARD DE NAZI");
+        $comment->setText("OH TU ME RATIO PAS !!!!!");
         $comment->setValidatedAt(new DateTimeImmutable('now'));
         $comment->setCreatedAt(new DateTimeImmutable('now'));
         $comment->setIdUser($user_default);
@@ -520,10 +696,29 @@ class AppFixtures extends Fixture
 
         $comment = new Comment();
 
-        $comment->setText("Je suis un gros raciste");
+        $comment->setText("Tu es un gros c*nnard hahhaahaha!");
         $comment->setCreatedAt(new DateTimeImmutable('now'));
         $comment->setIdUser($user_default);
         $comment->setIdPost($post);
+
+        $manager->persist($comment);
+
+        $comment = new Comment();
+
+        $comment->setText("Super ton concert Jacques !!!!");
+        $comment->setValidatedAt(new DateTimeImmutable('now'));
+        $comment->setCreatedAt(new DateTimeImmutable('now'));
+        $comment->setIdUser($user_default);
+        $comment->setIdPost($post0);
+
+        $manager->persist($comment);
+
+        $comment = new Comment();
+
+        $comment->setText("Tu es un gros c*nnard hahhaahaha!");
+        $comment->setCreatedAt(new DateTimeImmutable('now'));
+        $comment->setIdUser($user_default);
+        $comment->setIdPost($post0);
 
         $manager->persist($comment);
 

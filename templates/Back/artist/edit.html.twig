@@ -5,7 +5,7 @@
 {% block body %}
     <h1>Edit artist {{ artist.pseudo }}</h1>
 
-    {{ include('Back/post/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('Back/artist/_form.html.twig', {'button_label': 'Update'}) }}
 
     <a href="{{ path('admin_app_artist_index') }}">back to list</a>
 

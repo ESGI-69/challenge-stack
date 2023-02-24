@@ -5,7 +5,7 @@
     {% set minutes = mediaDuree / 60 %}
     {% set seconds = mediaDuree % 60 %}
     <span class="media__light-text">
-      {% for artist in mediaArtist %}{{artist.pseudo}}{% endfor %} • {{ minutes|format_number({fraction_digit: 0}) }} min {{seconds}}s
+      {% for artist in mediaArtist %}{{artist.pseudo}}{% endfor %} • {{ minutes|split('.')[0] }} min {{seconds}}s
     </span>
   </div>
 </div>

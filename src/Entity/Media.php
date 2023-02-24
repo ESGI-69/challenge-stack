@@ -101,7 +101,15 @@ class Media
         if ( $this->file_path == "" ) {
           $this->file_path = "placeholder-medias_lists.jpeg";
         }
-        return "/data-files/medias_list-pictures/".$this->file_path;
+        return $this->file_path;
+    }
+
+    public function getPrefixFilePath(): ?string
+    {
+      if ( $this->file_path == "" ) {
+        $this->file_path = "placeholder-medias_lists.jpeg";
+      }
+      return "/data-files/medias_list-pictures/".$this->file_path;
     }
 
     public function setFilePath(?string $file_path): self

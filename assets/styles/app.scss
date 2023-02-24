@@ -5,6 +5,7 @@
 
 @use 'back/sidebar' as *;
 @use 'back/table' as *;
+@use 'back/form' as *;
 
 @use 'front/about' as *;
 @use 'front/feed' as *;
@@ -24,7 +25,7 @@
 @use './components/comment.scss' as *;
 @use './components/section.scss' as *;
 @use './components/button.scss' as *;
-@use './components/mediaList/mediaListCard.scss' as *;
+@use './components/mediaList/mediasListCard.scss' as *;
 @use './components/mediaList/mediaCard.scss' as *;
 
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Rock+Salt&display=swap');

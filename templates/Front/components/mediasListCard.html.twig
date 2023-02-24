@@ -8,6 +8,6 @@
     <span class="medias-list__light-text">{% for artist in mediaslistArtist %}{{artist.pseudo}}{% endfor %}</span>
     {% set minutes = mediasListDuration / 60 %}
     {% set seconds = mediasListDuration % 60 %}
-    <span class="medias-list__light-text">• {{ minutes|format_number({fraction_digit: 0}) }}min {{seconds}}s</span>
+    <span class="medias-list__light-text">• {{ minutes|split('.')[0] }}min {{seconds}}s</span>
   </div>
 </div>

@@ -5,6 +5,17 @@
   margin-left: 4rem;
   margin-right: 4rem;
 
+  .vich-image {
+    a {
+      pointer-events: none;
+      cursor: default;
+    }
+    img {
+      max-width: 150px;
+      max-height: 150px;
+    }
+  }
+
   .form-group{
     display: flex;
     flex-direction: column;

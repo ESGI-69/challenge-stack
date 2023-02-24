@@ -17,7 +17,12 @@
         } %}
       {% endif %}
     </div>
-    <p class="post__content__text">{{ post.TextContent }}</p>
+    {% if trimDescription == true %}
+    
+      <p class="post__content__text">{{ post.TextContent |slice(0, 500)|trim ~ (post.TextContent |length > 500 ? ' ...' : '') }}</p>
+    {% else %}
+      <p class="post__content__text">{{ post.TextContent }}</p>
+    {% endif %}
     {% if post.getIdEvent %}
       <div class="post__content__event">
         {% include '/Front/components/eventRow.html.twig' 
@@ -37,7 +42,7 @@
       {% if post.getIdMediaslist %}
         <div class="post__content__mediaslist">
           {% include '/Front/components/mediasListCard.html.twig' with {
-            mediasListPicture: post.getIdMediaslist.pathCover,
+            mediasListPicture: post.getIdMediaslist.PrefixedPathCover,
             mediasListTitle: post.getIdMediaslist.title,
             mediaslistDate: post.getIdMediaslist.releaseDate|date("Y"),
             mediaslistArtist: post.getIdMediaslist.getArtists,
@@ -51,7 +56,7 @@
             mediaTitle: post.getIdMedia.title,
             mediaArtist: post.getIdMedia.getArtists,
             mediaDuree: post.getIdMedia.duree,
-            mediaPicture: post.getIdMedia.FilePath,
+            mediaPicture: post.getIdMedia.PrefixFilePath,
           } %}
         </div>
       {% endif %}
