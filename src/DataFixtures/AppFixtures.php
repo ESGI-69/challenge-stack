@@ -567,6 +567,7 @@ class AppFixtures extends Fixture
         $user_manager2->setUsername("Shredder2664");
         $user_manager2->setProfilePicturePath("");
         $user_manager2->setActive(true);
+        $user_manager2->setIdArtist($artist2);
         $user_manager2->setRoles(["ROLE_MANAGER"]);
         $user_manager2->setIdArtist($artist2);
         $user_manager2->setActivationToken("fdp");

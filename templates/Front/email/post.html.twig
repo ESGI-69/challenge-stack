@@ -1,5 +1,5 @@
 {% block body %}
-  <p>The arstist {{ post.IdArtist.pseudo }} posted a new article !</p>
+  <p>The artist {{ post.IdArtist.pseudo }} posted a new article !</p>
   <p><strong>{{ post.Title }}</strong></p>
   <p><a href="{{url('front_app_post_show', {'slug': post.Slug})}}">Check it out !</a></p>
   <p><a href="{{url('front_app_post_show', {'slug': post.Slug})}}">{{url('front_app_post_show', {'slug': post.Slug})}}</a></p>

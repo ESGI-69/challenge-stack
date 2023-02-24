@@ -26,3 +26,7 @@ services:
     App\EventListener\PostCreatedSubscriber:
         tags:
             - { name: doctrine.event_subscriber }
+
+    App\EventListener\EventCreatedSubscriber:
+        tags:
+            - { name: doctrine.event_subscriber }
