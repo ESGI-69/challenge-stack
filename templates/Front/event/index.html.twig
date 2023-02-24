@@ -25,7 +25,6 @@
 {% include '/Front/components/section.html.twig' with {name: 'Tomorow'} %}
 <div class="events-list">
 {% for event in tomorrowEvents %}
-{{ dump(event.slug)}}
   {% include '/Front/components/eventRow.html.twig'
     with {
       eventImagePath: event.getPrefixedPicturePath,

@@ -11,7 +11,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Form\SearchType;
 
-
 #[Route('/event')]
 class EventController extends AbstractController
 {
@@ -36,4 +35,36 @@ class EventController extends AbstractController
             'searchForm' => $searchForm->createView()
         ]);
     }
+
+    //route to make a user be interested in an event
+    #[Route('/{id}/interested', name: 'app_event_interested', methods: ['POST'])]
+    public function interested(Event $event, EventRepository $eventRepository , Request $request): Response
+    {
+        // check csrf token 
+        if (!$this->isCsrfTokenValid('interested', $request->request->get('_token'))) {
+            return $this->redirectToRoute('front_app_event_show', ['slug' => $event->getSlug()], Response::HTTP_SEE_OTHER);
+        }else{
+            $event->addInsterestedUser($this->getUser());
+            $eventRepository->save($event, true);
+            return $this->redirectToRoute('front_app_event_show', ['slug' => $event->getSlug()], Response::HTTP_SEE_OTHER);
+        }
+       
+    }
+
+    //route to make a user be not interested in an event
+    #[Route('/{id}/uninterested', name: 'app_event_uninterested', methods: ['POST'])]
+    public function uninterested(Event $event, EventRepository $eventRepository, Request $request): Response
+    {
+        // check csrf token
+        if (!$this->isCsrfTokenValid('interested', $request->request->get('_token'))) {
+            return $this->redirectToRoute('front_app_event_show', ['slug' => $event->getSlug()], Response::HTTP_SEE_OTHER);
+        }else{
+            $event->removeInsterestedUser($this->getUser());
+            $eventRepository->save($event, true);
+            return $this->redirectToRoute('front_app_event_show', ['slug' => $event->getSlug()], Response::HTTP_SEE_OTHER);
+        }
+     
+    }
+
+
 }
