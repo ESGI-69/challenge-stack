@@ -13,13 +13,20 @@
       {% include '/Front/components/section.html.twig' with { name: 'Last Posts' } %}
 
     <div class="posts-list">
-    {% for post in artist.getPosts %}
-      {% set isPostLiked = post.userslike.contains(app.user) %}
+      {% for post in artist.getPosts %}
+        {% set isPostLiked = post.userslike.contains(app.user) %}
+        {% set mediasListDuration = 0 %}
+        {% if (post.getIdMediaslist) %}
+          {% for media in post.getIdMediaslist.getMedias %}
+            {% set mediasListDuration = mediasListDuration + media.duree %}
+          {% endfor %}
+        {% endif %}
         {% include '/Front/components/post.html.twig'
           with {
             showComments: false,
             post,
             isPostLiked,
+            mediasListDuration
           }
         %}
       {% endfor %}
