@@ -17,7 +17,12 @@
         } %}
       {% endif %}
     </div>
-    <p class="post__content__text">{{ post.TextContent }}</p>
+    {% if trimDescription == true %}
+    
+      <p class="post__content__text">{{ post.TextContent |slice(0, 500)|trim ~ (post.TextContent |length > 500 ? ' ...' : '') }}</p>
+    {% else %}
+      <p class="post__content__text">{{ post.TextContent }}</p>
+    {% endif %}
     {% if post.getIdEvent %}
       <div class="post__content__event">
         {% include '/Front/components/eventRow.html.twig' 
