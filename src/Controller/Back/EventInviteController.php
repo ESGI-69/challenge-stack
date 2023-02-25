@@ -3,15 +3,20 @@
 namespace App\Controller\Back;
 
 use App\Entity\EventInvite;
+use App\Entity\User;
 use App\Repository\EventInviteRepository;
 use App\Repository\EventRepository;
 use App\Repository\ArtistRepository;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
+
 
 #[Route('/invite')]
 class EventInviteController extends AbstractController
@@ -65,7 +70,7 @@ class EventInviteController extends AbstractController
 
     #[isGranted('ROLE_ARTIST')]
     #[Route('/send', name: 'app_event_invite_send', methods: ['POST'])]
-    public function send(Request $request, EventInviteRepository $eventInviteRepository, EventRepository $eventRepository, ArtistRepository $artistRepository)
+    public function send(Request $request, EventInviteRepository $eventInviteRepository, EventRepository $eventRepository, ArtistRepository $artistRepository, UserRepository $userRepository, MailerInterface $mailer): Response
     {
         $artistId = $request->query->get('artist');
         $eventId = $request->query->get('event');
@@ -92,6 +97,27 @@ class EventInviteController extends AbstractController
         $eventInvite->setStatus('pending');
         $eventInvite->setCreatedAt(new \DateTimeImmutable());
         $eventInviteRepository->save($eventInvite, true);
+
+        if($eventInvite->getId()) {
+
+            $user = $userRepository->findOneBy(['id_artist' => $artist]);
+            $artistAuthor = $this->getUser()->getIdArtist();
+            if($user) {
+                $email = (new Email())
+                ->from('support@'.$_ENV['DOMAIN_NAME'])
+                ->to($user->getEmail())
+                ->subject('Invitation à un événement')
+                ->html($this->renderView('Front/email/invitation.html.twig', [
+                    'event' => $event,
+                    'artistName' => $artistAuthor->getPseudo()
+                ]));
+                $mailer->send($email);
+              
+            } else {
+                $this->addFlash('danger', 'L\'invitation n\'a pas pu être envoyée');
+            }
+           
+        }
 
         return $this->redirectToRoute('admin_app_select_artist_event_invite', ['event' => $event->getSlug()], Response::HTTP_SEE_OTHER);
     }
