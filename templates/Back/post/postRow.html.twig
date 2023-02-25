@@ -3,7 +3,7 @@
   <td class="text-center">{{ post.Id }}</td>
   <td class="text-center">{{ post.IdArtist.Pseudo }}</td>
   <td class="text-center">{{ post.Title }}</td>
-  <td class="text-center">{{ post.TextContent }}</td>
+  <td class="text-center"> {{ post.TextContent |slice(0, 200)|trim ~ (post.TextContent |length > 200 ? ' ...' : '') }}</td>
   <td class="text-center">{{ post.CreatedAt|date() }}</td>
   <td class="text-center">{{ post.UpdatedAt|date() }}</td>
   {% if post.ValidatedAt == null %}

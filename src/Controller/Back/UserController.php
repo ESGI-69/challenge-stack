@@ -40,7 +40,7 @@ class UserController extends AbstractController
             }
           }
           foreach ($users as $key => $user) {
-            if (in_array('ROLE_ADMIN', $user->getRoles()) || in_array('ROLE_MANAGER', $user->getRoles())) {
+            if (in_array('ROLE_ADMIN', $user->getRoles()) || in_array('ROLE_MANAGER', $user->getRoles())|| in_array('ROLE_MODERATOR', $user->getRoles())) {
               unset($users[$key]);
             }
           }

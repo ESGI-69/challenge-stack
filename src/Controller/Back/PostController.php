@@ -74,7 +74,9 @@ class PostController extends AbstractController
           $linkedArtist = false;
         }
         $post = new Post();
-        $form = $this->createForm(PostType::class, $post);
+        $form = $this->createForm(PostType::class, $post, [
+          'idArtist' => $idArtist,
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

@@ -1,0 +1,37 @@
+{% extends 'base_back.html.twig' %}
+
+{% block title %}BeatHub | My artists {% endblock %}
+
+{% block body %}
+  <h1>My Artist</h1>
+    {% if artist %}
+      <a href="{{ path('admin_app_artist_edit_mine', {'id': artist.Id}) }}">Edit my artist</a>
+      <div class="artist-infos">
+        <p>LastName: <span>{{ artist.nom }}</span></p>
+        <p>Firstname: <span>{{ artist.prenom }}</span></p>
+        <p>Nickname: <span>{{ artist.pseudo }}</span></p>
+        <p>Description: <span>{{ artist.description }}</span></p>
+        <p>Email: <span>{{ artist.email }}</span></p>
+        <p>Youtube: <span>{{ artist.urlYt }}</span></p>
+        <p>Soundcloud: <span>{{ artist.urlSoundcloud }}</span></p>
+        <p>Spotify: <span>{{ artist.urlSpotify }}</span></p>
+        <p>Deezer: <span>{{ artist.urlDeezer }}</span></p>
+        <p>Country: <span>{{ artist.country }}</span></p>
+        <p>Type: <span>{{ artist.type }}</span></p>
+        <p>
+          Medias: 
+          {% for media in artist.medias %}
+            <span> {{ media.title }} •</span>
+          {% endfor %}
+        </p>
+        <p>
+          Posts: 
+          {% for post in artist.posts %}
+            <span> {{ post.title }} •</span>
+          {% endfor %}
+        </p>
+      </div>
+  {% else %}
+    <a href="{{ path('admin_app_artist_new_mine') }}">Create your artist</a>
+  {% endif %}
+{% endblock %}
