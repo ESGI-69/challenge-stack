@@ -1,0 +1,19 @@
+<tr>
+<td class="text-center">{{ media.Title }}</td>
+<td class="text-center">{{ media.Description }}</td>
+<td class="text-center">
+  {% set minutes = media.Duree / 60 %}
+  {% set seconds = media.Duree % 60 %}
+  {{ minutes|split('.')[0] }}min {{seconds}}s
+</td>
+<td class="text-center"><img style="width: 50px;" src="{{ media.getPrefixFilePath }}"></td>
+<td class="text-center">
+  {% for mediasList in media.mediasLists %}
+    {{ mediasList.title }} •
+  {% endfor %}
+</td>
+<td class="text-center">
+  <a href="{{ path('admin_app_media_edit', {'id': media.id}) }}" class="btn btn-primary">Edit</a>
+  {{ include('Back/media/_delete_form.html.twig') }}
+</td>
+</tr>

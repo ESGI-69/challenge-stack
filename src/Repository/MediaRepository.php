@@ -39,6 +39,17 @@ class MediaRepository extends ServiceEntityRepository
         }
     }
 
+    public function mediaByArtist($artistId): array
+    {
+        $qb = $this->createQueryBuilder('m');
+        $qb->join('m.artists', 'ma')
+            ->where('ma.id = :artistId')
+            ->setParameter('artistId', $artistId )
+            ->getQuery()
+            ->getResult();
+        return $qb->getQuery()->getResult();
+    }
+
 //    /**
 //     * @return Media[] Returns an array of Media objects
 //     */

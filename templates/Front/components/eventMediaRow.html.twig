@@ -1,21 +1,15 @@
 {% for artist in artists %}
-<div style="display: flex;justify-content: space-around;">
+<div style="display: flex;justify-content:left; flex-wrap: wrap;">
     {% for media in artist.getmedias %}
-      {% if loop.index < 4 %}
-        <div>
-            <div style="height: 200px; width: 200px; background-color: red; background-image:url('{{media.getmediaslists[0].getPrefixedPathCover}}');    background-size: cover;"></div>
+        <div style="margin-right: 16px; margin-bottom: 8px; max-width: 200px; width: 200px;">
+            {% if not media.getmediaslists is empty %}
+              <div style="height: 200px; width: 200px; background-color: red; background-image:url('{{media.getmediaslists[0].getPrefixedPathCover}}');    background-size: cover;"></div>
+            {% else %}
+              <div style="height: 200px; width: 200px; background-color: red; background-image:url('{{media.getPrefixFilePath}}');    background-size: cover;"></div>
+            {% endif %}
                 <p>{{ media.title }} <b class="event-row__info__duration">{{  media.date | default(2022)}}</b></p>
                 <p class="event-row__info__duration">{{ artist.pseudo }}  -  {{ media.duree|date('i:s')  }}</p>
         </div>
-        {% else %}
-        
-       <div>
-            <div style="height: 50px; width: 50px; background-color: red; background-image:url('{{media.getmediaslists[0].getPrefixedPathCover}}');    background-size: cover;"></div>
-                <p>{{ media.title }} <b class="event-row__info__duration">{{  media.date | default(2022)}}</b></p>
-                <p class="event-row__info__duration">{{ artist.pseudo }}  -  {{ media.duree|date('i:s') }}</p>
-        </div>      
-
-      {% endif %}
 
     {% endfor %}    
 </div>

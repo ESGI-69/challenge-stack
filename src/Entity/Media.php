@@ -7,8 +7,11 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: MediaRepository::class)]
+#[Vich\Uploadable]
 class Media
 {
     #[ORM\Id]
@@ -30,6 +33,9 @@ class Media
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $file_path = null;
+
+    #[Vich\UploadableField(mapping: 'cover_mediaslist', fileNameProperty: 'file_path')]
+    private ?File $imageFile = null;
 
     #[ORM\ManyToMany(targetEntity: Artist::class, inversedBy: 'medias')]
     private Collection $artists;
@@ -163,6 +169,25 @@ class Media
     public function removeMediaslist(MediasList $mediaslist): self
     {
         $this->mediaslists->removeElement($mediaslist);
+
+        return $this;
+    }
+
+    /**
+     * @return File|null
+     */
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * @param File|null $imageFile
+     * @return MediasList
+     */
+    public function setImageFile(?File $imageFile): self
+    {
+        $this->imageFile = $imageFile;
 
         return $this;
     }

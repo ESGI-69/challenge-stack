@@ -11,19 +11,19 @@
     <div class="event-header__content__info">
       {% if 1 is not null %}
         <span class="event-header__content__info__icons" style="white-space: nowrap">
-          {% include '/icons/warehouse.html.twig' %} Venue <b>{{ event.getidconcerthall.name }}</b>
+          {% include '/icons/warehouse.html.twig' with { class: "warehouse-logo" } %} Venue <b>{{ event.getidconcerthall.name }}</b>
         </span>
       {% endif %}
 
       {% if 1 is not null %}
         <span class="club-header__content__info__icons" style="white-space: nowrap">
-          {% include '/icons/warehouse.html.twig' %} Date <b>{{ event.startdate|date("D M j") }}</b>
+          {% include '/icons/warehouse.html.twig' with { class: "warehouse-logo" } %} Date <b>{{ event.startdate|date("D M j") }}</b>
         </span>
       {% endif %}
 
         {% if 1 is not null %}
         <span class="club-header__content__info__icons" style="white-space: nowrap">
-          {% include '/icons/warehouse.html.twig' %} Capacity <b>{{ event.getidconcerthall.capacity }}</b>
+          {% include '/icons/warehouse.html.twig' with { class: "warehouse-logo" } %} Capacity <b>{{ event.getidconcerthall.capacity }}</b>
         </span>
       {% endif %}
       {% if app.user %}
