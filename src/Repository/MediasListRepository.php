@@ -59,6 +59,28 @@ class MediasListRepository extends ServiceEntityRepository
 
         return $result;
     }
+    // public function mediaByArtist($artistId): array
+    // {
+    //     $qb = $this->createQueryBuilder('m');
+    //     $qb->join('m.artists', 'ma')
+    //         ->where('ma.id = :artistId')
+    //         ->setParameter('artistId', $artistId )
+    //         ->getQuery()
+    //         ->getResult();
+    //     return $qb->getQuery()->getResult();
+    // }
+
+    public function mediasListsByArtist(int $artistId): array
+    {
+        $qb = $this->createQueryBuilder('ml');
+        $qb->join('ml.artists', 'ma')
+            ->where('ma.id = :artistId')
+            ->setParameter('artistId', $artistId )
+            ->getQuery()
+            ->getResult();
+        return $qb->getQuery()->getResult();
+    }
+
 
     // public function getTotalDuration(MediasList $ml): int
     // {

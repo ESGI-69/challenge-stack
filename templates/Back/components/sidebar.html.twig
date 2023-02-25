@@ -76,6 +76,14 @@
               }
             %}
           {% endif %}
+          {% if is_granted('ROLE_ARTIST') %}
+            {% include '/Back/components/sidebarButton.html.twig' with {
+                href: path('admin_app_mediaslist_index'),
+                iconTwig: '/icons/music.html.twig',
+                text: 'Medias Lists',
+              }
+            %}
+          {% endif %}
         </section>
       {% endif %}
 

@@ -32,18 +32,6 @@ class MediaController extends AbstractController
   }
 
   #[IsGranted('ROLE_ARTIST')]
-  #[Route('{id}',  name: 'app_media_delete', methods: ['POST'])]
-  public function delete(Request $request, Media $media, MediaRepository $mediaRepository): Response
-    {
-
-        if ($this->isCsrfTokenValid('delete'.$media->getId(), $request->request->get('_token'))) {
-            $mediaRepository->remove($media, true);
-        }
-
-        return $this->redirectToRoute('admin_app_media_index', [], Response::HTTP_SEE_OTHER);
-    }
-
-  #[IsGranted('ROLE_ARTIST')]
   #[Route('/new', name: 'app_media_new', methods: ['GET', 'POST'])]
   public function new(Request $request, MediaRepository $mediaRepository): Response
   {
@@ -53,7 +41,6 @@ class MediaController extends AbstractController
         $linkedArtist = false;
     }
     $media = new Media();
-    // dd($media);
     $form = $this->createForm(MediaBackType::class, $media);
     $form->handleRequest($request);
 
@@ -70,6 +57,19 @@ class MediaController extends AbstractController
       'linkedArtist' => $linkedArtist,
     ]);
   }
+
+  #[IsGranted('ROLE_ARTIST')]
+  #[Route('/{id}',  name: 'app_media_delete', methods: ['POST'])]
+  public function delete(Request $request, Media $media, MediaRepository $mediaRepository): Response
+    {
+
+        if ($this->isCsrfTokenValid('delete'.$media->getId(), $request->request->get('_token'))) {
+            $mediaRepository->remove($media, true);
+        }
+
+        return $this->redirectToRoute('admin_app_media_index', [], Response::HTTP_SEE_OTHER);
+    }
+
   #[IsGranted('ROLE_ARTIST')]
   #[Route('/{id}/edit', name: 'app_media_edit', methods: ['GET', 'POST'])]
   public function edit(Request $request, Media $media, MediaRepository $mediaRepository): Response

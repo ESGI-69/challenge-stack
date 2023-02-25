@@ -1,0 +1,9 @@
+<tr>
+<td class="text-center">{{ media.Title }}</td>
+<td class="text-center">{{ media.Description }}</td>
+<td class="text-center">{{ media.duree}}</td>
+<td class="text-center"><img style="width: 50px;" src="{{ media.getPrefixFilePath }}"></td>
+<td class="text-center">
+  {% include '/Back/mediasList/_delete_media_form.html.twig' with { id } %}
+</td>
+</tr>
