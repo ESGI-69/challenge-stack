@@ -42,6 +42,15 @@
                 text: 'Events',
               }
             %}
+            {% set day = date('now')|date('w') %}
+            {% set weekStart = date('now')|date_modify("-#{day} days")|date('c') %}
+            {% set weekEnd = date('now')|date_modify("+#{6-day} days")|date('c') %}
+            {% include '/Back/components/sidebarButton.html.twig' with {
+                href: path('admin_app_calendar_index', { 'from': weekStart, 'to': weekEnd }),
+                iconTwig: '/icons/calendar.html.twig',
+                text: 'Calendar',
+              }
+            %}
           {% endif %}
           {% if is_granted('ROLE_CAN_MODERATE_COMMENT') %}
             {% include '/Back/components/sidebarButton.html.twig' with {
