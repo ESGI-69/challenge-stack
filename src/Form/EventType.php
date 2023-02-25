@@ -63,7 +63,17 @@ class EventType extends AbstractType
                 'download_uri' => false,
                 'attr' => [
                   'class' => 'vich-image'
-              ]
+                ],
+                'constraints' => [
+                    new File([
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/png',
+                            'image/gif',
+                        ],
+                        'mimeTypesMessage' => 'Please upload a valid image (JPEG, PNG, GIF).',
+                    ]),
+                ],
             ])
             // Only the artist that are managed by the user can be selected
             // ->add('description')
