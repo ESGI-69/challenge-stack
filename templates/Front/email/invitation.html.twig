@@ -1,0 +1,8 @@
+{% block body %}
+
+{# mail d'invitation à un event #}
+
+<p> You are being invited to an event from {{artistName}} to join the event : {{event.title}} </p>
+<a href="{{url('admin_app_invite_index')}}"> {{url('admin_app_invite_index')}}</a>
+
+{% endblock %}
