@@ -1,0 +1,50 @@
+{% extends 'base_back.html.twig' %}
+
+{% block title %}BeatHub | Calendar{% endblock %}
+
+{% block body %}
+  <h1>Calendar</h1>
+  <div id='calendar'></div>
+
+  <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/index.global.min.js'></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var calendarEl = document.getElementById('calendar');
+      var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        locale: 'fr',
+        headerToolbar: {
+          left: 'prev,next today',
+          center: 'title',
+          right: 'dayGridMonth,timeGridWeek,timeGridDay'
+        },
+        eventColor: 'var(--color-primary)',
+        eventTextColor: 'var(--color-text-primary)',
+        events: [
+          {% for event in events %}
+            {
+              {% if event.inviteStatus|default(null) == 'accepted' %}
+              color: 'var(--color-success)',
+              title: '{{ event.title ~ ' by ' ~ event.ArtistAuthor.Pseudo ~ ' (accepted)' }}',
+              url: '{{ path('front_app_event_show', {'slug' : event.slug }) }}',
+              {% elseif event.inviteStatus|default(null) == 'pending' %}
+              color: 'var(--color-background)',
+              borderColor: 'var(--color-primary)',
+              textColor: 'var(--color-primary)',
+              title: '{{ event.title ~ ' by ' ~ event.ArtistAuthor.Pseudo ~ ' (pending)' }}',
+              url: '{{ path('admin_app_invite_index') }}',
+              {% else %}
+              url: '{{ path('front_app_event_show', {'slug' : event.slug }) }}',
+              title: '{{ event.title }}',
+              {% endif %}
+              start: '{{ event.StartDate|date('c') }}',
+              end: '{{ event.EndDate|date('c') }}',
+            },
+          {% endfor %}
+        ],
+      });
+      calendar.render();
+    });
+
+  </script>
+{% endblock %}
