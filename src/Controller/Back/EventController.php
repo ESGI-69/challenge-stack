@@ -6,6 +6,7 @@ use App\Entity\Event;
 use App\Form\EventType;
 use App\Form\EventPrivacyType;
 use App\Repository\EventRepository;
+use App\Repository\PostRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -80,9 +81,14 @@ class EventController extends AbstractController
 
     #[isGranted('ROLE_ARTIST')]
     #[Route('/{id}', name: 'app_event_delete', methods: ['POST'])]
-    public function delete(Request $request, Event $event, EventRepository $eventRepository): Response
+    public function delete(Request $request, Event $event, EventRepository $eventRepository, PostRepository $postRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$event->getId(), $request->request->get('_token'))) {
+            $posts = $postRepository->findBy(['id_event' => $event->getId()]);
+            foreach ($posts as $post) {
+                $post->setIdEvent(null);
+                $postRepository->save($post, true);
+            }
             $eventRepository->remove($event, true);
         }
 
