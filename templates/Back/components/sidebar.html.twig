@@ -74,12 +74,22 @@
       <section class="sidebar__container__navigation__section">
         {% if is_granted('ROLE_MANAGER') or is_granted('ROLE_ADMIN') %}
           <span class="sidebar__container__navigation__section__title">Management</span>
-           {% include '/Back/components/sidebarButton.html.twig' with {
-                href: path('admin_app_artist_index'),
-                iconTwig: '/icons/user.html.twig',
-                text: 'Artists',
-              }
-            %}
+            {% if is_granted('ROLE_ADMIN') %}
+              {% include '/Back/components/sidebarButton.html.twig' with {
+                    href: path('admin_app_artist_index'),
+                    iconTwig: '/icons/user.html.twig',
+                    text: 'Artists',
+                  }
+              %}
+            {% endif %}
+            {% if is_granted('ROLE_MANAGER') %}
+              {% include '/Back/components/sidebarButton.html.twig' with {
+                    href: path('admin_app_artist_index'),
+                    iconTwig: '/icons/user.html.twig',
+                    text: 'My Artist',
+                  }
+              %}
+            {% endif %}
             {% include '/Back/components/sidebarButton.html.twig' with {
                 href: path('admin_user_index'),
                 iconTwig: '/icons/link.html.twig',
