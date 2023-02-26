@@ -31,6 +31,10 @@ class EventController extends AbstractController
     #[Route('/{slug}', name: 'app_event_show', methods: ['GET'])]
     public function show(Event $event): Response
     {
+        // if event private raise 404
+        if($event->isPrivate()){
+            throw $this->createNotFoundException('The event does not exist');
+        }
         $searchForm = $this->createForm(SearchType::class, null, ['action' => $this->generateUrl('front_app_search'),'method' => 'POST']);
         return $this->render('Front/event/show.html.twig', [
             'event' => $event,
