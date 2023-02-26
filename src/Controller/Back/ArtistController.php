@@ -54,12 +54,10 @@ class ArtistController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $artistRepository->save($artist, true);
 
-            // assign the artist to the user
-            $user = $this->getUser();
-            $user->setIdArtist($artist);
-            $userRepository->save($user, true);
+            $artist->setManager($this->getUser());
+
+            $artistRepository->save($artist, true);
             return $this->redirectToRoute('admin_app_artist_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -94,10 +92,11 @@ class ArtistController extends AbstractController
     public function new(Request $request, ArtistRepository $artistRepository): Response
     {
         $artist = new Artist();
-        $form = $this->createForm(ArtistType::class, $artist);
+        $form = $this->createForm(ArtistType::class, $artist, ['role' => 'admin']);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $artistRepository->save($artist, true);
 
             return $this->redirectToRoute('admin_app_artist_index', [], Response::HTTP_SEE_OTHER);
