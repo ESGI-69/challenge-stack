@@ -26,15 +26,22 @@ class SearchController extends AbstractController
 
                     $search = $searchForm->getData();
                     $search = $search['search'];
+                    if ($search === null) {
+                        $search = '';
+                        $artists = [];
+                        $concertHalls = [];
+                        $events = [];
+                    }else{
+                        $artistRepository = $doctrine->getRepository(Artist::class);
+                        $artists = $artistRepository->findByLikePseudo($search);
 
-                    $artistRepository = $doctrine->getRepository(Artist::class);
-                    $artists = $artistRepository->findByLikePseudo($search);
+                        $concertHallRepository = $doctrine->getRepository(ConcertHall::class);
+                        $concertHalls = $concertHallRepository->findByLikeName($search);
 
-                    $concertHallRepository = $doctrine->getRepository(ConcertHall::class);
-                    $concertHalls = $concertHallRepository->findByLikeName($search);
+                        $eventRepository = $doctrine->getRepository(Event::class);
+                        $events = $eventRepository->findByLikeTitle($search);
+                    }
 
-                    $eventRepository = $doctrine->getRepository(Event::class);
-                    $events = $eventRepository->findByLikeTitle($search);
                     
                     return $this->render('Front/search/index.html.twig', [
                         'search' => $search,
