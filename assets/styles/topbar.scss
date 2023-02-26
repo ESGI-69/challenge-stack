@@ -64,6 +64,7 @@
   }
 
   &__user-info {
+    width: 100%;
     &__name {
       display: flex;
       align-items: center;
@@ -84,6 +85,25 @@
         min-height: 2rem;
         border-radius: 50%;
         object-fit: cover;
+      }
+    }
+
+    form {
+      flex-grow: 1;
+    }
+
+    &__search {
+      width: 100%;
+      padding: 0.5rem;
+      border: 1px solid var(--color-primary);
+      font-size: 1rem;
+      font-family: var(--font-family-sans-serif);
+      color: var(--color-text-primary);
+      background-color: var(--color-background);
+      outline: none;
+
+      &:focus {
+        box-shadow: 0 0 0 2px var(--color-primary);
       }
     }
   }
