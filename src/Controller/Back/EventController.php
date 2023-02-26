@@ -7,6 +7,7 @@ use App\Form\EventType;
 use App\Form\EventPrivacyType;
 use App\Repository\EventRepository;
 use App\Repository\PostRepository;
+use App\Repository\ArtistRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -99,12 +100,23 @@ class EventController extends AbstractController
 
     #[IsGranted('ROLE_ARTIST')]
     #[Route('/privacy', name: 'app_event_privacy_index', methods: ['GET'])]
-    public function privacy(EventRepository $eventRepository): Response
+    public function privacy(EventRepository $eventRepository, ArtistRepository $artistRepository) : Response
     {
+        $id_manager = $this->getUser()->getId();
+        $artists = $artistRepository->findByIdManager($id_manager);
+
+        $events = [];
+
+        foreach ($artists as $artist) {
+            foreach ($eventRepository->findBy(['ArtistAuthor' => $artist->getId()]) as $event) {
+                $events[] = $event;
+            }
+        }
+
         $today = new \DateTime();
         return $this->render('/Back/event/privacy/index.html.twig', [
             // All events created by the connected artist
-            'events' => $eventRepository->findBy(['ArtistAuthor' => $this->getUser()->getIdArtist()]),
+            'events' => $events,
         ]);
     }
 

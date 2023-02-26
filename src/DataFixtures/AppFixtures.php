@@ -76,7 +76,7 @@ class AppFixtures extends Fixture
         $artist2->setUrlDeezer("https://www.deezer.com/fr/artist/260397");
         $artist2->setCountry("France");
         $artist2->setType("solo");
-        $artist2->setManager($user_manager);
+        $artist2->setManager($user_manager2);
         $manager->persist($artist2);
 
         $artist3 = new Artist();
@@ -160,7 +160,7 @@ class AppFixtures extends Fixture
         $artist->setUrlDeezer("https://www.deezer.com/fr/artist/1935");
         $artist->setCountry("Germany");
         $artist->setType("solo");
-        $artist->setManager($user_manager2);
+        $artist->setManager($user_manager);
         $manager->persist($artist);
 
         $artist = new Artist();
