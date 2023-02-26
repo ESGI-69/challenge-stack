@@ -8,7 +8,7 @@ use App\Entity\User;
 use App\Repository\MediasListRepository;
 use App\Repository\MediaRepository;
 use App\Form\MediasListBackType;
-use App\Form\AddMediaType;
+use App\Form\MediaSelectType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -85,24 +85,29 @@ class MediasListController extends AbstractController
   #[Route('/medias/{id}/add', name: 'app_mediaslist_add_media', methods: ['GET', 'POST'])]
   public function addMedia(MediasList $mediasList, MediasListRepository $mediasListRepository, MediaRepository $mediaRepository, Request $request): Response
   {
-    //TODO A REFRACTOR
     $linkedArtist = true;
     $idArtist = $this->getUser()->getIdArtist();
     if ($idArtist === null) {
         $linkedArtist = false;
     }
-    $mediasList = new MediasList();
-    $form = $this->createForm(AddMediaType::class, $mediasList);
+
+    $medias = $mediaRepository->mediaByArtist($idArtist->getId());
+
+    $form = $this->createForm(MediaSelectType::class, null, ['medias' => $medias]);
+
     $form->handleRequest($request);
 
     if ($form->isSubmitted() && $form->isValid()) {
-        return $this->redirectToRoute('admin_app_mediaslist_index', ['id' => $mediasList->getId()], Response::HTTP_SEE_OTHER);
+        $selectedMedia = $form->get('medias')->getData();
+        $mediasList->addMedia($selectedMedia);
+        $mediasListRepository->save($mediasList, true);
+        return $this->redirectToRoute('admin_app_mediaslist_index');
     }
 
-    return $this->render('medias/add_media.html.twig', [
-        'form' => $form->createView(),
+    return $this->render('Back/mediasList/addMedia.html.twig', [
+        'linkedArtist' => $linkedArtist,
         'mediasList' => $mediasList,
-        'artistLinked' => $linkedArtist,
+        'form' => $form->createView(),
     ]);
   }
 
