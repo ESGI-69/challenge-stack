@@ -56,11 +56,15 @@ class ConcertHall
     private array $location = [];
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $updated_at = null; 
+    private ?\DateTimeInterface $updated_at = null;
+
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'followed_club', fetch:"EAGER")]
+    private Collection $users; 
 
     public function __construct()
     {
         $this->events = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -249,6 +253,33 @@ class ConcertHall
     public function setUpdatedAt(?\DateTimeInterface $updated_at): self
     {
         $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
+            $user->addFollowedClub($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->users->removeElement($user)) {
+            $user->removeFollowedClub($this);
+        }
 
         return $this;
     }
