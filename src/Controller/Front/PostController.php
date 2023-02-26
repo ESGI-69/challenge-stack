@@ -56,9 +56,13 @@ class PostController extends AbstractController
     ]);
   }
 
-  #[Route('/{id}/like', name: 'app_post_like', methods: ['GET'])]
+  #[Route('/{id}/like', name: 'app_post_like', methods: ['POST'])]
   public function like(Post $post, PostRepository $postRepository, Request $request): Response
   {
+    //check csrf
+    if(!$this->isCsrfTokenValid('like', $request->request->get('_token'))){
+      throw $this->createAccessDeniedException('Invalid CSRF token');
+    }
     $referer = $request->headers->get('referer');
     $post->addUserslike($this->getUser());
     $postRepository->save($post, true);
@@ -66,9 +70,13 @@ class PostController extends AbstractController
     return $this->redirect($referer);
   }
 
-  #[Route('/{id}/unlike', name: 'app_post_unlike', methods: ['GET'])]
+  #[Route('/{id}/unlike', name: 'app_post_unlike', methods: ['POST'])]
   public function unlike(Post $post, PostRepository $postRepository, Request $request): Response
   {
+    //check csrf
+    if(!$this->isCsrfTokenValid('unlike', $request->request->get('_token'))){
+      throw $this->createAccessDeniedException('Invalid CSRF token');
+    }
     $referer = $request->headers->get('referer');
     $post->removeUserslike($this->getUser());
     $postRepository->save($post, true);

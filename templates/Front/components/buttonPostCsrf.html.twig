@@ -1,0 +1,15 @@
+<form action="{{ link }}" method="post">
+               <input type="hidden" name="_token" value="{{ csrf_token(token_key) }}">
+        <input type="submit" value="{{ text }}" 
+         style="background: none;
+	border: none;
+    text-decoration: underline;
+	padding: 0;
+    color: inherit;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;"
+        class="button {{ type ? 'button-type--' ~ type : '' }} button-color--{{ color }} {{ class is defined ? class : '' }}"
+       
+        />
+</form>
