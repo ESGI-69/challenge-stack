@@ -49,6 +49,12 @@
       border-bottom: 1px solid var(--color-secondary);
       padding-bottom: 0.2rem;
 
+      @media (max-width: 768px) {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+      }
+
       &__title {
         font-size: 1.7rem;
         font-weight: bold;
