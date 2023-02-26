@@ -72,7 +72,7 @@ class AppFixtures extends Fixture
         $artist2->setEmail("jacques@mail.com");
         $artist2->setUrlYt("https://www.youtube.com/channel/UC05Om8nHItHP3xi4N8g1eMQ");
         $artist2->setUrlSoundcloud("https://soundcloud.com/jacquestransversal");
-        $artist1->setUrlSpotify("https://open.spotify.com/artist/55i4AnS7E58y41UwE0vvQh");
+        $artist2->setUrlSpotify("https://open.spotify.com/artist/55i4AnS7E58y41UwE0vvQh");
         $artist2->setUrlDeezer("https://www.deezer.com/fr/artist/260397");
         $artist2->setCountry("France");
         $artist2->setType("solo");
