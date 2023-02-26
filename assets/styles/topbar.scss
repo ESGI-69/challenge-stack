@@ -51,16 +51,19 @@
     display: flex;
     gap: 2rem;
     align-items: center;
+    padding: 0 2rem;
   }
 
   &__user-info {
     @media (max-width: 768px) {
+      padding: 0;
       flex-direction: column;
     }
   }
 
   &__navigation {
     @media (max-width: 768px) {
+      padding: 0;
       gap: 1rem;
     }
   }

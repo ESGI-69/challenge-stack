@@ -43,6 +43,15 @@
     min-height: 250px;
     height: fit-content;
 
+    &__actions {
+      @media screen and (max-width: 768px) {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: flex-start;
+      }
+    }
+
     @media (max-width: 768px) {
       padding: 0.5rem;
       margin-left: 0;
