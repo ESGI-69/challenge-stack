@@ -60,6 +60,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \Serial
     {
         $this->artists_followed = new ArrayCollection();
         $this->artists = new ArrayCollection();
+        $this->followed_club = new ArrayCollection();
     }
     #[ORM\Column(length: 255)]
     private ?string $activation_token = null;
@@ -75,6 +76,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \Serial
 
     #[ORM\OneToMany(mappedBy: 'id_manager', targetEntity: Artist::class)]
     private Collection $artists;
+
+    #[ORM\ManyToMany(targetEntity: ConcertHall::class, inversedBy: 'users')]
+    private Collection $followed_club;
 
     public function getId(): ?int
     {
@@ -358,6 +362,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \Serial
                 $artist->setIdManager(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ConcertHall>
+     */
+    public function getFollowedClub(): Collection
+    {
+        return $this->followed_club;
+    }
+
+    public function addFollowedClub(ConcertHall $followedClub): self
+    {
+        if (!$this->followed_club->contains($followedClub)) {
+            $this->followed_club->add($followedClub);
+        }
+
+        return $this;
+    }
+
+    public function removeFollowedClub(ConcertHall $followedClub): self
+    {
+        $this->followed_club->removeElement($followedClub);
 
         return $this;
     }

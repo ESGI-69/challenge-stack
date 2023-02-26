@@ -24,5 +24,36 @@
         </span>
       {% endif %}
     </div>
+
+    <div class="club-header__content__actions">
+      {% if not app.user %}
+        {% include '/Front/components/button.html.twig' with {
+          text: 'Sign in',
+          link: path('app_login'),
+          class: 'club-header__content__actions__follow-text__sign-in',
+          type: 'link',
+          color: 'black',
+        } %}<span class="club-header__content__actions__follow-text">&nbsp;to follow this club and be notified for the next show</span>
+      {% else %}
+        {% if isFollowed == false %}
+          {% include '/Front/components/button.html.twig' with {
+            text: 'Follow (' ~ followerCount ~ ')',
+            link: path('front_app_concerthall_follow', {id: club.id}) ,
+            class: 'artist-header__content__actions__follow-button',
+            type: 'outline',
+            color: 'white',
+          } %}
+        {% else %}
+          {% include '/Front/components/button.html.twig' with {
+            text: 'Unfollow (' ~ followerCount ~ ')',
+            link: path('front_app_concerthall_unfollow', {id: club.id}) ,
+            class: 'artist-header__content__actions__follow-button',
+            type: 'outline',
+            color: 'white',
+          } %}
+        {% endif %}
+        <span class="artist-header__content__actions__follow-text"> Follow this club to be notified for the next show</span>
+      {% endif %}
+    </div>
   </div>
 </div>

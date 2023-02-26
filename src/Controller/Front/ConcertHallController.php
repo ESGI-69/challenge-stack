@@ -50,10 +50,25 @@ class ConcertHallController extends AbstractController
     #[Route('/{slug}', name: 'app_club_show', methods: ['GET'])]
     public function show(ConcertHall $concertHall): Response
     {
+        $users = $concertHall->getUsers();
+
+        $followerCount = count($users);
+        $isFollowed = null;
+
+        if ( !is_null($this->getUSer()) && count($users)>0 ) {
+            foreach ($users as $user) {
+                if ( $user->getId() == $this->getUser()->getId() ) {
+                    $isFollowed = true;
+                }
+            }
+        }
+
         $searchForm = $this->createForm(SearchType::class, null, ['action' => $this->generateUrl('front_app_search'),'method' => 'POST']);
         return $this->render('Front/club/show.html.twig', [
             'club' => $concertHall,
-            'searchForm' => $searchForm->createView()
+            'searchForm' => $searchForm->createView(),
+            'followerCount' => $followerCount,
+            'isFollowed' => $isFollowed,
         ]);
     }
 
@@ -85,5 +100,21 @@ class ConcertHallController extends AbstractController
         }
 
         return $this->redirectToRoute('app_club_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/{id}/follow', name: 'app_concerthall_follow', methods: ['GET'])]
+    public function follow(ConcertHall $concertHall, ConcertHallRepository $concertHallRepository): Response
+    {
+        $concertHall->addUser($this->getUser());
+        $concertHallRepository->save($concertHall, true);
+        return $this->redirectToRoute('front_app_club_show', ['slug' => $concertHall->getSlug()], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/{id}/unfollow', name: 'app_concerthall_unfollow', methods: ['GET'])]
+    public function unfollow(ConcertHall $concertHall, ConcertHallRepository $concertHallRepository): Response
+    {
+        $concertHall->removeUser($this->getUser());
+        $concertHallRepository->save($concertHall, true);
+        return $this->redirectToRoute('front_app_club_show', ['slug' => $concertHall->getSlug()], Response::HTTP_SEE_OTHER);
     }
 }

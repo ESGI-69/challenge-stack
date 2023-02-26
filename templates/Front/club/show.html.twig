@@ -3,7 +3,7 @@
 {% block title %}Beathub | {{ club.name }} {% endblock %}
 
 {% block body %}
-  {% include '/Front/components/clubHeader.html.twig' with { club } %}
+  {% include '/Front/components/clubHeader.html.twig' with { club, followerCount, isFollowed } %}
 {% include '/Front/components/section.html.twig' with {name: 'Upcoming Events'} %}
 <div class="clubs-list">
 {% for event in club.getevents %}

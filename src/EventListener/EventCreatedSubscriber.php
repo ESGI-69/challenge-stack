@@ -40,7 +40,13 @@ class EventCreatedSubscriber implements EventSubscriber
         if ($entity->isPrivate() == false) {
             $artist = $entity->getArtistAuthor();
             $followers = $artist->getFollowed()->toArray();
+
+            $tab_already_sent = [];
+
             foreach ($followers as $follower) {
+
+                $tab_already_sent[] = $follower->getId();
+
                 // send email to each follower
                 $email = (new TemplatedEmail())
                     ->from(new Address('noreply@'.$_ENV['DOMAIN_NAME'], 'BeatHub'))
@@ -51,6 +57,28 @@ class EventCreatedSubscriber implements EventSubscriber
                         'event' => $entity,
                     ]);
                 $this->mailer->send($email);
+            }
+
+            $concertHall = $entity->getIdConcerthall(); 
+            $users = $concertHall->getUsers();
+
+            if (count($users)>0) {
+                foreach ($users as $user) {
+                    if ( !in_array($user->getId(), $tab_already_sent) ) {
+                        // send email to each follower
+                        $email = (new TemplatedEmail())
+                            ->from(new Address('noreply@'.$_ENV['DOMAIN_NAME'], 'BeatHub'))
+                            ->to($user->getEmail())
+                            ->subject('New Event in your favorite club !')
+                            ->htmlTemplate('Front/email/club_event.html.twig')
+                            ->context([
+                                'event' => $entity,
+                                'club' => $concertHall,
+                            ])
+                        ;
+                        $this->mailer->send($email);
+                    }
+                }
             }
         }
     }
