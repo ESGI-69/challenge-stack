@@ -25,11 +25,22 @@ class ArtistController extends AbstractController
             ]);
         }
         else {
-          $user = $this->getUser();
-          $artist = $user->getIdArtist();
-          return $this->render('Back/artist/my_artist.html.twig', [
-            'artist' => $artist,
-          ]);
+            $user = $this->getUser();
+            $artists = $artistRepository->findByIdManager($user->getId());
+            return $this->render('Back/artist/index_manager.html.twig', [
+                'artists' => $artists,
+            ]);
+        }
+    }
+
+    #[IsGranted('ROLE_MANAGER')]
+    #[Route('/{id}/my-artist', name: 'app_artist_mine', methods: ['GET'])]
+    public function myArtist(Artist $artist, ArtistRepository $artistRepository): Response
+    {
+        if ( $this->getUser()->getId() == $artist->getManager()->getId()) {
+            return $this->render('Back/artist/my_artist.html.twig', [
+                'artist' => $artist,
+            ]);
         }
     }
 

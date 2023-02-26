@@ -59,6 +59,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \Serial
     public function __construct()
     {
         $this->artists_followed = new ArrayCollection();
+        $this->artists = new ArrayCollection();
     }
     #[ORM\Column(length: 255)]
     private ?string $activation_token = null;
@@ -71,6 +72,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \Serial
 
     #[ORM\Column(length: 128, unique: true)]
     private ?string $username = null;
+
+    #[ORM\OneToMany(mappedBy: 'id_manager', targetEntity: Artist::class)]
+    private Collection $artists;
 
     public function getId(): ?int
     {
@@ -326,5 +330,35 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \Serial
             $this->artists_followed,
             $this->profile_picture_path,
         ) = unserialize($serialized);
+    }
+
+    /**
+     * @return Collection<int, Artist>
+     */
+    public function getArtists(): Collection
+    {
+        return $this->artists;
+    }
+
+    public function addArtist(Artist $artist): self
+    {
+        if (!$this->artists->contains($artist)) {
+            $this->artists->add($artist);
+            $artist->setIdManager($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArtist(Artist $artist): self
+    {
+        if ($this->artists->removeElement($artist)) {
+            // set the owning side to null (unless already changed)
+            if ($artist->getIdManager() === $this) {
+                $artist->setIdManager(null);
+            }
+        }
+
+        return $this;
     }
 }

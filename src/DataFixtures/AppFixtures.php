@@ -19,6 +19,35 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
+
+      $user_manager = new User();
+
+      $user_manager->setEmail("manager@mail.com");
+      $user_manager->setPlainPassword("password");
+      $user_manager->setUsername("Lividly0518");
+      $user_manager->setProfilePicturePath("");
+      $user_manager->setActive(true);
+      $user_manager->setRoles(["ROLE_MANAGER"]);
+      // $user_manager->setIdArtist($artist1);
+      $user_manager->setActivationToken("fdp");
+      $user_manager->setActivationTokenExpiration(new DateTimeImmutable('now'));
+
+      $manager->persist($user_manager);
+
+      $user_manager2 = new User();
+
+      $user_manager2->setEmail("manager2@mail.com");
+      $user_manager2->setPlainPassword("password");
+      $user_manager2->setUsername("Shredder2664");
+      $user_manager2->setProfilePicturePath("");
+      $user_manager2->setActive(true);
+      $user_manager2->setRoles(["ROLE_MANAGER"]);
+      // $user_manager2->setIdArtist($artist2);
+      $user_manager2->setActivationToken("fdp");
+      $user_manager2->setActivationTokenExpiration(new DateTimeImmutable('now'));
+
+      $manager->persist($user_manager2);
+
         /* BLOC POUR ARTISTES */ 
         $artist1 = new Artist();
         $artist1->setNom("Bauweraerts");
@@ -32,6 +61,7 @@ class AppFixtures extends Fixture
         $artist1->setUrlDeezer("https://www.deezer.com/fr/artist/199130");
         $artist1->setCountry("Belgium");
         $artist1->setType("solo");
+        $artist1->setManager($user_manager);
         $manager->persist($artist1);
         
         $artist2 = new Artist();
@@ -46,6 +76,7 @@ class AppFixtures extends Fixture
         $artist2->setUrlDeezer("https://www.deezer.com/fr/artist/260397");
         $artist2->setCountry("France");
         $artist2->setType("solo");
+        $artist2->setManager($user_manager);
         $manager->persist($artist2);
 
         $artist3 = new Artist();
@@ -59,6 +90,7 @@ class AppFixtures extends Fixture
         $artist3->setUrlDeezer("https://www.deezer.com/fr/artist/12826");
         $artist3->setCountry("United Kingdom");
         $artist3->setType("group");
+        $artist3->setManager($user_manager);
         $manager->persist($artist3);
 
         $artist = new Artist();
@@ -72,6 +104,7 @@ class AppFixtures extends Fixture
         $artist->setUrlDeezer("https://www.deezer.com/fr/artist/860");
         $artist->setCountry("United Kingdom");
         $artist->setType("group");
+        $artist->setManager($user_manager);
         $manager->persist($artist);
 
         $artist = new Artist();
@@ -85,6 +118,7 @@ class AppFixtures extends Fixture
         $artist->setUrlDeezer("https://www.deezer.com/fr/artist/17269");
         $artist->setCountry("United States");
         $artist->setType("group");
+        $artist->setManager($user_manager);
         $manager->persist($artist);
 
         $artist = new Artist();
@@ -98,6 +132,7 @@ class AppFixtures extends Fixture
         $artist->setUrlDeezer("https://www.deezer.com/fr/artist/134790");
         $artist->setCountry("Australia");
         $artist->setType("group");
+        $artist->setManager($user_manager);
         $manager->persist($artist);
 
         $artist = new Artist();
@@ -111,6 +146,7 @@ class AppFixtures extends Fixture
         $artist->setUrlDeezer("https://www.deezer.com/fr/artist/8169420");
         $artist->setCountry("Italy");
         $artist->setType("solo");
+        $artist->setManager($user_manager);
         $manager->persist($artist);
 
         $artist = new Artist();
@@ -124,6 +160,7 @@ class AppFixtures extends Fixture
         $artist->setUrlDeezer("https://www.deezer.com/fr/artist/1935");
         $artist->setCountry("Germany");
         $artist->setType("solo");
+        $artist->setManager($user_manager2);
         $manager->persist($artist);
 
         $artist = new Artist();
@@ -137,6 +174,7 @@ class AppFixtures extends Fixture
         $artist->setUrlDeezer("https://www.deezer.com/fr/artist/1562640");
         $artist->setCountry("France");
         $artist->setType("group");
+        $artist->setManager($user_manager2);
         $manager->persist($artist);
 
         $artist = new Artist();
@@ -150,6 +188,7 @@ class AppFixtures extends Fixture
         $artist->setUrlDeezer("https://www.deezer.com/fr/artist/116");
         $artist->setCountry("United States");
         $artist->setType("solo");
+        $artist->setManager($user_manager2);
         $manager->persist($artist);
 
         $artist = new Artist();
@@ -163,6 +202,7 @@ class AppFixtures extends Fixture
         $artist->setUrlDeezer("https://www.deezer.com/fr/artist/116");
         $artist->setCountry("United States");
         $artist->setType("solo");
+        $artist->setManager($user_manager2);
         $manager->persist($artist);
 
         $artist = new Artist();
@@ -176,6 +216,7 @@ class AppFixtures extends Fixture
         $artist->setUrlDeezer("https://www.deezer.com/fr/artist/116");
         $artist->setCountry("United States");
         $artist->setType("solo");
+        $artist->setManager($user_manager2);
         $manager->persist($artist);
 
         $artist = new Artist();
@@ -189,6 +230,7 @@ class AppFixtures extends Fixture
         $artist->setUrlDeezer("https://www.deezer.com/fr/artist/116");
         $artist->setCountry("France");
         $artist->setType("group");
+        $artist->setManager($user_manager2);
         $manager->persist($artist);
 
         $artist = new Artist();
@@ -202,6 +244,7 @@ class AppFixtures extends Fixture
         $artist->setUrlDeezer("https://www.deezer.com/fr/artist/116");
         $artist->setCountry("Japan");
         $artist->setType("solo");
+        $artist->setManager($user_manager2);
         $manager->persist($artist);
 
         $artist = new Artist();
@@ -216,6 +259,7 @@ class AppFixtures extends Fixture
         $artist->setUrlSpotify("https://open.spotify.com/artist/0X2BH1fck6amBIoJhDVmmJ");
         $artist->setCountry("France");
         $artist->setType("solo");
+        $artist->setManager($user_manager2);
         $manager->persist($artist);
         
         /* BLOC POUR ALBUM */
@@ -545,35 +589,6 @@ class AppFixtures extends Fixture
         $user_moderator->setActivationTokenExpiration(new DateTimeImmutable('now'));
 
         $manager->persist($user_moderator);
-
-        $user_manager = new User();
-
-        $user_manager->setEmail("manager@mail.com");
-        $user_manager->setPlainPassword("password");
-        $user_manager->setUsername("Lividly0518");
-        $user_manager->setProfilePicturePath("");
-        $user_manager->setActive(true);
-        $user_manager->setRoles(["ROLE_MANAGER"]);
-        $user_manager->setIdArtist($artist1);
-        $user_manager->setActivationToken("fdp");
-        $user_manager->setActivationTokenExpiration(new DateTimeImmutable('now'));
-
-        $manager->persist($user_manager);
-
-        $user_manager2 = new User();
-
-        $user_manager2->setEmail("manager2@mail.com");
-        $user_manager2->setPlainPassword("password");
-        $user_manager2->setUsername("Shredder2664");
-        $user_manager2->setProfilePicturePath("");
-        $user_manager2->setActive(true);
-        $user_manager2->setIdArtist($artist2);
-        $user_manager2->setRoles(["ROLE_MANAGER"]);
-        $user_manager2->setIdArtist($artist2);
-        $user_manager2->setActivationToken("fdp");
-        $user_manager2->setActivationTokenExpiration(new DateTimeImmutable('now'));
-
-        $manager->persist($user_manager2);
 
         $user_artist2 = new User();
 

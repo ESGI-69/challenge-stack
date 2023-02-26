@@ -1,0 +1,46 @@
+{% extends 'base_back.html.twig' %}
+
+{% block title %}BeatHub | artists {% endblock %}
+
+{% block body %}
+  <h1>Artists</h1>
+  <div class="container-table">
+    <table class="table table--post">
+      <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Pseudo</th>
+          <th scope="col" style="min-width: 100px">Nom</th>
+          <th scope="col">Prenom</th>
+          <th scope="col" style="min-width: 400px">Description</th>
+          <th scope="col">Email</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for artist in artists %}
+            <tr>
+                <td class="text-center">{{ artist.Id }}</td>
+                <td class="text-center">{{ artist.pseudo }}</td>
+                <td class="text-center">{{ artist.prenom }}</td>
+                <td class="text-center">{{ artist.nom }}</td>
+                <td class="text-center">{{ artist.Description }}</td>
+                <td class="text-center">{{ artist.email }}</td>
+
+
+                <td class="text-center">
+                    <a href="{{ path('admin_app_artist_mine', {'id': artist.id}) }}" class="btn btn-primary">Show</a>
+                    {{ include('Back/artist/_delete_form.html.twig') }}
+                </td>
+            </tr>
+        {% else %}
+        <tr>
+          <td class="text-center">no records found</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <a href="{{ path('admin_app_artist_new') }}">Create a new artist</a>
+{% endblock %}
