@@ -60,17 +60,24 @@ class ArtistController extends AbstractController
         return $this->redirectToRoute('app_artist_index', [], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/{id}/follow', name: 'app_artist_follow', methods: ['GET'])]
-    public function follow(Artist $artist, ArtistRepository $artistRepository): Response
+    #[Route('/{id}/follow', name: 'app_artist_follow', methods: ['POST'])]
+    public function follow(Artist $artist, ArtistRepository $artistRepository, Request $request): Response
     {
+        if(!$this->isCsrfTokenValid('follow_artist', $request->request->get('_token'))){
+            throw new \Exception('Invalid CSRF token');
+        }
         $artist->addFollowed($this->getUser());
         $artistRepository->save($artist, true);
         return $this->redirectToRoute('front_app_artist_show', ['slug' => $artist->getSlug()], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/{id}/unfollow', name: 'app_artist_unfollow', methods: ['GET'])]
-    public function unfollow(Artist $artist, ArtistRepository $artistRepository): Response
+    #[Route('/{id}/unfollow', name: 'app_artist_unfollow', methods: ['POST'])]
+    public function unfollow(Artist $artist, ArtistRepository $artistRepository, Request $request): Response
     {
+        //check csrf
+        if(!$this->isCsrfTokenValid('unfollow_artist', $request->request->get('_token'))){
+            throw new \Exception('Invalid CSRF token');
+        }
         $artist->removeFollowed($this->getUser());
         $artistRepository->save($artist, true);
         return $this->redirectToRoute('front_app_artist_show', ['slug' => $artist->getSlug()], Response::HTTP_SEE_OTHER);
