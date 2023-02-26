@@ -36,20 +36,22 @@
         } %}<span class="club-header__content__actions__follow-text">&nbsp;to follow this club and be notified for the next show</span>
       {% else %}
         {% if isFollowed == false %}
-          {% include '/Front/components/button.html.twig' with {
+          {% include '/Front/components/buttonPostCsrf.html.twig' with {
             text: 'Follow (' ~ followerCount ~ ')',
             link: path('front_app_concerthall_follow', {id: club.id}) ,
             class: 'artist-header__content__actions__follow-button',
             type: 'outline',
             color: 'white',
+            token_key: 'follow_club',
           } %}
         {% else %}
-          {% include '/Front/components/button.html.twig' with {
+          {% include '/Front/components/buttonPostCsrf.html.twig' with {
             text: 'Unfollow (' ~ followerCount ~ ')',
             link: path('front_app_concerthall_unfollow', {id: club.id}) ,
             class: 'artist-header__content__actions__follow-button',
             type: 'outline',
             color: 'white',
+            token_key: 'unfollow_club',
           } %}
         {% endif %}
         <span class="artist-header__content__actions__follow-text"> Follow this club to be notified for the next show</span>

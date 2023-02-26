@@ -1,7 +1,7 @@
 <form action="{{ link }}" method="post" style="display: inline;" id="form-{{ token_key}}">
                <input type="hidden" name="_token" value="{{ csrf_token(token_key) }}">
 
- {% if token_key in ['unfollow_artist', 'follow_artist']  %}
+ {% if token_key in ['unfollow_artist', 'follow_artist', 'follow_club' , 'unfollow_club' ]  %}
             <a class="button {{ type ? 'button-type--' ~ type : '' }} button-color--{{ color }} {{ class is defined ? class : '' }}"
                  onclick="document.getElementById('form-{{token_key}}').submit();">
                     {{ text }}
