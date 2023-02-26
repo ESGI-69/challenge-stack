@@ -53,13 +53,15 @@
     align-items: center;
   }
 
-  &__navigation__logo {
-    display: none;
+  &__user-info {
+    @media (max-width: 768px) {
+      flex-direction: column;
+    }
+  }
 
-    @media (max-width: 600px) {
-      display: flex;
-      gap: 0.25rem;
-      align-items: center;
+  &__navigation {
+    @media (max-width: 768px) {
+      gap: 1rem;
     }
   }
 
@@ -88,6 +90,7 @@
     }
 
     form {
+      box-sizing: border-box;
       flex-grow: 1;
       max-width: 200px;
     }
