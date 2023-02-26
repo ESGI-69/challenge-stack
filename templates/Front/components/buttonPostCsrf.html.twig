@@ -1,0 +1,26 @@
+<form action="{{ link }}" method="post" style="display: inline;" id="form-{{ token_key}}">
+               <input type="hidden" name="_token" value="{{ csrf_token(token_key) }}">
+
+ {% if token_key in ['unfollow_artist', 'follow_artist', 'follow_club' , 'unfollow_club' ]  %}
+            <a class="button {{ type ? 'button-type--' ~ type : '' }} button-color--{{ color }} {{ class is defined ? class : '' }}"
+                 onclick="document.getElementById('form-{{token_key}}').submit();">
+                    {{ text }}
+            </a>
+
+    {% else %}
+
+     <input type="submit" value="{{ text }}" 
+        
+            style="background: none;
+            border: none;
+            text-decoration: underline;
+            padding: 0;
+            color: inherit;
+            font: inherit;
+            cursor: pointer;
+            outline: inherit;"
+        />
+        {% endif %}
+        
+
+</form>

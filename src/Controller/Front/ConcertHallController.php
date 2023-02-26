@@ -102,17 +102,24 @@ class ConcertHallController extends AbstractController
         return $this->redirectToRoute('app_club_index', [], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/{id}/follow', name: 'app_concerthall_follow', methods: ['GET'])]
-    public function follow(ConcertHall $concertHall, ConcertHallRepository $concertHallRepository): Response
+    #[Route('/{id}/follow', name: 'app_concerthall_follow', methods: ['POST'])]
+    public function follow(ConcertHall $concertHall, ConcertHallRepository $concertHallRepository, Request $request): Response
     {
+        if(!$this->isCsrfTokenValid('follow_club', $request->request->get('_token'))){
+            throw new \Exception('Invalid CSRF token');
+        }
         $concertHall->addUser($this->getUser());
         $concertHallRepository->save($concertHall, true);
         return $this->redirectToRoute('front_app_club_show', ['slug' => $concertHall->getSlug()], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/{id}/unfollow', name: 'app_concerthall_unfollow', methods: ['GET'])]
-    public function unfollow(ConcertHall $concertHall, ConcertHallRepository $concertHallRepository): Response
+    #[Route('/{id}/unfollow', name: 'app_concerthall_unfollow', methods: ['POST'])]
+    public function unfollow(ConcertHall $concertHall, ConcertHallRepository $concertHallRepository, Request $request): Response
     {
+        //check csrf 
+        if(!$this->isCsrfTokenValid('unfollow_club', $request->request->get('_token'))){
+            throw new \Exception('Invalid CSRF token');
+        }
         $concertHall->removeUser($this->getUser());
         $concertHallRepository->save($concertHall, true);
         return $this->redirectToRoute('front_app_club_show', ['slug' => $concertHall->getSlug()], Response::HTTP_SEE_OTHER);

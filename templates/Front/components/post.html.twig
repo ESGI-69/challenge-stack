@@ -77,13 +77,16 @@
               color: 'white',
             } %}
         {% else %}
-            {% include '/Front/components/button.html.twig' with {
+       
+        {% include '/Front/components/buttonPostCsrf.html.twig' with {
               text: isPostLiked ? 'Liked' : 'Like',
               link: isPostLiked ? path('front_app_post_unlike', {'id': post.Id}) : path('front_app_post_like', {'id': post.Id}),
               class: 'post__content__footer__like-count__button',
               type: 'link',
               color: 'white',
+              token_key: isPostLiked ? 'unlike' : 'like'
             } %}
+
         {% endif %}
         <div class="post__content__footer__like-count__stat">
           {% if isPostLiked %}

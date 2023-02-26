@@ -42,20 +42,22 @@
         } %}<span class="artist-header__content__actions__follow-text">&nbsp;to follow this artist and be notified for the next show</span>
       {% else %}
         {% if isFollowed == false %}
-          {% include '/Front/components/button.html.twig' with {
+          {% include '/Front/components/buttonPostCsrf.html.twig' with {
             text: 'Follow (' ~ followerCount ~ ')',
             link: path('front_app_artist_follow', {id: artist.id}) ,
             class: 'artist-header__content__actions__follow-button',
             type: 'outline',
             color: 'white',
+            token_key: 'follow_artist'
           } %}
         {% else %}
-          {% include '/Front/components/button.html.twig' with {
+          {% include '/Front/components/buttonPostCsrf.html.twig' with {
             text: 'Unfollow (' ~ followerCount ~ ')',
             link: path('front_app_artist_unfollow', {id: artist.id}) ,
             class: 'artist-header__content__actions__follow-button',
             type: 'outline',
             color: 'white',
+            token_key: 'unfollow_artist'
           } %}
         {% endif %}
         <span class="artist-header__content__actions__follow-text"> Follow this artist to be notified for the next show</span>
