@@ -14,8 +14,9 @@ class SearchType extends AbstractType
             ->add('search', null, [
                 'label' => false,
                 'attr' => [
-                    'placeholder' => 'Search for artist, club or event'
-                ]
+                    'placeholder' => 'Search for artist, club or event',
+                    'class' => 'topbar__user-info__search'
+                ],
             ])
         ;
     }

@@ -45,8 +45,18 @@ class ArtistType extends AbstractType
                     'allow_delete' => false,
                     'download_uri' => false,
                     'attr' => [
-                    'class' => 'vich-image'
-                ]
+                        'class' => 'vich-image'
+                    ],
+                    'constraints' => [
+                        new File([
+                            'mimeTypes' => [
+                                'image/jpeg',
+                                'image/png',
+                                'image/gif',
+                            ],
+                            'mimeTypesMessage' => 'Please upload a valid image (JPEG, PNG, GIF).',
+                        ]),
+                    ],
                 ])
             ;
         } elseif ( $role == 'admin' ) {
@@ -69,8 +79,18 @@ class ArtistType extends AbstractType
                     'allow_delete' => false,
                     'download_uri' => false,
                     'attr' => [
-                    'class' => 'vich-image'
-                ]
+                        'class' => 'vich-image'
+                    ],
+                    'constraints' => [
+                        new File([
+                            'mimeTypes' => [
+                                'image/jpeg',
+                                'image/png',
+                                'image/gif',
+                            ],
+                            'mimeTypesMessage' => 'Please upload a valid image (JPEG, PNG, GIF).',
+                        ]),
+                    ],
                 ])
                 ->add('manager', EntityType::class, [
                     'class' => User::class,
@@ -87,7 +107,6 @@ class ArtistType extends AbstractType
                 ])
             ;
         }
-
     }
 
     public function configureOptions(OptionsResolver $resolver): void

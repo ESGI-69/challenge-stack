@@ -5,6 +5,7 @@
     <span class="topbar__logo__text">BeatHub</span>
   </a>
   <div class="topbar__navigation">
+    <img class="topbar__navigation__logo" src="{{ asset('build/images/logo.svg') }}" alt="logo" width="50" height="50">
     <a
       class="{{ app.request.get('_route')=='front_default_index' ? 'active' : '' }}"
       href="{{ path('front_default_index') }}"
