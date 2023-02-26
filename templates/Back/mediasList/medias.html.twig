@@ -1,0 +1,38 @@
+{% extends 'base_back.html.twig' %}
+
+{% block title %}BeatHub | Medias List{% endblock %}
+
+{% block body %}
+    <h1>Medias of medias List : {{ mediasList.title }}</h1>
+    {# back link #}
+    <p>
+      <a href="{{ path('admin_app_mediaslist_index') }}" class="btn btn-primary">Back to the list</a>
+    </p>
+    {% if artistLinked %}
+        <div class="container-table">
+        <table class="table table--medias">
+            <thead>
+                <tr>
+                    <th scope="col">Title</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Duration</th>
+                    <th scope="col">Image</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for media in medias %}
+              {% include '/Back/mediasList/mediasRow.html.twig' with { media, id } %}
+            {% else %}
+                <tr>
+                    <td class="text-center">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+      </div>
+    {% else %}
+      <p>You must be linked to an artist to add medias</p>
+    {% endif %}
+
+{% endblock %}

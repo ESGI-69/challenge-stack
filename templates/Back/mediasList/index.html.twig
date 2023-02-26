@@ -1,0 +1,38 @@
+{% extends 'base_back.html.twig' %}
+
+{% block title %}BeatHub | Medias List{% endblock %}
+
+{% block body %}
+    <h1>My Medias Lists</h1>
+    {% if artistLinked %}
+      <div class="container-table">
+        <table class="table table--medias">
+            <thead>
+                <tr>
+                    <th scope="col">Title</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Release</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Medias</th>
+                    <th scope="col" style="min-width: 100px;"></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for mediasList in mediasLists %}
+              {% include '/Back/mediasList/mListRow.html.twig' with { mediasList } %}
+
+            {% else %}
+                <tr>
+                    <td class="text-center">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+      </div>
+    {% else %}
+      <p>You must be linked to an artist to add medias</p>
+    {% endif %}
+
+    <a href="{{ path('admin_app_mediaslist_new') }}">Create new</a>
+{% endblock %}

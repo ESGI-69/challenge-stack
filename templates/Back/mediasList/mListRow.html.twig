@@ -1,0 +1,16 @@
+<tr>
+<td class="text-center">{{ mediasList.Title }}</td>
+<td class="text-center">{{ mediasList.Description }}</td>
+<td class="text-center">{{ mediasList.ReleaseDate|date("Y")}}</td>
+<td class="text-center"><img style="width: 50px;" src="{{ mediasList.getPrefixedPathCover }}"></td>
+<td class="text-center">{{ mediasList.type }}</td>
+<td class="text-center">{{ mediasList.medias|length }}</td>
+<td class="text-center">
+  <a href="{{ path('admin_app_mediaslist_add_media', {'id': mediasList.id}) }}" class="btn btn-primary">Add Medias</a>
+  <br>
+  <a href="{{ path('admin_app_mediaslist_medias', {'id': mediasList.id}) }}" class="btn btn-primary">Show Medias</a>
+  <br>
+  <a href="{{ path('admin_app_mediaslist_edit', {'id': mediasList.id}) }}" class="btn btn-primary">Edit</a>
+  {{ include('Back/mediasList/_delete_form.html.twig') }}
+</td>
+</tr>

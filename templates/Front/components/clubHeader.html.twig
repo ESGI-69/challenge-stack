@@ -15,12 +15,12 @@
     <div class="club-header__content__info">
       {% if 1 is not null %}
         <span class="club-header__content__info__icons">
-          {% include '/icons/warehouse.html.twig' %} Capacity <b>{{ club.capacity }}</b>
+          {% include '/icons/warehouse.html.twig' with { class: "warehouse-logo" } %} Capacity <b>{{ club.capacity }}</b>
         </span>
       {% endif %}
         {% if 1 is not null %}
         <span class="club-header__content__info__icons">
-          {% include '/icons/warehouse.html.twig' %} Total Events <b>{{ club.capacity }}</b>
+          {% include '/icons/warehouse.html.twig' with { class: "warehouse-logo" } %} Total Events <b>{{ club.capacity }}</b>
         </span>
       {% endif %}
     </div>

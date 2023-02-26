@@ -63,8 +63,24 @@
           {% if is_granted('ROLE_ADMIN') %}
             {% include '/Back/components/sidebarButton.html.twig' with {
                 href: path('admin_app_club_index'),
-                iconTwig: '/icons/music.html.twig',
+                iconTwig: '/icons/warehouse.html.twig',
                 text: 'Clubs',
+              }
+            %}
+          {% endif %}
+          {% if is_granted('ROLE_ARTIST') %}
+            {% include '/Back/components/sidebarButton.html.twig' with {
+                href: path('admin_app_media_index'),
+                iconTwig: '/icons/music.html.twig',
+                text: 'Medias',
+              }
+            %}
+          {% endif %}
+          {% if is_granted('ROLE_ARTIST') %}
+            {% include '/Back/components/sidebarButton.html.twig' with {
+                href: path('admin_app_mediaslist_index'),
+                iconTwig: '/icons/music.html.twig',
+                text: 'Medias Lists',
               }
             %}
           {% endif %}
