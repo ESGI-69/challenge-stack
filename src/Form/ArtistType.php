@@ -10,9 +10,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 use Vich\UploaderBundle\Form\Type\VichFileType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\ORM\EntityRepository;
 use App\Repository\ArtistRepository;
+use Symfony\Component\Validator\Constraints\File;
 
 class ArtistType extends AbstractType
 {
