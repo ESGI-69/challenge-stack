@@ -231,10 +231,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \Serial
     public function getProfilePicturePath(): ?string
     {
 
-        if ( $this->profile_picture_path == "" ) {
-            $this->profile_picture_path = "placeholder-users.png";
-        }
-
         return $this->profile_picture_path;
     }
 
@@ -242,7 +238,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \Serial
     {
 
         if ( $this->profile_picture_path == "" ) {
-            $this->profile_picture_path = "placeholder-users.png";
+            return "/data-files/user-pictures/placeholder-image.jpeg";
         }
 
         return "/data-files/user-pictures/".$this->profile_picture_path;
@@ -300,6 +296,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \Serial
 
 
     public function serialize() {
+
+        if ( !is_null($this->id_artist) ) {
+            $this->id_artist->setImageFile(null);
+        }
 
         return serialize(array(
             $this->id,

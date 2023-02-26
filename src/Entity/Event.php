@@ -9,6 +9,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation\Slug;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: EventRepository::class)]
@@ -67,6 +68,9 @@ class Event
     #[ORM\ManyToOne(inversedBy: 'created_events')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Artist $ArtistAuthor = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $updated_at = null;
 
     public function __construct()
     {
@@ -179,10 +183,6 @@ class Event
     public function getPicturePath(): ?string
     {
 
-        if ( $this->picture_path == "" ) {
-            $this->picture_path = "placeholder-events.png";
-        }
-
         return $this->picture_path;
 
     }
@@ -191,7 +191,7 @@ class Event
     {
 
         if ( $this->picture_path == "" ) {
-            $this->picture_path = "placeholder-events.png";
+            return "/data-files/event-pictures/placeholder-events.png";
         }
 
         return "/data-files/event-pictures/".$this->picture_path;
@@ -322,6 +322,23 @@ class Event
     public function setImageFile(?File $imageFile): self
     {
         $this->imageFile = $imageFile;
+
+        if ($imageFile instanceof UploadedFile) {
+
+            $this->updated_at = new \DateTime();
+        }
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updated_at;
+    }
+
+    public function setUpdatedAt(?\DateTimeInterface $updated_at): self
+    {
+        $this->updated_at = $updated_at;
 
         return $this;
     }

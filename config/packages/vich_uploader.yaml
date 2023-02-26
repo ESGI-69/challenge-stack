@@ -7,27 +7,33 @@ vich_uploader:
            upload_destination: '%kernel.project_dir%/public/data-files/medias_list-pictures'
            namer:
                 service: Vich\UploaderBundle\Naming\UniqidNamer
+           delete_on_update: false
 
         picture_artists:
            uri_prefix: /data-files/artist-pictures
            upload_destination: '%kernel.project_dir%/public/data-files/artist-pictures'
            namer:
                 service: Vich\UploaderBundle\Naming\UniqidNamer
+           delete_on_update: false
         
         picture_events:
            uri_prefix: /data-files/event-pictures
            upload_destination: '%kernel.project_dir%/public/data-files/event-pictures'
            namer:
                 service: Vich\UploaderBundle\Naming\UniqidNamer
+           delete_on_update: false
 
         picture_clubs:
            uri_prefix: /data-files/club-pictures
            upload_destination: '%kernel.project_dir%/public/data-files/club-pictures'
            namer:
                 service: Vich\UploaderBundle\Naming\UniqidNamer
+           delete_on_update: false
+
 
         picture_users:
            uri_prefix: /data-files/user-pictures
            upload_destination: '%kernel.project_dir%/public/data-files/user-pictures'
            namer:
                 service: Vich\UploaderBundle\Naming\UniqidNamer
+           delete_on_update: false

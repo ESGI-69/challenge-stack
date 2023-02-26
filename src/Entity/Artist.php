@@ -9,6 +9,7 @@ use Gedmo\Mapping\Annotation\Slug;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: ArtistRepository::class)]
@@ -88,6 +89,9 @@ class Artist
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $second_video = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $updated_at = null;
 
     public function __construct()
     {
@@ -294,10 +298,6 @@ class Artist
     public function getPicturePath(): ?string
     {
 
-        if ( $this->picture_path == "" ) {
-            $this->picture_path = "placeholder-image.webp";
-        }
-
         return $this->picture_path;
     }
 
@@ -305,7 +305,7 @@ class Artist
     {
 
         if ( $this->picture_path == "" ) {
-            $this->picture_path = "placeholder-image.webp";
+            return "/data-files/artist-pictures/placeholder-image.webp";
         }
 
         return "/data-files/artist-pictures/".$this->picture_path;
@@ -511,6 +511,24 @@ class Artist
     public function setImageFile(?File $imageFile): self
     {
         $this->imageFile = $imageFile;
+
+        if ($imageFile instanceof UploadedFile) {
+
+            $this->updated_at = new \DateTime();
+        }
+
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updated_at;
+    }
+
+    public function setUpdatedAt(?\DateTimeInterface $updated_at): self
+    {
+        $this->updated_at = $updated_at;
 
         return $this;
     }
