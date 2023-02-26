@@ -46,6 +46,12 @@ class PostController extends AbstractController
         $tab_id_artist[] = $artist->getId();
       }
 
+      $artistId = null;
+      
+      if ($this->getUser()->getIdArtist() !== null) {
+        $artistId = $this->getUser()->getIdArtist()->getId();
+      }
+
       $unvalidatedPosts = null;
 
       foreach ($tab_id_artist as $artistId) {
