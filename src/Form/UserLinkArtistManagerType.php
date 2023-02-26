@@ -19,6 +19,7 @@ class UserLinkArtistManagerType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     { 
         $managerArtist = $options['idArtist'];
+
         $builder
             ->add('id_artist', EntityType::class, [
             'class' => Artist::class,
@@ -28,7 +29,7 @@ class UserLinkArtistManagerType extends AbstractType
             'required' => false,
             'query_builder' => function (EntityRepository $er) use ($managerArtist) {
                 return $er->createQueryBuilder('a')
-                    ->where('a.id = :user')
+                    ->andWhere('a.id IN(:user)')
                     ->setParameter('user', $managerArtist)
                     ->orderBy('a.pseudo', 'ASC');
             },

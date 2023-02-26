@@ -25,7 +25,7 @@ class UserController extends AbstractController
      * @return Response
      */
     #[Route('/', name: 'user_index', methods: ['GET', 'POST']) ]
-    public function index(UserRepository $userRepository, Request $request): Response
+    public function index(UserRepository $userRepository, ArtistRepository $artistRepository, Request $request): Response
     {
         if ($this->isGranted('ROLE_ADMIN')) {
           $users = $userRepository->findUsersWithArtist();
@@ -34,8 +34,26 @@ class UserController extends AbstractController
           ]);
         } elseif ($this->isGranted('ROLE_MANAGER') && !$this->isGranted('ROLE_ADMIN')){
           $users = $userRepository->findUsersWithArtist();
+
+          $artists = $artistRepository->findByIdManager($this->getUser()->getId());
+
+          $tab_id_artist = [];
+
+          foreach ($artists as $artist) {
+            $tab_id_artist[] = $artist->getId();
+          }
+
+          $tmp_users = $userRepository->getByListIdArtist($tab_id_artist);
+
+          foreach ($tmp_users as $tmp_user) {
+            if ( !in_array($tmp_user, $users) ) {
+              $users[] = $tmp_user;
+            }
+          }
+
           foreach ($users as $key => $user) {
-            if ($user->getIdArtist() !== $this->getUser()->getIdArtist() && $user->getIdArtist() !== null) {
+
+            if ($user->getIdArtist() !== null && $user->getIdArtist()->getManager()->getId() !== $this->getUser()->getId()) {
               unset($users[$key]);
             }
           }
@@ -95,28 +113,26 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/artist/{id}/link', name: 'user_artist_link', methods: ['GET', 'POST'])]
-    public function linkArtist(Request $request, UserRepository $userRepository, User $user): Response
+    #[Route('/artist/{id}/link/', name: 'user_artist_link', methods: ['GET', 'POST'])]
+    public function linkArtist(Request $request, UserRepository $userRepository, ArtistRepository $artistRepository, User $user): Response
     {
+
       if (in_array('ROLE_MANAGER', $user->getRoles()) || in_array('ROLE_ARTIST', $user->getRoles())) {
         if ($this->isGranted('ROLE_ADMIN')) {
           $form = $this->createForm(UserLinkArtistType::class, $user);
         } elseif ($this->isGranted('ROLE_MANAGER') && !$this->isGranted('ROLE_ADMIN')){
-          $idArtist = $this->getUser()->getIdArtist();
-          if ($user->getIdArtist() !== null && $idArtist->getId() !== $user->getIdArtist()->getId()){
-            $this->addFlash('danger', 'You can\'t link an artist to this user');
-            return $this->redirectToRoute('admin_user_index');
-          } else {
-            if ($idArtist == null){
-              return $this->render('Back/user/link-artist.html.twig', [
-                'artistLinked' => false
-              ]);
-            } else {
-              $form = $this->createForm(UserLinkArtistManagerType::class, $user, [
-                'idArtist' => $idArtist->getId()
-              ]);
-            }
+
+          $artists = $artistRepository->findByIdManager($this->getUser()->getId());
+
+          $id_artists = [];
+          foreach ($artists as $artist) {
+            $id_artists[] = $artist->getId();
           }
+
+          $form = $this->createForm(UserLinkArtistManagerType::class, $user, [
+            'idArtist' => $id_artists
+          ]);
+
         }
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {

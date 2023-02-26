@@ -25,11 +25,22 @@ class ArtistController extends AbstractController
             ]);
         }
         else {
-          $user = $this->getUser();
-          $artist = $user->getIdArtist();
-          return $this->render('Back/artist/my_artist.html.twig', [
-            'artist' => $artist,
-          ]);
+            $user = $this->getUser();
+            $artists = $artistRepository->findByIdManager($user->getId());
+            return $this->render('Back/artist/index_manager.html.twig', [
+                'artists' => $artists,
+            ]);
+        }
+    }
+
+    #[IsGranted('ROLE_MANAGER')]
+    #[Route('/{id}/my-artist', name: 'app_artist_mine', methods: ['GET'])]
+    public function myArtist(Artist $artist, ArtistRepository $artistRepository): Response
+    {
+        if ( $this->getUser()->getId() == $artist->getManager()->getId()) {
+            return $this->render('Back/artist/my_artist.html.twig', [
+                'artist' => $artist,
+            ]);
         }
     }
 
@@ -43,12 +54,10 @@ class ArtistController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $artistRepository->save($artist, true);
 
-            // assign the artist to the user
-            $user = $this->getUser();
-            $user->setIdArtist($artist);
-            $userRepository->save($user, true);
+            $artist->setManager($this->getUser());
+
+            $artistRepository->save($artist, true);
             return $this->redirectToRoute('admin_app_artist_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -83,10 +92,11 @@ class ArtistController extends AbstractController
     public function new(Request $request, ArtistRepository $artistRepository): Response
     {
         $artist = new Artist();
-        $form = $this->createForm(ArtistType::class, $artist);
+        $form = $this->createForm(ArtistType::class, $artist, ['role' => 'admin']);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $artistRepository->save($artist, true);
 
             return $this->redirectToRoute('admin_app_artist_index', [], Response::HTTP_SEE_OTHER);

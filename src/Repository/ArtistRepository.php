@@ -127,6 +127,26 @@ class ArtistRepository extends ServiceEntityRepository
             // where ignore case sensitive
     }
 
+    public function findByIdManager(int $id_manager): array
+    {
+        return $this->createQueryBuilder('a')
+            ->where('a.manager = :manager_id')
+            ->setParameter('manager_id', $id_manager)
+            ->getQuery()
+            ->getResult();
+            // where ignore case sensitive
+    }
+
+    public function findOneById(int $id): ?Artist
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
 //    /**
 //     * @return Artist[] Returns an array of Artist objects
 //     */

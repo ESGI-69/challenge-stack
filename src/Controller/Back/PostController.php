@@ -6,6 +6,7 @@ use App\Entity\Post;
 use App\Entity\User;
 use App\Form\PostType;
 use App\Repository\PostRepository;
+use App\Repository\ArtistRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -33,26 +34,33 @@ class PostController extends AbstractController
 
     #[IsGranted('ROLE_MANAGER')]
     #[Route('/validation', name: 'app_post_validation', methods: ['GET'])]
-    public function validation(PostRepository $postRepository): Response
+    public function validation(PostRepository $postRepository, ArtistRepository $artistRepository): Response
     {
+
+      $idManager = $this->getUSer()->getId();
+
+      $artists = $artistRepository->findByIdManager($idManager);
+      $tab_id_artist = [];
+      
+      foreach ($artists as $artist) {
+        $tab_id_artist[] = $artist->getId();
+      }
+
       $unvalidatedPosts = null;
-      $artistId = $this->getUser()->getIdArtist();
-      if ($artistId === null) {
-        $unvalidatedPosts = null;
-      } else {
-        $artistId = $artistId->getId();
+
+      foreach ($tab_id_artist as $artistId) {
         $unvalidatedPostIds = $postRepository->getUnvalidatedPostIdsFromArtist($artistId);
         foreach ($unvalidatedPostIds as $unvalidatedPostId) {
           $unvalidatedPosts[] = $postRepository->find($unvalidatedPostId);
         }
       }
     
-        return $this->render('Back/post/validation.html.twig', [
-            'posts' => $postRepository->findAll(),
-            'unvalidatedPosts' => $unvalidatedPosts,
-            'validation' => true,
-            'artistId' => $artistId,
-        ]);
+      return $this->render('Back/post/validation.html.twig', [
+          'posts' => $postRepository->findAll(),
+          'unvalidatedPosts' => $unvalidatedPosts,
+          'validation' => true,
+          'artistId' => $artistId,
+      ]);
     }
 
     #[IsGranted('ROLE_MANAGER')]

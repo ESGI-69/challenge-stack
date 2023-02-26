@@ -25,12 +25,14 @@ class PostCreatedSubscriber implements EventSubscriber
     {
         return [
             Events::postUpdate,
+            Events::postPersist,
         ];
     }
 
     public function postUpdate(LifecycleEventArgs $args)
     {
         $entity = $args->getObject();
+
         // only act on "Post" entities
         if (!$entity instanceof Post) {
             return;
@@ -52,6 +54,46 @@ class PostCreatedSubscriber implements EventSubscriber
                     ]);
                 $this->mailer->send($email);
             }
+        } else {
+            $artist = $entity->getIdArtist();
+            $manager = $artist->getManager();
+
+            $email = (new TemplatedEmail())
+                ->from(new Address('noreply@'.$_ENV['DOMAIN_NAME'], 'BeatHub'))
+                ->to($manager->getEmail())
+                ->subject('There is a post to validate !')
+                ->htmlTemplate('Front/email/post_manager.html.twig')
+                ->context([
+                    'manager' => $manager,
+                    'post' => $entity
+                ])
+            ;
+            $this->mailer->send($email);
         }
+    }
+
+    public function postPersist(LifecycleEventArgs $args)
+    {
+        $entity = $args->getObject();
+
+        // only act on "Post" entities
+        if (!$entity instanceof Post) {
+            return;
+        }
+
+        $artist = $entity->getIdArtist();
+        $manager = $artist->getManager();
+
+        $email = (new TemplatedEmail())
+            ->from(new Address('noreply@'.$_ENV['DOMAIN_NAME'], 'BeatHub'))
+            ->to($manager->getEmail())
+            ->subject('There is a post to validate !')
+            ->htmlTemplate('Front/email/post_manager.html.twig')
+            ->context([
+                'manager' => $manager,
+                'post' => $entity
+            ])
+        ;
+        $this->mailer->send($email);
     }
 }
