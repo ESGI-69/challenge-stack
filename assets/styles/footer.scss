@@ -1,13 +1,18 @@
 .footer {
   display: grid;
-  grid-template-columns: 120px 1fr;
-  grid-template-rows: 120px;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto;
   padding: 2rem;
   border-top: 1px solid var(--color-primary-darker);
 
   &__logo {
     width: 120px;
     height: 120px;
+
+    @media screen and (max-width: 768px) {
+      width: 70px;
+      height: 70px;
+    }
   }
 
   &__links {

@@ -9,4 +9,11 @@
   &__light-text {
     color: var(--color-secondary);
   }
+
+  @media screen and (max-width: 768px) {
+    &__img {
+      width: 70px;
+      height: 70px;
+    }
+  }
 }

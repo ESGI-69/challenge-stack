@@ -4,6 +4,15 @@
   grid-template-rows: 1fr;
   grid-template-areas:
     "author content";
+
+  @media screen and (max-width: 768px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    grid-template-areas:
+      "author"
+      "content"
+      "comments";
+  }
   
   &.show-comment {
     grid-template-rows: 1fr auto auto;
@@ -11,6 +20,15 @@
       "author content"
       "author comments"
       "author comment-form";
+      
+    @media screen and (max-width: 768px) {
+      grid-template-rows: auto auto auto auto;
+      grid-template-areas:
+        "author"
+        "content"
+        "comments"
+        "comment-form";
+    }
   }
 
   &__author {
@@ -73,6 +91,10 @@
     &__medias {
       display: flex;
       flex-direction: row;
+
+      @media screen and (max-width: 768px) {
+        flex-direction: column;
+      }
     }
 
     &__footer {
