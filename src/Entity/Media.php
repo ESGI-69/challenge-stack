@@ -9,6 +9,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 #[ORM\Entity(repositoryClass: MediaRepository::class)]
 #[Vich\Uploadable]
@@ -34,7 +35,7 @@ class Media
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $file_path = null;
 
-    #[Vich\UploadableField(mapping: 'cover_mediaslist', fileNameProperty: 'file_path')]
+    #[Vich\UploadableField(mapping: 'cover_media', fileNameProperty: 'file_path')]
     private ?File $imageFile = null;
 
     #[ORM\ManyToMany(targetEntity: Artist::class, inversedBy: 'medias')]
@@ -42,6 +43,9 @@ class Media
 
     #[ORM\ManyToMany(targetEntity: MediasList::class)]
     private Collection $mediaslists;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $updated_at = null;
 
     public function __construct()
     {
@@ -104,18 +108,15 @@ class Media
 
     public function getFilePath(): ?string
     {
-        if ( $this->file_path == "" ) {
-          $this->file_path = "placeholder-medias_lists.jpeg";
-        }
         return $this->file_path;
     }
 
     public function getPrefixFilePath(): ?string
     {
       if ( $this->file_path == "" ) {
-        $this->file_path = "placeholder-medias_lists.jpeg";
+        return "/data-files/media-pictures/placeholder-media.jpeg";
       }
-      return "/data-files/medias_list-pictures/".$this->file_path;
+      return "/data-files/media-pictures/".$this->file_path;
     }
 
     public function setFilePath(?string $file_path): self
@@ -188,6 +189,21 @@ class Media
     public function setImageFile(?File $imageFile): self
     {
         $this->imageFile = $imageFile;
+        if ($imageFile instanceof UploadedFile) {
+
+          $this->updated_at = new \DateTime();
+        }
+
+        return $this;
+    }
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updated_at;
+    }
+
+    public function setUpdatedAt(?\DateTimeInterface $updated_at): self
+    {
+        $this->updated_at = $updated_at;
 
         return $this;
     }
