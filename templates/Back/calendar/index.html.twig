@@ -24,18 +24,26 @@
           {% for event in events %}
             {
               {% if event.inviteStatus|default(null) == 'accepted' %}
-              color: 'var(--color-success)',
-              title: '{{ event.title ~ ' by ' ~ event.ArtistAuthor.Pseudo ~ ' (accepted)' }}',
-              url: '{{ path('front_app_event_show', {'slug' : event.slug }) }}',
+                color: 'var(--color-success)',
+                {% if event.private == true %}
+                  title: '{{ event.title ~ ' by ' ~ event.ArtistAuthor.Pseudo ~ ' (accepted, private)' }}',
+                {% else %}
+                  title: '{{ event.title ~ ' by ' ~ event.ArtistAuthor.Pseudo ~ ' (accepted)' }}',
+                  url: '{{ path('front_app_event_show', {'slug' : event.slug }) }}',
+                {% endif %}
               {% elseif event.inviteStatus|default(null) == 'pending' %}
-              color: 'var(--color-background)',
-              borderColor: 'var(--color-primary)',
-              textColor: 'var(--color-primary)',
-              title: '{{ event.title ~ ' by ' ~ event.ArtistAuthor.Pseudo ~ ' (pending)' }}',
-              url: '{{ path('admin_app_invite_index') }}',
+                color: 'var(--color-background)',
+                borderColor: 'var(--color-primary)',
+                textColor: 'var(--color-primary)',
+                title: '{{ event.title ~ ' by ' ~ event.ArtistAuthor.Pseudo ~ ' (pending)' }}',
+                url: '{{ path('admin_app_invite_index') }}',
               {% else %}
-              url: '{{ path('front_app_event_show', {'slug' : event.slug }) }}',
-              title: '{{ event.title }}',
+                {% if event.private == true %}
+                  title: '{{ event.title }} (private)',
+                {% else %}
+                  title: '{{ event.title }}',
+                  url: '{{ path('front_app_event_show', {'slug' : event.slug }) }}',
+                {% endif %}
               {% endif %}
               start: '{{ event.StartDate|date('c') }}',
               end: '{{ event.EndDate|date('c') }}',
