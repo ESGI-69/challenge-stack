@@ -53,9 +53,9 @@ class EventRepository extends ServiceEntityRepository
     public function getPublicEventByDateRange($start, $end): array
     {
         $qb = $this->createQueryBuilder('e')
-        ->where("e.start_date >= :start AND e.start_date <= :end")
+        ->where("e.start_date > :start AND e.start_date <= :end")
         ->andWhere('e.private = false')
-        ->setParameter('start', $start->format('Y-m-d 00:00:00'))
+        ->setParameter('start', $start->format('Y-m-d 23:59:59'))
         ->setParameter('end', $end->format('Y-m-d 23:59:59'))
         ->orderBy('e.start_date', 'ASC');    
         return $qb->getQuery()->getResult();

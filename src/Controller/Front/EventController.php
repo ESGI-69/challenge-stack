@@ -22,7 +22,7 @@ class EventController extends AbstractController
         return $this->render('Front/event/index.html.twig', [
             'events' => $eventRepository->getPublicEventByDate((new \DateTime())),
             'tomorrowEvents' => $eventRepository->getPublicEventByDate((new \DateTime())->modify('+1 day')),
-            'monthEvents' => $eventRepository->getPublicEventByDateRange((new \DateTime()), (new \DateTime())->modify('+1 month')),
+            'monthEvents' => $eventRepository->getPublicEventByDateRange((new \DateTime())->modify('+1 day'), (new \DateTime())->modify('+1 month')),
             'passedEvents' => $eventRepository->getPublicEventsBeforeDate(new \DateTime()),
             'searchForm' => $searchForm->createView()
         ]);
