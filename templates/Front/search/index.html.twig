@@ -6,9 +6,9 @@
 
     <h2>Results for "{{ search ?? ''}}" search:</h2>
     
-        {% if artists is defined %}
         {% include '/Front/components/section.html.twig' with {name: 'Artists'} %}
-            <ul>
+        {% if artists|length != 0 %}
+            <div>
                 {% for artist in artists %}
                     {% include '/Front/components/artistRow.html.twig'
                             with {
@@ -21,12 +21,14 @@
                             } 
                     %}
           {% endfor %}
-            </ul>
+            </div>
+        {% else %}
+            <p>No artists found</p>
         {% endif %}
 
-        {% if concertHalls is defined %}
         {% include '/Front/components/section.html.twig' with {name: 'Club'} %}
-            <ul>
+        {% if concertHalls|length != 0 %}
+            <div>
                 {% for club in concertHalls %}
                        {% include '/Front/components/clubRow.html.twig'
                             with {
@@ -39,27 +41,33 @@
                             }
                         %}
                 {% endfor %}
-            </ul>
+            </div>
+        {% else %}
+            <p>No clubs found</p>
         {% endif %}
 
         {% if events is defined %}
         {% include '/Front/components/section.html.twig' with {name: 'Events'} %}
-            <ul>
-                {% for event in events %}
-                    {% include '/Front/components/eventRow.html.twig'
-                        with {
-                        eventImagePath: event.getPrefixedPicturePath,
-                        eventSlug: event.slug,
-                        eventName: event.title,
-                        eventId : event.id,
-                        eventDate: event.startdate|date("D M j"),
-                        eventClubSlug: event.getidconcerthall.slug,
-                        eventClubName: event.getidconcerthall.name,
-                        eventClubCity:  event.getidconcerthall.city
-                        }
-                    %}
-                {% endfor %}
-            </ul>
+            <div>
+            {% set filteredEvents = events|filter((event) => event.private == false) %}
+            {% if filteredEvents|length == 0 %}
+                <p>No events found</p>
+            {% endif %}
+            {% for event in filteredEvents %}
+                {% include '/Front/components/eventRow.html.twig'
+                    with {
+                    eventImagePath: event.getPrefixedPicturePath,
+                    eventSlug: event.slug,
+                    eventName: event.title,
+                    eventId : event.id,
+                    eventDate: event.startdate|date("D M j"),
+                    eventClubSlug: event.getidconcerthall.slug,
+                    eventClubName: event.getidconcerthall.name,
+                    eventClubCity:  event.getidconcerthall.city
+                    }
+                %}
+            {% endfor %}
+            </div>
         {% endif %}
 
 

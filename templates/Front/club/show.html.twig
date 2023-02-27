@@ -6,8 +6,39 @@
   {% include '/Front/components/clubHeader.html.twig' with { club, followerCount, isFollowed } %}
 {% include '/Front/components/section.html.twig' with {name: 'Upcoming Events'} %}
 <div class="clubs-list">
-{% for event in club.getevents %}
-  {% include '/Front/components/eventRow.html.twig' 
+{% set upcomingEvents = club.getevents|filter(e => e.private == false)|filter(e => e.startdate > date('now')) %}
+{% if upcomingEvents|length == 0 %}
+  <div class="no-events">
+    <p>There are no upcoming events for this club.</p>
+  </div>
+{% endif %}
+
+{% for event in upcomingEvents %}
+  {% include '/Front/components/eventRow.html.twig'
+    with {
+      eventId : event.id,
+      eventImagePath : event.getPrefixedPicturePath,
+      eventName : event.title,
+      eventSlug : event.slug,
+      eventDate :  event.startdate|date("D M j"),
+      eventClubName : club.name,
+      eventClubCity : club.city
+    }
+  %}
+{% endfor %}
+</div>
+
+{% include '/Front/components/section.html.twig' with {name: 'Passed events'} %}
+<div class="clubs-list">
+{% set passedEvents = club.getevents|filter(e => e.private == false)|filter(e => e.startdate < date('now')) %}
+{% if passedEvents|length == 0 %}
+  <div class="no-events">
+    <p>There are no passed events for this club.</p>
+  </div>
+{% endif %}
+
+{% for event in passedEvents %}
+  {% include '/Front/components/eventRow.html.twig'
     with {
       eventId : event.id,
       eventImagePath : event.getPrefixedPicturePath,

@@ -27,8 +27,12 @@ class ArtistType extends AbstractType
         if ( $role == "" ) {
 
             $builder
-                ->add('nom')
-                ->add('prenom')
+                ->add('nom', null, [
+                    'required' => false,
+                ])
+                ->add('prenom', null, [
+                    'required' => false,
+                ])
                 ->add('pseudo')
                 ->add('description')
                 ->add('email')
