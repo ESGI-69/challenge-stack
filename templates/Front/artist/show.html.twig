@@ -12,30 +12,44 @@
 
   {% include '/Front/components/section.html.twig' with { name: 'Last Posts' } %}
 
-  <div class="posts-list">
-    {% for post in artist.getPosts %}
-      {% set isPostLiked = post.userslike.contains(app.user) %}
-      {% set mediasListDuration = 0 %}
-      {% if (post.getIdMediaslist) %}
-        {% for media in post.getIdMediaslist.getMedias %}
-          {% set mediasListDuration = mediasListDuration + media.duree %}
-        {% endfor %}
-      {% endif %}
-      {% include '/Front/components/post.html.twig'
-        with {
-          showComments: false,
-          post,
-          isPostLiked,
-          mediasListDuration,
-          trimDescription: true
-        }
-      %}
-    {% endfor %}
-  </div>
+  {% if artist.getPosts|length > 0 %}
+    <div class="posts-list">
+      {% for post in artist.getPosts|filter(p => p.validatedAt is not null) %}
+        {% set isPostLiked = post.userslike.contains(app.user) %}
+        {% set mediasListDuration = 0 %}
+        {% if (post.getIdMediaslist) %}
+          {% for media in post.getIdMediaslist.getMedias %}
+            {% set mediasListDuration = mediasListDuration + media.duree %}
+          {% endfor %}
+        {% endif %}
+        {% include '/Front/components/post.html.twig'
+          with {
+            showComments: false,
+            post,
+            isPostLiked,
+            mediasListDuration,
+            trimDescription: true
+          }
+        %}
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="no-post">
+      <p>No post on record</p>
+    </div>
+  {% endif %}
 
   {% include '/Front/components/section.html.twig' with { name: 'Musics' } %}
 
-  {% include '/Front/components/mediaRow.html.twig' with { artists : artist } %}
+  {% if artist.getMedias|length > 0 %}
+    <div class="musics-list">
+      {% include '/Front/components/mediaRow.html.twig' with { artists : artist } %}
+    </div>
+  {% else %}
+    <div class="no-music">
+      <p>No music on record</p>
+    </div>
+  {% endif %}
 
   {% include '/Front/components/section.html.twig' with { name: 'Upcoming events' } %}
 
@@ -62,14 +76,18 @@
     {% endif %}
   </div>
 
-  {% include '/Front/components/section.html.twig' with { name: 'Medias' } %}
+  {% if artist.getFirstVideo or artist.getSecondVideo %}
+    {% include '/Front/components/section.html.twig' with { name: 'Videos' } %}
+    <div class="videos-list">
+      {% include 'Front/components/artistVideo.html.twig' 
+        with { 
+          first_video : artist.getFirstVideo,
+          second_video : artist.getSecondVideo
+        }
+      %}
+    </div>
+  {% endif %}
 
-  {% include 'Front/components/artistVideo.html.twig' 
-    with { 
-      first_video : artist.getFirstVideo, 
-      second_video : artist.getSecondVideo
-    }
-  %}
   {% include '/Front/components/section.html.twig' with { name: 'Past events' } %}
 
   <div class="past-events">

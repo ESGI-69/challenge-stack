@@ -1,4 +1,4 @@
-<div style="display: flex;justify-content: space-between;">
+<div class="artist-videos">
 {% if first_video is not null %}
     <iframe width="530" height="315" src="{{first_video|replace({'watch?v=': "embed/"})}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 {% endif %}
