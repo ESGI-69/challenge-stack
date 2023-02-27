@@ -30,7 +30,7 @@ class Post
     private ?\DateTimeImmutable $updated_at = null;
 
     #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: true)]
+    #[ORM\JoinColumn(nullable: true, onDelete:"CASCADE")]
     private ?User $id_user = null;
 
     #[ORM\ManyToOne]
@@ -40,7 +40,7 @@ class Post
     private ?MediasList $id_mediaslist = null;
 
     #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: true)]
+    #[ORM\JoinColumn(nullable: true, onDelete:"CASCADE")]
     private ?Event $id_event = null;
 
     #[ORM\Column(length: 105)]
@@ -54,7 +54,7 @@ class Post
     private ?\DateTimeInterface $validated_at = null;
 
     #[ORM\ManyToOne(inversedBy: 'posts')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: false, onDelete:"CASCADE")]
     private ?Artist $id_artist = null;
 
     #[ORM\ManyToMany(targetEntity: User::class)]

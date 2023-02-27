@@ -17,7 +17,7 @@ class EventInvite
     private ?Event $id_event = null;
 
     #[ORM\ManyToOne(inversedBy: 'eventInvites')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: false, onDelete:"CASCADE")]
     private ?Artist $id_artist = null;
 
     #[ORM\Column(length: 255)]
@@ -27,7 +27,7 @@ class EventInvite
     private ?\DateTimeImmutable $created_at = null;
 
     #[ORM\ManyToOne(inversedBy: 'eventInvitesCreated')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: false, onDelete:"CASCADE")]
     private ?Artist $ArtistAuthor = null;
 
     public function getId(): ?int
