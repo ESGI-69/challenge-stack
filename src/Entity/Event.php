@@ -34,7 +34,7 @@ class Event
     private Collection $artists;
 
     #[ORM\ManyToOne(inversedBy: 'events')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: false, onDelete:"CASCADE")]
     private ?ConcertHall $id_concerthall = null;
 
     #[ORM\ManyToMany(targetEntity: User::class)]
@@ -66,7 +66,7 @@ class Event
     private ?string $description = null;
 
     #[ORM\ManyToOne(inversedBy: 'created_events')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: false, onDelete:"CASCADE")]
     private ?Artist $ArtistAuthor = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]

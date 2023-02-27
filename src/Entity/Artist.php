@@ -94,7 +94,7 @@ class Artist
     private ?\DateTimeInterface $updated_at = null;
     
     #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: false, onDelete:"CASCADE")]
     private ?User $manager = null;
 
     public function __construct()
